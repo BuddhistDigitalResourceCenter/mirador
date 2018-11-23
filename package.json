@@ -2,7 +2,9 @@
   "name": "mirador",
   "version": "2.6.1",
   "description": "Multi-window image viewer, a web-based tool to support researcher goals",
-  "files": ["dist/*"],
+  "files": [
+    "dist/*"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/ProjectMirador/mirador"
@@ -76,7 +78,7 @@
     "material-design-icons": "^3.0.1",
     "mousetrap": "^1.4.6",
     "openseadragon": "^2.2.1",
-    "paper": "^0.10.2",
+    "paper": "^0.11.8",
     "qtip2": "^3.0.3",
     "sanitize-html": "practicefusion/sanitize-html#include-dist-files",
     "select2": "^4.0.3",
