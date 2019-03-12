@@ -6497,7 +6497,7 @@ return /******/ (function(modules) { // webpackBootstrap
 });
 ;
 //! openseadragon 2.4.0
-//! Built on 2019-03-11
+//! Built on 2019-03-12
 //! Git commit: unknown
 //! http://openseadragon.github.io
 //! License: http://openseadragon.github.io/license/
@@ -19492,9 +19492,12 @@ $.extend( $.IIIFTileSource.prototype, $.TileSource.prototype, /** @lends OpenSea
         } else {
             iiifQuality = "default." + this.usedFormat;
         }
-
         if ( levelWidth < tileWidth && levelHeight < tileHeight ){
-            iiifSize = levelWidth + ",";
+            // max will be canonical in 3.0
+            iiifSize = "max";
+            iiifRegion = 'full';
+        } else if ( x == 0 && y == 0 && levelWidth == this.width && levelHeight == this.height ) {
+            iiifSize = "max";
             iiifRegion = 'full';
         } else {
             iiifTileX = x * iiifTileSizeWidth;
@@ -19514,17 +19517,21 @@ $.extend( $.IIIFTileSource.prototype, $.TileSource.prototype, /** @lends OpenSea
     /**
      * Determine whether arbitrary tile requests can be made against a service with the given profile
      * @function
-     * @param {object} profile - IIIF profile object
+     * @param {object} profile - IIIF profile array
      * @throws {Error}
      */
-    function canBeTiled (profile ) {
+    function canBeTiled ( profile ) {
         var level0Profiles = [
             "http://library.stanford.edu/iiif/image-api/compliance.html#level0",
             "http://library.stanford.edu/iiif/image-api/1.1/compliance.html#level0",
             "http://iiif.io/api/image/2/level0.json"
         ];
         var isLevel0 = (level0Profiles.indexOf(profile[0]) != -1);
-        return !isLevel0 || (profile.indexOf("sizeByW") != -1);
+        var hasSizeByW = false;
+        if ( profile.length > 1 && profile[1].supports ) {
+            hasSizeByW = profile[1].supports.indexOf( "sizeByW" ) != -1;
+        }
+        return !isLevel0 || hasSizeByW;
     }
 
     /**
