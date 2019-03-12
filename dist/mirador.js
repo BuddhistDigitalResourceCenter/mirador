@@ -35109,6 +35109,7 @@ return /******/ (function(modules) { // webpackBootstrap
             topCollectionsUris:         {}, //A set of URIs already placed at the top level of the collection tree
             treeQueue:                  [], //A list that holds event triggers before the tree is ready; will be removed when ready
             resultsWidth:               0,
+            lazyLoadingFactor:          1,
             state:                      null,
             eventEmitter:               null
         }, options);
@@ -35272,6 +35273,16 @@ return /******/ (function(modules) { // webpackBootstrap
             jQuery(window).resize($.throttle(function() {
               _this.resizePanel();
             }, 50, true));
+            
+            // Lazy loading
+            this.element.find('.member-select-results').on('scroll', $.throttle(function() {
+              jQuery(this).find('img[data-src]').each(function(_, v) {
+                if ($.isOnScreen(v, _this.lazyLoadingFactor)) {
+                  v.setAttribute('src', v.getAttribute('data-src'));
+                  v.removeAttribute('data-src');
+                }
+              });
+            }, 50, true)).scroll();
         },
         
         hide: function() {
@@ -35282,6 +35293,7 @@ return /******/ (function(modules) { // webpackBootstrap
         show: function() {
             var _this = this;
             jQuery(this.element).show({effect: "fade", duration: 160, easing: "easeInCubic"});
+            this.element.find('.member-select-results').scroll();
         },
         
         // Send explicit request for adding a manifest from a URL
@@ -35317,6 +35329,7 @@ return /******/ (function(modules) { // webpackBootstrap
           var clone = _this.element.clone().css("visibility","hidden").css("display", "block").appendTo(_this.appendTo);
           _this.resultsWidth = clone.find('.member-select-results').outerWidth();
           clone.remove();
+          this.element.find('.select-results').scroll();
           _this.eventEmitter.publish("manifestPanelWidthChanged", _this.resultsWidth);
         },
         
@@ -35339,6 +35352,7 @@ return /******/ (function(modules) { // webpackBootstrap
               forcedIndex: _this.expectedThings.indexOf(newManifest.uri),
               appendTo: _this.manifestListElement }));
             _this.element.find('#manifest-search').keyup();
+            this.element.find('.member-select-results').scroll();
           }
         },
         
@@ -35405,7 +35419,7 @@ return /******/ (function(modules) { // webpackBootstrap
             _this.addManifestFromUrl(expectedThing);
           });
           this.element.find('#manifest-search').keyup();
-          
+          this.element.find('.member-select-results').scroll();
         },
         
         // Handler for expanding a node (> clicked)
@@ -35476,6 +35490,7 @@ return /******/ (function(modules) { // webpackBootstrap
                 eventEmitter: _this.eventEmitter,
                 forcedIndex: _this.expectedThings.indexOf(url),
                 appendTo: _this.manifestListElement }));
+              this.element.find('.member-select-results').scroll();
             }
           }
           // Cache miss: Queue the loading and defer the received event until it is done
@@ -36150,7 +36165,7 @@ return /******/ (function(modules) { // webpackBootstrap
               _this.imagesTotalWidth += (image.width + _this.margin);
 
               //add image to dom
-              _this.element.find('.preview-images').append('<img src="'+image.url+'" width="'+image.width+'" height="'+image.height+'" class="preview-image flash" data-image-id="'+image.id+'">');
+              _this.element.find('.preview-images').append('<img data-src="'+image.url+'" width="'+image.width+'" height="'+image.height+'" class="preview-image flash" data-image-id="'+image.id+'">');
 
               //get next image
               index++;
@@ -36182,7 +36197,7 @@ return /******/ (function(modules) { // webpackBootstrap
       '<li data-index-number={{index}}>',
       '<div class="repo-image">',
         '{{#if repoImage}}',
-        '<img src="{{repoImage}}" alt="repoImg">',
+        '<img data-src="{{repoImage}}" alt="repoImg">',
         '{{else}}',
         '<span class="default-logo"></span>',
         '{{/if}}',
@@ -36203,7 +36218,7 @@ return /******/ (function(modules) { // webpackBootstrap
       '<div class="preview-thumb">',
         '<div class="preview-images">',
         '{{#each images}}',
-          '<img src="{{url}}" width="{{width}}" height="{{height}}" class="preview-image flash" data-image-id="{{id}}">',
+          '<img data-src="{{url}}" width="{{width}}" height="{{height}}" class="preview-image flash" data-image-id="{{id}}">',
         '{{/each}}',
         '</div>',
         '{{#if remaining}}',
@@ -36228,6 +36243,7 @@ return /******/ (function(modules) { // webpackBootstrap
             manifestListElement:        null,
             manifestLoadStatusIndicator: null,
             resultsWidth:               0,
+            lazyLoadingFactor:          1,
             state:                      null,
             eventEmitter:               null
         }, options);
@@ -36304,6 +36320,16 @@ return /******/ (function(modules) { // webpackBootstrap
             jQuery(window).resize($.throttle(function() {
               _this.resizePanel();
             }, 50, true));
+            
+            // Lazy loading
+            this.element.find('.select-results').on('scroll', $.throttle(function() {
+              jQuery(this).find('img[data-src]').each(function(_, v) {
+                if ($.isOnScreen(v, _this.lazyLoadingFactor)) {
+                  v.setAttribute('src', v.getAttribute('data-src'));
+                  v.removeAttribute('data-src');
+                }
+              });
+            }, 50, true)).scroll();
         },
         
         hide: function() {
@@ -36314,6 +36340,7 @@ return /******/ (function(modules) { // webpackBootstrap
         show: function() {
             var _this = this;
             jQuery(this.element).show({effect: "fade", duration: 160, easing: "easeInCubic"});
+            this.element.find('.select-results').scroll();
         },
         
         addManifestUrl: function(url) {
@@ -36342,6 +36369,7 @@ return /******/ (function(modules) { // webpackBootstrap
           var clone = _this.element.clone().css("visibility","hidden").css("display", "block").appendTo(_this.appendTo);
           _this.resultsWidth = clone.find('.select-results').outerWidth();
           clone.remove();
+          this.element.find('.select-results').scroll();
           _this.eventEmitter.publish("manifestPanelWidthChanged", _this.resultsWidth);
         },
         
@@ -36360,6 +36388,7 @@ return /******/ (function(modules) { // webpackBootstrap
             eventEmitter: _this.eventEmitter,
             appendTo: _this.manifestListElement }));
           _this.element.find('#manifest-search').keyup();
+          this.element.find('.select-results').scroll();
         },
         
         onCollectionReceived: function(event, newCollection) {
