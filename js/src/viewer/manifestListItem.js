@@ -127,7 +127,7 @@
         if (_this.imagesTotalWidth >= _this.maxPreviewImagesWidth) {
           // outsized image will inherited
           if (value.width > _this.maxPreviewImagesWidth) {
-            _this.tplData.images.push(value);
+            //_this.tplData.images.push(value);
           }
           _this.imagesTotalWidth -= (width + _this.margin);
           return false;
