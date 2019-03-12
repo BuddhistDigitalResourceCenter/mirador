@@ -60,7 +60,7 @@
         version = $.Iiif.getVersionFromContext(service['@context']);
       }
       var cl = $.Iiif.getComplianceLevelFromProfile(service.profile);
-      if (cl == 0) {
+      if (cl == 0  && service.width) {
         thumbnailUrl = $.Iiif.makeUriWithWidth(service, service.width, version);
       } else {
         thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
