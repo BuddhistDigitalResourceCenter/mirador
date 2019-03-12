@@ -116,7 +116,7 @@
                 if (service.hasOwnProperty('@context')) {
                     version = $.Iiif.getVersionFromContext(service['@context']);
                 }
-                thumbnailUrl = $.Iiif.makeUriWithWidth(service['@id'], width, version);
+                thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
             }
         } else {
           thumbnailUrl = canvas.thumbnail['@id'];
@@ -128,7 +128,7 @@
         if (service.hasOwnProperty('@context')) {
           version = $.Iiif.getVersionFromContext(service['@context']);
         }
-        thumbnailUrl = $.Iiif.makeUriWithWidth(service['@id'], width, version);
+        thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
       }
       return thumbnailUrl;
     },

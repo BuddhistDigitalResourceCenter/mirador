@@ -55,12 +55,19 @@
         return compliance;
     },
     
-    makeUriWithWidth: function(uri, width, version) {
+    makeUriWithWidth: function(service, width, version) {
+      var uri = service['@id'];
       uri = uri.replace(/\/$/, '');
-      if (version[0] == '1') {
-        return uri + '/full/' + width + ',/0/native.jpg';
+      var widthPart;
+      if (width > service.width) {
+        widthPart = "max";
       } else {
-        return uri + '/full/' + width + ',/0/default.jpg';
+        widthPart = width+',';
+      }
+      if (version[0] == '1') {
+        return uri + '/full/' + widthPart + '/0/native.jpg';
+      } else {
+        return uri + '/full/' + widthPart + '/0/default.jpg';
       }
     },
 
