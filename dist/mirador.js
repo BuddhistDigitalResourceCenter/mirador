@@ -46389,7 +46389,7 @@ $.SimpleASEndpoint = function (options) {
       windowId:             null,
       panel:                false,
       vDirectionStatus: '',
-      lazyLoadingFactor:    1.5  //should be >= 1
+      lazyLoadingFactor:    1.0  //should be >= 1
     }, options);
 
     jQuery.extend($.ScrollView.prototype, $.ThumbnailsView.prototype);
@@ -47451,7 +47451,7 @@ $.SearchWithinResults.prototype = {
       defaultThumbHeight:   150,
       windowId:             null,
       panel:                false,
-      lazyLoadingFactor:    1.5,  //should be >= 1
+      lazyLoadingFactor:    1.0,  //should be >= 1
       eventEmitter:         null
     }, options);
 

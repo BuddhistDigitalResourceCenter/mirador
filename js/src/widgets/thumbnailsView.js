@@ -16,7 +16,7 @@
       defaultThumbHeight:   150,
       windowId:             null,
       panel:                false,
-      lazyLoadingFactor:    1.5,  //should be >= 1
+      lazyLoadingFactor:    1.0,  //should be >= 1
       eventEmitter:         null
     }, options);
 
