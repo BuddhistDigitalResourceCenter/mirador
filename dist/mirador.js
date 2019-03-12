@@ -14971,6 +14971,7 @@ $.extend( $.Viewer.prototype, $.EventSource.prototype, $.ControlDock.prototype, 
                     imageLoader: _this.imageLoader,
                     x: queueItem.options.x,
                     y: queueItem.options.y,
+                    formatHints: queueItem.options.formatHints,
                     width: queueItem.options.width,
                     height: queueItem.options.height,
                     fitBounds: queueItem.options.fitBounds,
@@ -48326,15 +48327,19 @@ $.SearchWithinResults.prototype = {
       var uri = service['@id'];
       uri = uri.replace(/\/$/, '');
       var widthPart;
+      var ext = "jpg";
+      if (service.formatHints) {
+        ext = service.formatHints[0];
+      }
       if (width > service.width) {
         widthPart = "max";
       } else {
         widthPart = width+',';
       }
       if (version[0] == '1') {
-        return uri + '/full/' + widthPart + '/0/native.jpg';
+        return uri + '/full/' + widthPart + '/0/native.'+ext;
       } else {
-        return uri + '/full/' + widthPart + '/0/default.jpg';
+        return uri + '/full/' + widthPart + '/0/default.'+ext;
       }
     },
 
