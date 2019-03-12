@@ -59,8 +59,9 @@
         }
 
         var aspectRatio = canvas.height/canvas.width,
-        width = (_this.thumbInfo.thumbsHeight/aspectRatio),
-        thumbnailUrl = $.getThumbnailForCanvas(canvas, width);
+        width = (_this.thumbInfo.thumbsHeight/aspectRatio);
+        if(width > canvas.width) width = canvas.width ;
+        var thumbnailUrl = $.getThumbnailForCanvas(canvas, width);
 
         return {
           thumbUrl: thumbnailUrl,
