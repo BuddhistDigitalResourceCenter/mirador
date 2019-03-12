@@ -36791,7 +36791,7 @@ return /******/ (function(modules) { // webpackBootstrap
                 if (service.hasOwnProperty('@context')) {
                     version = $.Iiif.getVersionFromContext(service['@context']);
                 }
-                thumbnailUrl = $.Iiif.makeUriWithWidth(service['@id'], width, version);
+                thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
             }
         } else {
           thumbnailUrl = canvas.thumbnail['@id'];
@@ -36803,7 +36803,7 @@ return /******/ (function(modules) { // webpackBootstrap
         if (service.hasOwnProperty('@context')) {
           version = $.Iiif.getVersionFromContext(service['@context']);
         }
-        thumbnailUrl = $.Iiif.makeUriWithWidth(service['@id'], width, version);
+        thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
       }
       return thumbnailUrl;
     },
@@ -48293,12 +48293,19 @@ $.SearchWithinResults.prototype = {
         return compliance;
     },
     
-    makeUriWithWidth: function(uri, width, version) {
+    makeUriWithWidth: function(service, width, version) {
+      var uri = service['@id'];
       uri = uri.replace(/\/$/, '');
-      if (version[0] == '1') {
-        return uri + '/full/' + width + ',/0/native.jpg';
+      var widthPart;
+      if (width > service.width) {
+        widthPart = "max";
       } else {
-        return uri + '/full/' + width + ',/0/default.jpg';
+        widthPart = width+',';
+      }
+      if (version[0] == '1') {
+        return uri + '/full/' + widthPart + '/0/native.jpg';
+      } else {
+        return uri + '/full/' + widthPart + '/0/default.jpg';
       }
     },
 
@@ -49022,7 +49029,7 @@ $.SearchWithinResults.prototype = {
             if (service.hasOwnProperty('@context')) {
                 version = $.Iiif.getVersionFromContext(service['@context']);
             }
-            thumbnailUrl = $.Iiif.makeUriWithWidth(service['@id'], width, version);
+            thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
         }
       } else {
         thumbnailUrl = canvas.thumbnail['@id'];
@@ -49034,7 +49041,12 @@ $.SearchWithinResults.prototype = {
       if (service.hasOwnProperty('@context')) {
         version = $.Iiif.getVersionFromContext(service['@context']);
       }
-      thumbnailUrl = $.Iiif.makeUriWithWidth(service['@id'], width, version);
+      var cl = $.Iiif.getComplianceLevelFromProfile(service.profile);
+      if (cl == 0) {
+        thumbnailUrl = $.Iiif.makeUriWithWidth(service, service.width, version);
+      } else {
+        thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
+      }
     }
     return thumbnailUrl;
   };

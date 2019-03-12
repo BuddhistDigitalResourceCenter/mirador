@@ -61,7 +61,7 @@
       }
       var cl = $.Iiif.getComplianceLevelFromProfile(service.profile);
       if (cl == 0) {
-        thumbnailUrl = $.Iiif.makeUriWithWidth(service, service['width'], version);
+        thumbnailUrl = $.Iiif.makeUriWithWidth(service, service.width, version);
       } else {
         thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
       }
