@@ -2,7 +2,9 @@
   "name": "mirador",
   "version": "2.7.0",
   "description": "Multi-window image viewer, a web-based tool to support researcher goals",
-  "files": ["dist/*"],
+  "files": [
+    "dist/*"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/ProjectMirador/mirador"
@@ -55,6 +57,7 @@
     "travis": "./node_modules/.bin/grunt ci --verbose --force & npm run test",
     "update_demo": "./bin/update_demo.sh",
     "release": "./bin/create_release.sh",
+    "prerelease":"cp js/lib/thumbnailFactory.js node_modules/iiif-evented-canvas/dist/",
     "lint": "./node_modules/.bin/eslint js/src"
   },
   "dependencies": {

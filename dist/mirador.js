@@ -19189,8 +19189,8 @@ $.IIIFTileSource = function( options ){
     this.usedFormat = "jpg";
     if ( this.formatHints ) {
         for (var f = 0; f < this.formatHints.length; f++ ) {
-            if ( $.imageFormatSupported(f) ) {
-                this.usedFormat = f;
+            if ( $.imageFormatSupported(this.formatHints[f]) ) {
+                this.usedFormat = this.formatHints[f];
                 break;
             }
         }
@@ -48299,15 +48299,15 @@ $.SearchWithinResults.prototype = {
 
     getComplianceLevelFromProfile: function(profile) {
         // what to return if we can't determine profile? 0 is not a good idea
-        // would be better to have $.Iiif.supports(profile, feature) but that needs a lot more! 
+        // would be better to have $.Iiif.supports(profile, feature) but that needs a lot more!
         var compliance = -1;
         var complianceString = null;
         if(profile) {
             if(typeof(profile) === 'string'){
-                complianceString = profile;    
+                complianceString = profile;
             } else if (typeof(profile) === 'object'){
                complianceString = profile[0];
-            }   
+            }
             switch(complianceString){
                 case "http://iiif.io/api/image/2/level0.json":
                     compliance = 0;
@@ -48322,7 +48322,7 @@ $.SearchWithinResults.prototype = {
         }
         return compliance;
     },
-    
+
     makeUriWithWidth: function(service, width, version) {
       var uri = service['@id'];
       uri = uri.replace(/\/$/, '');
@@ -48331,8 +48331,8 @@ $.SearchWithinResults.prototype = {
       if (service.formatHints) {
         ext = service.formatHints[0];
       }
-      if (width > service.width) {
-        widthPart = "max";
+      if( width == "max" || width >= service.width) {
+        widthPart = "full";
       } else {
         widthPart = width+',';
       }
@@ -48372,7 +48372,6 @@ $.SearchWithinResults.prototype = {
   };
 
 }(Mirador));
-
 
 (function($){
 
@@ -49077,7 +49076,7 @@ $.SearchWithinResults.prototype = {
       }
       var cl = $.Iiif.getComplianceLevelFromProfile(service.profile);
       if (cl == 0  && service.width) {
-        thumbnailUrl = $.Iiif.makeUriWithWidth(service, service.width, version);
+        thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version);
       } else {
         thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
       }
