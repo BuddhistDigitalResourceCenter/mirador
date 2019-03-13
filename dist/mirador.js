@@ -36833,6 +36833,7 @@ return /******/ (function(modules) { // webpackBootstrap
         if (service.hasOwnProperty('@context')) {
           version = $.Iiif.getVersionFromContext(service['@context']);
         }
+        if(service && service.profile && service.profile.match(/level0/)) width = "max" ;
         thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
       }
       return thumbnailUrl;

@@ -53,6 +53,7 @@
   },
   "scripts": {
     "start": "./node_modules/.bin/grunt serve",
+    "prestart":"cp js/lib/thumbnailFactory.js node_modules/iiif-evented-canvas/dist/",
     "test": "./node_modules/.bin/karma start ./karma.conf.js",
     "travis": "./node_modules/.bin/grunt ci --verbose --force & npm run test",
     "update_demo": "./bin/update_demo.sh",
