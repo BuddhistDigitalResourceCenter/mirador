@@ -53,12 +53,10 @@
   },
   "scripts": {
     "start": "./node_modules/.bin/grunt serve",
-    "prestart": "cp js/lib/thumbnailFactory.js node_modules/iiif-evented-canvas/dist/",
     "test": "./node_modules/.bin/karma start ./karma.conf.js",
     "travis": "./node_modules/.bin/grunt ci --verbose --force & npm run test",
     "update_demo": "./bin/update_demo.sh",
     "release": "./bin/create_release.sh",
-    "prerelease": "cp js/lib/thumbnailFactory.js node_modules/iiif-evented-canvas/dist/",
     "lint": "./node_modules/.bin/eslint js/src"
   },
   "dependencies": {
@@ -70,7 +68,7 @@
     "i18next": "^4.2.0",
     "i18next-browser-languagedetector": "^1.0.1",
     "i18next-xhr-backend": "^1.3.0",
-    "iiif-evented-canvas": "^0.0.3-beta",
+    "iiif-evented-canvas": "https://github.com/buda-base/iiif-evented-canvas",
     "iiif-layout-functions": "0.0.2-alpha",
     "javascript-state-machine": "^2.3.4",
     "jquery": "^3.1.1",
