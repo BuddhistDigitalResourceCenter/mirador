@@ -32483,7 +32483,7 @@ var getThumbUrl = function (resource, width) {
       return id;
     }
   } else {
-    if (resource && resource.service && resource.service.profile && resource.service.profile.match(/level0/)) return id.replace("/full/full/", "/full/max/");else // we still don't want the full size
+    if (resource && resource.service && resource.service.profile && resource.service.profile.match && resource.service.profile.match(/level0/)) return id.replace("/full/full/", "/full/max/");else // we still don't want the full size
       return id.replace("/full/full/", buildResourceSize());
   }
 };
@@ -36844,8 +36844,12 @@ return /******/ (function(modules) { // webpackBootstrap
         if (service.hasOwnProperty('@context')) {
           version = $.Iiif.getVersionFromContext(service['@context']);
         }
-        if(service && service.profile && service.profile.match(/level0/)) width = "max" ;
-        thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
+        var cl = $.Iiif.getComplianceLevelFromProfile(service.profile);
+        if (cl == 0  && service.width) {
+          thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version);
+        } else {
+          thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
+        }
       }
       return thumbnailUrl;
     },

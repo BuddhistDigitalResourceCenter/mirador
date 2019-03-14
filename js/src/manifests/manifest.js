@@ -128,8 +128,12 @@
         if (service.hasOwnProperty('@context')) {
           version = $.Iiif.getVersionFromContext(service['@context']);
         }
-        if(service && service.profile && service.profile.match(/level0/)) width = "max" ;
-        thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
+        var cl = $.Iiif.getComplianceLevelFromProfile(service.profile);
+        if (cl == 0  && service.width) {
+          thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version);
+        } else {
+          thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
+        }
       }
       return thumbnailUrl;
     },
