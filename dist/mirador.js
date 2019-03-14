@@ -48344,7 +48344,7 @@ $.SearchWithinResults.prototype = {
         ext = service.formatHints[0];
       }
       if( width == "max" || width >= service.width) {
-        widthPart = "full";
+        widthPart = "max";
       } else {
         widthPart = width+',';
       }
