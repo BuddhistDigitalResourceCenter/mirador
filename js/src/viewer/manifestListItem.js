@@ -120,7 +120,7 @@
         });
       }
 
-      jQuery.each(_this.allImages, function(index, value) {
+      jQuery.each(jQuery(_this.allImages).first(), function(index, value) {
         var width = value.width;
 
         _this.imagesTotalWidth += (width + _this.margin);
