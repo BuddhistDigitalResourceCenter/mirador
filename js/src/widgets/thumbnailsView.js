@@ -189,7 +189,7 @@
                                  '<ul class="{{listingCssCls}}" role="list" aria-label="Thumbnails">',
                                  '{{#thumbs}}',
                                  '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
-                                 '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" height="{{../defaultHeight}}" width="{{width}}">',
+                                 '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px">',
                                  '<div class="thumb-label">{{title}}</div>',
                                  '</li>',
                                  '{{/thumbs}}',
