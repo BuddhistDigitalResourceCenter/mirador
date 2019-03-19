@@ -47530,12 +47530,14 @@ $.SearchWithinResults.prototype = {
         width = (_this.thumbInfo.thumbsHeight/aspectRatio);
         if(width > canvas.width) width = canvas.width ;
         var thumbnailUrl = $.getThumbnailForCanvas(canvas, width);
+        var height = width *  aspectRatio ;
 
         return {
           thumbUrl: thumbnailUrl,
           title:    $.JsonLd.getTextValue(canvas.label),
           id:       canvas['@id'],
           width:    width,
+          height:   height,
           highlight: _this.currentImgIndex === index ? 'highlight' : ''
         };
       });
@@ -47657,7 +47659,7 @@ $.SearchWithinResults.prototype = {
                                  '<ul class="{{listingCssCls}}" role="list" aria-label="Thumbnails">',
                                  '{{#thumbs}}',
                                  '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
-                                 '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px">',
+                                 '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px;min-height:{{height}}px">',
                                  '<div class="thumb-label">{{title}}</div>',
                                  '</li>',
                                  '{{/thumbs}}',
