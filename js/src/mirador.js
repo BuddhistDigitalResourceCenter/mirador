@@ -32,4 +32,20 @@
     }
   }
   global.Mirador = global.Mirador || Mirador;
+
+
+   var originalConfigure = OpenSeadragon.IIIFTileSource.prototype.configure;
+   OpenSeadragon.IIIFTileSource.prototype.configure = function(data, url) {
+     data = originalConfigure.call(this, data, url);
+
+     for (var f = 0; f < data.formatHints.length; f++ ) {
+       if ( OpenSeadragon.imageFormatSupported(data.formatHints[f]) ) {
+         data.usedFormat = data.formatHints[f];
+         break;
+       }
+     }
+
+     return data;
+   };
+
 })(window);
