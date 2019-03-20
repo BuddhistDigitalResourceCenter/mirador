@@ -40,7 +40,7 @@
 
      if(data.formatHints) for (var f = 0; f < data.formatHints.length; f++ ) {
        if ( OpenSeadragon.imageFormatSupported(data.formatHints[f]) ) {
-         data.usedFormat = data.formatHints[f];
+         data.tileFormat = data.formatHints[f];
          break;
        }
      }
