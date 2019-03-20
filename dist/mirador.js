@@ -35132,12 +35132,13 @@ return /******/ (function(modules) { // webpackBootstrap
             resultsWidth:               0,
             lazyLoadingFactor:          1,
             state:                      null,
-            eventEmitter:               null
+            eventEmitter:               null,
+            labelToString:              function(label) { return label; }
         }, options);
 
         var _this = this;
         _this.init();
-        
+
     };
 
     $.CollectionTreeManifestsPanel.prototype = {
@@ -35148,7 +35149,7 @@ return /******/ (function(modules) { // webpackBootstrap
                 showURLBox : this.state.getStateProperty('showAddFromURLBox')
             })).appendTo(this.appendTo);
             this.manifestListElement = this.element.find('ul');
-            
+
             // Populate the preloads folder with manifests in the configuration
             jQuery.each(this.state.currentConfig.data, function(_, v) {
               if (v.hasOwnProperty('manifestUri')) {
@@ -35170,7 +35171,7 @@ return /******/ (function(modules) { // webpackBootstrap
                       selected: true
                     },
                     children: []
-                  }, 
+                  },
                   {
                     id: 'user',
                     text: i18next.t('myManifests'),
@@ -35205,7 +35206,7 @@ return /******/ (function(modules) { // webpackBootstrap
                 }
               });
             });
-            
+
             //this code gives us the max width of the results area, used to determine how many preview images to show
             //cloning the element and adjusting the display and visibility means it won't break the normal flow
             var clone = this.element.clone().css("visibility","hidden").css("display", "block").appendTo(this.appendTo);
@@ -35214,7 +35215,7 @@ return /******/ (function(modules) { // webpackBootstrap
             this.paddingListElement = this.controlsHeight;
             this.manifestListElement.css("padding-bottom", this.paddingListElement);
             clone.remove();
-            
+
             // this.manifestLoadStatusIndicator = new $.ManifestLoadStatusIndicator({
             //   manifests: this.parent.manifests,
             //   appendTo: this.element.find('.member-select-results')
@@ -35236,17 +35237,17 @@ return /******/ (function(modules) { // webpackBootstrap
           _this.eventEmitter.subscribe('manifestReceived', function(event, newManifest) {
             _this.onManifestReceived(event, newManifest);
           });
-          
+
           // When a collection is received
           _this.eventEmitter.subscribe('collectionReceived', function(event, newCollection, parentUri, parentNodeId) {
             _this.onCollectionReceived(event, newCollection, parentUri, parentNodeId);
           });
-          
+
           // When a collection failed to load
           _this.eventEmitter.subscribe('collectionNotReceived', function(event, parentUri, parentNodeId) {
             _this.onCollectionNotReceived(event, parentUri, parentNodeId);
           });
-          
+
           // When Mirador gets an explicit request to load a manifest from a URL
           _this.eventEmitter.subscribe('ADD_MANIFEST_FROM_URL', function(event, url) {
             // Add it if it has not been loaded before
@@ -35257,12 +35258,12 @@ return /******/ (function(modules) { // webpackBootstrap
             _this.treeElement.jstree('deselect_all');
             _this.treeElement.jstree('select_node', 'user');
           });
-          
+
           // When Mirador gets an explicit request to load a collection from a URL
           _this.eventEmitter.subscribe('ADD_COLLECTION_FROM_URL', function(event, url, source) {
             _this.addCollectionFromUrl(url, null, true);
           });
-          
+
           // When Mirador gets a request to load an object (manifest or collection) from a URL (e.g. the "Add object from URL" form)
           _this.eventEmitter.subscribe('ADD_OBJECT_FROM_URL', function(event, url, source) {
             _this.addObjectFromUrl(url, source, true);
@@ -35294,7 +35295,7 @@ return /******/ (function(modules) { // webpackBootstrap
             jQuery(window).resize($.throttle(function() {
               _this.resizePanel();
             }, 50, true));
-            
+
             // Lazy loading
             this.element.find('.member-select-results').on('scroll', $.throttle(function() {
               jQuery(this).find('img[data-src]').each(function(_, v) {
@@ -35305,7 +35306,7 @@ return /******/ (function(modules) { // webpackBootstrap
               });
             }, 50, true)).scroll();
         },
-        
+
         hide: function() {
             var _this = this;
             jQuery(this.element).hide({effect: "fade", duration: 160, easing: "easeOutCubic"});
@@ -35316,24 +35317,24 @@ return /******/ (function(modules) { // webpackBootstrap
             jQuery(this.element).show({effect: "fade", duration: 160, easing: "easeInCubic"});
             this.element.find('.member-select-results').scroll();
         },
-        
+
         // Send explicit request for adding a manifest from a URL
         addManifestUrl: function(url) {
           var _this = this;
           _this.eventEmitter.publish('ADD_MANIFEST_FROM_URL', [url, "(Added from URL)"]);
         },
-        
+
         // Send explicit request for adding a manifest or collection from a URL
         addObjectUrl: function(url) {
           var _this = this;
           _this.eventEmitter.publish('ADD_OBJECT_FROM_URL', [url, "(Added from URL)"]);
         },
-        
+
         togglePanel: function(event) {
           var _this = this;
           _this.eventEmitter.publish('TOGGLE_LOAD_WINDOW');
         },
-        
+
         filterManifests: function(value) {
           var _this = this;
           if (value.length > 0) {
@@ -35353,7 +35354,7 @@ return /******/ (function(modules) { // webpackBootstrap
           this.element.find('.select-results').scroll();
           _this.eventEmitter.publish("manifestPanelWidthChanged", _this.resultsWidth);
         },
-        
+
         onPanelVisible: function(_, stateValue) {
           var _this = this;
           if (stateValue) { _this.show(); return; }
@@ -35365,9 +35366,9 @@ return /******/ (function(modules) { // webpackBootstrap
           var _this = this;
           // Show a manifest list item only if the currently selected "folder" expects it
           if (_this.expectedThings.indexOf(newManifest.uri) != -1) {
-            _this.manifestListItems.push(new $.ManifestListItem({ 
-              manifest: newManifest, 
-              resultsWidth: _this.resultsWidth, 
+            _this.manifestListItems.push(new $.ManifestListItem({
+              manifest: newManifest,
+              resultsWidth: _this.resultsWidth,
               state: _this.state,
               eventEmitter: _this.eventEmitter,
               forcedIndex: _this.expectedThings.indexOf(newManifest.uri),
@@ -35376,7 +35377,7 @@ return /******/ (function(modules) { // webpackBootstrap
             this.element.find('.member-select-results').scroll();
           }
         },
-        
+
         // Handler for when collection data is loaded for the first time
         onCollectionReceived: function(event, newCollection, uri, parentNodeId) {
           // If the tree isn't ready, hold it and move on
@@ -35391,7 +35392,7 @@ return /******/ (function(modules) { // webpackBootstrap
             this.addCollectionNode(parentNodeId, newCollection);
           }
         },
-        
+
         // Handler for when collection data is loaded for the first time and failed
         onCollectionNotReceived: function(event, uri, parentNodeId) {
           // If the tree isn't ready, hold it and move on
@@ -35406,13 +35407,13 @@ return /******/ (function(modules) { // webpackBootstrap
             _this.treeElement.jstree('disable_node', nodeId); // Don't let the user click it
           });
         },
-        
+
         // Clean out the list of manifest items on the right side
         clearManifestItems: function() {
           this.manifestListItems = [];
           this.manifestListElement.html('');
         },
-        
+
         // Set up 2-way correspondence between node IDs and URIs
         registerNodeIdUriPair: function(nodeId, uri) {
           // Map node ID to URI
@@ -35423,7 +35424,7 @@ return /******/ (function(modules) { // webpackBootstrap
             this.uriToNodeId[uri] = [nodeId]; // New URI => new node ID
           }
         },
-        
+
         // Handler for selecting a new node
         changeNode: function(node) {
           var _this = this;
@@ -35442,7 +35443,7 @@ return /******/ (function(modules) { // webpackBootstrap
           this.element.find('#manifest-search').keyup();
           this.element.find('.member-select-results').scroll();
         },
-        
+
         // Handler for expanding a node (> clicked)
         expandNode: function(node) {
           var _this = this;
@@ -35451,7 +35452,7 @@ return /******/ (function(modules) { // webpackBootstrap
             _this.updateCollectionFromUrl(uri, node.id);
           });
         },
-        
+
         // Helper for loading a manifest or collection from a URL
         addObjectFromUrl: function(url, source) {
           var _this = this,
@@ -35495,7 +35496,7 @@ return /******/ (function(modules) { // webpackBootstrap
             });
           }
         },
-        
+
         // Helper for loading a manifest from a URL
         addManifestFromUrl: function(url) {
           var _this = this,
@@ -35504,9 +35505,9 @@ return /******/ (function(modules) { // webpackBootstrap
           if (_this.state.getStateProperty('manifests')[url]) {
             manifest = _this.state.getStateProperty('manifests')[url];
             if (manifest.jsonLd) {
-              _this.manifestListItems.push(new $.ManifestListItem({ 
-                manifest: manifest, 
-                resultsWidth: _this.resultsWidth, 
+              _this.manifestListItems.push(new $.ManifestListItem({
+                manifest: manifest,
+                resultsWidth: _this.resultsWidth,
                 state: _this.state,
                 eventEmitter: _this.eventEmitter,
                 forcedIndex: _this.expectedThings.indexOf(url),
@@ -35523,7 +35524,7 @@ return /******/ (function(modules) { // webpackBootstrap
             });
           }
         },
-        
+
         // Helper for loading a manifest from a URL as a child node of some other node (null = top level)
         // Optionally, jump to that new child node if jumpToIt is specified as true
         addCollectionFromUrl: function(url, nodeId, jumpToIt) {
@@ -35568,7 +35569,7 @@ return /******/ (function(modules) { // webpackBootstrap
             });
           }
         },
-        
+
         // Helper for updating a subnode of nodeId corresponding to the specified URL
         updateCollectionFromUrl: function(url, nodeId) {
           var _this = this,
@@ -35592,7 +35593,7 @@ return /******/ (function(modules) { // webpackBootstrap
             });
           }
         },
-        
+
         // Helper for loading a Collection object as a child of nodeId
         // Optionally, skip seeding subnodes under this collection if unexpanded is specified; this marks it as "still loading"
         addCollectionNode: function(nodeId, collection, unexpanded) {
@@ -35600,7 +35601,7 @@ return /******/ (function(modules) { // webpackBootstrap
               subcollectionBlocks = collection.getCollectionBlocks();
           // Add the new node
           var newNodeId = _this.treeElement.jstree('create_node', nodeId ? nodeId : null, {
-            text: collection.jsonLd.label,
+            text: this.labelToString(collection.jsonLd.label),
             icon: unexpanded ? 'fa fa-spinner fa-pulse' : 'fa fa-folder', // Unexpanded = still loading, expanded = loaded
             children: []
           }, 'last');
@@ -35637,7 +35638,7 @@ return /******/ (function(modules) { // webpackBootstrap
           // Return newly created node ID for future reference
           return newNodeId;
         },
-        
+
         // Helper for updating a subnode of nodeId corresponding to the specified URL
         updateCollectionNode: function(nodeId, collection) {
           var _this = this,
@@ -35665,7 +35666,7 @@ return /******/ (function(modules) { // webpackBootstrap
               _this.treeElement.jstree('enable_node', n);
             }
           });
-          
+
         },
 
         template: $.Handlebars.compile([
@@ -35699,7 +35700,6 @@ return /******/ (function(modules) { // webpackBootstrap
     };
 
 }(Mirador));
-
 
 (function($) {
 
