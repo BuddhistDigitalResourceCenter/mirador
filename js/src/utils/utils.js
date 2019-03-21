@@ -20,17 +20,18 @@
     return imgIndex;
   };
 
-  $.getThumbnailForCanvas = function(canvas, width) {
+  $.getThumbnailForCanvas = function(canvas, width, useThumbnailProperty) {
     var version = "1.1",
     compliance = -1,
     service,
     thumbnailUrl;
+    if(useThumbnailProperty == undefined) useThumbnailProperty = true ;
 
     // Ensure width is an integer...
     width = parseInt(width, 10);
 
     // Respecting the Model...
-    if (canvas.hasOwnProperty('thumbnail')) {
+    if (useThumbnailProperty && canvas.hasOwnProperty('thumbnail')) {
       // use the thumbnail image, prefer via a service
       if (typeof(canvas.thumbnail) == 'string') {
         thumbnailUrl = canvas.thumbnail;

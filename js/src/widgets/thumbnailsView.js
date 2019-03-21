@@ -45,13 +45,14 @@
       this.listenForActions();
     },
 
-    loadContent: function() {
+    loadContent: function(useThumbnailProperty) {
       var _this = this,
       tplData = {
         defaultHeight:  this.thumbInfo.thumbsHeight,
         listingCssCls:  this.thumbInfo.listingCssCls,
         thumbnailCls:   this.thumbInfo.thumbnailCls
       };
+      if(useThumbnailProperty == undefined) useThumbnailProperty = true ;
 
       tplData.thumbs = jQuery.map(this.imagesList, function(canvas, index) {
         if (canvas.width === 0) {
@@ -61,7 +62,7 @@
         var aspectRatio = canvas.height/canvas.width,
         width = (_this.thumbInfo.thumbsHeight/aspectRatio);
         if(width > canvas.width) width = canvas.width ;
-        var thumbnailUrl = $.getThumbnailForCanvas(canvas, width);
+        var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
         var height = width *  aspectRatio ;
 
         return {
@@ -169,14 +170,15 @@
       });
     },
 
-    reloadImages: function(newThumbHeight, triggerShow) {
+    reloadImages: function(newThumbHeight, triggerShow, useThumbnailProperty) {
       var _this = this;
       this.thumbInfo.thumbsHeight = newThumbHeight;
+      if(useThumbnailProperty == undefined) useThumbnailProperty = true ;
 
       jQuery.each(this.imagesList, function(index, image) {
         var aspectRatio = image.height/image.width,
         width = (_this.thumbInfo.thumbsHeight/aspectRatio),
-        newThumbURL = $.getThumbnailForCanvas(image, width),
+        newThumbURL = $.getThumbnailForCanvas(image, width, useThumbnailProperty),
         id = image['@id'];
         var imageElement = _this.element.find('img[data-image-id="'+id+'"]');
         imageElement.attr('data', newThumbURL).attr('height', _this.thumbInfo.thumbsHeight).attr('width', width).attr('src', '');
