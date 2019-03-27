@@ -511,7 +511,7 @@
             jQuery.each(subcollectionBlocks, function(i, v) {
               // Create the subnode
               var nid = _this.treeElement.jstree('create_node', newNodeId, {
-                text: v.label,
+                text: _this.labelToString(v.label),
                 icon: 'fa fa-spinner fa-pulse',
                 children: []
               }, 'last');
