@@ -46426,7 +46426,7 @@ $.SimpleASEndpoint = function (options) {
       windowId:             null,
       panel:                false,
       vDirectionStatus: '',
-      lazyLoadingFactor:    1.0  //should be >= 1
+      lazyLoadingFactor:    1.65  //should be >= 1
     }, options);
 
     jQuery.extend($.ScrollView.prototype, $.ThumbnailsView.prototype);
