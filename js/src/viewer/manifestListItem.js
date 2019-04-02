@@ -164,6 +164,7 @@
         jQuery(this).hide().fadeIn(600);
       });
 
+      /*
       this.element.on('click', function() {
         var windowConfig = {
           manifest: _this.manifest,
@@ -179,6 +180,16 @@
           manifest: _this.manifest,
           canvasID: jQuery(this).attr('data-image-id'),
           viewType: _this.state.getStateProperty('windowSettings').viewType //get the view type from settings rather than always defaulting to ImageView
+        };
+        _this.eventEmitter.publish('ADD_WINDOW', windowConfig);
+      });
+      */
+
+      this.element.find('.preview-image').on('click', function(e) {
+        var windowConfig = {
+          manifest: _this.manifest,
+          canvasID: null,
+          viewType: 'ScrollView'
         };
         _this.eventEmitter.publish('ADD_WINDOW', windowConfig);
       });
