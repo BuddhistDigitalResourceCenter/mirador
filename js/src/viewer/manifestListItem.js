@@ -116,6 +116,7 @@
           width: width,
           height: _this.thumbHeight,
           id: canvas['@id'],
+          view: canvas['@id'].replace(/.*(bdr:[^:/]+).*/,"$1"),
           index: i
         });
       }
@@ -192,6 +193,7 @@
           viewType: 'ScrollView'
         };
         _this.eventEmitter.publish('ADD_WINDOW', windowConfig);
+        e.preventDefault();
       });
     },
 
@@ -287,7 +289,7 @@
       '<div class="preview-thumb">',
         '<div class="preview-images">',
         '{{#each images}}',
-          '<img data-src="{{url}}" width="{{width}}" height="{{height}}" class="preview-image flash" data-image-id="{{id}}">',
+          '<a href="/view/{{view}}"><img data-src="{{url}}" width="{{width}}" height="{{height}}" class="preview-image flash" data-image-id="{{id}}"></a>',
         '{{/each}}',
         '</div>',
         '{{#if remaining}}',
