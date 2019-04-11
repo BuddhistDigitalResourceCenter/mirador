@@ -43174,7 +43174,8 @@ $.SimpleASEndpoint = function (options) {
           bottomPanelAvailable: this.bottomPanelAvailable,
           annoEndpointAvailable: this.annoEndpointAvailable,
           canvasControls: this.canvasControls,
-          annotationState : this.canvasControls.annotations.annotationState
+          annotationState : this.canvasControls.annotations.annotationState,
+          ajaxWithCredentials: this.ajaxWithCredentials
         });
       } else {
         this.focusModules.ImageView.updateImage(canvasID);
@@ -45738,7 +45739,9 @@ $.SimpleASEndpoint = function (options) {
         preserveViewport: true,
         blendTime: 0.1,
         alwaysBlend: false,
-        showNavigationControl: false
+        showNavigationControl: false,
+        canvasControls: this.canvasControls,
+        ajaxWithCredentials: this.ajaxWithCredentials
       });
 
       var canvasBounds = canvasModel.getBounds();
@@ -48639,8 +48642,7 @@ $.SearchWithinResults.prototype = {
         defaultZoomLevel: 0,
         blendTime:        0.1,
         alwaysBlend:      false,
-        showNavigationControl: false,
-        ajaxWithCredentials:true
+        showNavigationControl: false
       }, options)
 
     );

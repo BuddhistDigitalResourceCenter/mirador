@@ -699,7 +699,9 @@
         preserveViewport: true,
         blendTime: 0.1,
         alwaysBlend: false,
-        showNavigationControl: false
+        showNavigationControl: false,
+        canvasControls: this.canvasControls,
+        ajaxWithCredentials: this.ajaxWithCredentials
       });
 
       var canvasBounds = canvasModel.getBounds();

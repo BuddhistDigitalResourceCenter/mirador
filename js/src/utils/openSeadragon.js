@@ -11,8 +11,7 @@
         defaultZoomLevel: 0,
         blendTime:        0.1,
         alwaysBlend:      false,
-        showNavigationControl: false,
-        ajaxWithCredentials:true
+        showNavigationControl: false
       }, options)
 
     );
