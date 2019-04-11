@@ -123,8 +123,8 @@
 
       jQuery.each(jQuery(_this.allImages).first(), function(index, value) {
         var width = value.width;
-
         _this.imagesTotalWidth += (width + _this.margin);
+        /*
         if (_this.imagesTotalWidth >= _this.maxPreviewImagesWidth) {
           // outsized image will inherited
           if (value.width > _this.maxPreviewImagesWidth) {
@@ -133,6 +133,7 @@
           _this.imagesTotalWidth -= (width + _this.margin);
           return false;
         }
+        */
         _this.tplData.images.push(value);
       });
 
@@ -204,7 +205,7 @@
         var image = null;
 
         //width of browser window has been made smaller
-        if (newMaxPreviewWidth < _this.maxPreviewImagesWidth ) {
+        if (false && newMaxPreviewWidth < _this.maxPreviewImagesWidth ) {
           while (_this.imagesTotalWidth >= newMaxPreviewWidth) {
             image = _this.tplData.images.pop();
 
@@ -223,7 +224,7 @@
           }
           _this.remaining = _this.allImages.length - _this.tplData.images.length;
 
-        } else if (newMaxPreviewWidth > _this.maxPreviewImagesWidth) {
+        } else if ( false && newMaxPreviewWidth > _this.maxPreviewImagesWidth) {
           //width of browser window has been made larger
           var currentLastImage = _this.tplData.images[_this.tplData.images.length-1],
             index = currentLastImage ? currentLastImage.index+1 : 0;
