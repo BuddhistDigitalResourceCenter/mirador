@@ -34,18 +34,22 @@
   global.Mirador = global.Mirador || Mirador;
 
 
-   var originalConfigure = OpenSeadragon.IIIFTileSource.prototype.configure;
-   OpenSeadragon.IIIFTileSource.prototype.configure = function(data, url) {
-     data = originalConfigure.call(this, data, url);
+  var originalConfigure = OpenSeadragon.IIIFTileSource.prototype.configure;
+  OpenSeadragon.IIIFTileSource.prototype.configure = function(data, url) {
+    data = originalConfigure.call(this, data, url);
 
-     if(data.formatHints) for (var f = 0; f < data.formatHints.length; f++ ) {
-       if ( OpenSeadragon.imageFormatSupported(data.formatHints[f]) ) {
-         data.tileFormat = data.formatHints[f];
-         break;
-       }
-     }
-
-     return data;
-   };
-
+    if(data.preferredFormats) for (var f = 0; f < data.preferredFormats.length; f++ ) {
+      if ( OpenSeadragon.imageFormatSupported(data.preferredFormats[f]) ) {
+        data.tileFormat = data.preferredFormats[f];
+        break;
+      }
+    }
+    else if(data.formatHints) for (var g = 0; g < data.formatHints.length; g++ ) {
+      if ( OpenSeadragon.imageFormatSupported(data.formatHints[g]) ) {
+        data.tileFormat = data.formatHints[g];
+        break;
+      }
+    }
+    return data;
+  };
 })(window);
