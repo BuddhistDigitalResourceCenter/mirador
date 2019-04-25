@@ -178,6 +178,10 @@
         label: i18next.t('manifest'),
         value: this.stringifyRelated(jsonLd['@id'] || '')
       }, {
+        identifier: 'download',
+        label: i18next.t('download'),
+        value: this.stringifyRelated(jsonLd.rendering || '')
+      }, {
         identifier: 'within',
         label: i18next.t('within'),
         value: this.getWithin(jsonLd.within || '')
