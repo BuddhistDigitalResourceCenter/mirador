@@ -21,7 +21,8 @@
       remaining:                  0,
       forcedIndex:                null,
       state:                      null,
-      eventEmitter:               null
+      eventEmitter:               null,
+      labelToString:              function(label) { return label; }
     }, options);
 
     this.init();
@@ -82,7 +83,7 @@
       manifest = _this.manifest.jsonLd;
 
       this.tplData = {
-        label: $.JsonLd.getTextValue(manifest.label),
+        label: this.labelToString(manifest.label) ,// $.JsonLd.getTextValue(manifest.label),
         repository: location,
         canvasCount: manifest.sequences[0].canvases.length,
         images: [],
