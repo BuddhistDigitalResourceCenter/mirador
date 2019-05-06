@@ -60,7 +60,10 @@
       uri = uri.replace(/\/$/, '');
       var widthPart;
       var ext = "jpg";
-      if (service.formatHints) {
+      if (service.preferredFormats){
+        ext = service.preferredFormats[0];
+      }
+      else if (service.formatHints) {
         ext = service.formatHints[0];
       }
       if( width == "max" || width >= service.width) {
