@@ -5674,12 +5674,13 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   border-top: 1px solid gray;
 }
 #collection-tree {
-  position: absolute;
+  position: relative;
   float: left;
   width: 240px;
   max-width: 240px;
-  overflow: auto;
-  height: 90%;
+  overflow-x: auto;
+  overflow-y: scroll;
+  height: 100%;
   height: calc(100% - 88px);
 }
 @media (max-width: 768px) {
@@ -5959,3 +5960,5 @@ span.ellipse.clickable {
 	font-weight: bold;
 	cursor: default;
 }
+
+.clayfy-box:not(.clayfy-not-move){cursor:move;touch-action:none;}.clayfy-ghost{z-index:1000}.clayfy-ghost-opacity{opacity:.5}.clayfy-handler.clayfy-top{cursor:n-resize}.clayfy-handler.clayfy-top.left{cursor:nw-resize}.clayfy-handler.clayfy-top.right{cursor:ne-resize}.clayfy-handler.clayfy-bottom{cursor:n-resize}.clayfy-handler.clayfy-bottom.left{cursor:sw-resize}.clayfy-handler.clayfy-bottom.right{cursor:se-resize}.clayfy-handler.clayfy-left{cursor:w-resize}.clayfy-handler.clayfy-right{cursor:w-resize}.clayfy-sort-droparea{border:2px solid #ccc}.clayfy-touch-device clayfyhandler-bottom-right{display:none;width:18px;height:18px;bottom:-5px;right:-5px}
