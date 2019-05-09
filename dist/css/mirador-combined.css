@@ -4848,6 +4848,15 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   vertical-align: middle;
   width: 20px;
 }
+.mirador-container .pdfDL {
+  line-height: 80px;
+  margin-left: 5px;
+  display: inline-block;
+  font-size: 20px;
+}
+.mirador-container .pdfDL:hover {
+  font-size: 25px;
+}
 .mirador-container #load-controls {
   margin-top: 20px;
 }

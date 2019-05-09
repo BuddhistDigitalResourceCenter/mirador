@@ -408,6 +408,7 @@
             manifest = _this.state.getStateProperty('manifests')[url];
             if (manifest.jsonLd) {
               _this.manifestListItems.push(new $.ManifestListItem({
+                labelToString:_this.labelToString,
                 manifest: manifest,
                 resultsWidth: _this.resultsWidth,
                 state: _this.state,

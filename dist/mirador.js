@@ -35529,6 +35529,7 @@ return /******/ (function(modules) { // webpackBootstrap
             manifest = _this.state.getStateProperty('manifests')[url];
             if (manifest.jsonLd) {
               _this.manifestListItems.push(new $.ManifestListItem({
+                labelToString:_this.labelToString,
                 manifest: manifest,
                 resultsWidth: _this.resultsWidth,
                 state: _this.state,
@@ -36008,7 +36009,7 @@ return /******/ (function(modules) { // webpackBootstrap
       forcedIndex:                null,
       state:                      null,
       eventEmitter:               null,
-      labelToString:              function(label) { return label; }
+      labelToString:              function(label) { return "youpi",label; }
     }, options);
 
     this.init();
@@ -36066,14 +36067,29 @@ return /******/ (function(modules) { // webpackBootstrap
     fetchTplData: function() {
       var _this = this,
       location = _this.manifest.location,
-      manifest = _this.manifest.jsonLd;
+      manifest = _this.manifest.jsonLd,
+      pdf = manifest.rendering ;
+
+      if(pdf) {
+        console.log("pdf",pdf);
+        for(var idx = 0 ; idx < manifest.rendering.length ; idx ++) {
+          console.log("idx",idx,pdf[idx]);
+          if(pdf[idx].format == "application/pdf")
+          {
+            pdf = pdf[idx]["@id"];
+            console.log("found",pdf);
+            break ;
+          }
+        }
+      }
 
       this.tplData = {
         label: this.labelToString(manifest.label) ,// $.JsonLd.getTextValue(manifest.label),
         repository: location,
         canvasCount: manifest.sequences[0].canvases.length,
         images: [],
-        index: _this.state.getManifestIndex(manifest['@id'])
+        index: _this.state.getManifestIndex(manifest['@id']),
+        pdf: pdf
       };
 
       this.tplData.repoImage = (function() {
@@ -36283,6 +36299,7 @@ return /******/ (function(modules) { // webpackBootstrap
         '{{#if remaining}}',
           '<i class="fa fa fa-ellipsis-h remaining"></i>',
         '{{/if}}',
+        '<a class="pdfDL" title="Download as PDF" target="_blank" href="{{pdf}}"><i class="fa fa-file-pdf-o"></i></a>',
       '</div>',
       '</li>'
     ].join(''))
