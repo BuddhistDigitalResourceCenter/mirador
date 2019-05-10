@@ -163,7 +163,7 @@
         templateData[value] = true;
         templateData.iconClasses[value] = _this.iconClasses[value];
       });
-      templateData.title = $.JsonLd.getTextValue(manifest.label);
+      templateData.title = (this.labelToString?this.labelToString(manifest.label):$.JsonLd.getTextValue(manifest.label));
       templateData.displayLayout = this.displayLayout;
       templateData.layoutOptions = this.layoutOptions;
       // if displayLayout is true,  but all individual options are set to false, set displayLayout to false
