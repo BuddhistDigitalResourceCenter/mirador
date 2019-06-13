@@ -71,11 +71,13 @@
           id:       canvas['@id'],
           width:    width,
           height:   height,
-          highlight: _this.currentImgIndex === index ? 'highlight' : ''
+          highlight: _this.currentImgIndex === index ? 'highlight' : '',
+          usEtext:  _this.getEtextPage !== undefined
         };
       });
 
       this.element = jQuery(_this.template(tplData)).appendTo(this.appendTo);
+
     },
 
     updateImage: function(canvasId) {
@@ -167,6 +169,33 @@
 
       imagePromise.done(function(image) {
         jQuery(imageElement).attr('src', image);
+        if(_this.getEtextPage) {
+          var id = jQuery(imageElement).attr("data-image-id"),
+              canvas = _this.imagesList.filter(function(e) { return e["@id"] === id; });
+          if(canvas.length) {
+              jQuery(imageElement).next('.etext-content').text("(trying to load page in etext)");
+              _this.getEtextPage(canvas[0]).then(function(val) {                
+                console.log("val",canvas[0].label[0],JSON.stringify(val,null,3));
+                try { 
+                  if(val) { 
+                    var labelArray = [],
+                        txt = "",
+                        css = "" ;
+
+                    for(var i in val) {
+                      txt += _this.labelToString([ val[i] ], labelArray);
+                    }
+
+                    if(labelArray[0] && labelArray[0]["@language"] === "bo") css = "loaded-bo" ;
+                    jQuery(imageElement).next('.etext-content').addClass(css).text(txt) ; 
+
+                  } 
+                  else { jQuery(imageElement).next('.etext-content').html(''); }
+                }
+                catch(e){ console.error("ERROR fetching etext data",canvas,val); }
+              }) ;
+          }
+        }
       });
     },
 
@@ -194,6 +223,7 @@
                                  '{{#thumbs}}',
                                  '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
                                  '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px;min-height:{{height}}px">',
+                                 '{{#if usEtext}}<div class="etext-content" width="{{width}}" style="max-width:{{width}}px;height:auto;"></div>{{/if}}',
                                  '<div class="thumb-label">{{title}}</div>',
                                  '</li>',
                                  '{{/thumbs}}',

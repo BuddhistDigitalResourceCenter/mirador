@@ -4553,6 +4553,24 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   text-overflow: ellipsis;
   text-align: center;
 }
+.mirador-container .etext-content {
+  box-sizing: border-box;
+  color: black;
+  background: white;
+  font-size: calc( 3500 * (100% / 2500)  );
+  padding: calc(5% * 9 / 16) 5%;
+  white-space: pre;
+  word-break: break-all;
+}
+.mirador-container .etext-content.loaded-bo {
+  font-size: calc( 5000 * (100% / 2500)  );
+}
+.mirador-container .etext-content:empty {
+  height: 0 !important;
+  overflow: hidden;
+  transition: all 1s ease-in-out;
+  padding: 0;
+}
 .mirador-container .mirador-viewer ul.listing-thumbs {
   clear: both;
   list-style: none;

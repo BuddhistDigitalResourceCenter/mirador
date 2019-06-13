@@ -832,7 +832,9 @@
           imagesList: this.imagesList,
           imagesListLtr: this.imagesListLtr,
           vDirectionStatus: this.vDirectionStatus,
-          thumbInfo: {thumbsHeight: Math.floor(containerHeight * this.scrollImageRatio), listingCssCls: 'scroll-listing-thumbs', thumbnailCls: 'scroll-view'}
+          thumbInfo: {thumbsHeight: Math.floor(containerHeight * this.scrollImageRatio), listingCssCls: 'scroll-listing-thumbs', thumbnailCls: 'scroll-view'},
+          getEtextPage:this.getEtextPage,
+          labelToString:this.labelToString
         });
       } else {
         var view = this.focusModules.ScrollView;
