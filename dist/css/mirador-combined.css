@@ -4572,6 +4572,8 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   text-align: center;
 }
 .mirador-container .etext-content {
+  box-sizing: border-box;
+  overflow: hidden;
   font-family: "Tibetan Machine Uni";
   color: black;
   background: rgba(255, 255, 255, 0.9);
@@ -4581,22 +4583,24 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   word-break: break-all;
   text-align: center;
 }
-.mirador-container .etext-content.loaded-bo {
-  font-size: calc( 5000 * (100% / 2500)  );
-}
-.mirador-container .etext-content:empty {
-  height: 0 !important;
-  overflow: hidden;
-  transition: all 1s ease-in-out;
-  padding: 0;
-}
 .mirador-container .etext-content div {
   text-align: left;
   background: white;
   display: inline-block;
   padding: 35px;
-  padding-bottom: 15px;
   box-shadow: -3px 3px 15px rgba(0, 0, 0, 0.35);
+}
+.mirador-container .etext-content.loaded-bo {
+  font-size: calc( 5000 * (100% / 2500)  );
+}
+.mirador-container .etext-content.loaded-bo div {
+  padding-bottom: 15px;
+}
+.mirador-container .etext-content:empty {
+  height: 0 !important;
+  transition: all 1s ease-in-out;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .mirador-container .mirador-viewer ul.listing-thumbs {
   clear: both;

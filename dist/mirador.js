@@ -43568,6 +43568,7 @@ $.SimpleASEndpoint = function (options) {
       if(!button.iconClass){
         throw "userButtons must have an iconClass";
       }
+      console.log("button",button);
       // add custom attributes to the button element
       if(button.attributes){
         $a.attr(button.attributes);
@@ -43576,6 +43577,10 @@ $.SimpleASEndpoint = function (options) {
       $a.addClass('mirador-btn');
       // add custom classes to the icon element
       $i.addClass(button.iconClass);
+      // custom html
+      if(button.custom){
+        $a.append(button.custom);
+      }
       // append the icon element to the button element
       $a.append($i);
       return $a.get(0).outerHTML;

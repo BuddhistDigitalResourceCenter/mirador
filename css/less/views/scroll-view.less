@@ -59,7 +59,8 @@
   }
 
   .etext-content {
-
+    box-sizing: border-box;
+    overflow:hidden; 
     font-family: "Tibetan Machine Uni"; //"Noto Sans Tibetan" ;
     color:black;  
     background:rgba(255,255,255,0.9);
@@ -78,7 +79,7 @@
       padding: 35px;
       box-shadow: -3px 3px 15px rgba(0,0,0,0.35);
     }
-    
+
     &.loaded-bo {
       font-size:~"calc( 5000 * (100% / 2500)  )";
       //text-align:left;      
@@ -87,7 +88,7 @@
         padding-bottom: 15px;
       }
     }
-    &:empty { height:0 !important; overflow:hidden; transition: all 1s ease-in-out; padding:0;}
+    &:empty { height:0 !important; transition: all 1s ease-in-out; padding-top:0;padding-bottom:0;}
     
   }
 }
