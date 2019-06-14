@@ -47688,6 +47688,13 @@ $.SearchWithinResults.prototype = {
         var canvasID = jQuery(this).attr('data-image-id');
         _this.eventEmitter.publish('SET_CURRENT_CANVAS_ID.' + _this.windowId, canvasID);
       });
+
+      
+      jQuery(window).resize(function() {
+        var z = jQuery("#zoomer");        
+        if(z.length && window.setZoom) window.setZoom(z.val());
+      });
+      
     },
 
     toggle: function(stateValue) {
@@ -47729,11 +47736,14 @@ $.SearchWithinResults.prototype = {
                         txt = "",
                         css = "" ;
 
+                    var checkB = jQuery('#showEtext') ;
+                    if(!checkB || !checkB.get(0).checked) css += "hide " ;
+
                     for(var i in val) {
                       txt += _this.labelToString([ val[i] ], labelArray);
                     }
 
-                    if(labelArray[0] && labelArray[0]["@language"] === "bo") css = "loaded-bo" ;
+                    if(labelArray[0] && labelArray[0]["@language"] === "bo") css += "loaded-bo " ;
                     jQuery(imageElement).next('.etext-content').addClass(css).html("<div>"+txt+"</div>") ; 
 
                   } 

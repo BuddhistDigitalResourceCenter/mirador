@@ -4583,6 +4583,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   word-break: break-all;
   text-align: center;
 }
+.mirador-container .etext-content.hide {
+  display: none;
+}
 .mirador-container .etext-content div {
   text-align: left;
   background: white;
