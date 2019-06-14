@@ -70,20 +70,24 @@
     word-break: break-all; 
     text-align: center;   
     
-    &.loaded-bo {
-      font-size:~"calc( 5000 * (100% / 2500)  )";
-      //text-align:left;      
-    }
-    &:empty { height:0 !important; overflow:hidden; transition: all 1s ease-in-out; padding:0;}
-    
     div {
       //border:1px solid black;
       text-align:left;
       background:white;
       display:inline-block;
       padding: 35px;
-      padding-bottom: 15px;
       box-shadow: -3px 3px 15px rgba(0,0,0,0.35);
     }
+    
+    &.loaded-bo {
+      font-size:~"calc( 5000 * (100% / 2500)  )";
+      //text-align:left;      
+
+      div {
+        padding-bottom: 15px;
+      }
+    }
+    &:empty { height:0 !important; overflow:hidden; transition: all 1s ease-in-out; padding:0;}
+    
   }
 }
