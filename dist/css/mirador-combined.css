@@ -4521,6 +4521,24 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .mirador-container .mirador-image-view-choice-selected {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo0RUQ5OEI2QzFFMkIxMUUzOUExN0IyREY1RTI1MUQ0QiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo0RUQ5OEI2RDFFMkIxMUUzOUExN0IyREY1RTI1MUQ0QiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjRFRDk4QjZBMUUyQjExRTM5QTE3QjJERjVFMjUxRDRCIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjRFRDk4QjZCMUUyQjExRTM5QTE3QjJERjVFMjUxRDRCIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+9DJqAgAAAF1JREFUeNpitLS0ZHj69GktAwNDJgMETJeWlm5mZmJiAgk2ATEvFDt+/vz5H6OcnNwzIEeSARU8Z2LADhiZ+fn5uUDa0SS6mbW0tA4BzfwP5GgC8Ucg7gJa3gIQYAChCRXFhBXUngAAAABJRU5ErkJggg==);
 }
+/*
+@font-face {
+  font-family: 'Noto Sans Tibetan';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/notosanstibetan/v1/NotoSansTibetan-Regular.eot);
+  src: url(//fonts.gstatic.com/ea/notosanstibetan/v1/NotoSansTibetan-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/notosanstibetan/v1/NotoSansTibetan-Regular.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/notosanstibetan/v1/NotoSansTibetan-Regular.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/notosanstibetan/v1/NotoSansTibetan-Regular.ttf) format('truetype');
+}
+*/
+@font-face {
+  font-family: 'Tibetan Machine Uni';
+  src: url('../fonts/Tibetan_Machine_Uni.woff2') format('woff2'), url('../fonts/Tibetan_Machine_Uni.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 .mirador-container ul.scroll-listing-thumbs {
   clear: both;
   list-style: none;
@@ -4544,7 +4562,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .mirador-container ul.scroll-listing-thumbs li .thumb-label {
   clear: both;
   color: #999;
-  font-size: 12px;
+  font-size: 24px;
   margin: 0 auto;
   max-width: 200px;
   text-align: left;
@@ -4554,13 +4572,14 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   text-align: center;
 }
 .mirador-container .etext-content {
-  box-sizing: border-box;
+  font-family: "Tibetan Machine Uni";
   color: black;
-  background: white;
-  font-size: calc( 3500 * (100% / 2500)  );
-  padding: calc(5% * 9 / 16) 5%;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: calc( 2000 * (100% / 2500)  );
+  padding: calc(3% * 9 / 16) 5%;
   white-space: pre;
   word-break: break-all;
+  text-align: center;
 }
 .mirador-container .etext-content.loaded-bo {
   font-size: calc( 5000 * (100% / 2500)  );
@@ -4570,6 +4589,14 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   overflow: hidden;
   transition: all 1s ease-in-out;
   padding: 0;
+}
+.mirador-container .etext-content div {
+  text-align: left;
+  background: white;
+  display: inline-block;
+  padding: 35px;
+  padding-bottom: 15px;
+  box-shadow: -3px 3px 15px rgba(0, 0, 0, 0.35);
 }
 .mirador-container .mirador-viewer ul.listing-thumbs {
   clear: both;

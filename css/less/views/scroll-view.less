@@ -1,3 +1,26 @@
+
+/*
+@font-face {
+  font-family: 'Noto Sans Tibetan';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/notosanstibetan/v1/NotoSansTibetan-Regular.eot);
+  src: url(//fonts.gstatic.com/ea/notosanstibetan/v1/NotoSansTibetan-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/notosanstibetan/v1/NotoSansTibetan-Regular.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/notosanstibetan/v1/NotoSansTibetan-Regular.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/notosanstibetan/v1/NotoSansTibetan-Regular.ttf) format('truetype');
+}
+*/
+
+@font-face {
+  font-family: 'Tibetan Machine Uni';
+  src: url('../fonts/Tibetan_Machine_Uni.woff2') format('woff2'),
+      url('../fonts/Tibetan_Machine_Uni.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 .mirador-container {
   ul.scroll-listing-thumbs {
     clear: both;
@@ -25,7 +48,7 @@
   ul.scroll-listing-thumbs li .thumb-label {
     clear: both;
     color: @gray-99;
-    font-size: 12px;
+    font-size: 24px;
     margin: 0 auto;
     max-width: 200px;
     text-align: left;
@@ -36,17 +59,31 @@
   }
 
   .etext-content {
-    box-sizing: border-box; 
+
+    font-family: "Tibetan Machine Uni"; //"Noto Sans Tibetan" ;
     color:black;  
-    background:white;
-    font-size:~"calc( 3500 * (100% / 2500)  )";
-    padding:~"calc(5% * 9 / 16)" 5%;
-    white-space:pre;
-    word-break: break-all;
+    background:rgba(255,255,255,0.9);
+    //background:white;
+    font-size:~"calc( 2000 * (100% / 2500)  )";
+    padding:~"calc(3% * 9 / 16)" 5%;
+    white-space: pre;
+    word-break: break-all; 
+    text-align: center;   
+    
     &.loaded-bo {
       font-size:~"calc( 5000 * (100% / 2500)  )";
       //text-align:left;      
     }
     &:empty { height:0 !important; overflow:hidden; transition: all 1s ease-in-out; padding:0;}
+    
+    div {
+      //border:1px solid black;
+      text-align:left;
+      background:white;
+      display:inline-block;
+      padding: 35px;
+      padding-bottom: 15px;
+      box-shadow: -3px 3px 15px rgba(0,0,0,0.35);
+    }
   }
 }

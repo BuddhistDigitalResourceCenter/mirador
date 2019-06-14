@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Tibetan Machine Uni';
+    src: url('Tibetan_Machine_Uni.woff2') format('woff2'),
+        url('Tibetan_Machine_Uni.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+

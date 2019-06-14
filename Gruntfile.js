@@ -165,6 +165,11 @@ module.exports = function(grunt) {
           dest: 'build/mirador'
         }, {
           expand: true,
+          cwd: 'css/fonts/',
+          src: '*',
+          dest: 'build/mirador/fonts'
+        }, {
+          expand: true,
           cwd: 'node_modules/font-awesome',
           src: 'fonts/*',
           dest: 'build/mirador'

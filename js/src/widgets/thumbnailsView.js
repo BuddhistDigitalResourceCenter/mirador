@@ -175,7 +175,9 @@
           if(canvas.length) {
               jQuery(imageElement).next('.etext-content').text("(trying to load page in etext)");
               _this.getEtextPage(canvas[0]).then(function(val) {                
-                console.log("val",canvas[0].label[0],JSON.stringify(val,null,3));
+                
+                //console.log("val",canvas[0].label[0],JSON.stringify(val,null,3));
+
                 try { 
                   if(val) { 
                     var labelArray = [],
@@ -187,7 +189,7 @@
                     }
 
                     if(labelArray[0] && labelArray[0]["@language"] === "bo") css = "loaded-bo" ;
-                    jQuery(imageElement).next('.etext-content').addClass(css).text(txt) ; 
+                    jQuery(imageElement).next('.etext-content').addClass(css).html("<div>"+txt+"</div>") ; 
 
                   } 
                   else { jQuery(imageElement).next('.etext-content').html(''); }
