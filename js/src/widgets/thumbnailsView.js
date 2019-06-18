@@ -195,10 +195,13 @@
                     if(!checkB || !checkB.get(0).checked) css += "hide " ;
 
                     for(var i in val) {
-                      txt += _this.labelToString([ val[i] ], labelArray);
+                      txt += val[i]["@value"] ; //_this.labelToString([ val[i] ], labelArray);
                     }
 
-                    if(labelArray[0] && labelArray[0]["@language"] === "bo") css += "loaded-bo " ;
+                    //if(labelArray[0] && labelArray[0]["@language"] === "bo") 
+                    if(val[0] && val[0]["@language"] === "bo") 
+                      css += "loaded-bo " ;
+
                     jQuery(imageElement).next('.etext-content').addClass(css).html("<div>"+txt+"</div>") ; 
 
                   } 
