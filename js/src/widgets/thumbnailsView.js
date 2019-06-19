@@ -175,11 +175,18 @@
       imagePromise = $.createImagePromise(url);
 
       imagePromise.done(function(image) {
-        jQuery(imageElement).attr('src', image);
-        if(_this.getEtextPage) {
+
+        imageElement.src = image ;
+
+        //console.log("image loaded",image);
+
+        if(_this.getEtextPage && jQuery("#showEtext").length) {
+         
           var id = jQuery(imageElement).attr("data-image-id"),
               canvas = _this.imagesList.filter(function(e) { return e["@id"] === id; });
-          if(canvas.length) {
+
+          if(canvas.length) { //} && jQuery(imageElement).isInViewport()) {
+
               jQuery(imageElement).next('.etext-content').text("(trying to load page in etext)");
               _this.getEtextPage(canvas[0]).then(function(val) {                
                 

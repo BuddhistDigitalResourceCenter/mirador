@@ -170,10 +170,10 @@
     }
     var win = jQuery(window);
     var viewport = {
-      top : (win.scrollTop() * factor),
+      top : win.scrollTop(), //* factor),
       left : (win.scrollLeft() * factor)
     };
-    viewport.bottom = (viewport.top + win.outerHeight()) * factor;
+    viewport.bottom = viewport.top + (win.outerHeight()) * factor;
     viewport.right = (viewport.left + win.outerWidth()) * factor;
 
     var el = jQuery(elem);
@@ -181,7 +181,13 @@
     bounds.bottom = bounds.top + el.height();
     bounds.right = bounds.left + el.width();
 
-    return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+    var ret = (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+
+    //if(ret) 
+    //  console.log("vp",JSON.stringify(viewport));
+    
+    return ret ;
+
   };
 
   $.getRangeIDByCanvasID = function(structures, canvasID /*, [given parent range] (for multiple ranges, later) */) {
