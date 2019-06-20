@@ -193,13 +193,15 @@
                 //console.log("val",canvas[0].label[0],JSON.stringify(val,null,3));
 
                 try { 
-                  if(val) { 
-                    var labelArray = [],
-                        txt = "",
-                        css = "" ;
 
-                    var checkB = jQuery('#showEtext') ;
-                    if(!checkB || !checkB.get(0).checked) css += "hide " ;
+                  var labelArray = [],
+                      txt = "",
+                      css = "" ;
+
+                  var checkB = jQuery('#showEtext') ;
+                  if(!checkB || !checkB.get(0).checked) css += "hide " ;
+
+                  if(val) { 
 
                     for(var i in val) {
                       txt += val[i]["@value"] ; //_this.labelToString([ val[i] ], labelArray);
@@ -213,7 +215,7 @@
 
                   } 
                   else { 
-                    jQuery(imageElement).next('.etext-content').text('(could  not find etext page)'); 
+                    jQuery(imageElement).next('.etext-content').addClass(css).text('(could  not find etext page)'); 
                   }
                 }
                 catch(e){ 
