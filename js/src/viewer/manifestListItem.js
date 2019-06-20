@@ -22,7 +22,8 @@
       forcedIndex:                null,
       state:                      null,
       eventEmitter:               null,
-      labelToString:              function(label) { return "youpi",label; }
+      labelToString:              function(label) { return "youpi",label; },
+      url:null
     }, options);
 
     this.init();
@@ -78,31 +79,40 @@
     },
 
     fetchTplData: function() {
-      var _this = this,
-      location = _this.manifest.location,
-      manifest = _this.manifest.jsonLd,
-      pdf = manifest.rendering ;
+      var _this = this,location,manifest,pdf ;
+      if(!_this.manifest) {
+        _this.manifest = { 
+          jsonLd: {
+            label:{"@language":"en","@value":"loading manifest..."},
+            sequences:[{canvases:[]}]
+          }
+        };
+      }
+      location = _this.manifest.location ;
+      manifest = _this.manifest.jsonLd ;
+      if(manifest) pdf = manifest.rendering ;
 
       if(pdf) {
-        console.log("pdf",pdf);
+        //console.log("pdf",pdf);
         for(var idx = 0 ; idx < manifest.rendering.length ; idx ++) {
-          console.log("idx",idx,pdf[idx]);
+          //console.log("idx",idx,pdf[idx]);
           if(pdf[idx].format == "application/pdf")
           {
             pdf = pdf[idx]["@id"];
-            console.log("found",pdf);
+            //console.log("found",pdf);
             break ;
           }
         }
       }
 
       this.tplData = {
-        label: this.labelToString(manifest.label) ,// $.JsonLd.getTextValue(manifest.label),
+        label: _this.labelToString(manifest.label) ,// $.JsonLd.getTextValue(manifest.label),
         repository: location,
         canvasCount: manifest.sequences[0].canvases.length,
         images: [],
         index: _this.state.getManifestIndex(manifest['@id']),
-        pdf: pdf
+        pdf: pdf,
+        url: _this.url
       };
 
       this.tplData.repoImage = (function() {
@@ -282,10 +292,10 @@
     },
 
     template: $.Handlebars.compile([
-      '<li data-index-number={{index}}>',
+      '<li data-index-number={{index}} data-url={{url}}>',
       '<div class="repo-image">',
         '{{#if repoImage}}',
-        '<img data-src="{{repoImage}}" alt="repoImg">',
+        '<img data-src="{{repoImage}}" src={{repoImage}} alt="repoImg">',
         '{{else}}',
         '<span class="default-logo"></span>',
         '{{/if}}',

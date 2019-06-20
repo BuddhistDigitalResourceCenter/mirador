@@ -161,6 +161,7 @@
         onCollectionReceived: function(event, newCollection) {
           var _this = this;
           jQuery.each(newCollection.getManifestUris(), function(_, v) {
+            
             _this.eventEmitter.publish('ADD_MANIFEST_FROM_URL', [v, newCollection.location]);
           });
         },

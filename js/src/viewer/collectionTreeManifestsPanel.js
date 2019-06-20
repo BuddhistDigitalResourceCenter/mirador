@@ -22,10 +22,11 @@
             topCollectionsUris:         {}, //A set of URIs already placed at the top level of the collection tree
             treeQueue:                  [], //A list that holds event triggers before the tree is ready; will be removed when ready
             resultsWidth:               0,
-            lazyLoadingFactor:          1,
+            lazyLoadingFactor:          1.2,
+            lazyLoadingManifests:       [],
             state:                      null,
             eventEmitter:               null,
-            labelToString:              function(label) { return label; }
+            labelToString:              function(label) { return label; },
         }, options);
 
         var _this = this;
@@ -198,11 +199,29 @@
             }, 50, true));
 
             // Lazy loading
-            this.element.find('.member-select-results').on('scroll', $.throttle(function() {
-              jQuery(this).find('img[data-src]').each(function(_, v) {
-                if ($.isOnScreen(v, _this.lazyLoadingFactor)) {
-                  v.setAttribute('src', v.getAttribute('data-src'));
-                  v.removeAttribute('data-src');
+            this.element.find('.member-select-results').on('scroll', $.throttle(function() {              
+              jQuery(this).find('.preview-images').each(function(_, w) {
+                var img = jQuery(this).find('img[data-src]');
+                if(img.length) {
+                  img.each(function(_, v) {
+                    if ($.isOnScreen(v, _this.lazyLoadingFactor)) {
+                      v.setAttribute('src', v.getAttribute('data-src'));
+                      v.removeAttribute('data-src');
+                    }
+                  });
+                }
+                else if ($.isOnScreen(w, _this.lazyLoadingFactor)) {
+                  var url = jQuery(w).parent().parent().attr('data-url');
+                  //console.log("should load manifest\n",url);
+                  if(_this.lazyLoadingManifests.indexOf(url) === -1) {
+                    _this.lazyLoadingManifests.push(url);
+                    var manifest = new $.Manifest(url,'');                     
+                    _this.eventEmitter.publish('manifestQueued', manifest, '');                    
+                    manifest.request.done(function() {
+                      _this.eventEmitter.publish('manifestReceived', manifest);
+                      jQuery("li[data-url='"+url+"']").remove();
+                    });
+                  }
                 }
               });
             }, 50, true)).scroll();
@@ -400,7 +419,7 @@
         },
 
         // Helper for loading a manifest from a URL
-        addManifestFromUrl: function(url) {
+        addManifestFromUrl: function(url) {            
           var _this = this,
             manifest;
           // Cache hit: Show the manifest panel item if it is loaded
@@ -420,11 +439,23 @@
           }
           // Cache miss: Queue the loading and defer the received event until it is done
           else {
-            manifest = new $.Manifest(url, '');
+                        
+            _this.manifestListItems.push(new $.ManifestListItem({
+              url:url,
+              labelToString:_this.labelToString,
+              resultsWidth: _this.resultsWidth,
+              state: _this.state,
+              eventEmitter: _this.eventEmitter,
+              forcedIndex: _this.expectedThings.indexOf(url),
+              appendTo: _this.manifestListElement }));
+            this.element.find('.member-select-results').scroll();          
+
+            /*
             _this.eventEmitter.publish('manifestQueued', manifest, '');
             manifest.request.done(function() {
               _this.eventEmitter.publish('manifestReceived', manifest);
             });
+            */
           }
         },
 
