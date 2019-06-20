@@ -212,9 +212,14 @@
                     jQuery(imageElement).next('.etext-content').addClass(css).html("<div>"+txt+"</div>") ; 
 
                   } 
-                  else { jQuery(imageElement).next('.etext-content').html(''); }
+                  else { 
+                    jQuery(imageElement).next('.etext-content').text('(could  not find etext page)'); 
+                  }
                 }
-                catch(e){ console.error("ERROR fetching etext data",canvas,val); }
+                catch(e){ 
+                  console.error("ERROR fetching etext data",canvas,val); 
+                  jQuery(imageElement).next('.etext-content').text("");
+                }
               }) ;
           }
         }
