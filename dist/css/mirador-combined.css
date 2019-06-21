@@ -4578,7 +4578,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   color: black;
   background: rgba(255, 255, 255, 0.9);
   font-size: calc( 2000 * (100% / 2500)  );
-  padding: calc(3% * 9 / 16) 5%;
+  padding: calc(3% * 9 / 16) 0;
   white-space: pre;
   word-break: break-all;
   text-align: center;
@@ -4595,7 +4595,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   box-shadow: -3px 3px 15px rgba(0, 0, 0, 0.35);
 }
 .mirador-container .etext-content.loaded-bo {
-  font-size: calc( 5000 * (100% / 2500)  );
+  font-size: calc( 4750 * (100% / 2500)  );
 }
 .mirador-container .etext-content.loaded-bo div {
   padding-bottom: 15px;

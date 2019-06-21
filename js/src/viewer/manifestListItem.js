@@ -91,6 +91,8 @@
       location = _this.manifest.location ;
       manifest = _this.manifest.jsonLd ;
       if(manifest) pdf = manifest.rendering ;
+      var _url = _this.url ;
+      //if(!_url && manifest) _url = manifest["@id"];
 
       if(pdf) {
         //console.log("pdf",pdf);
@@ -112,7 +114,8 @@
         images: [],
         index: _this.state.getManifestIndex(manifest['@id']),
         pdf: pdf,
-        url: _this.url
+        url: _url,
+        manifId:manifest["@id"]
       };
 
       this.tplData.repoImage = (function() {
@@ -314,7 +317,7 @@
         '</div>',
       '</div>',
       '<div class="preview-thumb">',
-        '<div class="preview-images">',
+        '<div class="preview-images" data-manifest={{manifId}}>',
         '{{#each images}}',
           '<a href="/view/{{view}}"><img data-src="{{url}}" width="{{width}}" height="{{height}}" class="preview-image flash" data-image-id="{{id}}"></a>',
         '{{/each}}',

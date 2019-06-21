@@ -25,6 +25,12 @@
 
   $.ThumbnailsView.prototype = {
 
+    updateGetEtextPage : function (page){
+      //console.log("what?",page,window.getEtextPage,this.getEtextPage);
+      if(this.getEtextPage) return this.getEtextPage(page) ;
+      else if(window.getEtextPage) return window.getEtextPage(page) ;
+    },
+
     init: function() {
       if (this.canvasID !== null) {
         this.currentImgIndex = $.getImageIndexById(this.imagesList, this.canvasID);
@@ -71,8 +77,7 @@
           id:       canvas['@id'],
           width:    width,
           height:   height,
-          highlight: _this.currentImgIndex === index ? 'highlight' : '',
-          usEtext:  _this.getEtextPage !== undefined
+          highlight: _this.currentImgIndex === index ? 'highlight' : ''
         };
       });
 
@@ -178,17 +183,19 @@
 
         imageElement.src = image ;
 
-        //console.log("image loaded",image);
+        //console.log("image loaded",image,_this.updateGetEtextPage,jQuery("#showEtext"));
 
-        if(_this.getEtextPage && jQuery("#showEtext").length) {
+        if(jQuery("#showEtext").length) {
          
           var id = jQuery(imageElement).attr("data-image-id"),
               canvas = _this.imagesList.filter(function(e) { return e["@id"] === id; });
 
           if(canvas.length) { //} && jQuery(imageElement).isInViewport()) {
 
-              jQuery(imageElement).next('.etext-content').text("(trying to load page in etext)");
-              _this.getEtextPage(canvas[0]).then(function(val) {                
+              jQuery(imageElement).next('.etext-content').addClass(!jQuery("#showEtext").get(0).checked?"hide":"").text("(trying to load page in etext)");
+              var prom = _this.updateGetEtextPage(canvas[0]);              
+              if(!prom) jQuery(imageElement).next('.etext-content').text("");
+              else prom.then(function(val) {                
                 
                 //console.log("val",canvas[0].label[0],JSON.stringify(val,null,3));
 
@@ -252,7 +259,7 @@
                                  '{{#thumbs}}',
                                  '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
                                  '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px;min-height:{{height}}px">',
-                                 '{{#if usEtext}}<div class="etext-content" width="{{width}}" style="max-width:{{width}}px;height:auto;"></div>{{/if}}',
+                                 '<div class="etext-content" width="{{width}}" style="max-width:{{width}}px;height:auto;"></div>',
                                  '<div class="thumb-label">{{title}}</div>',
                                  '</li>',
                                  '{{/thumbs}}',

@@ -287,6 +287,7 @@
           // Show a manifest list item only if the currently selected "folder" expects it
           if (_this.expectedThings.indexOf(newManifest.uri) != -1) {
             _this.manifestListItems.push(new $.ManifestListItem({
+              //url:"new2?",
               labelToString:_this.labelToString,
               manifest: newManifest,
               resultsWidth: _this.resultsWidth,
@@ -427,6 +428,7 @@
             manifest = _this.state.getStateProperty('manifests')[url];
             if (manifest.jsonLd) {
               _this.manifestListItems.push(new $.ManifestListItem({
+                url:url,
                 labelToString:_this.labelToString,
                 manifest: manifest,
                 resultsWidth: _this.resultsWidth,

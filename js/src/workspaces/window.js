@@ -840,6 +840,8 @@
         var view = this.focusModules.ScrollView;
         view.updateImage(canvasID);
       }
+      //if(!this.getEtextPage && !window.getEtextPage) { jQuery("#showEtext").parent().hide(); }
+      //else { jQuery("#showEtext").parent().show(); }
       this.toggleFocus('ScrollView', '');
     },
 
