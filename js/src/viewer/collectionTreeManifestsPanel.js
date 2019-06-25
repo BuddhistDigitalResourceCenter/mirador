@@ -98,6 +98,7 @@
                   _this.onCollectionNotReceived.apply(_this, v);
                 }
               });
+              console.log("ok",theQueue);
             });
             jQuery('#collection-tree').clayfy({
                type : 'resizable',
@@ -311,7 +312,11 @@
           if (parentNodeId) {
             this.updateCollectionNode(parentNodeId, newCollection);
           } else {
-            this.addCollectionNode(parentNodeId, newCollection);
+            var node = this.addCollectionNode(parentNodeId, newCollection);
+            console.log("ok?",node,newCollection);
+            this.treeElement.jstree('deselect_all');
+            this.treeElement.jstree('select_node', node);
+            this.treeElement.jstree('open_node', node);
           }
         },
 
