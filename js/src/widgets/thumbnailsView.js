@@ -218,6 +218,9 @@
                     if(val[0] && val[0]["@language"] === "bo") 
                       css += "loaded-bo " ;
 
+                    if(!txt.match(/[\n\r]/)) 
+                      css += "unformated " ;                  
+
                     jQuery(imageElement).next('.etext-content').addClass(css).html("<div>"+txt+"</div>") ; 
 
                   } 
