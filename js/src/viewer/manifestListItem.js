@@ -140,12 +140,15 @@
         if(width > canvas.width) width = canvas.width ;
         var url = _this.manifest.getThumbnailForCanvas(canvas, width);
 
+        var view ;
+        if(canvas['@id'] && canvas['@id'].match(/bdr:[A-Z]/)) view = canvas['@id'].replace(/.*(bdr:[^:/]+).*/,"$1") ;
+
         _this.allImages.push({
           url: url,
           width: width,
           height: _this.thumbHeight,
           id: canvas['@id'],
-          view: canvas['@id'].replace(/.*(bdr:[^:/]+).*/,"$1"),
+          view: view,
           index: i
         });
       }
@@ -319,13 +322,19 @@
       '<div class="preview-thumb">',
         '<div class="preview-images" data-manifest={{manifId}}>',
         '{{#each images}}',
-          '<a href="/view/{{view}}"><img data-src="{{url}}" width="{{width}}" height="{{height}}" class="preview-image flash" data-image-id="{{id}}"></a>',
+          '{{#if view}}',
+            '<a href="/view/{{view}}"><img data-src="{{url}}" width="{{width}}" height="{{height}}" class="preview-image flash" data-image-id="{{id}}"></a>',
+          '{{else}}',  
+            '<a href="#"><img data-src="{{url}}" width="{{width}}" height="{{height}}" class="preview-image flash" data-image-id="{{id}}"></a>',
+          '{{/if}}',          
         '{{/each}}',
         '</div>',
         '{{#if remaining}}',
           '<i class="fa fa fa-ellipsis-h remaining"></i>',
         '{{/if}}',
+        '{{#if pdf}}',
         '<a class="pdfDL" title="Download as PDF" target="_blank" href="{{pdf}}"><i class="fa fa-file-pdf-o"></i></a>',
+        '{{/if}}',        
       '</div>',
       '</li>'
     ].join(''))
