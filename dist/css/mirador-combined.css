@@ -4806,13 +4806,16 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .mirador-container .repo-image {
   position: relative;
   width: 80px;
-  height: 80px;
+  height: 100px;
   overflow: hidden;
   opacity: 0.5;
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
 .mirador-container .repo-image img {
-  position: absolute;
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
   top: 0;
 }
 .mirador-container .repo-image span.default-logo {
