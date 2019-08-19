@@ -453,7 +453,7 @@
         if ($.fullscreenElement()) {
           $.exitFullscreen();
         } else {
-          $.enterFullscreen(_this.element[0]);
+          $.enterFullscreen(_this.element.closest(".mirador-container")[0]);
         }
       });
 
