@@ -106,8 +106,8 @@
                top: false,
                left: false,
                bottom: false,
-               minSize : [jQuery(".mirador-container #manifest-select-menu").width()*0.2,50],
-               maxSize : [jQuery(".mirador-container #manifest-select-menu").width()*0.5,2000]
+               minSize : [jQuery(".mirador-container #manifest-select-menu").width()*0.25,50],
+               maxSize : [jQuery(".mirador-container #manifest-select-menu").width()*0.75,2000]
             });
 
             //this code gives us the max width of the results area, used to determine how many preview images to show
