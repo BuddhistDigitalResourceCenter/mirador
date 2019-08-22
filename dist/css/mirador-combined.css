@@ -4613,6 +4613,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   padding-top: 0;
   padding-bottom: 0;
 }
+.mirador-container .panel-thumbnail-view .etext-content {
+  display: none;
+}
 .mirador-container .mirador-viewer ul.listing-thumbs {
   clear: both;
   list-style: none;
