@@ -50,8 +50,7 @@ module.exports = function(grunt) {
     'node_modules/sanitize-html/dist/sanitize-html.min.js',
     'node_modules/iiif-evented-canvas/dist/iiif-evented-canvas.umd.min.js',
     'node_modules/iiif-layout-functions/dist/iiif-layout-functions.umd.min.js',
-    'node_modules/select2/dist/js/select2.full.min.js',
-    'node_modules/clayfy/dist/clayfy.min.js'
+    'node_modules/select2/dist/js/select2.full.min.js'
   ],
 
   // source files
@@ -104,8 +103,7 @@ module.exports = function(grunt) {
           'node_modules/select2/dist/css/select2.min.css',
           'css/mirador.css',
           'css/material-icons.css',
-          'node_modules/simple-pagination.js/simplePagination.css',
-          'node_modules/clayfy/dist/clayfy.min.css'
+          'node_modules/simple-pagination.js/simplePagination.css'
         ],
         dest: 'build/mirador/css/mirador-combined.css'
       }

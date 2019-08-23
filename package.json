@@ -62,7 +62,6 @@
   "dependencies": {
     "bootbox": "^4.4.0",
     "bootstrap": "^3.3.7",
-    "clayfy": "https://github.com/aewebsolutions/clayfy",
     "d3": "^3.5.17",
     "font-awesome": "^4.7.0",
     "handlebars": "^4.0.11",

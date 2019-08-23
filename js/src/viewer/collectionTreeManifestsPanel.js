@@ -100,15 +100,6 @@
               });
               console.log("ok",theQueue);
             });
-            jQuery('#collection-tree').clayfy({
-               type : 'resizable',
-               move: false,
-               top: false,
-               left: false,
-               bottom: false,
-               minSize : [jQuery(".mirador-container #manifest-select-menu").width()*0.25,50],
-               maxSize : [jQuery(".mirador-container #manifest-select-menu").width()*0.75,2000]
-            });
 
             //this code gives us the max width of the results area, used to determine how many preview images to show
             //cloning the element and adjusting the display and visibility means it won't break the normal flow
@@ -196,8 +187,28 @@
             });
 
             jQuery(window).resize($.throttle(function() {
-              _this.resizePanel();
-            }, 50, true));
+
+              var elem = jQuery('#collection-tree-resizer');
+              var w = jQuery(".mirador-container #manifest-select-menu").width();
+
+              if(!elem.resizable("instance")) elem.resizable({
+                minWidth: Math.min(240,w*0.25),
+                maxWidth: w*0.75,
+                handles: "e"
+              });
+              else {
+                elem.resizable("option","minWidth", Math.min(240,w*0.25));
+                elem.resizable("option","maxWidth", w*0.75);
+              }
+
+              if(elem.width() > w*0.75) elem.width(w * 0.75);
+              else if(elem.width() < Math.min(240,w*0.25)) elem.width(Math.min(240,w*0.25));
+
+            }, 100, true));
+
+            setTimeout(function(){ jQuery(window).resize(); },650);  
+
+            _this.resizePanel();
 
             // Lazy loading
             this.element.find('.member-select-results').on('scroll', $.throttle(function() {              
@@ -235,7 +246,7 @@
 
         show: function() {
             var _this = this;
-            jQuery(this.element).show({effect: "fade", duration: 160, easing: "easeInCubic"});
+            jQuery(this.element).show({effect: "fade", duration: 160, easing: "easeInCubic"});            
             this.element.find('.member-select-results').scroll();
         },
 
@@ -608,6 +619,10 @@
             }
           });
 
+          var elem = jQuery('#collection-tree-resizer');
+          var w = jQuery(".mirador-container #manifest-select-menu").width();
+          if(elem.width() > w*0.75) elem.width(w * 0.75);
+          else if(elem.width() < Math.min(240,w*0.25)) elem.width(Math.min(240,w*0.25));
         },
 
         template: $.Handlebars.compile([
@@ -629,7 +644,9 @@
                 '</form>',
               '</div>',
             '</div>',
-              '<div id="collection-tree">',
+              '<div id="collection-tree-resizer">',            
+                '<div id="collection-tree">',
+                '</div>',
               '</div>',
               '<div class="member-select-results">',
                 '<ul class="items-listing">',
