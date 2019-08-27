@@ -12,7 +12,8 @@
       searchTabAvailable: null,
       hasStructures:     false,
       state:             null,
-      eventEmitter:      null
+      eventEmitter:      null,
+      labelToString:     function(label) { return $.JsonLd.getTextValue(label); }
     }, options);
 
     this.init();
@@ -85,7 +86,8 @@
           windowId: this.windowId,
           canvasID: this.canvasID,
           manifestVersion: this.manifest.getVersion(),
-          eventEmitter: this.eventEmitter
+          eventEmitter: this.eventEmitter,
+          labelToString:this.labelToString
         });
       }
       if (_this.annotationsTabAvailable) {

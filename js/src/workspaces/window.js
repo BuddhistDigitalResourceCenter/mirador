@@ -54,8 +54,10 @@
         "ScrollView" : "fa fa-ellipsis-h fa-lg fa-fw",
         "ThumbnailsView" : "fa fa-th fa-lg fa-rotate-90 fa-fw"
       },
-      userButtons: null
+      userButtons: null,
+      labelToString: function(label) { return  $.JsonLd.getTextValue(label); }
     }, options);
+
 
     this.init();
     this.bindAnnotationEvents();
@@ -163,7 +165,7 @@
         templateData[value] = true;
         templateData.iconClasses[value] = _this.iconClasses[value];
       });
-      templateData.title = (this.labelToString?this.labelToString(manifest.label):$.JsonLd.getTextValue(manifest.label));
+      templateData.title = this.labelToString(manifest.label);
       templateData.displayLayout = this.displayLayout;
       templateData.layoutOptions = this.layoutOptions;
       // if displayLayout is true,  but all individual options are set to false, set displayLayout to false
@@ -610,8 +612,8 @@
           tocTabAvailable: tocTabAvailable,
           searchTabAvailable: searchTabAvailable,
           annotationsTabAvailable: annotationsTabAvailable,
-          hasStructures: hasStructures
-
+          hasStructures: hasStructures,
+          labelToString:this.labelToString
         });
       } else {
         this.sidePanel.update('annotations', annotationsTabAvailable);

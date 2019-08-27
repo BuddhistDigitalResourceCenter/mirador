@@ -26,7 +26,7 @@
             lazyLoadingManifests:       [],
             state:                      null,
             eventEmitter:               null,
-            labelToString:              function(label) { return label; },
+            labelToString:              function(label) { return $.JsonLd.getTextValue(label); },
         }, options);
 
         var _this = this;

@@ -16,10 +16,13 @@
       selectContext:    null,
       tocData: {},
       active: null,
-      eventEmitter: null
+      eventEmitter: null,
+      labelToString:     function(label) { return $.JsonLd.getTextValue(label); }
     }, options);
 
     this.init();
+
+    console.log("TOC",this.labelToString);
 
     var self = this;
     window.render = function() {self.render();};
@@ -397,6 +400,7 @@
       ].join(''));
 
       var previousTemplate;
+      var _this = this;
 
       $.Handlebars.registerHelper('nestedRangeLevel', function(children, options) {
         var out = '';
@@ -406,7 +410,7 @@
         }
 
         children.forEach(function(child) {
-          child.label = $.JsonLd.getTextValue(child.label);
+          child.label = _this.labelToString(child.label);
           out = out + previousTemplate(child);
         });
 
@@ -415,7 +419,7 @@
 
       $.Handlebars.registerHelper('tocLevel', function(id, label, level, children) {
         var caret = '<i class="fa fa-caret-right toc-caret"></i>',
-            cert = '<i class="fa fa-certificate star"></i>';
+            cert = '' ; //'<i class="fa fa-certificate star"></i>';
         return '<h' + (level+1) + '><a class="toc-link" data-rangeID="' + id + '">' + caret + cert + '<span>' + label + '</span></a></h' + (level+1) + '>';
       });
 
