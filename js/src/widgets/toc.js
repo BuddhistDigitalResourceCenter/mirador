@@ -319,7 +319,8 @@
         var rangeID = jQuery(this).data().rangeid,
             canvasID = jQuery.grep(_this.structures, function(item) { return item['@id'] == rangeID; })[0].canvases[0];
 
-        _this.eventEmitter.publish('SET_CURRENT_CANVAS_ID.' + _this.windowId, canvasID);
+        if(window.scrollToImage) window.scrollToImage(canvasID);
+        else _this.eventEmitter.publish('SET_CURRENT_CANVAS_ID.' + _this.windowId, canvasID);
       });
 
       _this.element.find('.toc-caret').on('click', function(event) {
