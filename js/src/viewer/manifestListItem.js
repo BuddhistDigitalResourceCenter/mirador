@@ -315,7 +315,7 @@
             '{{#if repository}}',
               '<div class="repo-label">{{repository}}</div>',
             '{{/if}}',
-            '<div class="canvas-count">{{canvasCount}} {{pluralize canvasCount (t "item") (t "items")}}</div>',
+            '<div class="canvas-count">{{canvasCount}} {{pluralize canvasCount (t "image") (t "images")}}</div>',
           '</div>',
         '</div>',
       '</div>',
