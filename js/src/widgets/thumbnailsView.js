@@ -64,7 +64,7 @@
         if (canvas.width === 0) {
           return {};
         }
-
+        
         var aspectRatio = canvas.height/canvas.width,
         width = (_this.thumbInfo.thumbsHeight/aspectRatio);
         if(width > canvas.width) width = canvas.width ;
@@ -75,6 +75,7 @@
           thumbUrl: thumbnailUrl,
           title:    $.JsonLd.getTextValue(canvas.label),
           id:       canvas['@id'],
+          fullW:    canvas.width,
           width:    width,
           height:   height,
           highlight: _this.currentImgIndex === index ? 'highlight' : ''
@@ -261,7 +262,7 @@
                                  '<ul class="{{listingCssCls}}" role="list" aria-label="Thumbnails">',
                                  '{{#thumbs}}',
                                  '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
-                                 '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px;min-height:{{height}}px">',
+                                 '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-full-width="{{fullW}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px;min-height:{{height}}px">',
                                  '<div class="etext-content" width="{{width}}" style="max-width:{{width}}px;height:auto;"></div>',
                                  '<div class="thumb-label">{{title}}</div>',
                                  '</li>',
