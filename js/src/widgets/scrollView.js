@@ -36,7 +36,7 @@
       jQuery(this.appendTo).find('.scroll-view').addClass('v-direction-rtl');
     }
 
-
+    
   };
 
 }(Mirador));

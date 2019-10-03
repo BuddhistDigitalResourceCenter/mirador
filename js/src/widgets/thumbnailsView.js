@@ -71,11 +71,13 @@
         var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
         var height = width *  aspectRatio ;
 
+        width = canvas.width ;
+        height = canvas.height ;
+
         return {
           thumbUrl: thumbnailUrl,
           title:    $.JsonLd.getTextValue(canvas.label),
           id:       canvas['@id'],
-          fullW:    canvas.width,
           width:    width,
           height:   height,
           highlight: _this.currentImgIndex === index ? 'highlight' : ''
@@ -250,7 +252,7 @@
         newThumbURL = $.getThumbnailForCanvas(image, width, useThumbnailProperty),
         id = image['@id'];
         var imageElement = _this.element.find('img[data-image-id="'+id+'"]');
-        imageElement.attr('data', newThumbURL).attr('height', _this.thumbInfo.thumbsHeight).attr('width', width).attr('src', '');
+        imageElement.attr('data', newThumbURL).attr('height', image.height).attr('width', image.width).attr('src', '');
       });
       if (triggerShow) {
         this.show();
@@ -262,7 +264,7 @@
                                  '<ul class="{{listingCssCls}}" role="list" aria-label="Thumbnails">',
                                  '{{#thumbs}}',
                                  '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
-                                 '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-full-width="{{fullW}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px;min-height:{{height}}px">',
+                                 '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px;min-height:{{height}}px">',
                                  '<div class="etext-content" width="{{width}}" style="max-width:{{width}}px;height:auto;"></div>',
                                  '<div class="thumb-label">{{title}}</div>',
                                  '</li>',
