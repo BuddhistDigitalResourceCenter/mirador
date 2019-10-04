@@ -68,11 +68,33 @@
         var aspectRatio = canvas.height/canvas.width,
         width = (_this.thumbInfo.thumbsHeight/aspectRatio);
         if(width > canvas.width) width = canvas.width ;
-        var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
         var height = width *  aspectRatio ;
+
+        //console.log("load",canvas,width,height,canvas.width,canvas.height,tplData.defaultHeight);
 
         width = canvas.width ;
         height = canvas.height ;
+
+        var img = canvas.images ;
+        if(img && img.length && img[0]) {
+          img = img[0] ;
+          if(img.resource && img.resource.service ) {
+            img = img.resource.service ;
+            if(img.width && img.height) {
+              width = img.width;
+              height = width *aspectRatio;
+            }            
+            else { 
+              img = canvas.images[0].resource;
+              if(width === img.width && height === img.height) { // Taisho manifest
+                width = (_this.thumbInfo.thumbsHeight/aspectRatio);              
+                height = width *  aspectRatio ;
+              }
+            }
+          }        
+        }
+
+        var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
 
         return {
           thumbUrl: thumbnailUrl,
@@ -80,6 +102,7 @@
           id:       canvas['@id'],
           width:    width,
           height:   height,
+          ratio:    width/height,
           highlight: _this.currentImgIndex === index ? 'highlight' : ''
         };
       });
@@ -249,8 +272,33 @@
       jQuery.each(this.imagesList, function(index, image) {
         var aspectRatio = image.height/image.width,
         width = (_this.thumbInfo.thumbsHeight/aspectRatio),
-        newThumbURL = $.getThumbnailForCanvas(image, width, useThumbnailProperty),
-        id = image['@id'];
+        height = _this.thumbInfo.thumbsHeight,
+        id = image['@id'];      
+
+        //console.log("reload",image,width,height,image.width,image.height,_this.thumbInfo.thumbsHeight);
+
+        width = image.width;
+        height = image.height;
+
+        var img = image.images ;       
+        if(img && img.length && img[0]) {
+          img = img[0] ;
+          if(img.resource && img.resource.service ) {
+            img = img.resource.service ;
+            if(img.width && img.height) {
+              width = img.width;
+              height = width * aspectRatio;
+            }
+            else { 
+              img = image.images[0].resource;
+              if(width === img.width && height === img.height) { // Taisho manifest
+                width = (_this.thumbInfo.thumbsHeight/aspectRatio);              
+                height = width *  aspectRatio ;
+              }
+            }
+          }        
+        }
+        var newThumbURL = $.getThumbnailForCanvas(image, width, useThumbnailProperty);        
         var imageElement = _this.element.find('img[data-image-id="'+id+'"]');
         imageElement.attr('data', newThumbURL).attr('height', image.height).attr('width', image.width).attr('src', '');
       });
@@ -264,7 +312,7 @@
                                  '<ul class="{{listingCssCls}}" role="list" aria-label="Thumbnails">',
                                  '{{#thumbs}}',
                                  '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
-                                 '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px;min-height:{{height}}px">',
+                                 '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" data-max-height={{height}} data-ratio={{ratio}} height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px;min-height:{{height}}px">',
                                  '<div class="etext-content" width="{{width}}" style="max-width:{{width}}px;height:auto;"></div>',
                                  '<div class="thumb-label">{{title}}</div>',
                                  '</li>',

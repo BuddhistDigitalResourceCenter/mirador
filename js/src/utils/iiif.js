@@ -66,8 +66,10 @@
       else if (service.formatHints) {
         ext = service.formatHints[0];
       }
+      var level = $.Iiif.getComplianceLevelFromProfile(service.profile);
       if( width == "max" || width >= service.width) {
-        widthPart = "max";
+        if(level < 2) widthPart = "max";
+        else widthPart = "full" ;
       } else {
         widthPart = width+',';
       }
