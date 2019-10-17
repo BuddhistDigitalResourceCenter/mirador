@@ -701,7 +701,8 @@
         alwaysBlend: false,
         showNavigationControl: false,
         canvasControls: this.canvasControls,
-        ajaxWithCredentials: this.ajaxWithCredentials
+        ajaxWithCredentials: this.ajaxWithCredentials,
+        maxZoomPixelRatio:4
       });
 
       var canvasBounds = canvasModel.getBounds();
