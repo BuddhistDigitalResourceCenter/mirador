@@ -208,12 +208,8 @@
 
     template: $.Handlebars.compile([
                                  '<div class="mirador-hud">',
-                                 '{{#if showNextPrev}}',
-                                 '<a class="mirador-osd-previous hud-control ">',
-                                 '<i class="fa fa-3x fa-chevron-left "></i>',
-                                 '</a>',
-                                 '{{/if}}',
                                  '<div class="mirador-osd-context-controls hud-container">',
+                                 /*
                                  '{{#if showAnno}}',
                                   '<div class="mirador-osd-annotation-controls">',
                                   '<a class="mirador-osd-annotations-layer hud-control" role="button" title="{{t "annotationTooltip"}}" aria-label="{{t "annotationTooltip"}}">',
@@ -221,6 +217,7 @@
                                   '</a>',
                                   '</div>',
                                  '{{/if}}',
+                                 */
                                  '{{#if showImageControls}}',
                                   '<div class="mirador-manipulation-controls">',
                                   '<a class="mirador-manipulation-toggle hud-control" role="button" title="{{t "imageManipulationTooltip"}}" aria-label="{{t "imageManipulationTooltip"}}">',
@@ -230,16 +227,22 @@
                                  '{{/if}}',
                                  '</div>',
                                  '{{#if showNextPrev}}',
+                                 '<a class="mirador-osd-previous hud-control ">',
+                                 '<i class="fa fa-chevron-left "></i>',
+                                 '</a>',
                                  '<a class="mirador-osd-next hud-control ">',
-                                 '<i class="fa fa-3x fa-chevron-right"></i>',
+                                 '<i class="fa fa-chevron-right"></i>',
                                  '</a>',
                                  '{{/if}}',
+                                 /*
                                  '{{#if showBottomPanel}}',
                                  '<a class="mirador-osd-toggle-bottom-panel hud-control" role="button" aria-label="Toggle Bottom Panel">',
                                  '<i class="fa fa-2x fa-ellipsis-h"></i>',
                                  '</a>',
                                  '{{/if}}',
+                                 */
                                  '<div class="mirador-pan-zoom-controls hud-control">',
+                                 /*
                                  '<a class="mirador-osd-up hud-control" role="button" aria-label="Move image up">',
                                  '<i class="fa fa-chevron-circle-up"></i>',
                                  '</a>',
@@ -252,15 +255,18 @@
                                  '<a class="mirador-osd-left hud-control" role="button" aria-label="Move image left">',
                                  '<i class="fa fa-chevron-circle-left"></i>',
                                  '</a>',
+                                 */
                                  '<a class="mirador-osd-zoom-in hud-control" role="button" aria-label="Zoom in">',
                                  '<i class="fa fa-plus-circle"></i>',
                                  '</a>',
                                  '<a class="mirador-osd-zoom-out hud-control" role="button" aria-label="Zoom out">',
                                  '<i class="fa fa-minus-circle"></i>',
                                  '</a>',
+                                 /*
                                  '<a class="mirador-osd-go-home hud-control" role="button" aria-label="Reset image bounds">',
                                  '<i class="fa fa-home"></i>',
                                  '</a>',
+                                 */
                                  '</div>',
                                  '</div>'
     ].join(''))

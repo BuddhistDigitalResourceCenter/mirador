@@ -1,3 +1,5 @@
+
+
 (function($) {
 
   $.ThumbnailsView = function(options) {
@@ -23,6 +25,7 @@
     this.init();
   };
 
+
   $.ThumbnailsView.prototype = {
 
     updateGetEtextPage : function (page){
@@ -32,6 +35,8 @@
     },
 
     init: function() {
+      this.imagePromise = {} ;
+
       if (this.canvasID !== null) {
         this.currentImgIndex = $.getImageIndexById(this.imagesList, this.canvasID);
       }
@@ -70,7 +75,7 @@
         if(width > canvas.width) width = canvas.width ;
         var height = width *  aspectRatio ;
 
-        //console.log("load",canvas,width,height,canvas.width,canvas.height,tplData.defaultHeight);
+        //console.log("content",canvas,width,height,canvas.width,canvas.height,tplData.defaultHeight);
 
         width = canvas.width ;
         height = canvas.height ;
@@ -96,6 +101,7 @@
 
         var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
 
+
         return {
           thumbUrl: thumbnailUrl,
           title:    $.JsonLd.getTextValue(canvas.label),
@@ -106,6 +112,8 @@
           highlight: _this.currentImgIndex === index ? 'highlight' : ''
         };
       });
+
+      console.log("return");
 
       this.element = jQuery(_this.template(tplData)).appendTo(this.appendTo);
 
@@ -196,20 +204,18 @@
       jQuery.each(_this.element.find("img"), function(key, value) {
         if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src")) {
           var url = jQuery(value).attr("data");
-          _this.loadImage(value, url);
+          if(!_this.imagePromise[url]) _this.loadImage(value, url);
         }
       });
     },
 
     loadImage: function(imageElement, url) {
-      var _this = this,
+      var _this = this,  
       imagePromise = $.createImagePromise(url);
 
       imagePromise.done(function(image) {
 
         imageElement.src = image ;
-
-        //console.log("image loaded",image,_this.updateGetEtextPage,jQuery("#showEtext"));
 
         if(jQuery("#showEtext").length) {
          
