@@ -299,6 +299,7 @@
     ].join('')),
 
     manipulationTemplate: $.Handlebars.compile([
+                                   '<div>',
                                    '{{#if showRotate}}',
                                    '<a class="hud-control mirador-osd-rotate-right" title="{{t "rotateRightTooltip"}}">',
                                    '<i class="fa fa-lg fa-rotate-right"></i>',
@@ -348,7 +349,8 @@
                                    '<a class="hud-control mirador-osd-reset" title="{{t "resetTooltip"}}">',
                                    '<i class="fa fa-lg fa-refresh"></i>',
                                    '</a>',
-      '{{/if}}',
+                                   '{{/if}}',
+                                   '</div>'
     ].join('')),
 
     // for accessibility, make sure to add aria-labels just like above

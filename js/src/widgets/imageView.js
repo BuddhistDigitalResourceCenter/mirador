@@ -363,7 +363,7 @@
       });
 
       this.element.find('.mirador-osd-brightness-slider').slider({
-        orientation: "vertical",
+        orientation: 'horizontal', //"vertical",
         range: "min",
         min: 0,
         max: 200,
@@ -390,7 +390,7 @@
                                                             });
 
       this.element.find('.mirador-osd-contrast-slider').slider({
-        orientation: "vertical",
+        orientation: 'horizontal', //"vertical",
         range: "min",
         min: 0,
         max: 200,
@@ -417,7 +417,7 @@
                                                           });
 
       this.element.find('.mirador-osd-saturation-slider').slider({
-        orientation: "vertical",
+        orientation: 'horizontal', //"vertical",
         range: "min",
         min: 0,
         max: 200,
@@ -508,6 +508,8 @@
           lastCanvasId = _this.imagesList[_this.imagesList.length-1]['@id'];
 
       // If it is the first canvas, hide the "go to previous" button, otherwise show it.
+      // If it is the last canvas, hide the "go to previous" button, otherwise show it.
+      /*
       if (canvasId === firstCanvasId) {
         _this.element.find('.mirador-osd-previous').hide();
         _this.element.find('.mirador-osd-next').show();
@@ -518,7 +520,20 @@
         _this.element.find('.mirador-osd-next').show();
         _this.element.find('.mirador-osd-previous').show();
       }
-      // If it is the last canvas, hide the "go to previous" button, otherwise show it.
+      */
+
+      if (canvasId === firstCanvasId) {
+        _this.element.find('.mirador-osd-previous').addClass("first");
+      }
+      else {
+        _this.element.find('.mirador-osd-previous').removeClass("first");
+      }
+      if (canvasId === lastCanvasId) {
+        _this.element.find('.mirador-osd-next').addClass("last");
+      }
+      else {
+        _this.element.find('.mirador-osd-next').removeClass("last");
+      }
     },
 
     loadImage: function(event, imageResource) {
