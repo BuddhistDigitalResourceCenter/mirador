@@ -459,6 +459,10 @@
         }
       });
 
+      this.element.find('.thumbnails-open-close').on('click', function() {
+        jQuery(".mirador-container .view-container").toggleClass("thumbs-off");
+      });
+
       jQuery(document).on("webkitfullscreenchange mozfullscreenchange fullscreenchange", function() {
         _this.toggleFullScreen();
       });
@@ -1117,6 +1121,7 @@
       '<div class="overlay"></div>',
       '<div class="view-container {{#unless sidePanel}}focus-max-width{{/unless}}">',
       '<div class="bottomPanel">',
+      '<div class="thumbnails-open-close"></div>',
       '</div>',
       '</div>',
       '</div>',
