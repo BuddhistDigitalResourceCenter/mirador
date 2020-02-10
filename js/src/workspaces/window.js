@@ -434,6 +434,10 @@
       _this.events.push(_this.eventEmitter.subscribe('ENABLE_WINDOW_FULLSCREEN', function(event) {
         _this.element.find('.mirador-osd-fullscreen').show();
       }));
+
+      _this.events.push(_this.eventEmitter.subscribe('TOGGLE_METADATA', function(event) {        
+          _this.toggleMetadataOverlay(_this.viewType);
+      }));
     },
 
     bindEvents: function() {
@@ -1072,16 +1076,18 @@
       '{{/if}}',
       '</ul>',
       '</a>',
+      /*
       '{{#if MetadataView}}',
       '<a href="javascript:;" class="mirador-btn mirador-icon-metadata-view mirador-tooltip" role="button" title="{{t "metadataTooltip"}}" aria-label="{{t "metadataTooltip"}}">',
       '<i class="fa fa-info-circle fa-lg fa-fw"></i>',
       '</a>',
       '{{/if}}',
       '{{#if showFullScreen}}',
-      '<a class="mirador-btn mirador-osd-fullscreen mirador-tooltip" role="button" title="{{t "fullScreenWindowTooltip"}}" aria-label="{{t "fullScreenWindowTooltip"}}">',
+      '<a style="display:none" class="mirador-btn mirador-osd-fullscreen mirador-tooltip" role="button" title="{{t "fullScreenWindowTooltip"}}" aria-label="{{t "fullScreenWindowTooltip"}}">',
       '<i class="fa fa-lg fa-fw fa-expand"></i>',
       '</a>',
       '{{/if}}',
+      */
       '</div>',
       '{{#if layoutOptions.close}}',
       '<a href="javascript:;" class="mirador-btn mirador-close-window remove-object-option mirador-tooltip" title="{{t "closeTooltip"}}" aria-label="{{t "closeTooltip"}}"><i class="fa fa-times fa-lg fa-fw"></i></a>',

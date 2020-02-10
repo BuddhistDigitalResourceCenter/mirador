@@ -66,6 +66,19 @@
           _this.annoState.choosePointer();
         }
       });
+      
+      this.element.find('.mirador-icon-metadata-view').on('click', function() {
+          _this.eventEmitter.publish('TOGGLE_METADATA', {windowId: _this.id });
+      });
+
+      this.element.find('.mirador-osd-fullscreen').on('click', function() {
+        if ($.fullscreenElement()) {
+          $.exitFullscreen();
+        } else {
+          $.enterFullscreen(_this.element.closest(".mirador-container")[0]);
+        }
+      });
+
     },
 
     bindEvents: function() {
@@ -250,7 +263,6 @@
                                  '</a>',
                                  '</div>',
                                  */
-                                 '<div class="mirador-osd-context-controls hud-container">',
                                  /*
                                  '{{#if showAnno}}',
                                   '<div class="mirador-osd-annotation-controls">',
@@ -260,6 +272,11 @@
                                   '</div>',
                                  '{{/if}}',
                                  */
+                                '<a class="mirador-btn mirador-osd-fullscreen mirador-tooltip" role="button" title="{{t "fullScreenWindowTooltip"}}" aria-label="{{t "fullScreenWindowTooltip"}}">',
+                                '<i class="fa fa-lg fa-fw fa-expand"></i>',
+                                '</a>',
+
+                                 '<div class="mirador-osd-context-controls hud-container">',
                                  '{{#if showImageControls}}',
                                   '<div class="mirador-manipulation-controls">',
                                   '<a class="mirador-manipulation-toggle hud-control" role="button" title="{{t "imageManipulationTooltip"}}" aria-label="{{t "imageManipulationTooltip"}}">',
@@ -268,6 +285,11 @@
                                   '</div>',
                                  '{{/if}}',
                                  '</div>',
+
+                                '<a href="javascript:;" class="mirador-btn mirador-icon-metadata-view mirador-tooltip" role="button" title="{{t "metadataTooltip"}}" aria-label="{{t "metadataTooltip"}}">',
+                                '<i class="fa fa-info-circle fa-lg fa-fw"></i>',
+                                '</a>',
+                                
                                  '</div>'
     ].join(''))
 
