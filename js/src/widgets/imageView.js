@@ -838,11 +838,14 @@
       _this.eventEmitter.publish('UPDATE_FOCUS_IMAGES.' + this.windowId, {array: [canvasID]});
       },
 
+    // TODO use eventEmitter to trigger goto page in hud
+
     next: function() {
       var _this = this;
       var next = this.currentImgIndex + 1;
       if (next < this.imagesList.length) {
         _this.eventEmitter.publish('SET_CURRENT_CANVAS_ID.' + this.windowId, this.imagesList[next]['@id']);
+        _this.eventEmitter.publish('SET_PAGINATION.' + this.windowId, (next+1) + " / " + this.imagesList.length);
       }
     },
 
@@ -852,6 +855,7 @@
 
       if (prev >= 0) {
         _this.eventEmitter.publish('SET_CURRENT_CANVAS_ID.' + this.windowId, this.imagesList[prev]['@id']);
+        _this.eventEmitter.publish('SET_PAGINATION.' + this.windowId, (prev+1) + " / " + this.imagesList.length);
       }
     }
   };

@@ -181,6 +181,7 @@
       _this.element.find('.thumbnail-image').on('click', function() {
         var canvasID = jQuery(this).attr('data-image-id');
         _this.eventEmitter.publish('SET_CURRENT_CANVAS_ID.' + _this.windowId, canvasID);
+        _this.eventEmitter.publish('SET_PAGINATION.' + _this.windowId, (jQuery(this).parent().index()+1) + " / " + _this.imagesList.length);
       });
 
       

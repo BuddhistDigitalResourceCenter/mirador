@@ -203,6 +203,7 @@
     filter: FlipH;
   }
 
+
   /* color picker custom style
   ---------------------------------------------------------------------------- */
 
@@ -302,4 +303,229 @@
     height: 30px;
     vertical-align: middle;
   }
+}
+
+
+/* ---------------------------------------- 2.7.0-BDRC */
+
+
+
+.mirador-container .mirador-osd-context-controls a {
+  float:none ;
+}
+
+.mirador-container .mirador-osd-context-controls a,
+.mirador-container .hud-control,
+.mirador-container .mirador-osd-previous,
+.mirador-container .mirador-osd-next,
+.mirador-container .mirador-manipulation-controls,
+.mirador-container .mirador-osd-context-controls,
+.mirador-container .mirador-pan-zoom-controls,
+.mirador-container .mirador-osd-zoom-in,
+.mirador-container .mirador-osd-zoom-out,
+.mirador-container .mirador-viewer .mirador-hud a.mirador-osd-fullscreen,
+.mirador-container .mirador-viewer .mirador-hud a.mirador-icon-metadata-view
+{
+  position:relative; 
+  opacity:1;
+  color:white;
+  bottom:auto;
+  right:auto;
+  top:0;
+  left:0;
+  /* display:inline-block; */
+  min-width:0;
+  margin:0;
+  vertical-align:middle;
+  height:auto;
+  width:auto;
+  padding:0;
+  margin-right:0;
+  text-align: center;
+}
+
+
+.mirador-container .mirador-manipulation-controls > div {
+  position: absolute;
+  bottom: 38px;
+  width: 38px;
+  text-align: left;
+  left: 3px;
+}
+
+
+.mirador-container .mirador-hud > * { 
+  /*border-left:1px solid rgba(255,255,255,0.51);*/ 
+  height:40px; 
+  display:flex; 
+  align-items: center;
+  justify-content: center;
+  padding:0 10px !important;  
+  
+  &.image-num {
+    padding:0 !important;  
+  }
+}
+
+.mirador-container .mirador-osd-context-controls,
+.mirador-container .mirador-osd-zoom-out { 
+  border-left:1px solid rgba(255,255,255,0.51); 
+  border-right:1px solid rgba(255,255,255,0.51);
+  /* padding-left:10px;
+  margin-left:10px; 
+  height:100%; */
+}
+
+.mirador-container .mirador-osd-zoom-in { 
+  margin-left:10px;
+}
+
+.mirador-container .mirador-osd-previous,
+.mirador-container .mirador-osd-next
+{
+  border-radius: 20px;
+  width:42px;
+  height:42px;
+  box-sizing: border-box;
+  margin:0 10px;
+  background:url(../images/icons.png) -438px 0px ;
+}
+
+.mirador-container .mirador-osd-next {   
+  transform:scaleX(-1) !important;
+  margin-right:20px !important;
+}
+
+.mirador-container .mirador-osd-previous {   
+  margin-left:20px !important;
+}
+
+.mirador-container .mirador-osd-previous.first,
+.mirador-container .mirador-osd-next.last {
+  opacity: 0.51;
+  pointer-events: none;
+}
+
+
+.mirador-container .mirador-osd-context-controls > div { display:flex; }
+.mirador-container .mirador-osd-context-controls > div > a:first-child { margin-bottom:0; display:flex; }
+
+.mirador-container .mirador-osd-previous.bottom-panel-open,
+.mirador-container .mirador-osd-next.bottom-panel-open,
+.mirador-container .mirador-pan-zoom-controls.bottom-panel-open 
+{ 
+  transform:none ;
+}
+
+/*
+.mirador-container .hud-control .ui-slider, .mirador-container .ui-slider-vertical {
+  margin-left: 48px;
+  position: absolute;
+  top: -38px;
+}
+*/
+.mirador-container .mirador-osd-context-controls .hud-control.mirador-osd-reset {
+  margin-left:2px;
+  display: inline-block;
+}
+
+.mirador-container .mirador-osd-context-controls .hud-control.mirador-osd-rotate-left,
+.mirador-container .mirador-osd-context-controls .hud-control.mirador-osd-rotate-right {
+  margin-left:2px;
+  margin-bottom:5px;
+  display: inline-block;
+}
+.mirador-container .hud-control .ui-slider, .mirador-container .ui-slider-horizontal {
+  margin-left: 34px;
+  position: absolute;
+  top: 10px; 
+  width:100px;
+  height:5px;
+}
+.mirador-container .hud-control .ui-slider-handle .percent {
+  left: 0;
+  top: 100%;
+}
+.mirador-container .ui-slider .ui-slider-handle {
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 0.35em;
+}
+
+
+.mirador-hud .mirador-hud-control > span {
+  display:inline-block;
+}
+
+.mirador-manipulation-controls,
+.mirador-osd-fullscreen {
+  display:flex;
+}
+
+.mirador-osd-fullscreen span {
+  background:url(../images/icons.png) -677px -10px ;
+  width:19px;
+  height:19px;
+  margin-bottom:2px;
+}
+
+.mirador-osd-zoom-in span {
+  background:url(../images/icons.png) -593px -9px ;
+  width:22px;
+  height:22px;
+}
+
+.mirador-osd-zoom-out span {
+  background:url(../images/icons.png) -633px -9px ;
+  width:22px;
+  height:22px;
+}
+
+.mirador-container .mirador-osd-context-controls .mirador-manipulation-toggle span {
+  display:inline-block;
+  background:url(../images/icons.png) -713px -7px ;
+  width:31px;
+  height:29px;
+}
+
+.mirador-icon-metadata-view span {
+  background:url(../images/icons.png) -760px -10px ;
+  width:23px;
+  height:23px;
+}
+
+.image-num,
+.goto-page {
+  display:inline-block;
+  position:relative;
+  font-family: "Noto Sans";
+  color: white;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.image-num { 
+  margin: 0 10px;
+  padding:0 !important;
+}
+
+.goto-page {
+  input { 
+    width:60px;
+    height:20px; 
+    display: inline-block; 
+    margin-left:35px;
+    margin-right:20px;
+  }
+
+  &:after { 
+    position:absolute;
+    content:' ';
+    left:62px;
+    top:16px;
+    background:url(../images/icons.png) -325px -17px; ;
+    width:12px;
+    height:9px;  
+  }
+
 }

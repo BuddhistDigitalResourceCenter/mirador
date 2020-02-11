@@ -79,6 +79,12 @@
         }
       });
 
+      this.eventEmitter.subscribe('SET_PAGINATION.' + this.windowId, function(event, txt) {
+
+        jQuery(".mirador-hud .image-num").text(txt);
+
+      });
+
     },
 
     bindEvents: function() {
@@ -222,11 +228,13 @@
     template: $.Handlebars.compile([
                                  '<div class="mirador-hud">',                                 
                                  '{{#if showNextPrev}}',
+                                 "<span class='goto-page'>Go to p. <input type='text' id='gotoPage' onInput='javascript:jQuery(\"#gotoPage\").removeClass(\"error\");' onChange='javascript:window.scrollToImage(event.target.value);'/></span>",
                                  '<a class="mirador-osd-previous hud-control ">',
-                                 '<i class="fa fa-chevron-left "></i>',
+                                 '<span></span>',
                                  '</a>',
+                                 '<span class="image-num">… / …</span>',
                                  '<a class="mirador-osd-next hud-control ">',
-                                 '<i class="fa fa-chevron-right"></i>',
+                                 '<span></span>',
                                  '</a>',
                                  '{{/if}}',
                                  /*
@@ -237,10 +245,10 @@
                                  '{{/if}}',
                                  */
                                  '<a class="mirador-osd-zoom-in hud-control" role="button" aria-label="Zoom in">',
-                                 '<i class="fa fa-plus-circle"></i>',
+                                 '<span></span>',
                                  '</a>',
                                  '<a class="mirador-osd-zoom-out hud-control" role="button" aria-label="Zoom out">',
-                                 '<i class="fa fa-minus-circle"></i>',
+                                 '<span></span>',
                                  '</a>',
                                  /*
                                  '<div class="mirador-pan-zoom-controls hud-control">',
@@ -273,21 +281,21 @@
                                  '{{/if}}',
                                  */
                                 '<a class="mirador-btn mirador-osd-fullscreen mirador-tooltip" role="button" title="{{t "fullScreenWindowTooltip"}}" aria-label="{{t "fullScreenWindowTooltip"}}">',
-                                '<i class="fa fa-lg fa-fw fa-expand"></i>',
+                                '<span></span>',
                                 '</a>',
 
                                  '<div class="mirador-osd-context-controls hud-container">',
                                  '{{#if showImageControls}}',
                                   '<div class="mirador-manipulation-controls">',
-                                  '<a class="mirador-manipulation-toggle hud-control" role="button" title="{{t "imageManipulationTooltip"}}" aria-label="{{t "imageManipulationTooltip"}}">',
-                                  '<i class="material-icons">tune</i>',
+                                  '<a class="mirador-manipulation-toggle hud-control" role="button" title="{{t "imageManipulationTooltip"}}" aria-label="{{t "imageManipulationTooltip"}}">',                                  
+                                  '<span></span>',
                                   '</a>',
                                   '</div>',
                                  '{{/if}}',
                                  '</div>',
 
                                 '<a href="javascript:;" class="mirador-btn mirador-icon-metadata-view mirador-tooltip" role="button" title="{{t "metadataTooltip"}}" aria-label="{{t "metadataTooltip"}}">',
-                                '<i class="fa fa-info-circle fa-lg fa-fw"></i>',
+                                '<span></span>',
                                 '</a>',
                                 
                                  '</div>'
