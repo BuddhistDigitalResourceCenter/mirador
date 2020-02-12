@@ -67,6 +67,7 @@
         }
       });
       
+
       this.element.find('.mirador-icon-metadata-view').on('click', function() {
           _this.eventEmitter.publish('TOGGLE_METADATA', {windowId: _this.id });
       });
@@ -80,15 +81,18 @@
       });
 
       this.eventEmitter.subscribe('SET_PAGINATION.' + this.windowId, function(event, txt) {
-
         jQuery(".mirador-hud .image-num").text(txt);
-
       });
+
 
     },
 
     bindEvents: function() {
       var _this = this;
+
+      _this.element.find('.goto-page input').on('change', function(event) {
+         _this.eventEmitter.publish('GOTO_IMAGE_NUM.'+_this.windowId, jQuery(this).val());
+      });
     },
 
     createStateMachines: function() {
@@ -228,7 +232,8 @@
     template: $.Handlebars.compile([
                                  '<div class="mirador-hud">',                                 
                                  '{{#if showNextPrev}}',
-                                 "<span class='goto-page'>Go to p. <input type='text' id='gotoPage' onInput='javascript:jQuery(\"#gotoPage\").removeClass(\"error\");' onChange='javascript:window.scrollToImage(event.target.value);'/></span>",
+                                 //"<span class='goto-page'>Go to p. <input type='text' id='gotoPage' onInput='javascript:jQuery(\"#gotoPage\").removeClass(\"error\");' onChange='javascript:window.scrollToImage(event.target.value);'/></span>",
+                                 '<span class="goto-page">Go to p. <input type="text" id="gotoPage"/></span>',
                                  '<a class="mirador-osd-previous hud-control ">',
                                  '<span></span>',
                                  '</a>',

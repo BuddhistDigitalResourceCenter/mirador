@@ -144,15 +144,24 @@
       if (target.position()) {
         if (windowObject && windowObject.viewType === 'BookView') {
           scrollPosition = _this.element.scrollLeft() + (target.position().left + (target.next().width() + target.outerWidth())/2) - _this.element.width()/2;
+          _this.element.scrollTo(scrollPosition, 900);
         } else {
-          scrollPosition = _this.element.scrollLeft() + (target.position().left + target.width()/2) - _this.element.width()/2;
+          //scrollPosition = _this.element.scrollLeft() + (target.position().left + target.width()/2) - _this.element.width()/2;
+          scrollPosition = _this.element.scrollTop() + (target.position().top + target.height()/2) - _this.element.height()/2;
+          _this.element.scrollTop(scrollPosition);
         }
       }
-      _this.element.scrollTo(scrollPosition, 900);
     },
 
     listenForActions: function() {
       var _this = this;
+      
+      /*
+      _this.eventEmitter.subscribe(('SET_CURRENT_CANVAS_ID.' + _this.windowId), function(event) {
+        _this.currentImageChanged();
+      });
+      */
+
       _this.eventEmitter.subscribe(('currentCanvasIDUpdated.' + _this.windowId), function(event) {
         _this.currentImageChanged();
       });

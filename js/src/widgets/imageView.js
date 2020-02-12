@@ -81,7 +81,7 @@
         windowId: this.windowId,
         canvasControls: this.canvasControls,
         annoEndpointAvailable: this.annoEndpointAvailable,
-        showNextPrev : this.imagesList.length !== 1,
+        showNextPrev : true, //this.imagesList.length !== 1,
         availableAnnotationStylePickers: this.state.getStateProperty('availableAnnotationStylePickers'),
         availableAnnotationTools: this.availableAnnotationTools,
         state: this.state,
@@ -165,6 +165,27 @@
         jQuery(_this.osd.canvas).css("cursor", "pointer");
       });
       //Related to Annotations HUD
+
+
+
+      _this.eventEmitter.subscribe('GOTO_IMAGE_NUM.' + _this.windowId, function(event, imageNum) {
+        var n = Number(imageNum) - 1 ;        
+        for(var i = 0 ; i <  _this.imagesList.length ; i ++) {
+          var label = _this.imagesList[i].label, found = false ;
+          if(!Array.isArray(label)) label = [ { "@value": label } ] ;
+          for(var l = 0 ; l < label.length ; l++) if(label[l]["@value"] && label[l]["@value"].match(new RegExp("^[^0-9]*"+(n+1)+"[^0-9]*$"))) {
+            n = i ;
+            found = true ;
+            break ;
+          }
+          if(found) break ;
+        }
+        if(n >= 0 && n < _this.imagesList.length) {          
+            _this.eventEmitter.publish('SET_CURRENT_CANVAS_ID.' + _this.windowId, _this.imagesList[n]['@id']);
+            _this.eventEmitter.publish('SET_PAGINATION.' + _this.windowId, (n+1) + " / " + _this.imagesList.length);
+        } 
+      });
+
     },
 
     bindEvents: function() {
@@ -837,8 +858,6 @@
       }
       _this.eventEmitter.publish('UPDATE_FOCUS_IMAGES.' + this.windowId, {array: [canvasID]});
       },
-
-    // TODO use eventEmitter to trigger goto page in hud
 
     next: function() {
       var _this = this;
