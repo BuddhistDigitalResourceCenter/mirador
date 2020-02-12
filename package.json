@@ -80,6 +80,7 @@
     "mousetrap": "^1.4.6",
     "openseadragon": "https://github.com/openseadragon/openseadragon#master",
     "paper": "^0.11.2",
+    "perfect-scrollbar": "^1.5.0",
     "qtip2": "^3.0.3",
     "sanitize-html": "practicefusion/sanitize-html#include-dist-files",
     "select2": "^4.0.3",

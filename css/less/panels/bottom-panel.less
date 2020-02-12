@@ -36,10 +36,26 @@
         padding: 0px 10px 0px 10px;
         display: inline-block;
         margin-bottom: 11px;
+        position:relative;
 
         &.highlight {
           padding-left: 8px;
           padding-right: 8px;
+        }
+
+
+        &.highlight,
+        &:hover {
+          &::before {
+            content:' ';
+            position:absolute;
+            background-color:#d73449;
+            width:5px;
+            height:14px;
+            display: block;
+            left:-5px;
+            top:2px;
+          }
         }
 
         img {
@@ -57,13 +73,15 @@
             margin-right:15px;
           }
 
+          /*
           &.thumbnail-image.highlight {
             border: 2px solid deepskyblue;
           }
+          */
 
           &:hover {
-            border:2px solid @blue-bfff-a70;
-            transform: scale(1.1);
+            //border:2px solid @blue-bfff-a70;
+            //transform: scale(1.1);
             cursor: pointer;
           }
         }

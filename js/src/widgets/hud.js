@@ -233,7 +233,7 @@
                                  '<div class="mirador-hud">',                                 
                                  '{{#if showNextPrev}}',
                                  //"<span class='goto-page'>Go to p. <input type='text' id='gotoPage' onInput='javascript:jQuery(\"#gotoPage\").removeClass(\"error\");' onChange='javascript:window.scrollToImage(event.target.value);'/></span>",
-                                 '<span class="goto-page">Go to p. <input type="text" id="gotoPage"/></span>',
+                                 '<span class="goto-page">Go to p. <input type="text" id="gotoPage" /></span>',
                                  '<a class="mirador-osd-previous hud-control ">',
                                  '<span></span>',
                                  '</a>',
