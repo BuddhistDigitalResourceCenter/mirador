@@ -45023,6 +45023,7 @@ $.SimpleASEndpoint = function (options) {
 
       _this.element.find('.goto-page input').on('change', function(event) {
          _this.eventEmitter.publish('GOTO_IMAGE_NUM.'+_this.windowId, jQuery(this).val());
+         jQuery(this).val("");
       });
     },
 
@@ -45164,7 +45165,7 @@ $.SimpleASEndpoint = function (options) {
                                  '<div class="mirador-hud">',                                 
                                  '{{#if showNextPrev}}',
                                  //"<span class='goto-page'>Go to p. <input type='text' id='gotoPage' onInput='javascript:jQuery(\"#gotoPage\").removeClass(\"error\");' onChange='javascript:window.scrollToImage(event.target.value);'/></span>",
-                                 '<span class="goto-page">Go to p. <input type="text" id="gotoPage" /></span>',
+                                 '<span class="goto-page"><select size="5"></select><span>Go to p.</span><input type="text" id="gotoPage" /></span>',
                                  '<a class="mirador-osd-previous hud-control ">',
                                  '<span></span>',
                                  '</a>',
@@ -47914,8 +47915,39 @@ $.SearchWithinResults.prototype = {
 
       _this.element = jQuery(_this.template(tplData)).appendTo(_this.appendTo);
 
-      if(!_this.ps) _this.ps = new PerfectScrollbar(".panel-thumbnail-view",{ minScrollbarLength:16, maxScrollbarLength:16 });
-      
+      if(!_this.ps) { 
+
+        _this.ps = new PerfectScrollbar(".panel-thumbnail-view",{ minScrollbarLength:16, maxScrollbarLength:16 });
+        
+        for(var i = 0 ; i < tplData.thumbs.length ; i ++) {
+          var val = tplData.thumbs[i].title.replace(/(^[^0-9]+)|([^0-9a-z]$)/g,"") ;
+          jQuery(".goto-page select").append("<option value='"+val+"'>"+val+"</option>") ;
+        }        
+
+        jQuery(".goto-page select").selectmenu( { 
+          appendTo:".goto-page",
+          position: { my : "right-1 bottom-1", at: "right bottom-2" },
+          select: function( event, ui ) { _this.eventEmitter.publish('GOTO_IMAGE_NUM.'+_this.windowId, ui.item.value) ; }
+        });
+
+        if(!_this.gotoPs) { 
+          var container = document.querySelector(".goto-page .ui-selectmenu-menu");
+          _this.gotoPs = new PerfectScrollbar(container,{ suppressScrollX: true, minScrollbarLength:12 });
+          // fix for infinite scroll bug ... remove CSS border much simpler
+          /*
+          container.addEventListener('ps-scroll-up', function (event)   { _this.endY = false; jQuery(".ps__rail-y").removeClass("reach-end"); });
+          container.addEventListener('ps-scroll-down', function (event) { 
+            if(_this.endY) { 
+              //console.log(jQuery(".goto-page .ui-selectmenu-menu ul").height(),jQuery(container).height()); 
+              container.scrollTop = jQuery(".goto-page .ui-selectmenu-menu ul").height() - jQuery(container).height() ; 
+              jQuery(".ps__rail-y").addClass("reach-end");
+              //_this._endY = false ;
+            } 
+          });
+          container.addEventListener('ps-y-reach-end', function (event) { _this.endY = true;  });
+          */
+        }
+      }      
     },
 
     loadContent: function(useThumbnailProperty) {

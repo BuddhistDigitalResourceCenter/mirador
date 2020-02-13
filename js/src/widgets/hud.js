@@ -92,6 +92,7 @@
 
       _this.element.find('.goto-page input').on('change', function(event) {
          _this.eventEmitter.publish('GOTO_IMAGE_NUM.'+_this.windowId, jQuery(this).val());
+         jQuery(this).val("");
       });
     },
 
@@ -233,7 +234,7 @@
                                  '<div class="mirador-hud">',                                 
                                  '{{#if showNextPrev}}',
                                  //"<span class='goto-page'>Go to p. <input type='text' id='gotoPage' onInput='javascript:jQuery(\"#gotoPage\").removeClass(\"error\");' onChange='javascript:window.scrollToImage(event.target.value);'/></span>",
-                                 '<span class="goto-page">Go to p. <input type="text" id="gotoPage" /></span>',
+                                 '<span class="goto-page"><select size="5"></select><span>Go to p.</span><input type="text" id="gotoPage" /></span>',
                                  '<a class="mirador-osd-previous hud-control ">',
                                  '<span></span>',
                                  '</a>',

@@ -393,11 +393,13 @@
 
 .mirador-container .mirador-osd-next {   
   transform:scaleX(-1) !important;
-  margin-right:20px !important;
+  margin-left:0px;  
+  margin-right:25px;
 }
 
 .mirador-container .mirador-osd-previous {   
-  margin-left:20px !important;
+  margin-right:0px;  
+  margin-left:10px;
 }
 
 .mirador-container .mirador-osd-previous.first,
@@ -478,42 +480,108 @@
 }
 
 .image-num,
-.goto-page {
-  display:inline-block;
+.mirador-container .mirador-hud > .goto-page {  
   position:relative;
   font-family: "Noto Sans";
   color: white;
   font-weight: 700;
   font-size: 11px;
-}
-
-.image-num { 
-  margin: 0 10px;
   padding:0 !important;
 }
 
-.goto-page {
+.image-num { 
+  display:inline-block;
+  margin: 0 10px;
+}
+
+.mirador-container .mirador-hud > .goto-page {
   input { 
     width:40px;
     height:20px; 
     display: inline-block; 
-    margin-left:35px;
-    margin-right:20px;
+    margin-left:30px;
+    // margin-right:20px;
     padding: 0 5px;
     font-size: 11px;
     font-family: "Noto Sans";
     border-color:#D73449 !important;
     border-width:1px;
+    z-index:1;
+
+    & + .ui-selectmenu-menu { 
+      max-height:210px;
+      //border:1px solid #D73449 ;
+      overflow:auto;
+      overflow-x:hidden;
+
+      box-shadow:0 0 1px 1px #D73449;
+      
+      // fix for infinite scroll bug
+      /*
+      &::before {
+        content:' ';
+        position:absolute;
+        background-color: #D73449;
+        width:52px;
+        height:~"calc(100% + 2px)";
+        left:-2px;
+        top:-2px;
+        z-index:-1;
+      }        
+      */
+
+      ul.ui-menu {
+        border:none;
+        border-radius:0 ;
+        width:50px !important;
+        overflow:hidden;
+  
+        li:hover { 
+          &, div { background-color:#eee; }
+        }
+
+        li div {
+          font-family:"Noto Sans";
+          font-weight:400 !important;
+          font-size:11px;
+        }
+  
+        li div.ui-state-active {
+          border-color:transparent !important;
+          font-weight:700 !important;
+        }
+      }
+    }    
   }
 
   &:after { 
     position:absolute;
     content:' ';
-    left:62px;
+    right:62px;
     top:16px;
     background:url(../images/icons.png) -325px -17px; ;
     width:12px;
     height:9px;  
+    pointer-events: none;
   }
 
+  select {    
+    position: absolute;
+    bottom: 7px;
+    left: 10px;
+    width: 67px;
+    height: 25px;
+    opacity: 0;
+    cursor: pointer;
+    
+    & + span {
+      position: absolute !important;
+      left: 0px;
+      width: 100%;
+      outline-color:transparent;
+
+      .ui-selectmenu-text { opacity:0; }
+    }
+  }
+  
 }
