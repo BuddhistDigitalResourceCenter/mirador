@@ -1114,10 +1114,15 @@
       '</ul>',
       '</a>',
       '{{/if}}',
+      '<div class="nav-bar-top"><div><a href="https://www.tbrc.org" target="_blank" id="bdrc">BDRC</a><a href="/" id="buda"></a></div>',
+      '<div id="breadcrumbs"><span id="return">return to BUDA</span><span id="collec">Collection name</span><span id="vol">Volume name</span><span id="image">Image Name</span></div>',
+      '</div>',
+      /*
       '{{#if sidePanel}}',
       '<a href="javascript:;" class="mirador-btn mirador-icon-toc selected mirador-tooltip" title="{{t "sidePanelTooltip"}}" aria-label="{{t "sidePanelTooltip"}}"><i class="fa fa-bars fa-lg fa-fw"></i></a>',
       '{{/if}}',
       '<h3 class="window-manifest-title" title="{{{title}}}" aria-label="{{{title}}}">{{{title}}}</h3>',
+      */
       '</div>',
       '<div class="content-container">',
       '{{#if sidePanel}}',
