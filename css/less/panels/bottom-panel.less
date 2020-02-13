@@ -38,14 +38,15 @@
         margin-bottom: 11px;
         position:relative;
 
+        /*          
         &.highlight {
           padding-left: 8px;
           padding-right: 8px;
         }
+        */
 
-
-        &.highlight,
-        &:hover {
+        &.highlight/*,
+        &:hover*/ {
           &::before {
             content:' ';
             position:absolute;
@@ -90,8 +91,8 @@
           clear: both;
           color: @gray-99;
           font-size: 12px;
-          margin: 0 auto;
-          max-width: 75px;
+          margin: 0 ;
+          width: 180px;
           text-align: left;
           white-space:nowrap;
           overflow:hidden;

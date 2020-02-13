@@ -5722,13 +5722,14 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   display: inline-block;
   margin-bottom: 11px;
   position: relative;
+  /*          
+        &.highlight {
+          padding-left: 8px;
+          padding-right: 8px;
+        }
+        */
 }
-.mirador-container .panel-thumbnail-view ul.panel-listing-thumbs li.highlight {
-  padding-left: 8px;
-  padding-right: 8px;
-}
-.mirador-container .panel-thumbnail-view ul.panel-listing-thumbs li.highlight::before,
-.mirador-container .panel-thumbnail-view ul.panel-listing-thumbs li:hover::before {
+.mirador-container .panel-thumbnail-view ul.panel-listing-thumbs li.highlight::before {
   content: ' ';
   position: absolute;
   background-color: #d73449;
@@ -5764,8 +5765,8 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   clear: both;
   color: #999;
   font-size: 12px;
-  margin: 0 auto;
-  max-width: 75px;
+  margin: 0 ;
+  width: 180px;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
