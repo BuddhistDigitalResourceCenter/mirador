@@ -55,9 +55,11 @@
         "ThumbnailsView" : "fa fa-th fa-lg fa-rotate-90 fa-fw"
       },
       userButtons: null,
-      labelToString: function(label) { return  $.JsonLd.getTextValue(label); }
+      labelToString: function(label) { return  $.JsonLd.getTextValue(label); },
+      resID:null
     }, options);
 
+    console.log("resID?",this.resID);
 
     this.init();
     this.bindAnnotationEvents();
@@ -158,6 +160,8 @@
       } else {
         templateData.MetadataView = true;
       }
+
+      templateData.resID = this.resID ;
 
       //determine if any buttons should be hidden in template
       templateData.iconClasses = {};
@@ -1115,7 +1119,9 @@
       '</a>',
       '{{/if}}',
       '<div class="nav-bar-top"><div><a href="https://www.tbrc.org" target="_blank" id="bdrc">BDRC</a><a href="/" id="buda"></a></div>',
-      '<div id="breadcrumbs"><span id="return">return to BUDA</span><span id="collec">Collection name</span><span id="vol">Volume name</span><span id="image">Image Name</span></div>',
+      '<div id="breadcrumbs">',
+      '<a href="/show/{{resID}}" id="return">return to BUDA</a>',
+      '<a id="collec">Collection name</a><a id="vol">Volume name</a><a id="image">Image Name</a></div>',
       '</div>',
       /*
       '{{#if sidePanel}}',
