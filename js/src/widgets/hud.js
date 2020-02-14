@@ -50,10 +50,12 @@
     listenForActions: function() {
       var _this = this;
       this.eventEmitter.subscribe('DISABLE_TOOLTIPS_BY_CLASS.' + this.windowId, function(event, className) {
+        console.log("QTIP off",className);
         _this.element.find(className).qtip('disable');
       });
 
       this.eventEmitter.subscribe('ENABLE_TOOLTIPS_BY_CLASS.' + this.windowId, function(event, className) {
+        console.log("QTIP on",className);
         _this.element.find(className).qtip('enable');
       });
 
@@ -94,6 +96,9 @@
          _this.eventEmitter.publish('GOTO_IMAGE_NUM.'+_this.windowId, jQuery(this).val());
          jQuery(this).val("");
       });
+
+
+      _this.element.find('.hud-control').qtip('destroy');
     },
 
     createStateMachines: function() {
@@ -234,12 +239,12 @@
                                  '<div class="mirador-hud">',                                 
                                  '{{#if showNextPrev}}',
                                  //"<span class='goto-page'>Go to p. <input type='text' id='gotoPage' onInput='javascript:jQuery(\"#gotoPage\").removeClass(\"error\");' onChange='javascript:window.scrollToImage(event.target.value);'/></span>",
-                                 '<span class="goto-page"><select size="5"></select><span>Go to p.</span><input type="text" id="gotoPage" /></span>',
-                                 '<a class="mirador-osd-previous hud-control ">',
+                                 '<span class="goto-page"><select size="5"></select><span>Go to p.</span><input type="text" id="gotoPage" title={{t "GotoImageTooltip"}}"/></span>',
+                                 '<a class="mirador-osd-previous hud-control" role="button" title="{{t "PreviousImageTooltip"}}" aria-label="{{t "PreviousImageTooltip"}}">',
                                  '<span></span>',
                                  '</a>',
                                  '<span class="image-num">… / …</span>',
-                                 '<a class="mirador-osd-next hud-control ">',
+                                 '<a class="mirador-osd-next hud-control" role="button" title="{{t "NextImageTooltip"}}" aria-label="{{t "NextImageTooltip"}}">',
                                  '<span></span>',
                                  '</a>',
                                  '{{/if}}',
@@ -250,10 +255,10 @@
                                  '</a>',
                                  '{{/if}}',
                                  */
-                                 '<a class="mirador-osd-zoom-in hud-control" role="button" aria-label="Zoom in">',
+                                 '<a class="mirador-osd-zoom-in hud-control" role="button" title="{{t "ZoomInTooltip" }}" aria-label="{{t "ZoomInTooltip"}}">',
                                  '<span></span>',
                                  '</a>',
-                                 '<a class="mirador-osd-zoom-out hud-control" role="button" aria-label="Zoom out">',
+                                 '<a class="mirador-osd-zoom-out hud-control" role="button" title="{{t "ZoomOutTooltip"}}" aria-label="{{t "ZoomOutTooltip"}}">',
                                  '<span></span>',
                                  '</a>',
                                  /*
