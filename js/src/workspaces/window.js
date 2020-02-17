@@ -796,7 +796,8 @@
           annoEndpointAvailable: this.annoEndpointAvailable,
           canvasControls: this.canvasControls,
           annotationState : this.canvasControls.annotations.annotationState,
-          ajaxWithCredentials: this.ajaxWithCredentials
+          ajaxWithCredentials: this.ajaxWithCredentials,
+          labelToString:this.labelToString
         });
       } else {
         this.focusModules.ImageView.updateImage(canvasID);
@@ -1118,11 +1119,6 @@
       '</ul>',
       '</a>',
       '{{/if}}',
-      '<div class="nav-bar-top"><div><a href="https://www.tbrc.org" target="_blank" id="bdrc">BDRC</a><a href="/" id="buda"></a></div>',
-      '<div id="breadcrumbs">',
-      '<a href="/show/{{resID}}" id="return">return to BUDA</a>',
-      '<a id="collec">Collection name</a><a id="vol">Volume name</a><a id="image">Image Name</a></div>',
-      '</div>',
       /*
       '{{#if sidePanel}}',
       '<a href="javascript:;" class="mirador-btn mirador-icon-toc selected mirador-tooltip" title="{{t "sidePanelTooltip"}}" aria-label="{{t "sidePanelTooltip"}}"><i class="fa fa-bars fa-lg fa-fw"></i></a>',

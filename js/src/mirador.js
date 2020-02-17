@@ -11,6 +11,9 @@
   }
 
   function Mirador(config) {
+
+    console.log("M options?",config);
+
     if (this instanceof Mirador) {
         checkContainer(config.id);
 
@@ -24,7 +27,8 @@
         // initialize the application
         this.viewer = new Mirador.Viewer({
             'state': this.saveController,
-            'eventEmitter': this.eventEmitter
+            'eventEmitter': this.eventEmitter,
+            'resID': config.resID
         });
         return this;
     } else {

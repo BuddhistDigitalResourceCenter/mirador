@@ -167,7 +167,6 @@
       //Related to Annotations HUD
 
 
-
       _this.eventEmitter.subscribe('GOTO_IMAGE_NUM.' + _this.windowId, function(event, imageNum) {
         var n = Number(imageNum) - 1 ;        
         for(var i = 0 ; i <  _this.imagesList.length ; i ++) {
@@ -681,6 +680,8 @@
 
     toggle: function(stateValue) {
       if (stateValue) {
+        jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
+        jQuery(".nav-bar-top #breadcrumbs #image span").text(this.canvasID.replace(/^.*[/]([^/]+)$/,"$1")).parent().addClass("active on");
         this.show();
       } else {
         this.hide();

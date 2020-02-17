@@ -1,13 +1,18 @@
 .mirador-container {
   .mirador-main-menu-bar {
-    background-color: @black;
-    border-bottom: 1px solid @gray-55;
-    color: @white;
-    height: 33px;
+    // background-color: @black;
+    // border-bottom: 1px solid @gray-55;
+    // color: @white;
+    height: 80px;
     width: 100%;
     /*padding: 4px;*/
     font-size: 14px;
     top: 0;
+
+    display: flex;
+    align-items: center;
+    background: white;
+    justify-content: center;
 
     .window-options-menu {
       position: relative;
@@ -92,4 +97,94 @@
     padding-right: 10px;
     font-size: 16px;
   }
+}
+
+
+.nav-bar-top { height:80px; width:1225px; display:flex;align-items: center; justify-content: space-between; font-family:"Noto Sans";}
+
+.nav-bar-top div { display:flex; align-items:center; }
+.nav-bar-top div > a { display:inline-block;  }
+.nav-bar-top div #bdrc { font-size: 24px; font-weight:500; text-shadow: 0 1px 0 #111312; color:#111312;}
+.nav-bar-top div #bdrc::before { content:' ';display:inline-block;width:77px; height:55px; background:url(../images/icons-2a.png) 0 0; margin-right:16px; vertical-align: middle; }
+.nav-bar-top div #buda { content:' ';display:inline-block;width:41px; height:52px; background:url(../images/icons-2a.png) -187px -1px; margin-left:32px; }
+
+/* .manifest-info .nav-bar-top #breadcrumbs :not(#return) { display:none; } */
+
+.nav-bar-top #breadcrumbs { color:#152631;  font-size:14px; font-weight:700; line-height:12px;}
+.nav-bar-top #breadcrumbs #return { text-transform: uppercase; }
+.nav-bar-top #breadcrumbs #return::before { content:'<'; padding-right:10px;  }
+
+.nav-bar-top #breadcrumbs a:hover, 
+.nav-bar-top #breadcrumbs a.on
+{ color:#d73449; }
+
+.nav-bar-top #breadcrumbs a { 
+  span {  padding-left:33px; position:relative;
+
+    &::before {
+      left:0;
+      top:3px ;
+      content:' ';
+      //vertical-align:0px;
+      display:inline-block;
+      position:absolute;
+      width:30px;
+      height:16px;
+      background:url(../images/icons-2b.png) -384px -24px;
+      transform:scale(0.9);
+      transform-origin: center left ; 
+    }
+  }
+
+  &#vol span{ padding-left:53px;
+    &::before {
+      top:1px;
+      width:49px;
+      height:23px;
+      background:url(../images/icons-2a.png) -628px -23px;
+    }
+  }
+
+  &#image span { padding-left:48px;
+
+    &::before {
+      top:0;
+      width:44px;
+      height:34px;
+      background:url(../images/icons-2a.png) -849px -21px;
+    }
+  }
+}
+
+
+.nav-bar-top #breadcrumbs #collec:hover, 
+.nav-bar-top #breadcrumbs #collec.on {
+  span::before { background:url(../images/icons-2a.png) -849px -21px; }
+}
+
+.nav-bar-top #breadcrumbs #vol:hover, 
+.nav-bar-top #breadcrumbs #vol.on {
+  span::before { background:url(../images/icons-2d.png) -628px -23px; }
+}
+
+.nav-bar-top #breadcrumbs #image:hover, 
+.nav-bar-top #breadcrumbs #image.on {
+  span::before { background:url(../images/icons-2c.png) -849px -21px; }
+}
+
+.nav-bar-top #breadcrumbs a.active:not(.on) { cursor:pointer; }
+
+.nav-bar-top #breadcrumbs a {
+    padding:0 10px;
+    border-left:2px solid #152631;
+}
+.nav-bar-top #breadcrumbs a:first-child {
+    border-left:none;
+}
+.nav-bar-top #breadcrumbs a:not(.active) {
+    pointer-events: none;
+}
+.nav-bar-top #breadcrumbs a:not(.active) span {
+    opacity:0.5;
+    pointer-events: none;
 }

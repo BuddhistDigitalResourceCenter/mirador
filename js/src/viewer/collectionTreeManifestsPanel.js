@@ -328,6 +328,16 @@
             this.treeElement.jstree('deselect_all');
             this.treeElement.jstree('select_node', node);
             this.treeElement.jstree('open_node', node);
+          
+            var _this = this ;
+            var timer = setInterval(function(){
+              if(jQuery(".member-select-results .setClick .preview-image").length) {
+                if(newCollection && newCollection.jsonLd && !newCollection.jsonLd.collections && newCollection.jsonLd.manifests && newCollection.jsonLd.manifests.length === 1) {              
+                  _this.eventEmitter.publish('OPEN_MANIFEST.'+newCollection.jsonLd.manifests[0]["@id"]);                
+                }
+                clearInterval(timer);
+              }
+            },10);
           }
         },
 

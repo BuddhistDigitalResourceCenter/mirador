@@ -76,6 +76,8 @@
 
       this.bindEvents();
       this.listenForActions();
+
+      //console.log("MLI ready",this.manifest);
     },
 
     fetchTplData: function() {
@@ -188,6 +190,10 @@
       _this.eventEmitter.subscribe('manifestPanelWidthChanged', function(event, newWidth){
         _this.updateDisplay(newWidth);
       });
+
+      _this.eventEmitter.subscribe('OPEN_MANIFEST.'+_this.manifest.jsonLd["@id"], function(e){
+        _this.element.find(".preview-image").click();
+      });
     },
 
     bindEvents: function() {
@@ -227,6 +233,10 @@
         };
         _this.eventEmitter.publish('ADD_WINDOW', windowConfig);
         e.preventDefault();
+
+        jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
+        jQuery(".nav-bar-top #breadcrumbs #vol span").text(_this.labelToString(_this.manifest.jsonLd.label)).parent().addClass("active on");
+
       });
     },
 

@@ -299,7 +299,7 @@
                                  '<h1 class="dropMeMessage">{{t "dropToLoad"}}</h1>',
                                  '</div>',
                                  '<a class="addItemLink" role="button" aria-label="Add item"></a>',
-      '<a class="dropMask"></a>',
+                                 '<a class="dropMask"></a>',
                                  '</div>'
     ].join(''))
   };

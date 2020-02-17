@@ -81,7 +81,7 @@
 
         return {
           thumbUrl: thumbnailUrl,
-          title:    title,
+          title:    title.replace(/[.] +([0-9])/,".$1"),
           id:       canvas['@id'],
           width:    width,
           height:   height,

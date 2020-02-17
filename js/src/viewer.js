@@ -1,6 +1,10 @@
 (function($) {
 
   $.Viewer = function(options) {
+
+
+    console.log("V options?",options);
+
     jQuery.extend(true, this, {
       id:                     null,
       data:                   null,
@@ -22,7 +26,8 @@
         'optionsPanelVisible': false,
         'bookmarkPanelVisible': false
       },
-      manifests:             []
+      manifests:             [],
+      resID:                 null
     }, options);
 
     this.id = this.state.getStateProperty('id');
@@ -101,7 +106,7 @@
 
       // add main menu
       if (showMainMenu) {
-        this.mainMenu = new $.MainMenu({ appendTo: this.element, state: this.state, eventEmitter: this.eventEmitter });
+        this.mainMenu = new $.MainMenu({ resID: this.resID, appendTo: this.element, state: this.state, eventEmitter: this.eventEmitter });
         this.eventEmitter.publish('mainMenuInitialized');
       }
 

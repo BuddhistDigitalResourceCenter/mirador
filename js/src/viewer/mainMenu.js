@@ -2,6 +2,8 @@
 
     $.MainMenu = function(options) {
 
+        console.log("MM options?",options);
+
         jQuery.extend(true, this, {
             element:                    null,
             mainMenuHeight:             null,
@@ -17,7 +19,8 @@
             clearLocalStorageDialogCls: 'mirador-main-menu-clear-local-storage',
             collectionsListingCls:      'mirador-listing-collections',
             state:                      null,
-            eventEmitter:               null
+            eventEmitter:               null,
+            resID:                      null
         }, options);
 
         this.element  = this.element || jQuery('<div/>');
@@ -39,6 +42,7 @@
             .appendTo(this.appendTo);
 
             this.element.append(this.template({
+                resID:       this.resID,
                 mainMenuCls: this.mainMenuCls,
                 showBookmark : this.state.getStateProperty('mainMenuSettings').buttons.bookmark,
                 showLayout : this.state.getStateProperty('mainMenuSettings').buttons.layout,
@@ -113,6 +117,13 @@
         },
 
         template: $.Handlebars.compile([
+
+      '<div class="nav-bar-top"><div><a href="https://www.tbrc.org" target="_blank" id="bdrc">BDRC</a><a href="/" id="buda"></a></div>',
+      '<div id="breadcrumbs">',
+      '<a href="/show/{{resID}}" id="return" class="active">return to BUDA</a>',
+      '<a id="collec"><span>Browse Collection</span></a><a id="vol"><span>Reading View</span></a><a id="image"><span>Page View</span></a></div>',
+      '</div>',
+
         '{{#if userLogo}}',
           '<ul class="user-logo {{mainMenuCls}}">',
             '{{userlogo userLogo}}',
