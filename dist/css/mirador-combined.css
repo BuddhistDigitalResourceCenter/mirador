@@ -4049,7 +4049,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   color: #152631;
   font-size: 13px;
   font-weight: 700;
-  line-height: 13px;
+  line-height: 20px;
   max-width: 930px;
 }
 .nav-bar-top #breadcrumbs #return {
@@ -4063,14 +4063,10 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .nav-bar-top #breadcrumbs a.on {
   color: #d73449;
 }
-.nav-bar-top #breadcrumbs a {
-  /*
-  &:not(#return):not(#image) {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  */
+.nav-bar-top #breadcrumbs a:not(#return):not(#image) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .nav-bar-top #breadcrumbs a span {
   padding-left: 33px;
@@ -4122,8 +4118,25 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   cursor: pointer;
 }
 .nav-bar-top #breadcrumbs a {
+  position: relative;
   padding: 0 10px;
+  max-width: 300px;
+}
+.nav-bar-top #breadcrumbs a::after {
+  content: ' ';
+  right: 0;
+  top: 4px;
+  height: 12px;
+  width: 2px;
   border-left: 2px solid #152631;
+  position: absolute;
+  display: inline-block;
+}
+.nav-bar-top #breadcrumbs a:last-child {
+  padding-right: 0;
+}
+.nav-bar-top #breadcrumbs a:last-child::after {
+  content: none;
 }
 .nav-bar-top #breadcrumbs a:first-child {
   border-left: none;
@@ -4134,6 +4147,16 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .nav-bar-top #breadcrumbs a:not(.active) span {
   opacity: 0.5;
   pointer-events: none;
+}
+.nav-bar-top #breadcrumbs #image,
+.nav-bar-top #breadcrumbs #return {
+  flex-shrink: 0;
+}
+.nav-bar-top #breadcrumbs #collec {
+  flex-shrink: 1;
+}
+.nav-bar-top #breadcrumbs #vol {
+  flex-shrink: 2;
 }
 .mirador-container .mirador-status-bar {
   background-color: #ccc;

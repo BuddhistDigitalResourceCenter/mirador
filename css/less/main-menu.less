@@ -110,7 +110,7 @@
 
 /* .manifest-info .nav-bar-top #breadcrumbs :not(#return) { display:none; } */
 
-.nav-bar-top #breadcrumbs { color:#152631;  font-size:13px; font-weight:700; line-height:13px; max-width:930px;}
+.nav-bar-top #breadcrumbs { color:#152631;  font-size:13px; font-weight:700; line-height:20px; max-width:930px;}
 .nav-bar-top #breadcrumbs #return { text-transform: uppercase; }
 .nav-bar-top #breadcrumbs #return::before { content:'<'; padding-right:10px;  }
 
@@ -120,13 +120,12 @@
 
 
 .nav-bar-top #breadcrumbs a { 
-  /*
+  
   &:not(#return):not(#image) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  */
 
   span {  padding-left:33px; position:relative;
 
@@ -184,8 +183,25 @@
 .nav-bar-top #breadcrumbs a.active:not(.on) { cursor:pointer; }
 
 .nav-bar-top #breadcrumbs a {
-    padding:0 10px;
+  position:relative;
+  padding:0 10px;
+  max-width:300px;
+  
+  &::after { 
+    content:' '; 
+    right:0;
+    top:4px;
+    height:12px;
+    width:2px;
     border-left:2px solid #152631;
+    position: absolute;
+    display: inline-block;
+  }
+
+  &:last-child { padding-right:0; 
+  
+    &::after { content:none; }
+  } 
 }
 .nav-bar-top #breadcrumbs a:first-child {
     border-left:none;
@@ -196,4 +212,10 @@
 .nav-bar-top #breadcrumbs a:not(.active) span {
     opacity:0.5;
     pointer-events: none;
+}
+
+.nav-bar-top #breadcrumbs {
+  #image,#return { flex-shrink:0; }
+  #collec { flex-shrink:1;  }
+  #vol { flex-shrink:2; }
 }
