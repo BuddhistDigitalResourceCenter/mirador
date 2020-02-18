@@ -194,6 +194,17 @@
       _this.eventEmitter.subscribe('OPEN_MANIFEST.'+_this.manifest.jsonLd["@id"], function(e){
         _this.element.find(".preview-image").click();
       });
+
+      _this.eventEmitter.subscribe('UPDATE_MAIN_MENU_MANIFEST.'+_this.manifest.jsonLd["@id"], function(e){
+        console.log("UMMM",_this);
+
+        jQuery(".nav-bar-top #breadcrumbs #vol span").text(_this.labelToString(_this.manifest.jsonLd.label)).parent().addClass("active");
+
+        if(_this.allImages.length && _this.allImages[0].id) 
+          jQuery(".nav-bar-top #breadcrumbs #image span").text(_this.allImages[0].id.replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1")).parent().addClass("active");
+
+        
+      });
     },
 
     bindEvents: function() {
@@ -233,10 +244,6 @@
         };
         _this.eventEmitter.publish('ADD_WINDOW', windowConfig);
         e.preventDefault();
-
-        jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
-        jQuery(".nav-bar-top #breadcrumbs #vol span").text(_this.labelToString(_this.manifest.jsonLd.label)).parent().addClass("active on");
-
       });
     },
 

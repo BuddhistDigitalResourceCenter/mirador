@@ -329,15 +329,26 @@
             this.treeElement.jstree('select_node', node);
             this.treeElement.jstree('open_node', node);
           
-            var _this = this ;
-            var timer = setInterval(function(){
-              if(jQuery(".member-select-results .setClick .preview-image").length) {
-                if(newCollection && newCollection.jsonLd && !newCollection.jsonLd.collections && newCollection.jsonLd.manifests && newCollection.jsonLd.manifests.length === 1) {              
-                  _this.eventEmitter.publish('OPEN_MANIFEST.'+newCollection.jsonLd.manifests[0]["@id"]);                
+            var _this = this, timer ;
+            if(newCollection && newCollection.jsonLd && !newCollection.jsonLd.collections && newCollection.jsonLd.manifests && newCollection.jsonLd.manifests.length === 1) { 
+              timer = setInterval(function(){
+                if(jQuery(".member-select-results .setClick .preview-image").length) {
+                  _this.eventEmitter.publish('OPEN_MANIFEST.'+newCollection.jsonLd.manifests[0]["@id"]);                                
+                  clearInterval(timer);
                 }
-                clearInterval(timer);
-              }
-            },10);
+              },10);
+            }
+            else {
+              jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
+              jQuery(".nav-bar-top #breadcrumbs #collec span").text(this.labelToString(newCollection.jsonLd.label)).parent().addClass("active on");
+              timer = setInterval(function(){
+                if(jQuery(".member-select-results .setClick .preview-image").length) {
+                  _this.eventEmitter.publish('UPDATE_MAIN_MENU_MANIFEST.'+newCollection.jsonLd.manifests[0]["@id"]);                                
+                  clearInterval(timer2);
+                }
+              },10);            
+            }
+            
           }
         },
 

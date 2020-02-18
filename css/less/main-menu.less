@@ -110,7 +110,7 @@
 
 /* .manifest-info .nav-bar-top #breadcrumbs :not(#return) { display:none; } */
 
-.nav-bar-top #breadcrumbs { color:#152631;  font-size:14px; font-weight:700; line-height:12px;}
+.nav-bar-top #breadcrumbs { color:#152631;  font-size:13px; font-weight:700; line-height:13px;}
 .nav-bar-top #breadcrumbs #return { text-transform: uppercase; }
 .nav-bar-top #breadcrumbs #return::before { content:'<'; padding-right:10px;  }
 
@@ -123,7 +123,7 @@
 
     &::before {
       left:0;
-      top:3px ;
+      top:2px ;
       content:' ';
       //vertical-align:0px;
       display:inline-block;
@@ -136,19 +136,19 @@
     }
   }
 
-  &#vol span{ padding-left:53px;
+  &#vol span{ padding-left:48px;
     &::before {
-      top:1px;
-      width:49px;
+      top:0px;
       height:23px;
-      background:url(../images/icons-2a.png) -628px -23px;
+      width:47px;
+      background:url(../images/icons-2a.png) -630px -23px;
     }
   }
 
   &#image span { padding-left:48px;
 
     &::before {
-      top:0;
+      top:-1px;
       width:44px;
       height:34px;
       background:url(../images/icons-2a.png) -849px -21px;
@@ -159,12 +159,12 @@
 
 .nav-bar-top #breadcrumbs #collec:hover, 
 .nav-bar-top #breadcrumbs #collec.on {
-  span::before { background:url(../images/icons-2a.png) -849px -21px; }
+  span::before { background:url(../images/icons-2a.png) -384px -24px; }
 }
 
 .nav-bar-top #breadcrumbs #vol:hover, 
 .nav-bar-top #breadcrumbs #vol.on {
-  span::before { background:url(../images/icons-2d.png) -628px -23px; }
+  span::before { background:url(../images/icons-2d.png) -630px -23px; }
 }
 
 .nav-bar-top #breadcrumbs #image:hover, 

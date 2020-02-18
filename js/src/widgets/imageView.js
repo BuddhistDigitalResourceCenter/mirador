@@ -680,8 +680,9 @@
 
     toggle: function(stateValue) {
       if (stateValue) {
+        console.log("toggle",this);
         jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
-        jQuery(".nav-bar-top #breadcrumbs #image span").text(this.canvasID.replace(/^.*[/]([^/]+)$/,"$1")).parent().addClass("active on");
+        jQuery(".nav-bar-top #breadcrumbs #image span").text(this.canvasID.replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1")).parent().addClass("active on");
         this.show();
       } else {
         this.hide();

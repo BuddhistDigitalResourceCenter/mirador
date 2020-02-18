@@ -48,7 +48,17 @@
     ].join(''));
 
 
-
+    $.ScrollView.prototype.originalToggle = $.ScrollView.prototype.toggle ;
+    $.ScrollView.prototype.toggle = function(stateValue) {
+      if (stateValue) {
+        jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
+        jQuery(".nav-bar-top #breadcrumbs #vol span").text(this.labelToString(this.manifest.jsonLd.label)).parent().addClass("active on");
+        jQuery(".nav-bar-top #breadcrumbs #image span").text(this.imagesList[0]["@id"].replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1")).parent().addClass("active");
+        this.show();
+      } else {
+        this.hide();
+      }
+    };
 
     $.ScrollView.prototype.originalInitThumbs = $.ScrollView.prototype.initThumbs ;
     $.ScrollView.prototype.initThumbs = function( tplData, useThumbnailProperty) {
