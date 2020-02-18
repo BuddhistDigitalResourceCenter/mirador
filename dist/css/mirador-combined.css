@@ -4064,9 +4064,13 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   color: #d73449;
 }
 .nav-bar-top #breadcrumbs a {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /*
+  &:not(#return):not(#image) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  */
 }
 .nav-bar-top #breadcrumbs a span {
   padding-left: 33px;
