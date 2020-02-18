@@ -196,13 +196,17 @@
       });
 
       _this.eventEmitter.subscribe('UPDATE_MAIN_MENU_MANIFEST.'+_this.manifest.jsonLd["@id"], function(e){
-        console.log("UMMM",_this);
+        console.log("UMMM",_this,e);
 
-        jQuery(".nav-bar-top #breadcrumbs #vol span").text(_this.labelToString(_this.manifest.jsonLd.label)).parent().addClass("active");
+        jQuery(".nav-bar-top #breadcrumbs #vol span").text(_this.labelToString(_this.manifest.jsonLd.label))
+        .parent().addClass("active").attr("data-reading-view-id",_this.allImages[0].id);
 
-        if(_this.allImages.length && _this.allImages[0].id) 
-          jQuery(".nav-bar-top #breadcrumbs #image span").text(_this.allImages[0].id.replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1")).parent().addClass("active");
-
+        if(_this.allImages.length && _this.allImages[0].id) {
+          if(jQuery(".nav-bar-top #breadcrumbs #image").attr("data-reading-view-id") !== _this.allImages[0].id) {
+            jQuery(".nav-bar-top #breadcrumbs #image span").text(_this.allImages[0].id.replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1"))
+            .parent().addClass("active").attr("data-page-view-id",_this.allImages[0].id).attr("data-reading-view-id",_this.allImages[0].id);
+          }
+        }
         
       });
     },
@@ -243,6 +247,7 @@
           viewType: 'ScrollView'
         };
         _this.eventEmitter.publish('ADD_WINDOW', windowConfig);
+        _this.eventEmitter.publish('UPDATE_MAIN_MENU_MANIFEST.'+_this.manifest.jsonLd["@id"]);
         e.preventDefault();
       });
     },

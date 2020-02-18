@@ -110,13 +110,15 @@
 
 /* .manifest-info .nav-bar-top #breadcrumbs :not(#return) { display:none; } */
 
-.nav-bar-top #breadcrumbs { color:#152631;  font-size:13px; font-weight:700; line-height:13px;}
+.nav-bar-top #breadcrumbs { color:#152631;  font-size:13px; font-weight:700; line-height:13px; max-width:930px;}
 .nav-bar-top #breadcrumbs #return { text-transform: uppercase; }
 .nav-bar-top #breadcrumbs #return::before { content:'<'; padding-right:10px;  }
 
 .nav-bar-top #breadcrumbs a:hover, 
 .nav-bar-top #breadcrumbs a.on
 { color:#d73449; }
+
+// TODO "text-overflow:ellipsis" for long volume/collection titles
 
 .nav-bar-top #breadcrumbs a { 
   span {  padding-left:33px; position:relative;

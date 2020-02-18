@@ -340,15 +340,15 @@
             }
             else {
               jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
-              jQuery(".nav-bar-top #breadcrumbs #collec span").text(this.labelToString(newCollection.jsonLd.label)).parent().addClass("active on");
+              jQuery(".nav-bar-top #breadcrumbs #collec span").text(this.labelToString(newCollection.jsonLd.label))
+              .parent().addClass("active on").attr("title","Browse Collection: "+this.labelToString(newCollection.jsonLd.label)) ;
+              
               timer = setInterval(function(){
                 if(jQuery(".member-select-results .setClick .preview-image").length) {
                   _this.eventEmitter.publish('UPDATE_MAIN_MENU_MANIFEST.'+newCollection.jsonLd.manifests[0]["@id"]);                                
-                  clearInterval(timer2);
-                }
+                  clearInterval(timer);                }
               },10);            
-            }
-            
+            }            
           }
         },
 

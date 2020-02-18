@@ -114,6 +114,48 @@
             this.element.find('.fullscreen-viewer').on('click', function() {
               _this.eventEmitter.publish('TOGGLE_FULLSCREEN');
             });
+
+            this.element.find("#breadcrumbs #collec").on('click', function() { 
+              if(!jQuery(this).hasClass("on")) {
+                jQuery(this).parent().find(".on").removeClass("on");
+                jQuery(this).addClass("on");
+                _this.eventEmitter.publish('manifestsPanelVisible.set',true);
+              }
+            });
+
+            this.element.find("#breadcrumbs #vol").on('click', function() { 
+              var the = jQuery(this);
+              if(!the.hasClass("on")) {
+                the.parent().find(".on").removeClass("on");
+                the.addClass("on");
+                if(the.attr("data-reading-view-id"))  jQuery(".preview-image[data-image-id='"+the.attr("data-reading-view-id")+"']").click();
+                else jQuery(".mirador-viewer li.scroll-option").click();                
+              }
+            });
+
+            this.element.find("#breadcrumbs #image").on('click', function() {
+              var the = jQuery(this);
+              if(!the.hasClass("on")) {
+                the.parent().find(".on").removeClass("on");
+                the.addClass("on");
+                if(!the.attr("data-reading-view-id") || the.attr("data-reading-view-id") === jQuery("#breadcrumbs #vol").attr("data-reading-view-id")) { 
+                  var image = jQuery(".thumbnail-image[data-image-id='"+the.attr("data-page-view-id")+"']");
+                  if(image.length) image.click();
+                  else {
+                    jQuery(".preview-image[data-image-id='"+the.attr("data-reading-view-id")+"']").click();
+                    var timer = setInterval(function(){
+                      image = jQuery(".thumbnail-image[data-image-id='"+the.attr("data-page-view-id")+"']");
+                      console.log(image,the.attr("data-page-view-id"));
+                      if(image.length) { 
+                        image.click();
+                        clearInterval(timer);
+                      }
+                    },10);
+                  }
+                  setTimeout(function(){ clearInterval(timer); },500);
+                }
+              }
+            });
         },
 
         template: $.Handlebars.compile([

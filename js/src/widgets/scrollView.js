@@ -53,8 +53,29 @@
       if (stateValue) {
         jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
         jQuery(".nav-bar-top #breadcrumbs #vol span").text(this.labelToString(this.manifest.jsonLd.label)).parent().addClass("active on");
-        jQuery(".nav-bar-top #breadcrumbs #image span").text(this.imagesList[0]["@id"].replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1")).parent().addClass("active");
+        if(!jQuery(".nav-bar-top #breadcrumbs #image").attr("data-page-view-id")) {
+          jQuery(".nav-bar-top #breadcrumbs #image span").text(this.imagesList[0]["@id"].replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1"))
+          .parent().addClass("active").attr("data-page-view-id",this.imagesList[0]["@id"]);
+        }
         this.show();
+
+        var ima = jQuery(".nav-bar-top #breadcrumbs #image");
+        if(ima.attr("data-page-view-id")) setTimeout(function() { window.scrollToImage(ima.attr("data-page-view-id")); }, 1000);
+
+        /* TODO not working with setInterval (try with "Goto" from footer menu)
+        var ima = jQuery(".nav-bar-top #breadcrumbs #image");
+        if(ima.attr("data-page-view-id")) { 
+          console.log("scroll?",ima.attr("data-page-view-id"));
+          var timerScroll = setInterval(function() { 
+            console.log(ima.attr("data-page-view-id"), jQuery("[data-image-id='"+ima.attr("data-page-view-id")+"']"));
+            if(jQuery("[data-image-id='"+ima.attr("data-page-view-id")+"']").length) {
+              window.scrollToImage(ima.attr("data-page-view-id")); 
+              clearInterval(timerScroll);
+            }
+          }, 10);
+          setTimeout(function(){ clearInterval(timerScroll);},1000);
+        }
+        */
       } else {
         this.hide();
       }

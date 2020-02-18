@@ -106,7 +106,7 @@
 
       // add main menu
       if (showMainMenu) {
-        this.mainMenu = new $.MainMenu({ resID: this.resID, appendTo: this.element, state: this.state, eventEmitter: this.eventEmitter });
+        this.mainMenu = new $.MainMenu({ id:this.id, resID: this.resID, appendTo: this.element, state: this.state, eventEmitter: this.eventEmitter });
         this.eventEmitter.publish('mainMenuInitialized');
       }
 

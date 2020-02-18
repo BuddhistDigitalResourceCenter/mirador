@@ -4050,6 +4050,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   font-size: 13px;
   font-weight: 700;
   line-height: 13px;
+  max-width: 930px;
 }
 .nav-bar-top #breadcrumbs #return {
   text-transform: uppercase;

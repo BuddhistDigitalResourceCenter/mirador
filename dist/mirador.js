@@ -34312,7 +34312,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
 
       // add main menu
       if (showMainMenu) {
-        this.mainMenu = new $.MainMenu({ resID: this.resID, appendTo: this.element, state: this.state, eventEmitter: this.eventEmitter });
+        this.mainMenu = new $.MainMenu({ id:this.id, resID: this.resID, appendTo: this.element, state: this.state, eventEmitter: this.eventEmitter });
         this.eventEmitter.publish('mainMenuInitialized');
       }
 
@@ -35489,15 +35489,15 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
             }
             else {
               jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
-              jQuery(".nav-bar-top #breadcrumbs #collec span").text(this.labelToString(newCollection.jsonLd.label)).parent().addClass("active on");
+              jQuery(".nav-bar-top #breadcrumbs #collec span").text(this.labelToString(newCollection.jsonLd.label))
+              .parent().addClass("active on").attr("title","Browse Collection: "+this.labelToString(newCollection.jsonLd.label)) ;
+              
               timer = setInterval(function(){
                 if(jQuery(".member-select-results .setClick .preview-image").length) {
                   _this.eventEmitter.publish('UPDATE_MAIN_MENU_MANIFEST.'+newCollection.jsonLd.manifests[0]["@id"]);                                
-                  clearInterval(timer2);
-                }
+                  clearInterval(timer);                }
               },10);            
-            }
-            
+            }            
           }
         },
 
@@ -35945,6 +35945,48 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
             this.element.find('.fullscreen-viewer').on('click', function() {
               _this.eventEmitter.publish('TOGGLE_FULLSCREEN');
             });
+
+            this.element.find("#breadcrumbs #collec").on('click', function() { 
+              if(!jQuery(this).hasClass("on")) {
+                jQuery(this).parent().find(".on").removeClass("on");
+                jQuery(this).addClass("on");
+                _this.eventEmitter.publish('manifestsPanelVisible.set',true);
+              }
+            });
+
+            this.element.find("#breadcrumbs #vol").on('click', function() { 
+              var the = jQuery(this);
+              if(!the.hasClass("on")) {
+                the.parent().find(".on").removeClass("on");
+                the.addClass("on");
+                if(the.attr("data-reading-view-id"))  jQuery(".preview-image[data-image-id='"+the.attr("data-reading-view-id")+"']").click();
+                else jQuery(".mirador-viewer li.scroll-option").click();                
+              }
+            });
+
+            this.element.find("#breadcrumbs #image").on('click', function() {
+              var the = jQuery(this);
+              if(!the.hasClass("on")) {
+                the.parent().find(".on").removeClass("on");
+                the.addClass("on");
+                if(!the.attr("data-reading-view-id") || the.attr("data-reading-view-id") === jQuery("#breadcrumbs #vol").attr("data-reading-view-id")) { 
+                  var image = jQuery(".thumbnail-image[data-image-id='"+the.attr("data-page-view-id")+"']");
+                  if(image.length) image.click();
+                  else {
+                    jQuery(".preview-image[data-image-id='"+the.attr("data-reading-view-id")+"']").click();
+                    var timer = setInterval(function(){
+                      image = jQuery(".thumbnail-image[data-image-id='"+the.attr("data-page-view-id")+"']");
+                      console.log(image,the.attr("data-page-view-id"));
+                      if(image.length) { 
+                        image.click();
+                        clearInterval(timer);
+                      }
+                    },10);
+                  }
+                  setTimeout(function(){ clearInterval(timer); },500);
+                }
+              }
+            });
         },
 
         template: $.Handlebars.compile([
@@ -36298,13 +36340,17 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
       });
 
       _this.eventEmitter.subscribe('UPDATE_MAIN_MENU_MANIFEST.'+_this.manifest.jsonLd["@id"], function(e){
-        console.log("UMMM",_this);
+        console.log("UMMM",_this,e);
 
-        jQuery(".nav-bar-top #breadcrumbs #vol span").text(_this.labelToString(_this.manifest.jsonLd.label)).parent().addClass("active");
+        jQuery(".nav-bar-top #breadcrumbs #vol span").text(_this.labelToString(_this.manifest.jsonLd.label))
+        .parent().addClass("active").attr("data-reading-view-id",_this.allImages[0].id);
 
-        if(_this.allImages.length && _this.allImages[0].id) 
-          jQuery(".nav-bar-top #breadcrumbs #image span").text(_this.allImages[0].id.replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1")).parent().addClass("active");
-
+        if(_this.allImages.length && _this.allImages[0].id) {
+          if(jQuery(".nav-bar-top #breadcrumbs #image").attr("data-reading-view-id") !== _this.allImages[0].id) {
+            jQuery(".nav-bar-top #breadcrumbs #image span").text(_this.allImages[0].id.replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1"))
+            .parent().addClass("active").attr("data-page-view-id",_this.allImages[0].id).attr("data-reading-view-id",_this.allImages[0].id);
+          }
+        }
         
       });
     },
@@ -36345,6 +36391,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
           viewType: 'ScrollView'
         };
         _this.eventEmitter.publish('ADD_WINDOW', windowConfig);
+        _this.eventEmitter.publish('UPDATE_MAIN_MENU_MANIFEST.'+_this.manifest.jsonLd["@id"]);
         e.preventDefault();
       });
     },
@@ -45996,7 +46043,8 @@ $.SimpleASEndpoint = function (options) {
       if (stateValue) {
         console.log("toggle",this);
         jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
-        jQuery(".nav-bar-top #breadcrumbs #image span").text(this.canvasID.replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1")).parent().addClass("active on");
+        jQuery(".nav-bar-top #breadcrumbs #image span").text(this.canvasID.replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1"))
+        .parent().addClass("active on").attr("data-page-view-id",this.canvasID);
         this.show();
       } else {
         this.hide();
@@ -46790,8 +46838,29 @@ $.SimpleASEndpoint = function (options) {
       if (stateValue) {
         jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
         jQuery(".nav-bar-top #breadcrumbs #vol span").text(this.labelToString(this.manifest.jsonLd.label)).parent().addClass("active on");
-        jQuery(".nav-bar-top #breadcrumbs #image span").text(this.imagesList[0]["@id"].replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1")).parent().addClass("active");
+        if(!jQuery(".nav-bar-top #breadcrumbs #image").attr("data-page-view-id")) {
+          jQuery(".nav-bar-top #breadcrumbs #image span").text(this.imagesList[0]["@id"].replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1"))
+          .parent().addClass("active").attr("data-page-view-id",this.imagesList[0]["@id"]);
+        }
         this.show();
+
+        var ima = jQuery(".nav-bar-top #breadcrumbs #image");
+        if(ima.attr("data-page-view-id")) setTimeout(function() { window.scrollToImage(ima.attr("data-page-view-id")); }, 1000);
+
+        /* TODO not working with setInterval (try with "Goto" from footer menu)
+        var ima = jQuery(".nav-bar-top #breadcrumbs #image");
+        if(ima.attr("data-page-view-id")) { 
+          console.log("scroll?",ima.attr("data-page-view-id"));
+          var timerScroll = setInterval(function() { 
+            console.log(ima.attr("data-page-view-id"), jQuery("[data-image-id='"+ima.attr("data-page-view-id")+"']"));
+            if(jQuery("[data-image-id='"+ima.attr("data-page-view-id")+"']").length) {
+              window.scrollToImage(ima.attr("data-page-view-id")); 
+              clearInterval(timerScroll);
+            }
+          }, 10);
+          setTimeout(function(){ clearInterval(timerScroll);},1000);
+        }
+        */
       } else {
         this.hide();
       }
