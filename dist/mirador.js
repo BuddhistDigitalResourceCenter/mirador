@@ -35973,6 +35973,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
                   var image = jQuery(".thumbnail-image[data-image-id='"+the.attr("data-page-view-id")+"']");
                   if(image.length) image.click();
                   else {
+                    window.tmpScroll = true ;
                     jQuery(".preview-image[data-image-id='"+the.attr("data-reading-view-id")+"']").click();
                     var timer = setInterval(function(){
                       image = jQuery(".thumbnail-image[data-image-id='"+the.attr("data-page-view-id")+"']");
@@ -46041,7 +46042,8 @@ $.SimpleASEndpoint = function (options) {
 
     toggle: function(stateValue) {
       if (stateValue) {
-        console.log("toggle",this);
+        console.log("toggle",this,window.tmpScroll);
+        if(window.tmpScroll) delete window.tmpScroll ;
         jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
         jQuery(".nav-bar-top #breadcrumbs #image span").text(this.canvasID.replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1"))
         .parent().addClass("active on").attr("data-page-view-id",this.canvasID);
@@ -46844,8 +46846,10 @@ $.SimpleASEndpoint = function (options) {
         }
         this.show();
 
-        var ima = jQuery(".nav-bar-top #breadcrumbs #image");
-        if(ima.attr("data-page-view-id")) setTimeout(function() { window.scrollToImage(ima.attr("data-page-view-id")); }, 1000);
+        if(!window.tmpScroll) {
+          var ima = jQuery(".nav-bar-top #breadcrumbs #image");
+          if(ima.attr("data-page-view-id")) setTimeout(function() { window.scrollToImage(ima.attr("data-page-view-id")); }, 1000);
+        }
 
         /* TODO not working with setInterval (try with "Goto" from footer menu)
         var ima = jQuery(".nav-bar-top #breadcrumbs #image");

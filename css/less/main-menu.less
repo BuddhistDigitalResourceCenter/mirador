@@ -118,9 +118,15 @@
 .nav-bar-top #breadcrumbs a.on
 { color:#d73449; }
 
-// TODO "text-overflow:ellipsis" for long volume/collection titles
 
 .nav-bar-top #breadcrumbs a { 
+  // TODO "text-overflow:ellipsis" for long volume/collection titles  
+  /*
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  */
+
   span {  padding-left:33px; position:relative;
 
     &::before {

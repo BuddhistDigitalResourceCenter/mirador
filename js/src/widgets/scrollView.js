@@ -59,8 +59,10 @@
         }
         this.show();
 
-        var ima = jQuery(".nav-bar-top #breadcrumbs #image");
-        if(ima.attr("data-page-view-id")) setTimeout(function() { window.scrollToImage(ima.attr("data-page-view-id")); }, 1000);
+        if(!window.tmpScroll) {
+          var ima = jQuery(".nav-bar-top #breadcrumbs #image");
+          if(ima.attr("data-page-view-id")) setTimeout(function() { window.scrollToImage(ima.attr("data-page-view-id")); }, 1000);
+        }
 
         /* TODO not working with setInterval (try with "Goto" from footer menu)
         var ima = jQuery(".nav-bar-top #breadcrumbs #image");

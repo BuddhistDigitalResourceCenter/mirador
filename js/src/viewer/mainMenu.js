@@ -142,6 +142,7 @@
                   var image = jQuery(".thumbnail-image[data-image-id='"+the.attr("data-page-view-id")+"']");
                   if(image.length) image.click();
                   else {
+                    window.tmpScroll = true ;
                     jQuery(".preview-image[data-image-id='"+the.attr("data-reading-view-id")+"']").click();
                     var timer = setInterval(function(){
                       image = jQuery(".thumbnail-image[data-image-id='"+the.attr("data-page-view-id")+"']");
