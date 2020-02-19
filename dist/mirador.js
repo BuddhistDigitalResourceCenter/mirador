@@ -35947,7 +35947,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
                 jQuery(this).parent().find(".on").removeClass("on");
                 jQuery(this).addClass("on");
                 _this.eventEmitter.publish('manifestsPanelVisible.set',true);
-                jQuery(".nav-bar-top #breadcrumbs #vol").removeClass("active on");
+                jQuery(".nav-bar-top #breadcrumbs #vol,.nav-bar-top #breadcrumbs #image").removeClass("active on");
               }
             });
 

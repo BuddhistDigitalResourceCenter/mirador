@@ -210,8 +210,9 @@
     border-left:none;
 }
 .nav-bar-top #breadcrumbs a:not(.active) {
-    //pointer-events: none;
-    display:none;
+    pointer-events: none;
+    
+    &:not(#collec) { display:none; }
 }
 .nav-bar-top #breadcrumbs a:not(.active) span {
     opacity:0.5;

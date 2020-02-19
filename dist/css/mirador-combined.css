@@ -4142,6 +4142,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   border-left: none;
 }
 .nav-bar-top #breadcrumbs a:not(.active) {
+  pointer-events: none;
+}
+.nav-bar-top #breadcrumbs a:not(.active):not(#collec) {
   display: none;
 }
 .nav-bar-top #breadcrumbs a:not(.active) span {
