@@ -131,7 +131,7 @@
 
     &::before {
       left:0;
-      top:2px ;
+      top:3px ;
       content:' ';
       //vertical-align:0px;
       display:inline-block;
@@ -146,7 +146,7 @@
 
   &#vol span{ padding-left:48px;
     &::before {
-      top:0px;
+      top:1px;
       height:23px;
       width:47px;
       background:url(../images/icons-2a.png) -630px -23px;
@@ -156,7 +156,7 @@
   &#image span { padding-left:48px;
 
     &::before {
-      top:-1px;
+      top:0px;
       width:44px;
       height:34px;
       background:url(../images/icons-2a.png) -849px -21px;
@@ -187,9 +187,9 @@
   padding:0 10px;
   max-width:300px;
   
-  &::after { 
+  &:not(#return)::before { 
     content:' '; 
-    right:0;
+    left:0;
     top:4px;
     height:12px;
     width:2px;
@@ -198,16 +198,20 @@
     display: inline-block;
   }
 
+  /*
   &:last-child { padding-right:0; 
   
     &::after { content:none; }
   } 
+  */
+
 }
 .nav-bar-top #breadcrumbs a:first-child {
     border-left:none;
 }
 .nav-bar-top #breadcrumbs a:not(.active) {
-    pointer-events: none;
+    //pointer-events: none;
+    display:none;
 }
 .nav-bar-top #breadcrumbs a:not(.active) span {
     opacity:0.5;

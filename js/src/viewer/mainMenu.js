@@ -120,6 +120,7 @@
                 jQuery(this).parent().find(".on").removeClass("on");
                 jQuery(this).addClass("on");
                 _this.eventEmitter.publish('manifestsPanelVisible.set',true);
+                jQuery(".nav-bar-top #breadcrumbs #vol").removeClass("active on");
               }
             });
 

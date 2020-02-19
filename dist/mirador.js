@@ -35485,11 +35485,14 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
               jQuery(".nav-bar-top #breadcrumbs #collec span").text(this.labelToString(newCollection.jsonLd.label))
               .parent().addClass("active on").attr("title","Browse Collection: "+this.labelToString(newCollection.jsonLd.label)) ;
               
+              /*
               timer = setInterval(function(){
                 if(jQuery(".member-select-results .setClick .preview-image").length) {
                   _this.eventEmitter.publish('UPDATE_MAIN_MENU_MANIFEST.'+newCollection.jsonLd.manifests[0]["@id"]);                                
-                  clearInterval(timer);                }
-              },10);            
+                  clearInterval(timer);                
+                }
+              },10);
+              */            
             }            
           }
         },
@@ -35944,6 +35947,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
                 jQuery(this).parent().find(".on").removeClass("on");
                 jQuery(this).addClass("on");
                 _this.eventEmitter.publish('manifestsPanelVisible.set',true);
+                jQuery(".nav-bar-top #breadcrumbs #vol").removeClass("active on");
               }
             });
 
@@ -36338,6 +36342,22 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
 
         jQuery(".nav-bar-top #breadcrumbs #vol span").text(_this.labelToString(_this.manifest.jsonLd.label))
         .parent().addClass("active").attr("data-reading-view-id",_this.allImages[0].id);
+        
+        jQuery(".nav-bar-top #breadcrumbs #image").removeClass("active on");
+
+        /*
+        if(_this.allImages.length && _this.allImages[0].id) {
+          if(jQuery(".nav-bar-top #breadcrumbs #image").attr("data-reading-view-id") !== _this.allImages[0].id) {
+            jQuery(".nav-bar-top #breadcrumbs #image span").text(_this.allImages[0].id.replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1"))
+            .parent().addClass("active").attr("data-page-view-id",_this.allImages[0].id).attr("data-reading-view-id",_this.allImages[0].id);
+          }
+        }
+        */
+        
+      });
+
+      _this.eventEmitter.subscribe('UPDATE_MAIN_MENU_IMAGE.'+_this.manifest.jsonLd["@id"], function(e){
+        console.log("UMMI",_this,e);
 
         if(_this.allImages.length && _this.allImages[0].id) {
           if(jQuery(".nav-bar-top #breadcrumbs #image").attr("data-reading-view-id") !== _this.allImages[0].id) {
@@ -46833,10 +46853,12 @@ $.SimpleASEndpoint = function (options) {
       if (stateValue) {
         jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
         jQuery(".nav-bar-top #breadcrumbs #vol span").text(this.labelToString(this.manifest.jsonLd.label)).parent().addClass("active on");
+        /*
         if(!jQuery(".nav-bar-top #breadcrumbs #image").attr("data-page-view-id")) {
           jQuery(".nav-bar-top #breadcrumbs #image span").text(this.imagesList[0]["@id"].replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1"))
           .parent().addClass("active").attr("data-page-view-id",this.imagesList[0]["@id"]);
         }
+        */
         this.show();
 
         if(!window.tmpScroll) {

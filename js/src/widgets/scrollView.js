@@ -53,10 +53,12 @@
       if (stateValue) {
         jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
         jQuery(".nav-bar-top #breadcrumbs #vol span").text(this.labelToString(this.manifest.jsonLd.label)).parent().addClass("active on");
+        /*
         if(!jQuery(".nav-bar-top #breadcrumbs #image").attr("data-page-view-id")) {
           jQuery(".nav-bar-top #breadcrumbs #image span").text(this.imagesList[0]["@id"].replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1"))
           .parent().addClass("active").attr("data-page-view-id",this.imagesList[0]["@id"]);
         }
+        */
         this.show();
 
         if(!window.tmpScroll) {

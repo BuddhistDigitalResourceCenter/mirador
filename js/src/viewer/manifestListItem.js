@@ -200,6 +200,22 @@
 
         jQuery(".nav-bar-top #breadcrumbs #vol span").text(_this.labelToString(_this.manifest.jsonLd.label))
         .parent().addClass("active").attr("data-reading-view-id",_this.allImages[0].id);
+        
+        jQuery(".nav-bar-top #breadcrumbs #image").removeClass("active on");
+
+        /*
+        if(_this.allImages.length && _this.allImages[0].id) {
+          if(jQuery(".nav-bar-top #breadcrumbs #image").attr("data-reading-view-id") !== _this.allImages[0].id) {
+            jQuery(".nav-bar-top #breadcrumbs #image span").text(_this.allImages[0].id.replace(/^.*?[/]([^/]+)([/]canvas)?$/,"$1"))
+            .parent().addClass("active").attr("data-page-view-id",_this.allImages[0].id).attr("data-reading-view-id",_this.allImages[0].id);
+          }
+        }
+        */
+        
+      });
+
+      _this.eventEmitter.subscribe('UPDATE_MAIN_MENU_IMAGE.'+_this.manifest.jsonLd["@id"], function(e){
+        console.log("UMMI",_this,e);
 
         if(_this.allImages.length && _this.allImages[0].id) {
           if(jQuery(".nav-bar-top #breadcrumbs #image").attr("data-reading-view-id") !== _this.allImages[0].id) {
