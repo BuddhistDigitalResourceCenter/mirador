@@ -11,7 +11,7 @@
 
   #manifest-select-menu {
     position: absolute;
-    margin: 6px;
+    //margin: 6px;
     display: block;
     left: 0;
     right: 0;
@@ -27,7 +27,7 @@
       position: relative;
       width: 100%;
       height:100%;
-      padding: 10px 4px 10px 10px;
+      //padding: 10px 4px 10px 10px;
       box-sizing: border-box;
       overflow: hidden;
       margin:0 auto;
@@ -54,17 +54,23 @@
     li {
       list-style-type: none;
       overflow: hidden;
-      border-bottom: 1px solid @light-gray;
-      padding-top: 10px;
-      padding-bottom: 10px;
+      //border-bottom: 1px solid @light-gray;
+      padding: 45px;
       position: relative;
-      padding-left: 5px;
-      transition: background-color 0.3s ease-out;
+      padding-left: 105px;
+      //transition: background-color 0.3s ease-out;
 
+
+      &:nth-child(even) {
+        background-color: #1d1c1c;
+      }
+
+      /*
       &:hover {
         background-color: @gray-dd;
         cursor: pointer;
       }
+      */
     }
   }
 
@@ -122,19 +128,26 @@
 
   .repo-image {
     position:relative;
-    width: 80px;
+    width: 36px;
+    opacity: 1;
+    margin-right:37px;
+    /*
     height: 100px; //80px;
     overflow: hidden;
-    opacity: 0.5;
     display:flex;
     align-content: center;
     justify-content: center;
+    */
 
     img {
       //position:absolute;
       max-width: 100%;
       max-height:100%;
       top: 0;
+
+      &[data-src="https://iiif.bdrc.io/static::logo.png/full/max/0/default.png"] {
+        filter: invert(100%);
+      }
     }
 
     span.default-logo {
@@ -204,14 +217,16 @@
   }
 
   .repo-image, .select-metadata, .preview-images {
-    float:left;
-    margin-right:15px;
-    height: 80px;
+    //float:left;
+    //margin-right:15px;
+    //height: 80px;
   }
 
   .preview-thumb {
-    display: inline-flex;
-    position: absolute;
+    display: flex;
+    // position: absolute;
+    align-items: center;
+    justify-content: flex-start;
   }
 
   .preview-images {
@@ -221,17 +236,19 @@
   .preview-image {
     background-color: @gray;
     box-shadow: 0px 0px 5px @black-a70;
-    float:left;
+    //float:left;
     margin-right:15px;
     min-height: 25px;
     min-width: 25px;
     /*transition: all 0.1s ease-out; ?*/
 
+    /*
     &:hover {
       box-shadow: 0px 0px 5px @blue-bfff;
       transform: scale(1.1);
       transition: all 0.6 ease-out;
     }
+    */
   }
 
   .remaining {
@@ -245,13 +262,16 @@
 
   .pdfDL {
      line-height:80px;
-     margin-left:5px;
+     margin-left:auto;
      display:inline-block;
      font-size:20px;
+     justify-self:flex-end;
 
+      /*
      &:hover {
         font-size:25px;
      }
+     */
   }
 
   #load-controls {
