@@ -116,10 +116,22 @@
             // });
             this.bindEvents();
             this.listenForActions();
+
+            this.ps = new PerfectScrollbar(".member-select-results",{ minScrollbarLength:16, maxScrollbarLength:16 });
+            this.psTree = new PerfectScrollbar("#collection-tree",{ minScrollbarLength:16, maxScrollbarLength:16 });
         },
 
         listenForActions: function() {
           var _this = this;
+
+          _this.eventEmitter.subscribe('UPDATE_COLLECTION_SCROLL_BAR', function(_) {
+            console.log("update",_this.ps);
+            if(_this.ps) _this.ps.update();
+          });
+
+          setTimeout(function() { 
+            if(_this.ps) _this.ps.update(); 
+          }, 10);
 
           // handle subscribed events
           // When the manifest selection panel is brought up or hidden
@@ -166,6 +178,12 @@
 
         bindEvents: function() {
             var _this = this;
+
+            jQuery('.collec-tree-open-close').on('click', function(event) {
+              var elem = jQuery("#collection-tree-resizer");
+              if(!elem.hasClass("closed")) elem.addClass("closed").animate({"margin-left":-(elem.width() - 25)},400);    
+              else elem.removeClass("closed").animate({"margin-left":0},400);    
+            });
 
             // handle interface events
             this.element.find('form#url-load-form').on('submit', function(event) {
@@ -308,7 +326,7 @@
               forcedIndex: _this.expectedThings.indexOf(newManifest.uri),
               appendTo: _this.manifestListElement }));
             _this.element.find('#manifest-search').keyup();
-            this.element.find('.member-select-results').scroll();
+            _this.element.find('.member-select-results').scroll();
           }
         },
 
@@ -669,6 +687,8 @@
               '</div>',
             '</div>',
               '<div id="collection-tree-resizer">',            
+                '<div class="collec-tree-open-close">',
+                '</div>',
                 '<div id="collection-tree">',
                 '</div>',
               '</div>',

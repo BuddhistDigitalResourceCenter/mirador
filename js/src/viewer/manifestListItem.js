@@ -78,6 +78,7 @@
       this.listenForActions();
 
       //console.log("MLI ready",this.manifest);
+
     },
 
     fetchTplData: function() {
@@ -232,7 +233,8 @@
 
       this.element.find('img').on('load', function() {
         //if img width is not equal to the width in the html, change height
-        jQuery(this).hide().fadeIn(600);
+        jQuery(this).hide().fadeIn(600);        
+        _this.eventEmitter.publish('UPDATE_COLLECTION_SCROLL_BAR');
       });
 
       /*
@@ -358,7 +360,7 @@
           '<i class="fa fa fa-ellipsis-h remaining"></i>',
         '{{/if}}',
         '{{#if pdf}}',
-        '<a class="pdfDL" title="Download as PDF" target="_blank" href="{{pdf}}"><i class="fa fa-file-pdf-o"></i></a>',
+        '<a class="pdfDL" title="Download as PDF" target="_blank" href="{{pdf}}"></a>',
         '{{/if}}',        
       '</div>',
       '<div class="select-metadata">',

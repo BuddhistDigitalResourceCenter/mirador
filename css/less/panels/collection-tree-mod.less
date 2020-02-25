@@ -28,14 +28,18 @@
   //border-top: 1px solid gray;
   background-color: #100f0f;
   padding-right:40px;
-  @media (min-width: 1400px) {  padding-right:135px; }
+  @media (min-width: 1600px) {  padding-right:135px; }
 }
 
 #collection-tree-resizer { 
+  box-shadow: 2px 0 4px rgba(0,0,0,0.5);  
+  z-index: 1;
   width:auto;
   height:100%; 
   float: left;
   background-color:#2c3b45;
+  max-width:450px; 
+  @media (min-width: 1600px) {  max-width:555px; }
 }
 
 #collection-tree {
@@ -46,9 +50,9 @@
   //height: 100%;
   // height: ~"calc(100% - 20px)";
   height:100%;
-  padding-left:40px;
   padding-top:40px;
-  @media (min-width: 1400px) {  padding-left:135px; }
+  padding-left:40px;
+  @media (min-width: 1600px) {  padding-left:135px; }
 
   li {
 
@@ -58,9 +62,26 @@
     
     .jstree-anchor { 
       background:none !important; 
-      color:white !important;
+      color:white;
       box-shadow:none !important;
       outline: transparent !important;
+      height:auto;
+      white-space: normal;
+      position:relative;
+      
+
+      line-height: 28px;
+      padding-bottom: 16px;
+      font-size: 20px;
+
+      
+      &.jstree-disabled { font-style:italic; }
+
+      & > i:first-child { position:absolute; left:-24px; }
+    }
+
+    &.jstree-closed .jstree-anchor {
+      color:rgba(255,255,255,0.65);
     }
   }
 
@@ -128,3 +149,10 @@
 {
   background-image: none !important;
 }
+.jstree-default .jstree-icon:empty { width:7px;height:7px;padding:0 !important; }
+
+.jstree-icon.jstree-ocl { color:transparent; vertical-align:0px; background:url("../images/UD.png");margin-right:5px; }
+
+.jstree-default>.jstree-no-dots .jstree-open>.jstree-ocl { background-position:top; }
+
+.jstree-default>.jstree-no-dots .jstree-closed>.jstree-ocl {  background-position:bottom; }
