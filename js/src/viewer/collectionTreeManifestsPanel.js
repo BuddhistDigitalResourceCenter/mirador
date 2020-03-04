@@ -125,7 +125,7 @@
           var _this = this;
 
           _this.eventEmitter.subscribe('UPDATE_COLLECTION_SCROLL_BAR', function(_) {
-            console.log("update",_this.ps);
+            //console.log("update",_this.ps);
             if(_this.ps) _this.ps.update();
           });
 

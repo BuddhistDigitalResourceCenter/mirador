@@ -49,7 +49,8 @@
                 showOptions: this.state.getStateProperty('mainMenuSettings').buttons.options,
                 showFullScreenViewer : this.state.getStateProperty('mainMenuSettings').buttons.fullScreenViewer,
                 userButtons: this.state.getStateProperty('mainMenuSettings').userButtons,
-                userLogo:    this.state.getStateProperty('mainMenuSettings').userLogo
+                userLogo:    this.state.getStateProperty('mainMenuSettings').userLogo,
+                useClose:    window.closeViewer?true:false
             }));
 
             this.element.find('.mainmenu-button').each(function() {
@@ -164,7 +165,11 @@
 
       '<div class="nav-bar-top"><div><a href="https://www.tbrc.org" target="_blank" id="bdrc">BDRC</a><a href="/" id="buda"></a></div>',
       '<div id="breadcrumbs">',
+      '{{#if useClose}}',
+      '<a onClick="javascript:window.closeViewer()" id="return" class="active">return to BUDA</a>',
+      '{{else}}',
       '<a href="/show/{{resID}}" id="return" class="active">return to BUDA</a>',
+      '{{/if}}',
       '<a id="collec"><span>Browse Collection</span></a><a id="vol"><span>Reading View</span></a><a id="image"><span>Page View</span></a></div>',
       '</div>',
 
