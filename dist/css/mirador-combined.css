@@ -4011,42 +4011,19 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 }
 .nav-bar-top {
   height: 80px;
-  width: 1225px;
+  width: 1234px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-family: "Noto Sans";
 }
-.nav-bar-top div {
-  display: flex;
-  align-items: center;
-}
-.nav-bar-top div > a {
-  display: inline-block;
-}
-.nav-bar-top div #bdrc {
-  font-size: 24px;
-  font-weight: 500;
-  text-shadow: 0 1px 0 #111312;
-  color: #111312;
-}
-.nav-bar-top div #bdrc::before {
-  content: ' ';
-  display: inline-block;
-  width: 77px;
-  height: 55px;
-  background: url(../images/icons-2a.png) 0 0;
-  margin-right: 16px;
-  vertical-align: middle;
-}
-.nav-bar-top div #buda {
-  content: ' ';
-  display: inline-block;
-  width: 41px;
-  height: 52px;
-  background: url(../images/icons-2a.png) -187px -1px;
-  margin-left: 32px;
-}
+/*
+.nav-bar-top div { display:flex; align-items:center; }
+.nav-bar-top div > a { display:inline-block;  }
+.nav-bar-top div #bdrc { font-size: 24px; font-weight:500; text-shadow: 0 1px 0 #111312; color:#111312;}
+.nav-bar-top div #bdrc::before { content:' ';display:inline-block;width:202px; height:57px; background:url(../images/BDRC.svg) 0 0; vertical-align: middle; }
+.nav-bar-top div #buda { content:' ';display:inline-block;width:41px; height:52px; background:url(../images/icons-2a.png) -187px -1px; }
+*/
 /* .manifest-info .nav-bar-top #breadcrumbs :not(#return) { display:none; } */
 .nav-bar-top #breadcrumbs {
   color: #152631;
@@ -5266,7 +5243,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   max-height: 100%;
   top: 0;
 }
-.mirador-container .repo-image img[data-src="https://iiif.bdrc.io/static::logo.png/full/max/0/default.png"] {
+.mirador-container .repo-image img[data-src$="bdrc.io/static::logo.png/full/max/0/default.png"] {
   filter: invert(100%);
 }
 .mirador-container .repo-image span.default-logo {
@@ -6314,6 +6291,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   width: 7px;
   height: 7px;
   padding: 0 !important;
+  transform: scale(1.25);
 }
 .jstree-icon.jstree-ocl {
   color: transparent;
