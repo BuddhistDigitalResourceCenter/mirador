@@ -123,16 +123,19 @@
         }
       } else {
         // No thumbnail, use main image
-        var resource = canvas.images[0].resource;
-        service = resource['default'] ? resource['default'].service : resource.service;
-        if (service.hasOwnProperty('@context')) {
-          version = $.Iiif.getVersionFromContext(service['@context']);
-        }
-        var cl = $.Iiif.getComplianceLevelFromProfile(service.profile);
-        if (cl == 0  && service.width) {
-          thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version);
-        } else {
-          thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
+        var resource ;
+        if(canvas.images) { 
+          resource = canvas.images[0].resource;
+          service = resource['default'] ? resource['default'].service : resource.service;
+          if (service.hasOwnProperty('@context')) {
+            version = $.Iiif.getVersionFromContext(service['@context']);
+          }
+          var cl = $.Iiif.getComplianceLevelFromProfile(service.profile);
+          if (cl == 0  && service.width) {
+            thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version);
+          } else {
+            thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
+          }
         }
       }
       return thumbnailUrl;
