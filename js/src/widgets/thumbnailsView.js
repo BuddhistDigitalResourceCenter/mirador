@@ -232,7 +232,8 @@
     loadImages: function() {
       var _this = this;
       jQuery.each(_this.element.find("img"), function(key, value) {
-        if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src")) {
+        if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src") ) {
+          console.log("reload", key);
           var url = jQuery(value).attr("data");
           if(!_this.imagePromise[url]) _this.loadImage(value, url);
         }
@@ -242,6 +243,12 @@
     loadImage: function(imageElement, url) {
       var _this = this,  
       imagePromise = $.createImagePromise(url);
+  
+      /* // surprisingly not changing anything ... 
+      imagePromise.fail(function() {
+        imageElement.src = "missing";
+      });
+      */
 
       imagePromise.done(function(image) {
 

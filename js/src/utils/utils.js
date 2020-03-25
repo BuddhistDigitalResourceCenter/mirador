@@ -246,7 +246,8 @@
     };
 
     dfd.fail(function() {
-      console.log('image failed to load: ' + img.src);
+      console.log('image failed to load: ' + img.src);      
+      dfd.resolve("failed");
     });
 
     img.src = imageUrl;

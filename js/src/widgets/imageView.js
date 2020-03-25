@@ -168,18 +168,38 @@
 
 
       _this.eventEmitter.subscribe('GOTO_IMAGE_NUM.' + _this.windowId, function(event, imageNum) {
-        var n = Number(imageNum) - 1 ;        
+
+
+        var n = imageNum, m = Number(imageNum), found = false ;
+        // if(n == Number(n)) n-- ;        
+        
+        //console.log("imaN",imageNum,n,m,n==m);
+
         for(var i = 0 ; i <  _this.imagesList.length ; i ++) {
-          var label = _this.imagesList[i].label, found = false ;
-          if(!Array.isArray(label)) label = [ { "@value": label } ] ;
-          for(var l = 0 ; l < label.length ; l++) if(label[l]["@value"] && label[l]["@value"].match(new RegExp("^[^0-9]*"+(n+1)+"[^0-9]*$"))) {
-            n = i ;
-            found = true ;
-            break ;
+          var label = _this.imagesList[i].label ;
+          if(!Array.isArray(label)) {
+            if(label["@value"]) label = [ label ] ;
+            else label = [ { "@value": label } ] ;
+          }
+          for(var l = 0 ; l < label.length ; l++) { 
+            if(label[l]["@value"] && label[l]["@value"].match && 
+                ((n == m && label[l]["@value"].match(new RegExp("^[^0-9]*"+(m)+"[^0-9]*$"))) ||
+                (n != m &&  label[l]["@value"].startsWith(n)) ) ) {                
+              
+              //console.log("found",l,label[l]["@value"]);
+              
+              n = i ;
+              found = true ;
+              break ;
+            }
           }
           if(found) break ;
         }
-        if(n >= 0 && n < _this.imagesList.length) {          
+        if(!found && n == m) {
+          found = true ;
+          n = n - 1;
+        }
+        if(found && n >= 0 && n < _this.imagesList.length) {          
             _this.eventEmitter.publish('SET_CURRENT_CANVAS_ID.' + _this.windowId, _this.imagesList[n]['@id']);
             _this.eventEmitter.publish('SET_PAGINATION.' + _this.windowId, (n+1) + " / " + _this.imagesList.length);
         } 
