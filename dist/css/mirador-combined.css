@@ -4016,6 +4016,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   align-items: center;
   justify-content: space-between;
   font-family: "Noto Sans";
+  white-space: nowrap;
 }
 /*
 .nav-bar-top div { display:flex; align-items:center; }
@@ -4044,6 +4045,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   color: #d73449;
 }
 .nav-bar-top #breadcrumbs a:not(#return):not(#image) {
+  display: inline-flex;
+}
+.nav-bar-top #breadcrumbs a:not(#return):not(#image) > span {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
