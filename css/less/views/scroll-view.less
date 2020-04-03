@@ -20,6 +20,24 @@
   font-style: normal;
 }
 
+.image-view .provider img,
+.scroll-view .provider img { max-height:75px; max-width:40px;padding:0 4px;}
+
+.provider img[src$="bdrc.io/static::logo.png/full/max/0/default.png"] {
+  filter: invert(100%);
+}
+
+.provider img[src$="bl_logo_100.gif"] {
+  padding:0
+}
+
+
+.image-view .provider,
+.scroll-view .provider { position:fixed; top:~"calc(100vh - 120px - 70px)";right:15px; min-width:40px;min-height:75px;background:#2d3b46;
+  display:flex;align-items: center;justify-content: center; z-index:1;}
+  .image-view .provider { right:0px; z-index:100; }
+
+  // .scroll-view .provider { display:none !important; }
 
 .mirador-container {
   ul.scroll-listing-thumbs {
@@ -57,6 +75,8 @@
     text-overflow:ellipsis;
     text-align: center;
   }
+
+  
 
   .etext-content {
     box-sizing: border-box;

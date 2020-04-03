@@ -158,6 +158,9 @@
 
       // check that windows are loading first to set state of slot?
       _this.eventEmitter.subscribe('manifestReceived', function(event, newManifest) {
+
+        window.providerUrl = newManifest.jsonLd.logo ;
+
         if (_this.state.getStateProperty('windowObjects')) {
           var check = jQuery.grep(_this.state.getStateProperty('windowObjects'), function(object, index) {
             return object.loadedManifest === newManifest.uri;
@@ -324,6 +327,7 @@
       _this.eventEmitter.publish('DELETE_FROM_CONFIG', options);
 
       _this.eventEmitter.publish('ADD_WINDOW', windowConfig);
+
     }
   };
 

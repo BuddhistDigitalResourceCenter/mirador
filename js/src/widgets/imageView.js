@@ -28,6 +28,8 @@
     }, options);
 
     this.init();
+
+    if(window.providerUrl) { jQuery(".image-view .provider img").attr("src",window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl); }
   };
 
   $.ImageView.prototype = {
@@ -101,12 +103,17 @@
 
     template: $.Handlebars.compile([
        '<div class="image-view">',
+       '<div class="provider"><img /></div>',
        '</div>'
 
     ].join('')),
 
     listenForActions: function() {
       var _this = this;
+
+      _this.eventEmitter.subscribe('PROVIDER_IMG', function(event,src) {
+          jQuery(".image-view .provider img").attr("src",src);
+      });
 
       _this.eventEmitter.subscribe('bottomPanelSet.' + _this.windowId, function(event, visible) {
         var dodgers = _this.element.find('.mirador-osd-toggle-bottom-panel, .mirador-pan-zoom-controls');

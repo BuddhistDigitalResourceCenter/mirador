@@ -35,6 +35,7 @@
     $.ScrollView.prototype.originalTemplate = $.ScrollView.prototype.template ;
     $.ScrollView.prototype.template = $.Handlebars.compile([      
       '<div class="{{thumbnailCls}}">',
+      '<div class="provider"><img src={{window.providerUrl}}/></div>',
       '<ul class="{{listingCssCls}}" role="list" aria-label="Thumbnails">',
       '{{#thumbs}}',
       '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
@@ -151,6 +152,9 @@
     if(this.vDirectionStatus == 'rtl') {
       jQuery(this.appendTo).find('.scroll-view').addClass('v-direction-rtl');
     }
+
+
+    if(window.providerUrl) { jQuery(".scroll-view .provider img").attr("src",window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl); }
 
     
   };

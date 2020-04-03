@@ -24,7 +24,6 @@
     }, options);
 
     this.init();
-
   };
 
 
@@ -182,6 +181,10 @@
       });
       */
 
+      _this.eventEmitter.subscribe('PROVIDER_IMG', function(event,src) {
+          jQuery(".scroll-view .provider img").attr("src",src);
+      });
+      
       _this.eventEmitter.subscribe(('currentCanvasIDUpdated.' + _this.windowId), function(event) {
         _this.currentImageChanged();
       });
