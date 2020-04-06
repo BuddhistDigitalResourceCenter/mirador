@@ -25,11 +25,21 @@
   $.Collection.prototype = {
     init: function(collectionUri) {
       var _this = this;
+       
+      var headers = {};
+      var id_token = localStorage.getItem('id_token');
+      if(id_token) {
+        headers = { "Authorization": "Bearer " + id_token } ;
+      }
+
       this.request = jQuery.ajax({
         url: collectionUri,
         dataType: 'json',
-        async: true
+        async: true,
+        headers: headers
       });
+
+      console.log("collection?",headers);
 
       this.request.done(function(jsonLd) {
         _this.jsonLd = jsonLd;

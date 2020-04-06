@@ -50,11 +50,21 @@
   $.Manifest.prototype = {
     init: function(manifestUri) {
       var _this = this;
+
+      var headers = {} ;
+      var id_token = localStorage.getItem('id_token');
+      if(id_token) {
+        headers = { "Authorization": "Bearer " + id_token } ;
+      }
+
       this.request = jQuery.ajax({
         url: manifestUri,
         dataType: 'json',
-        async: true
+        async: true,
+        headers: headers
       });
+
+      console.log("manifest?",headers);
 
       this.request.done(function(jsonLd) {
         _this.jsonLd = jsonLd;
