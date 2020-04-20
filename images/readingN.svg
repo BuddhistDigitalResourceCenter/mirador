@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="35px" height="22px" viewBox="0 0 35 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>menumirador_noir</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M0,26 L46,26 L46,0 L0,0 L0,26 Z M11,15 L35,15 L35,11 L11,11 L11,15 Z" id="path-1"></path>
+        <path d="M0,24 L46,24 L46,0 L0,0 L0,24 Z M11,13 L35,13 L35,11 L11,11 L11,13 Z" id="path-3"></path>
+        <path d="M0,26 L46,26 L46,0 L0,0 L0,26 Z M11,14.0844167 L35,14.0844167 L35,11.9166667 L11,11.9166667 L11,14.0844167 Z" id="path-5"></path>
+    </defs>
+    <g id="menumirador_noir" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-4" transform="translate(-6.000000, -6.000000)">
+            <g id="Group-9" transform="translate(0.000000, 12.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-8"></g>
+                <polygon id="Stroke-7" stroke="#343434" stroke-width="2.4" mask="url(#mask-2)" points="11 15 35 15 35 11 11 11"></polygon>
+            </g>
+            <polygon id="Fill-10" fill="#FEFEFE" points="9 31 39 31 39 25 9 25"></polygon>
+            <g id="Group-3">
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <polygon id="Stroke-1" stroke="#343434" stroke-width="2.4" mask="url(#mask-4)" points="11 13 35 13 35 11 11 11"></polygon>
+            </g>
+            <g id="Group-6" transform="translate(0.000000, 5.000000)">
+                <mask id="mask-6" fill="white">
+                    <use xlink:href="#path-5"></use>
+                </mask>
+                <g id="Clip-5"></g>
+                <polygon id="Stroke-4" stroke="#343434" stroke-width="2.4" mask="url(#mask-6)" points="11 14 35 14 35 12 11 12"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>
