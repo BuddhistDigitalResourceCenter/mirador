@@ -29,6 +29,7 @@
 
     this.init();
 
+    // TODO no image when no logo
     if(window.providerUrl) { jQuery(".image-view .provider img").attr("src",window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl); }
   };
 

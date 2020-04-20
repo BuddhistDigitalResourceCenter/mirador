@@ -121,6 +121,8 @@
             this.psTree = new PerfectScrollbar("#collection-tree",{ minScrollbarLength:16, maxScrollbarLength:16 });
         },
 
+        // TODO get pdf download link via popin not new tab
+
         listenForActions: function() {
           var _this = this;
 

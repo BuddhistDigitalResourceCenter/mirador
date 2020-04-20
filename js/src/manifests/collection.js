@@ -29,7 +29,7 @@
       var headers = {};
       var id_token = localStorage.getItem('id_token');
       if(id_token) {
-        headers = { "Authorization": "Bearer " + id_token } ;
+        headers = { "Authorization": "Bearer " + id_token } ; // TODO no need if manifest not from BDRC x is token valid ?
       }
 
       this.request = jQuery.ajax({

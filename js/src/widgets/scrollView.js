@@ -35,7 +35,7 @@
     $.ScrollView.prototype.originalTemplate = $.ScrollView.prototype.template ;
     $.ScrollView.prototype.template = $.Handlebars.compile([      
       '<div class="{{thumbnailCls}}">',
-      '<div class="provider"><img src={{window.providerUrl}}/></div>',
+      '<div class="provider"><div><img src={{window.providerUrl}}/></div></div>',
       '<ul class="{{listingCssCls}}" role="list" aria-label="Thumbnails">',
       '{{#thumbs}}',
       '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
@@ -154,6 +154,7 @@
     }
 
 
+    // TODO no image when no logo
     if(window.providerUrl) { jQuery(".scroll-view .provider img").attr("src",window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl); }
 
     

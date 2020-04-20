@@ -146,28 +146,39 @@
       position:absolute;
       width:30px;
       height:16px;
-      background:url(../images/icons-2b.png) -384px -24px;
+      background-image:url(../images/collecN.svg); // -384px -24px;
       transform:scale(0.9);
       transform-origin: center left ; 
+      background-size:contain;
+      background-repeat:no-repeat;
     }
   }
 
-  &#vol span{ padding-left:48px;
+  &#collec span { padding-left:38px;
     &::before {
-      top:1px;
-      height:23px;
+      left : -7px;
+      top: -8px;
+      width: 50px;
+      height: 38px;
+    }
+  }
+
+  &#vol span{ padding-left:42px;
+    &::before {
+      top:-3px;
+      height:25px;
       width:47px;
-      background:url(../images/icons-2a.png) -630px -23px;
+      background-image:url(../images/readingN.svg); //icons-2a.png) -630px -23px;
     }
   }
 
   &#image span { padding-left:48px;
 
     &::before {
-      top:0px;
+      top:1px;
       width:44px;
       height:34px;
-      background:url(../images/icons-2a.png) -849px -21px;
+      background-image:url(../images/pageR.svg); //../images/icons-2a.png) -849px -21px;
     }
   }
 }
@@ -175,18 +186,20 @@
 
 .nav-bar-top #breadcrumbs #collec:hover, 
 .nav-bar-top #breadcrumbs #collec.on {
-  span::before { background:url(../images/icons-2a.png) -384px -24px; }
+  span::before { background-image:url(../images/collecR.svg); } //-384px -24px; }
 }
 
 .nav-bar-top #breadcrumbs #vol:hover, 
 .nav-bar-top #breadcrumbs #vol.on {
-  span::before { background:url(../images/icons-2d.png) -630px -23px; }
+  span::before { background-image:url(../images/readingR.svg); } //icons-2d.png) -630px -23px; }
 }
 
+/*
 .nav-bar-top #breadcrumbs #image:hover, 
 .nav-bar-top #breadcrumbs #image.on {
   span::before { background:url(../images/icons-2c.png) -849px -21px; }
 }
+*/
 
 .nav-bar-top #breadcrumbs a.active:not(.on) { cursor:pointer; }
 
@@ -220,7 +233,7 @@
 .nav-bar-top #breadcrumbs a:not(.active) {
     pointer-events: none;
     
-    &:not(#collec) { display:none; }
+    &:not(#collec) { display:none !important; }
 }
 .nav-bar-top #breadcrumbs a:not(.active) span {
     opacity:0.5;
