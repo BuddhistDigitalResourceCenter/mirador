@@ -23,7 +23,7 @@
 .scroll-view { position:relative;}
 
 .image-view .provider img,
-.scroll-view .provider img { max-height:75px; max-width:40px;padding:0 4px;}
+.scroll-view .provider img { max-height:80px; max-width:40px;padding:0 4px;}
 
 .provider img[src$="bdrc.io/static::logo.png/full/max/0/default.png"] {
   filter: invert(100%);
@@ -35,14 +35,23 @@
 
 
 .scroll-view .provider div,
-.image-view .provider { position:fixed; top:~"calc(100vh - 120px - 70px)"; min-width:40px;min-height:75px;background:#2d3b46;
-  display:flex;align-items: center;justify-content: center; z-index:1;z-index:100; }
+.image-view .provider { position:fixed; top:~"calc(100vh - 120px - 70px)"; min-width:40px;min-height:80px;background:#2d3b46;
+  display:flex;align-items: center;justify-content: center; z-index:1;z-index:100; 
+
+  span {  max-width: 50px;  padding:8px 4px; color: white;  text-align: center;  font-size: 10px;  font-weight: 600; 
   
-.scroll-view .provider { position:absolute; top:0; right:0; width:48px; 
+    & + img { display:none; }
+  }
+}
+  
+.scroll-view .provider { position:absolute; top:0; right:0; width:48px; display: flex; justify-content: flex-end;
   & > div { display:inline-flex; }
 }
 
+.scroll-view.v-direction-rtl .provider > div { right:0; }
+
 .image-view .provider { right:0; }
+
 
   // .scroll-view .provider { display:none !important; }
 

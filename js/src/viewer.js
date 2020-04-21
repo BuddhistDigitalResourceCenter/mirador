@@ -159,7 +159,10 @@
       // check that windows are loading first to set state of slot?
       _this.eventEmitter.subscribe('manifestReceived', function(event, newManifest) {
 
-        window.providerUrl = newManifest.jsonLd.logo ;
+        if(newManifest.jsonLd.logo)
+          window.providerUrl = newManifest.jsonLd.logo ;
+        else 
+          window.providerAttr = newManifest.jsonLd.attribution ;
 
         if (_this.state.getStateProperty('windowObjects')) {
           var check = jQuery.grep(_this.state.getStateProperty('windowObjects'), function(object, index) {

@@ -1,3 +1,18 @@
+function b64DecodeUnicode(str) {
+  return decodeURIComponent(
+    Array.prototype.map.call(atob(str), function(c) { 
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2) ;
+    }).join(''));
+}
+
+function parseJwt(token){
+  return JSON.parse(
+    b64DecodeUnicode(
+      token.split('.')[1].replace('-', '+').replace('_', '/')
+    )
+  );
+}
+
 (function($){
 
   $.Manifest = function(manifestUri, location, manifestContent) {
@@ -53,8 +68,10 @@
 
       var headers = {} ;
       var id_token = localStorage.getItem('id_token');
-      if(id_token) {
-        headers = { "Authorization": "Bearer " + id_token } ; // TODO no need if manifest not from BDRC x is token valid ?
+      if(id_token && manifestUri && manifestUri.match(/[^?&]+[.]bdrc[.]io[/]/)) {        
+        var jwt = parseJwt(id_token);
+        if(jwt.exp && jwt.exp > Date.now() / 1000)
+          headers = { "Authorization": "Bearer " + id_token } ; // TODO no need if manifest not from BDRC x is token valid ?
       }
 
       this.request = jQuery.ajax({

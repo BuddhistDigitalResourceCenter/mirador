@@ -35,7 +35,7 @@
     $.ScrollView.prototype.originalTemplate = $.ScrollView.prototype.template ;
     $.ScrollView.prototype.template = $.Handlebars.compile([      
       '<div class="{{thumbnailCls}}">',
-      '<div class="provider"><div><img src={{window.providerUrl}}/></div></div>',
+      '<div class="provider"><div></div></div>',
       '<ul class="{{listingCssCls}}" role="list" aria-label="Thumbnails">',
       '{{#thumbs}}',
       '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
@@ -153,9 +153,10 @@
       jQuery(this.appendTo).find('.scroll-view').addClass('v-direction-rtl');
     }
 
+    console.log("provUrl",window.providerUrl,window.providerAttr,this.manifest);
 
-    // TODO no image when no logo
-    if(window.providerUrl) { jQuery(".scroll-view .provider img").attr("src",window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl); }
+    if(window.providerUrl) { jQuery(".scroll-view .provider div").append("<img src="+(window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl)+"/>") ; }
+    else if(window.providerAttr) { jQuery(".scroll-view .provider div").prepend("<span>"+window.providerAttr+"</span>"); }
 
     
   };

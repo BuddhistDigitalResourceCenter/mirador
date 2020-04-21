@@ -29,8 +29,11 @@
 
     this.init();
 
-    // TODO no image when no logo
-    if(window.providerUrl) { jQuery(".image-view .provider img").attr("src",window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl); }
+
+    console.log("provUrl",window.providerUrl);
+
+    if(window.providerUrl) { jQuery(".image-view .provider").append("<img src="+(window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl)+"/>"); }
+    else if(window.providerAttr) { jQuery(".image-view .provider").prepend("<span>"+window.providerAttr+"</span>"); }
   };
 
   $.ImageView.prototype = {
@@ -104,7 +107,7 @@
 
     template: $.Handlebars.compile([
        '<div class="image-view">',
-       '<div class="provider"><img /></div>',
+       '<div class="provider"></div>',
        '</div>'
 
     ].join('')),
