@@ -155,8 +155,8 @@
 
     console.log("provUrl",window.providerUrl,window.providerAttr,this.manifest);
 
-    if(window.providerUrl) { jQuery(".scroll-view .provider div").append("<img src="+(window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl)+"/>") ; }
-    else if(window.providerAttr) { jQuery(".scroll-view .provider div").prepend("<span>"+window.providerAttr+"</span>"); }
+    if(window.providerUrl) { jQuery(".scroll-view .provider div").append("<img src='"+(window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl)+"'/>") ; }
+    else if(window.providerAttr) { jQuery(".scroll-view .provider div").prepend("<span>"+this.labelToString(window.providerAttr)+"</span>"); }
 
     
   };

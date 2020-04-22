@@ -32,8 +32,8 @@
 
     console.log("provUrl",window.providerUrl);
 
-    if(window.providerUrl) { jQuery(".image-view .provider").append("<img src="+(window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl)+"/>"); }
-    else if(window.providerAttr) { jQuery(".image-view .provider").prepend("<span>"+window.providerAttr+"</span>"); }
+    if(window.providerUrl) { jQuery(".image-view .provider").append("<img src='"+(window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl)+"'/>"); }
+    else if(window.providerAttr) { jQuery(".image-view .provider").prepend("<span>"+this.labelToString(window.providerAttr)+"</span>"); }
   };
 
   $.ImageView.prototype = {
