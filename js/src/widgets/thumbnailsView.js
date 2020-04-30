@@ -30,7 +30,7 @@
   $.ThumbnailsView.prototype = {
 
     updateGetEtextPage : function (page){
-      //console.log("what?",page,window.getEtextPage,this.getEtextPage);
+      console.log("what?",page,window.getEtextPage,this.getEtextPage);
       if(this.getEtextPage) return this.getEtextPage(page) ;
       else if(window.getEtextPage) return window.getEtextPage(page) ;
     },
@@ -259,19 +259,21 @@
 
         setTimeout(function() { if(_this.ps) _this.ps.update(); }, 10);
 
-        if(jQuery("#showEtext").length) {
+        var showET = window.MiradorUseEtext ;
+
+        if(showET) {
          
           var id = jQuery(imageElement).attr("data-image-id"),
               canvas = _this.imagesList.filter(function(e) { return e["@id"] === id; });
 
           if(canvas.length) { //} && jQuery(imageElement).isInViewport()) {
 
-              jQuery(imageElement).next('.etext-content').addClass(!jQuery("#showEtext").get(0).checked?"hide":"").text("(trying to load page in etext)");
+              jQuery(imageElement).next('.etext-content').addClass(!showET?"hide":"").text("(trying to load page in etext)");
               var prom = _this.updateGetEtextPage(canvas[0]);              
               if(!prom) jQuery(imageElement).next('.etext-content').text("");
               else prom.then(function(val) {                
                 
-                //console.log("val",canvas[0].label[0],JSON.stringify(val,null,3));
+                console.log("val",canvas[0].label[0],JSON.stringify(val,null,3));
 
                 try { 
 
@@ -279,8 +281,9 @@
                       txt = "",
                       css = "" ;
 
-                  var checkB = jQuery('#showEtext') ;
-                  if(!checkB || !checkB.get(0).checked) css += "hide " ;
+                  //var checkB = jQuery('#showEtext') ;
+                  //if(!checkB || !checkB.get(0).checked) css += "hide " ;
+                  if(!showET) css += "hide " ;
 
                   if(val) { 
 
