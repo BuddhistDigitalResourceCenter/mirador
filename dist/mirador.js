@@ -48145,7 +48145,7 @@ $.SearchWithinResults.prototype = {
   $.ThumbnailsView.prototype = {
 
     updateGetEtextPage : function (page){
-      console.log("what?",page,window.getEtextPage,this.getEtextPage);
+      //console.log("what?",page,window.getEtextPage,this.getEtextPage);
       if(this.getEtextPage) return this.getEtextPage(page) ;
       else if(window.getEtextPage) return window.getEtextPage(page) ;
     },
