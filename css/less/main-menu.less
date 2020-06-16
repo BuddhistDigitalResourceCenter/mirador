@@ -106,7 +106,18 @@
 
 .nav-bar-top { height:80px; width:1222px; display:flex;align-items: center; justify-content: space-between; font-family:"Noto Sans"; 
   white-space: nowrap;
+
+  #logo { display:flex; align-items:center;
+
+    a { display: inline-block; margin-right:20px; 
+      &:last-child span,
+      &:first-child span { font-size:24px; line-height:26px; font-weight:500;}
+    }
+
+    a > span { font-weight:700; font-size:14px;letter-spacing: 0.29px; text-transform: uppercase; text-decoration: none; }
+  }
 }
+
 
 /*
 .nav-bar-top div { display:flex; align-items:center; }
@@ -116,8 +127,11 @@
 .nav-bar-top div #buda { content:' ';display:inline-block;width:41px; height:52px; background:url(../images/icons-2a.png) -187px -1px; }
 */
 
+
+/*
 .nav-bar-top div #buda img,
 .nav-bar-top div #bdrc img { vertical-align:middle; display: inline-block; margin-right:30px;}
+*/
 
 /* .manifest-info .nav-bar-top #breadcrumbs :not(#return) { display:none; } */
 
