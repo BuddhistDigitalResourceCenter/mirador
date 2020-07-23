@@ -4024,7 +4024,8 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 }
 .nav-bar-top #logo a {
   display: inline-block;
-  margin-right: 20px;
+  margin-right: 15px;
+  font-size: 0;
 }
 .nav-bar-top #logo a:last-child span,
 .nav-bar-top #logo a:first-child span {
@@ -4038,6 +4039,32 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   letter-spacing: 0.29px;
   text-transform: uppercase;
   text-decoration: none;
+}
+.nav-bar-top #logo #buda img {
+  height: 65px;
+  margin-right: 10px;
+}
+.nav-bar-top #logo #buda {
+  margin-right: 0;
+}
+.nav-bar-top #logo #buda + a + a span {
+  padding-top: 7px;
+  text-transform: none;
+  letter-spacing: 1px;
+  font-weight: 600;
+  display: inline-flex;
+}
+.nav-bar-top #logo #bdrc + a {
+  font-size: 0;
+}
+.nav-bar-top #logo #bdrc + a img {
+  height: 40px;
+}
+.nav-bar-top #logo #bdrc span,
+.nav-bar-top #logo #buda + a > span {
+  font-size: 24px;
+  line-height: 26px;
+  font-weight: 500;
 }
 /*
 .nav-bar-top div { display:flex; align-items:center; }

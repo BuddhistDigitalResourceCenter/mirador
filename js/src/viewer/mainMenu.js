@@ -164,7 +164,7 @@
         template: $.Handlebars.compile([
 
       //'<div class="nav-bar-top"><div><a href="https://www.tbrc.org" target="_blank" id="bdrc"><img src="/BDRC-Logo.png"/></a><a href="/" id="buda"><img src="/LIBRARY.svg"/></a></div>',
-      '<div class="nav-bar-top"><div id="logo"><a href="/"><span>BUDA</span></a><a><span>BY</span></a><a href="https://www.bdrc.io" target="_blank" id="bdrc"><img src="/BDRC-Logo_.png"/></a><a href="https://bdrc.io/" target="_blank"><span>BDRC</span></a></div>',
+      '<div class="nav-bar-top"><div id="logo"><a href="/" id="buda"><img src="/icons/BUDA-small.svg"/></a><a href="/"><span>BUDA</span></a><a><span>by</span></a><a href="https://bdrc.io/" target="_blank"  id="bdrc"><span>BDRC</span></a><a href="https://bdrc.io" target="_blank"><img src="/BDRC-Logo_.png"/></a></div>',
         
       '<div id="breadcrumbs">',
       '{{#if useClose}}',
