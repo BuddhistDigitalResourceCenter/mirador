@@ -4088,7 +4088,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 }
 #viewer.embed .bottomPanel,
 #viewer.embed .mirador-osd {
-  height: calc(40%);
+  height: calc(100% - 60px);
 }
 /*
 .nav-bar-top div { display:flex; align-items:center; }
