@@ -77,7 +77,8 @@
                   dots: false
                 },
                 check_callback: true, // IMPORTANT: This line allows code to edit the tree later
-                multiple: false // IMPORTANT: This prevents multiple nodes from being selected
+                multiple: false, // IMPORTANT: This prevents multiple nodes from being selected
+                dblclick_toggle : false // open node on single click instead of double
               }
             // Hook up event for when a node is selected
             }).on('select_node.jstree', function(event, data) {
@@ -180,6 +181,11 @@
 
         bindEvents: function() {
             var _this = this;
+            
+            // toggle node on simple click
+            jQuery('#collection-tree').on('click', '.jstree-anchor', function (e) {
+                jQuery(this).jstree(true).toggle_node(e.target);
+            }).jstree();
 
             jQuery('.collec-tree-open-close').on('click', function(event) {
               var elem = jQuery("#collection-tree-resizer");

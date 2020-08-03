@@ -134,6 +134,21 @@
   }
 }
 
+#viewer.embed { 
+  .nav-bar-top { width:100%;padding-left:24px;
+    #return, 
+    #logo { display:none; }
+
+    #return + a::before { content:none; display:none; }
+  }
+  .nav-bar-top,
+  .mirador-hud,
+  .mirador-main-menu-bar { height:60px;}
+  .mirador-viewer { top:60px;}
+  .bottomPanel,
+  .mirador-osd { height: calc(100% - 60px); }
+}
+
 
 /*
 .nav-bar-top div { display:flex; align-items:center; }

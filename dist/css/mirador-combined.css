@@ -4066,6 +4066,30 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   line-height: 26px;
   font-weight: 500;
 }
+#viewer.embed .nav-bar-top {
+  width: 100%;
+  padding-left: 24px;
+}
+#viewer.embed .nav-bar-top #return,
+#viewer.embed .nav-bar-top #logo {
+  display: none;
+}
+#viewer.embed .nav-bar-top #return + a::before {
+  content: none;
+  display: none;
+}
+#viewer.embed .nav-bar-top,
+#viewer.embed .mirador-hud,
+#viewer.embed .mirador-main-menu-bar {
+  height: 60px;
+}
+#viewer.embed .mirador-viewer {
+  top: 60px;
+}
+#viewer.embed .bottomPanel,
+#viewer.embed .mirador-osd {
+  height: calc(40%);
+}
 /*
 .nav-bar-top div { display:flex; align-items:center; }
 .nav-bar-top div > a { display:inline-block;  }
