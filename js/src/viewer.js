@@ -27,7 +27,8 @@
         'bookmarkPanelVisible': false
       },
       manifests:             [],
-      resID:                 null
+      resID:                 null,
+      locale:                'en',
     }, options);
 
     this.id = this.state.getStateProperty('id');
@@ -51,21 +52,22 @@
       // i18next options
       var i18nextOptions = {
         fallbackLng: 'en',
-        load: 'unspecific',
-        debug: false,
+        whitelist: [ 'bo', 'en', 'zh'],
+        //load: 'unspecific',
+        debug: true,
         backend: {
-          loadPath: _this.state.getStateProperty('buildPath') + _this.state.getStateProperty('i18nPath')+'{{lng}}/{{ns}}.json'
+          loadPath: '/scripts/mirador/locales/{{lng}}/translation.json' //_this.state.getStateProperty('buildPath') + _this.state.getStateProperty('i18nPath')+'{{lng}}/{{ns}}.json'
         }
       };
 
       // set the language from configuration
-      var configuredLanguage = _this.state.getStateProperty('language');
+      var configuredLanguage = _this.state.getStateProperty('locale');
       if(configuredLanguage){
         i18nextOptions.lng = configuredLanguage;
       }
 
       //initialize i18next
-      i18next.use(i18nextXHRBackend).use(i18nextBrowserLanguageDetector).init(
+      i18next.use(i18nextXHRBackend)/*.use(i18nextBrowserLanguageDetector)*/.init(
         i18nextOptions,
         _this.setupViewer.bind(_this)
       );
@@ -82,6 +84,7 @@
       //register $.Handlebars helper
       $.Handlebars.registerHelper('t', function(i18n_key) {
         var result = i18next.t(i18n_key);
+        console.log("i18n.t("+i18n_key+")");
         return new $.Handlebars.SafeString(result);
       });
 

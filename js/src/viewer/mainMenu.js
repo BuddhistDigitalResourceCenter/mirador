@@ -33,6 +33,7 @@
     $.MainMenu.prototype = {
 
         init: function() {
+
             //this.mainMenuHeight = this.parent.mainMenuSettings.height;
             //this.mainMenuWidth = this.parent.mainMenuSettings.width;
             this.element
@@ -50,7 +51,7 @@
                 showFullScreenViewer : this.state.getStateProperty('mainMenuSettings').buttons.fullScreenViewer,
                 userButtons: this.state.getStateProperty('mainMenuSettings').userButtons,
                 userLogo:    this.state.getStateProperty('mainMenuSettings').userLogo,
-                useClose:    window.closeViewer?true:false
+                useClose:    window.closeViewer?true:false,
             }));
 
             this.element.find('.mainmenu-button').each(function() {
@@ -168,11 +169,11 @@
         
       '<div id="breadcrumbs">',
       '{{#if useClose}}',
-      '<a onClick="javascript:window.closeViewer()" id="return" class="active">return to BUDA</a>',
+      '<a onClick="javascript:window.closeViewer()" id="return" class="active">{{t "return"}}</a>',
       '{{else}}',
-      '<a href="/show/{{resID}}" id="return" class="active">return to BUDA</a>',
+      '<a href="/show/{{resID}}" id="return" class="active">{{t "return"}}</a>',
       '{{/if}}',
-      '<a id="collec"><span>Browse Collection</span></a><a id="vol"><span>Reading View</span></a><a id="image"><span>Page View</span></a></div>',
+      '<a id="collec"><span>{{t "browse"}}</span></a><a id="vol"><span>Reading View</span></a><a id="image"><span>Page View</span></a></div>',
       '</div>',
 
         '{{#if userLogo}}',

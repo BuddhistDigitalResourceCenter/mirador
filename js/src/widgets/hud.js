@@ -239,7 +239,7 @@
                                  '<div class="mirador-hud">',                                 
                                  '{{#if showNextPrev}}',
                                  //"<span class='goto-page'>Go to p. <input type='text' id='gotoPage' onInput='javascript:jQuery(\"#gotoPage\").removeClass(\"error\");' onChange='javascript:window.scrollToImage(event.target.value);'/></span>",
-                                 '<span class="goto-page"><select size="5" title="{{t "GotoImageSelectTooltip"}}" aria-label="{{t "GotoImageSelectTooltip"}}"></select><span>Go to p.</span><input type="text" id="gotoPage" title="{{t "GotoImageTooltip"}}" aria-label="{{t "GotoImageTooltip"}}"/></span>',
+                                 '<span class="goto-page"><select size="5" title="{{t "GotoImageSelectTooltip"}}" aria-label="{{t "GotoImageSelectTooltip"}}"></select><span>{{t "goto"}}</span><input type="text" id="gotoPage" title="{{t "GotoImageTooltip"}}" aria-label="{{t "GotoImageTooltip"}}"/></span>',
                                  '<a class="mirador-osd-previous hud-control" role="button" title="{{t "PreviousImageTooltip"}}" aria-label="{{t "PreviousImageTooltip"}}">',
                                  '<span></span>',
                                  '</a>',

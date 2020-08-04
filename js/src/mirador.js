@@ -14,9 +14,7 @@
 
     console.log("M options?",config);
 
-
     // TODO add token to info.json (OSD)
-
 
     if (this instanceof Mirador) {
         checkContainer(config.id);
@@ -32,7 +30,8 @@
         this.viewer = new Mirador.Viewer({
             'state': this.saveController,
             'eventEmitter': this.eventEmitter,
-            'resID': config.resID
+            'resID': config.resID,
+            'locale':config.locale
         });
         return this;
     } else {
