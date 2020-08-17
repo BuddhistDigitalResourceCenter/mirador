@@ -113,7 +113,7 @@
       this.tplData = {
         label: _this.labelToString(manifest.label) ,// $.JsonLd.getTextValue(manifest.label),
         repository: location,
-        canvasCount: manifest.sequences[0].canvases.length,
+        canvasCount: (manifest.sequences[0].canvases?manifest.sequences[0].canvases.length:0),
         images: [],
         index: _this.state.getManifestIndex(manifest['@id']),
         pdf: pdf,
@@ -132,7 +132,7 @@
         return '';
       })();
 
-      for ( var i=0; i < manifest.sequences[0].canvases.length; i++) {
+      if(manifest.sequences[0].canvases) for( var i=0; i < manifest.sequences[0].canvases.length; i++) {
         var canvas = manifest.sequences[0].canvases[i];
         if (canvas.width === 0) {
           continue;
