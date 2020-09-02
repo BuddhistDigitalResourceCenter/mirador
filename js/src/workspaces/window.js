@@ -1136,6 +1136,7 @@
       '<div class="bottomPanel">',
       '<div class="thumbnails-open-close"></div>',
       '</div>',
+      '<div class="view-nav"><div><a id="DL" target="_blank" rel="alternate" type="text" download="" href="">Download Images<img src="/icons/DLw.png"></a><div id="control"><span title="mirador.increase" class="on"><img src="/icons/Zp.svg"></span><span title="mirador.decrease" class="on"><img src="/icons/Zm.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a><span id="check"></span>Show Etext<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
       '</div>',
       '</div>',
       '</div>'
