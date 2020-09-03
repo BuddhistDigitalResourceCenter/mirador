@@ -264,6 +264,54 @@
           _this.destroy();
         }
       }));
+
+      console.log('manif:',manifest);
+
+      if(manifest && manifest.rendering) {
+        var render = manifest.rendering ;
+        if(!Array.isArray(render)) render = [ render ] ;
+        if(render.length) {
+
+          for(var i = 0 ; i < render.length ; i ++) {
+            var txt = "Generate " + (render[i].format.includes("pdf")?"PDF":"ZIP");
+            jQuery(".view-nav #DL ul").append("<li data-value='"+render[i]["@id"]+"'>"+txt+"</li>") ;            
+          }        
+          
+          jQuery(".view-nav #DL").addClass("on");
+
+          jQuery(".view-nav #DL ul li").click(function(event){
+            var elem = jQuery(event.currentTarget).closest("li");
+            if(!elem.hasClass("gen")) elem.addClass("gen").text(elem.text().replace(/.*(PDF|ZIP)$/,"Generating $1..."));
+            event.stopPropagation();
+            event.preventDefault();
+            return false;
+          });
+
+          jQuery(".view-nav #DL").click(function(event) {
+            jQuery(".view-nav #DL ul").toggleClass("on");
+            event.stopPropagation();
+            event.preventDefault();
+            return false;
+          });
+          
+          jQuery(document).click(function(event) {
+            jQuery(".view-nav #DL ul.on").removeClass("on");
+          });
+
+        }
+      }
+      /*
+      var sel = jQuery('.view-nav #DL select'); 
+      sel.selectmenu( { 
+        appendTo:".view-nav #DL",
+        position: { my : "right-1 bottom-1", at: "right-2 top" },
+        select: function( event, ui ) { 
+          console.log('DL', event, ui, ui.item, ui.item.value) ; 
+          jQuery(event.currentTarget).find("div").html("<a href='youpi' target='_blank'>"+ui.item.label+"</a>");
+          setImmediate(function(){ sel.selectmenu('open'); });
+        }
+      });
+      */
     },
 
     buildCanvasesIndex: function(canvases) {
@@ -1136,7 +1184,7 @@
       '<div class="bottomPanel">',
       '<div class="thumbnails-open-close"></div>',
       '</div>',
-      '<div class="view-nav"><div><a id="DL" target="_blank" rel="alternate" type="text" download="" href="">Download Images<img src="/icons/DLw.png"></a><div id="control"><span title="mirador.increase" class="on"><img src="/icons/Zp.svg"></span><span title="mirador.decrease" class="on"><img src="/icons/Zm.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a><span id="check"></span>Show Etext<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
+      '<div class="view-nav"><div><a id="DL"><ul class="select"></ul>Download Images<img src="/icons/DLw.png"></a><div id="control"><span title="mirador.increase" class="on"><img src="/icons/Zp.svg"></span><span title="mirador.decrease" class="on"><img src="/icons/Zm.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a><span id="check"></span>Show Etext<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
       '</div>',
       '</div>',
       '</div>'

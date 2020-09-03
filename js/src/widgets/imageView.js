@@ -184,10 +184,11 @@
         var n = imageNum, m = Number(imageNum), found = false ;
         // if(n == Number(n)) n-- ;        
         
-        //console.log("imaN",imageNum,n,m,n==m);
+        console.log("imaN",imageNum,n,m,n==m);
 
         for(var i = 0 ; i <  _this.imagesList.length ; i ++) {
           var label = _this.imagesList[i].label ;
+          if(!label) continue ;
           if(!Array.isArray(label)) {
             if(label["@value"]) label = [ label ] ;
             else label = [ { "@value": label } ] ;
