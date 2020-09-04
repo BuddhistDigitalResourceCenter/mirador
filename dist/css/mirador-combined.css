@@ -5107,6 +5107,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   height: 42px;
   box-sizing: border-box;
 }
+.view-nav .DL {
+  position: relative;
+}
 .view-nav ul.select {
   position: absolute;
   top: -85px;
@@ -5139,8 +5142,17 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   text-overflow: ellipsis;
   overflow: hidden;
 }
+.view-nav ul.select li[data-value] {
+  cursor: pointer;
+}
 .view-nav ul.select li a {
+  display: block;
+  color: #222;
+  font-weight: 400 !important;
   text-decoration: none !important;
+}
+.view-nav ul.select li:hover a {
+  font-weight: 700 !important;
 }
 .view-nav a:hover {
   text-decoration: underline;

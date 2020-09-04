@@ -51,7 +51,12 @@
     
   }
 }
+
+
 .view-nav {
+
+  .DL { position:relative; }
+
   ul.select { 
 
     &:not(.on) { display:none;}
@@ -73,6 +78,9 @@
     }
 
     li {
+
+      &[data-value] { cursor:pointer; }
+
       padding:5px 15px ;
       background-color:#fff;
       color:#222;
@@ -85,9 +93,13 @@
       overflow: hidden;      
 
       a {
-
+        display:block;
+        color:#222;
+        font-weight:400 !important;
         text-decoration: none !important;
+
       }
+      &:hover a { font-weight:700 !important; }
     }
   }
 

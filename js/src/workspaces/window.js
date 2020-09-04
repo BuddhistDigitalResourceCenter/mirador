@@ -265,8 +265,6 @@
         }
       }));
 
-      console.log('manif:',manifest);
-
       if(manifest && manifest.rendering) {
         var render = manifest.rendering ;
         if(!Array.isArray(render)) render = [ render ] ;
@@ -274,28 +272,54 @@
 
           for(var i = 0 ; i < render.length ; i ++) {
             var txt = "Generate " + (render[i].format.includes("pdf")?"PDF":"ZIP");
-            jQuery(".view-nav #DL ul").append("<li data-value='"+render[i]["@id"]+"'>"+txt+"</li>") ;            
+            jQuery(".view-nav .DL ul.select").append("<li data-value='"+render[i]["@id"]+"'>"+txt+"</li>") ;            
           }        
           
-          jQuery(".view-nav #DL").addClass("on");
+          jQuery(".view-nav .DL").addClass("on");
 
-          jQuery(".view-nav #DL ul li").click(function(event){
+          jQuery(".view-nav .DL ul li").click(function(event){
+
             var elem = jQuery(event.currentTarget).closest("li");
-            if(!elem.hasClass("gen")) elem.addClass("gen").text(elem.text().replace(/.*(PDF|ZIP)$/,"Generating $1..."));
-            event.stopPropagation();
-            event.preventDefault();
-            return false;
+            
+            if(elem.attr("data-value")) {
+              var url = elem.attr("data-value");
+              if(url) {
+                elem.removeAttr("data-value").text(elem.text().replace(/.*(PDF|ZIP)$/,"Generating $1..."));
+
+                var request = jQuery.ajax({
+                  url: url,
+                  dataType:'json',
+                  async: true,
+                });
+
+                request.done(function(jsonLd) {
+                  console.log("ajax:",jsonLd,elem);
+                  elem.html("<a download href='"+url.replace(/^(.*?bdrc.io).*/,"$1")+jsonLd.links+"'>"+elem.text().replace(/.*(PDF|ZIP).*/,"Download $1")+"</a>");
+                });
+
+              }
+              event.stopPropagation();
+              event.preventDefault();
+              return false;
+            }
+            else if(!elem.find("a").length) {
+              event.stopPropagation();
+              event.preventDefault();
+              return false;
+            }
           });
 
-          jQuery(".view-nav #DL").click(function(event) {
-            jQuery(".view-nav #DL ul").toggleClass("on");
+  
+          jQuery(".view-nav #DL").click(function(event) {                        
+            jQuery(".view-nav .DL ul.select").toggleClass("on");
             event.stopPropagation();
             event.preventDefault();
             return false;
-          });
           
+          });
+        
           jQuery(document).click(function(event) {
-            jQuery(".view-nav #DL ul.on").removeClass("on");
+            jQuery(".view-nav .DL ul.on").removeClass("on");
           });
 
         }
@@ -1184,7 +1208,7 @@
       '<div class="bottomPanel">',
       '<div class="thumbnails-open-close"></div>',
       '</div>',
-      '<div class="view-nav"><div><a id="DL"><ul class="select"></ul>Download Images<img src="/icons/DLw.png"></a><div id="control"><span title="mirador.increase" class="on"><img src="/icons/Zp.svg"></span><span title="mirador.decrease" class="on"><img src="/icons/Zm.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a><span id="check"></span>Show Etext<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
+      '<div class="view-nav"><div><span class="DL"><ul class="select"></ul><a id="DL">Download Images<img src="/icons/DLw.png"></a></span><div id="control"><span title="mirador.increase" class="on"><img src="/icons/Zp.svg"></span><span title="mirador.decrease" class="on"><img src="/icons/Zm.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a><span id="check"></span>Show Etext<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
       '</div>',
       '</div>',
       '</div>'
