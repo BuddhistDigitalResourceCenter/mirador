@@ -5148,8 +5148,8 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .view-nav ul.select li a {
   display: block;
   color: #222;
-  font-weight: 400 !important;
-  text-decoration: none !important;
+  font-weight: 500 !important;
+  text-decoration: underline !important;
 }
 .view-nav ul.select li:hover a {
   font-weight: 700 !important;
