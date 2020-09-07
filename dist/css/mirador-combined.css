@@ -5170,6 +5170,20 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   background: white;
   border-radius: 10px;
 }
+.view-nav a span#check img {
+  margin: 0;
+  position: absolute;
+}
+.view-nav a span#check:not(.on) img {
+  display: none;
+}
+.view-nav a span#check.on {
+  background: none;
+}
+.view-nav .eText {
+  display: flex;
+  align-items: center;
+}
 .image-view .provider img,
 .scroll-view .provider img {
   max-height: 80px;

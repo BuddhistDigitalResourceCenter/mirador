@@ -322,6 +322,26 @@
             jQuery(".view-nav .DL ul.on").removeClass("on");
           });
 
+
+        }
+        if(window.MiradorUseEtext) {
+          jQuery(".view-nav .eText").addClass("on");
+          
+          if(window.MiradorUseEtext == "open") jQuery(".view-nav .eText #check").addClass("on");            
+
+          jQuery(".view-nav .eText").click(function() {
+            var elem = jQuery(".view-nav .eText #check");            
+            elem.toggleClass("on");
+            if(elem.hasClass("on")) { 
+              window.MiradorUseEtext = "open" ;
+              jQuery(".etext-content").removeClass("hide"); 
+            }
+            else {
+              window.MiradorUseEtext = true ;
+              jQuery(".etext-content").addClass("hide"); 
+            }
+          });
+
         }
       }
       /*
@@ -1208,7 +1228,7 @@
       '<div class="bottomPanel">',
       '<div class="thumbnails-open-close"></div>',
       '</div>',
-      '<div class="view-nav"><div><span class="DL"><ul class="select"></ul><a id="DL">Download Images<img src="/icons/DLw.png"></a></span><div id="control"><span title="mirador.increase" class="on"><img src="/icons/Zp.svg"></span><span title="mirador.decrease" class="on"><img src="/icons/Zm.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a><span id="check"></span>Show Etext<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
+      '<div class="view-nav"><div><span class="DL"><ul class="select"></ul><a id="DL">Download Images<img src="/icons/DLw.png"></a></span><div id="control"><span title="mirador.decrease" class="on"><img src="/icons/Zm.svg"></span><span title="mirador.increase" class="on"><img src="/icons/Zp.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a class="eText"><span id="check"><img src="/icons/check.svg"/></span>Show Etext<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
       '</div>',
       '</div>',
       '</div>'

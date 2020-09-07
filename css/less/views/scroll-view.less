@@ -107,7 +107,13 @@
 
 .view-nav a:hover { text-decoration:underline; } 
 .view-nav a #check { margin-left:10px;margin-right:20px; display:inline-block;vertical-align: middle; min-width:19px;}
-.view-nav a span#check { width:19px;height:19px;background:white;border-radius:10px;}
+.view-nav a span#check { width:19px;height:19px;background:white;border-radius:10px;
+  img { margin:0; position:absolute;}
+
+  &:not(.on) img { display:none;  }
+  &.on { background:none; }
+}
+.view-nav .eText { display:flex;align-items: center; }
 
 
 .image-view .provider img,

@@ -268,7 +268,7 @@
 
           if(canvas.length) { //} && jQuery(imageElement).isInViewport()) {
 
-              jQuery(imageElement).next('.etext-content').addClass(!showET?"hide":"").text("(trying to load page in etext)");
+              jQuery(imageElement).next('.etext-content').addClass(showET!="open"?"hide":"").text("(trying to load page in etext)");
               var prom = _this.updateGetEtextPage(canvas[0]);              
               if(!prom) jQuery(imageElement).next('.etext-content').text("");
               else prom.then(function(val) {                
