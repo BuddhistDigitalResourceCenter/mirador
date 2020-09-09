@@ -5184,6 +5184,15 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   display: flex;
   align-items: center;
 }
+@keyframes toggle {
+  50% {
+    filter: opacity(0.125);
+  }
+}
+.view-nav .eText.on {
+  animation: 1s toggle 5;
+  animation-delay: 0.75s;
+}
 .image-view .provider img,
 .scroll-view .provider img {
   max-height: 80px;

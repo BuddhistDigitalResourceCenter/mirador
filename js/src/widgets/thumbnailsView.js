@@ -268,7 +268,7 @@
 
           if(canvas.length) { //} && jQuery(imageElement).isInViewport()) {
 
-              jQuery(imageElement).next('.etext-content').addClass(showET!="open"?"hide":"").text("(trying to load page in etext)");
+              jQuery(imageElement).next('.etext-content').addClass(showET!="open"?"hide":"").text("--");
               var prom = _this.updateGetEtextPage(canvas[0]);              
               if(!prom) jQuery(imageElement).next('.etext-content').text("");
               else prom.then(function(val) {                
@@ -302,7 +302,7 @@
 
                   } 
                   else { 
-                    jQuery(imageElement).next('.etext-content').addClass(css).text('(could  not find etext page)'); 
+                    jQuery(imageElement).next('.etext-content').addClass(css).text('?'); 
                   }
                 }
                 catch(e){ 
