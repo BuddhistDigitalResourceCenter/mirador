@@ -302,7 +302,7 @@
 
                   } 
                   else { 
-                    jQuery(imageElement).next('.etext-content').addClass(css).text('?'); 
+                    jQuery(imageElement).next('.etext-content').addClass(css).text('--'); 
                   }
                 }
                 catch(e){ 
