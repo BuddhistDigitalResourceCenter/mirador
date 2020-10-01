@@ -584,20 +584,30 @@ var Z = 0 ;
         _this.toggleFullScreen();
       });
 
-      this.element.find('#Zi').on('click', function() {
+      this.element.find('#Zi').on('click', function(e) {
         //console.log("i+",Z);
         Z += 0.1 ;
-        if(Z > 1) Z = 1 ;
+        if(Z > 1) {
+          Z = 1 ; 
+          jQuery("#Zi").removeClass("on");
+        } else if(Z > 0) {
+          jQuery("#Zo").addClass("on");
+        }
         window.setZoom(Z);
         jQuery("#zoomer").val(Z);
       });
 
-      this.element.find('#Zo').on('click', function() {
+      this.element.find('#Zo').on('click', function(e) {
         //console.log("i-",Z);
         Z -= 0.1 ;
-        if(Z < 0) Z = 0 ;
+        if(Z < 0) { 
+          Z = 0 ;
+          jQuery("#Zo").removeClass("on");
+        } else if(Z < 1) {
+          jQuery("#Zi").addClass("on");
+        }
         window.setZoom(Z);
-        jQuery("#zoomer").val(Z);
+        jQuery("#zoomer").val(Z);        
       });
 
     },
@@ -1261,7 +1271,7 @@ var Z = 0 ;
       '<div class="bottomPanel">',
       '<div class="thumbnails-open-close"></div>',
       '</div>',
-      '<div class="view-nav"><div><span class="DL"><ul class="select"></ul><a id="DL">Download Images<img src="/icons/DLw.png"></a></span><div id="control" class="on"><span id="Zo" title="{{t "zoomOut"}}" class="on"><img src="/icons/Zm.svg"></span><span id="Zi" title="{{t "zoomIn"}}" class="on"><img src="/icons/Zp.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a class="eText"><span id="check"><img src="/icons/check.svg"/></span>Show Etext<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
+      '<div class="view-nav"><div><span class="DL"><ul class="select"></ul><a id="DL">Download Images<img src="/icons/DLw.png"></a></span><div id="control" class="on"><span id="Zo" title="{{t "zoomOut"}}" class=""><img src="/icons/Zm.svg"></span><span id="Zi" title="{{t "zoomIn"}}" class="on"><img src="/icons/Zp.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a class="eText"><span id="check"><img src="/icons/check.svg"/></span>Show Etext<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
       '</div>',
       '</div>',
       '</div>'
