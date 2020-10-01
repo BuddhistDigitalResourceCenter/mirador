@@ -105,5 +105,7 @@
   "viewTypeTooltip": "Change view type",
   "visibleLabel": "visible",
   "within": "Within",
-  "yes": "Yes"
+  "yes": "Yes",
+  "zoomIn":"Zoom In",
+  "zoomOut":"Zoom Out"
 }

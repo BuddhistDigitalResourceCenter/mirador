@@ -5073,11 +5073,11 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .view-nav #control > *:first-child {
   border-left: none;
 }
-.view-nav #control span:not(#lang):not(.on) {
+.view-nav #control span:not(.on) {
   pointer-events: none;
 }
-.view-nav #control span:not(#lang):not(.on) img {
-  opacity: 0.5;
+.view-nav #control span:not(.on) img {
+  opacity: 0.35;
 }
 .view-nav a {
   color: white;

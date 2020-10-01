@@ -1,3 +1,5 @@
+var Z = 0 ;
+
 (function($) {
 
   $.Window = function(options) {
@@ -580,6 +582,22 @@
 
       jQuery(document).on("webkitfullscreenchange mozfullscreenchange fullscreenchange", function() {
         _this.toggleFullScreen();
+      });
+
+      this.element.find('#Zi').on('click', function() {
+        //console.log("i+",Z);
+        Z += 0.1 ;
+        if(Z > 1) Z = 1 ;
+        window.setZoom(Z);
+        jQuery("#zoomer").val(Z);
+      });
+
+      this.element.find('#Zo').on('click', function() {
+        //console.log("i-",Z);
+        Z -= 0.1 ;
+        if(Z < 0) Z = 0 ;
+        window.setZoom(Z);
+        jQuery("#zoomer").val(Z);
       });
 
     },
@@ -1243,7 +1261,7 @@
       '<div class="bottomPanel">',
       '<div class="thumbnails-open-close"></div>',
       '</div>',
-      '<div class="view-nav"><div><span class="DL"><ul class="select"></ul><a id="DL">Download Images<img src="/icons/DLw.png"></a></span><div id="control"><span title="mirador.decrease" class="on"><img src="/icons/Zm.svg"></span><span title="mirador.increase" class="on"><img src="/icons/Zp.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a class="eText"><span id="check"><img src="/icons/check.svg"/></span>Show Etext<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
+      '<div class="view-nav"><div><span class="DL"><ul class="select"></ul><a id="DL">Download Images<img src="/icons/DLw.png"></a></span><div id="control" class="on"><span id="Zo" title="{{t "zoomOut"}}" class="on"><img src="/icons/Zm.svg"></span><span id="Zi" title="{{t "zoomIn"}}" class="on"><img src="/icons/Zp.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a class="eText"><span id="check"><img src="/icons/check.svg"/></span>Show Etext<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
       '</div>',
       '</div>',
       '</div>'
