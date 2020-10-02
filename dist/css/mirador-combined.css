@@ -5053,6 +5053,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .view-nav #control {
   margin-left: auto;
   margin-right: 65px;
+  display: flex;
 }
 .view-nav #control img {
   height: 22px;
@@ -5106,6 +5107,38 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .view-nav a#DL select + span span.ui-selectmenu-text {
   height: 42px;
   box-sizing: border-box;
+}
+.view-nav #control #Zmenu {
+  position: relative;
+}
+.view-nav #control #Zmenu > span {
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 2px 5px;
+  background: black;
+  display: inline-block;
+  min-width: 50px;
+  text-align: center;
+}
+.view-nav #control #Zmenu > span::after {
+  content: '';
+  background: url(../images/icons.png) -325px -17px;
+  width: 12px;
+  height: 8px;
+  display: inline-block;
+  margin-left: 4px;
+  transform: scale(0.7);
+}
+.view-nav #control #Zmenu ul.select {
+  bottom: 16px;
+  top: auto;
+  width: 53px;
+  left: 12px;
+}
+.view-nav #control #Zmenu ul.select li {
+  padding-left: 8px;
+  padding-right: 8px;
 }
 .view-nav .DL {
   position: relative;
