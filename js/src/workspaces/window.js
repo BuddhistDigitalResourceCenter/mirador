@@ -268,7 +268,7 @@ var Z = 0 ;
       }));
 
       for(var i = 0 ; i <= 100 ; i += 25) {
-        jQuery(".view-nav #Zmenu ul.select").append("<li data-value='"+(i)+"'>"+(i)+"%</li>") ;            
+        jQuery(".view-nav #Zmenu ul.select").append("<li data-value='"+(i)+"'>"+(i === 0?"auto":(i)+"%")+"</li>") ;            
       }        
       
       if(manifest && manifest.rendering) {
@@ -284,7 +284,7 @@ var Z = 0 ;
           jQuery(".view-nav #Zmenu ul.select li").click(function(event){
             var elem = jQuery(event.currentTarget).closest("li");
             if(elem.attr("data-value")) {
-              jQuery("#Zmenu span").text( (elem.attr("data-value")) +"%");
+              jQuery("#Zmenu span").text( elem.attr("data-value") == 0 ? "auto":(elem.attr("data-value")) +"%");
               Z = Number(elem.attr("data-value"))  ;
               jQuery("#Zi,#Zo").addClass("on");
               if(Z == 100) jQuery("#Zi").removeClass("on");
@@ -1298,7 +1298,7 @@ var Z = 0 ;
       '<div class="bottomPanel">',
       '<div class="thumbnails-open-close"></div>',
       '</div>',
-      '<div class="view-nav"><div><span class="DL"><ul class="select"></ul><a id="DL">Download Images<img src="/icons/DLw.png"></a></span><div id="control" class="on"><span id="Zo" title="{{t "zoomOut"}}" class=""><img src="/icons/Zm.svg"></span><span id="Zmenu" class="on"><ul class="select"></ul><span>0%</span></span><span id="Zi" title="{{t "zoomIn"}}" class="on"><img src="/icons/Zp.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a class="eText"><span id="check"><img src="/icons/check.svg"/></span>Show Etext<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
+      '<div class="view-nav"><div><span class="DL"><ul class="select"></ul><a id="DL">Download Images<img src="/icons/DLw.png"></a></span><div id="control" class="on"><span id="Zo" title="{{t "zoomOut"}}" class=""><img src="/icons/Zm.svg"></span><span id="Zmenu" class="on"><ul class="select"></ul><span>auto</span></span><span id="Zi" title="{{t "zoomIn"}}" class="on"><img src="/icons/Zp.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a class="eText"><span id="check"><img src="/icons/check.svg"/></span>Show Etext<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
       '</div>',
       '</div>',
       '</div>'
