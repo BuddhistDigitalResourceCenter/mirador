@@ -373,6 +373,7 @@ var Z = 0 ;
                 if(check.hasClass("on")) { 
                   window.MiradorUseEtext = "open" ;
                   jQuery(".etext-content").removeClass("hide"); 
+                  jQuery(window).resize();
                 }
                 else {
                   window.MiradorUseEtext = true ;
