@@ -634,7 +634,7 @@ var Z = 0 ;
         }
         window.setZoom(Z/100);
         jQuery("#zoomer").val(Z/100);        
-        jQuery("#Zmenu span").text(Z+"%");
+        jQuery("#Zmenu span").text(Z > 0 ? Z+"%" : "auto");
       });
 
     },

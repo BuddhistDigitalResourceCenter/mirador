@@ -255,10 +255,10 @@
                                  '</a>',
                                  '{{/if}}',
                                  */
-                                 '<a class="mirador-osd-zoom-in hud-control" role="button" title="{{t "ZoomInTooltip" }}" aria-label="{{t "ZoomInTooltip"}}">',
+                                 '<a class="mirador-osd-zoom-out hud-control" role="button" title="{{t "ZoomOutTooltip"}}" aria-label="{{t "ZoomOutTooltip"}}">',
                                  '<span></span>',
                                  '</a>',
-                                 '<a class="mirador-osd-zoom-out hud-control" role="button" title="{{t "ZoomOutTooltip"}}" aria-label="{{t "ZoomOutTooltip"}}">',
+                                 '<a class="mirador-osd-zoom-in hud-control" role="button" title="{{t "ZoomInTooltip" }}" aria-label="{{t "ZoomInTooltip"}}">',
                                  '<span></span>',
                                  '</a>',
                                  /*
