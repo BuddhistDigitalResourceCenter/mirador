@@ -383,6 +383,9 @@ var Z = 0 ;
 
             }
           }, 350);
+
+          // clear timer if nothing happened
+          setTimeout(function() { clearInterval(timer); }, 3000);
         }
       }
 
