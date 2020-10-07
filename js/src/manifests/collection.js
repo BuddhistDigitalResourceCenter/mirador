@@ -41,10 +41,19 @@
         headers: headers
       });
 
-      console.log("collection?",headers);
+      //console.log("collection?",headers,this.request);
 
       this.request.done(function(jsonLd) {
         _this.jsonLd = jsonLd;
+      });
+
+      this.request.error(function(jsonLd) {
+        console.error("collection:",jsonLd);
+        _this.jsonLd = {
+          label:{"@language":"en","@value":jsonLd.status == 404 ? "images not available" : "problem fetching collection"},
+          sequences:[{canvases:[]}],
+          error:jsonLd.status
+        } ;
       });
     },
     initFromCollectionContent: function (collectionContent) {

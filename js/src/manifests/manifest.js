@@ -81,10 +81,19 @@ function parseJwt(token){
         headers: headers
       });
 
-      console.log("manifest?",headers);
+      //console.log("manifest?",headers,this.request);
 
       this.request.done(function(jsonLd) {
         _this.jsonLd = jsonLd;
+      });
+
+      this.request.error(function(jsonLd) {
+        console.error("manifest:",jsonLd);
+        _this.jsonLd = {
+          label:{"@language":"en","@value":jsonLd.status == 404 ? "images not available" : "problem fetching manifest"},
+          sequences:[{canvases:[]}],
+          error:jsonLd.status
+        } ;
       });
     },
     buildCanvasMap: function() {

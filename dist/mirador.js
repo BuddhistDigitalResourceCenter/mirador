@@ -35421,6 +35421,10 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
                       _this.eventEmitter.publish('manifestReceived', manifest);
                       jQuery("li[data-url='"+url+"']").remove();
                     });
+                    manifest.request.error(function() {
+                      _this.eventEmitter.publish('manifestReceived', manifest);
+                      jQuery("li[data-url='"+url+"']").remove();
+                    });
                   }
                 }
               });
@@ -36281,14 +36285,14 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
 
     fetchTplData: function() {
       var _this = this,location,manifest,pdf ;
-      if(!_this.manifest) {
+      if(!_this.manifest) {        
         _this.manifest = { 
           jsonLd: {
             label:{"@language":"en","@value":"loading manifest..."},
             sequences:[{canvases:[]}]
           }
         };
-      }
+      } 
       location = _this.manifest.location ;
       manifest = _this.manifest.jsonLd ;
       if(manifest) pdf = manifest.rendering ;
@@ -36316,7 +36320,8 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
         index: _this.state.getManifestIndex(manifest['@id']),
         pdf: pdf,
         url: _url,
-        manifId:manifest["@id"]
+        manifId:manifest["@id"],
+        error:manifest.error
       };
 
       this.tplData.repoImage = (function() {
@@ -36541,6 +36546,8 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
         '<div class="repo-image">',
           '{{#if repoImage}}',
           '<img data-src="{{repoImage}}" src={{repoImage}} alt="repoImg">',
+          '{{else if error}}',
+          '{{error}}',
           '{{else}}',
           '<span class="default-logo"></span>',
           '{{/if}}',
@@ -36959,10 +36966,19 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
         headers: headers
       });
 
-      console.log("collection?",headers);
+      //console.log("collection?",headers,this.request);
 
       this.request.done(function(jsonLd) {
         _this.jsonLd = jsonLd;
+      });
+
+      this.request.error(function(jsonLd) {
+        console.error("collection:",jsonLd);
+        _this.jsonLd = {
+          label:{"@language":"en","@value":jsonLd.status == 404 ? "images not available" : "problem fetching collection"},
+          sequences:[{canvases:[]}],
+          error:jsonLd.status
+        } ;
       });
     },
     initFromCollectionContent: function (collectionContent) {
@@ -37147,10 +37163,19 @@ function parseJwt(token){
         headers: headers
       });
 
-      console.log("manifest?",headers);
+      //console.log("manifest?",headers,this.request);
 
       this.request.done(function(jsonLd) {
         _this.jsonLd = jsonLd;
+      });
+
+      this.request.error(function(jsonLd) {
+        console.error("manifest:",jsonLd);
+        _this.jsonLd = {
+          label:{"@language":"en","@value":jsonLd.status == 404 ? "images not available" : "problem fetching manifest"},
+          sequences:[{canvases:[]}],
+          error:jsonLd.status
+        } ;
       });
     },
     buildCanvasMap: function() {

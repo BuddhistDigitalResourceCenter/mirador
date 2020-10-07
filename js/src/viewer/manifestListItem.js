@@ -83,14 +83,14 @@
 
     fetchTplData: function() {
       var _this = this,location,manifest,pdf ;
-      if(!_this.manifest) {
+      if(!_this.manifest) {        
         _this.manifest = { 
           jsonLd: {
             label:{"@language":"en","@value":"loading manifest..."},
             sequences:[{canvases:[]}]
           }
         };
-      }
+      } 
       location = _this.manifest.location ;
       manifest = _this.manifest.jsonLd ;
       if(manifest) pdf = manifest.rendering ;
@@ -118,7 +118,8 @@
         index: _this.state.getManifestIndex(manifest['@id']),
         pdf: pdf,
         url: _url,
-        manifId:manifest["@id"]
+        manifId:manifest["@id"],
+        error:manifest.error
       };
 
       this.tplData.repoImage = (function() {
@@ -343,6 +344,8 @@
         '<div class="repo-image">',
           '{{#if repoImage}}',
           '<img data-src="{{repoImage}}" src={{repoImage}} alt="repoImg">',
+          '{{else if error}}',
+          '{{error}}',
           '{{else}}',
           '<span class="default-logo"></span>',
           '{{/if}}',

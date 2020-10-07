@@ -259,6 +259,10 @@
                       _this.eventEmitter.publish('manifestReceived', manifest);
                       jQuery("li[data-url='"+url+"']").remove();
                     });
+                    manifest.request.error(function() {
+                      _this.eventEmitter.publish('manifestReceived', manifest);
+                      jQuery("li[data-url='"+url+"']").remove();
+                    });
                   }
                 }
               });
