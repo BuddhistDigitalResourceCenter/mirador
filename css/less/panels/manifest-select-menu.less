@@ -254,7 +254,6 @@
     display:inline-block;
   }
 
-
   .preview-thumb {
     display: flex;
     // position: absolute;
@@ -269,6 +268,12 @@
       width: 300px;
       height: 75px;
       background: gray;
+
+      &.error { display:flex; align-items: center; justify-content: center;
+
+        &::before { content:''; background:url(/icons/forbidden.svg); width:40px;height:40px;background-size:contain;
+          background-repeat:no-repeat}
+      }
     }
   }
 
