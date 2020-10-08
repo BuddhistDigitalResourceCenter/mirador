@@ -254,19 +254,23 @@
                   if(_this.lazyLoadingManifests.indexOf(url) === -1) {
                     _this.lazyLoadingManifests.push(url);
                     var manifest = new $.Manifest(url,'');                     
-                    _this.eventEmitter.publish('manifestQueued', manifest, '');                    
+                    
+                    _this.eventEmitter.publish('manifestQueued', manifest, '');   
+
                     manifest.request.done(function() {
-                      _this.eventEmitter.publish('manifestReceived', manifest);
                       jQuery("li[data-url='"+url+"']").remove();
+                      _this.eventEmitter.publish('manifestReceived', manifest);
                     });
+                      
                     manifest.request.error(function() {
+                      if(url) jQuery("li[data-url='"+url+"']").remove();
                       _this.eventEmitter.publish('manifestReceived', manifest);
-                      jQuery("li[data-url='"+url+"']").remove();
                     });
+                    
                   }
                 }
               });
-            }, 50, true)).scroll();
+            }, 50, true));
         },
 
         hide: function() {
