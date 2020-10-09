@@ -184,10 +184,12 @@
     bounds.bottom = bounds.top + el.height();
     bounds.right = bounds.left + el.width();
 
-    var ret = (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+    var valid = (bounds.left != 0 && bounds.right != bounds.left) ;
+
+    var ret = valid && (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
 
     //if(ret) 
-    //  console.log("vp",JSON.stringify(viewport));
+    //  console.log("vp",elem.style.cssText,JSON.stringify(bounds),JSON.stringify(viewport));
     
     return ret ;
 

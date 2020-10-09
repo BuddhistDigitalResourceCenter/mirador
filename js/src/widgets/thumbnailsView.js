@@ -235,8 +235,9 @@
     loadImages: function() {
       var _this = this;
       jQuery.each(_this.element.find("img"), function(key, value) {
+        //console.log("img?",key,$.isOnScreen(value, _this.lazyLoadingFactor));
         if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src") ) {
-          console.log("reload", key);
+          //console.log("reload", key);
           var url = jQuery(value).attr("data");
           if(!_this.imagePromise[url]) _this.loadImage(value, url);
         }
