@@ -5313,6 +5313,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   text-overflow: ellipsis;
   text-align: center;
 }
+.mirador-container ul.scroll-listing-thumbs li .thumb-label[lang="bo"] {
+  font-size: 20px;
+}
 .mirador-container .etext-content {
   box-sizing: border-box;
   overflow: hidden;

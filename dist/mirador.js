@@ -47168,7 +47168,7 @@ var Z = 0 ;
       '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
       '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" data-max-height={{height}} data-ratio={{ratio}} height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px;min-height:{{height}}px">',
       '<div class="etext-content" width="{{width}}" style="max-width:{{width}}px;height:auto;"></div>',
-      '<div class="thumb-label">{{title}}</div>',
+      '<div class="thumb-label" lang={{locale}}>{{title}}</div>',
       '</li>',
       '{{/thumbs}}',
       '</ul>',
@@ -47260,7 +47260,7 @@ var Z = 0 ;
           clabel
           .filter(function(e){ return !e["@language"] || e["@language"].startsWith(i18next.language); })
           .map(function(e) { return _this.labelToString([e],null,true); })
-          .join(i18next.t("dash"));
+          .join(i18next.t("_dash"));
         if(title === "p. ") title = "p. "+(Number(index)+1);        
 
         return {
@@ -47270,6 +47270,7 @@ var Z = 0 ;
           width:    width,
           height:   height,
           ratio:    width/height,
+          locale:   i18next.language,
           highlight: _this.currentImgIndex === index ? 'highlight' : ''
         };
       });
