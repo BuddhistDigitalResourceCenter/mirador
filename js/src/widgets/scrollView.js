@@ -133,7 +133,7 @@
           clabel
           .filter(function(e){ return !e["@language"] || e["@language"].startsWith(i18next.language); })
           .map(function(e) { return _this.labelToString([e],null,true); })
-          .join(i18next.t("_dash"));
+          .join(i18next.t("dash"));
         if(title === "p. ") title = "p. "+(Number(index)+1);        
 
         return {
