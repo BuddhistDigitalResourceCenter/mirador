@@ -127,7 +127,13 @@
 
         var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
 
-        var title = $.JsonLd.getTextValue(canvas.label);
+        var clabel = canvas.label;
+        if(!Array.isArray(clabel)) clabel = [ clabel ];
+        var title = 
+          clabel
+          .filter(function(e){ return !e["@language"] || e["@language"].startsWith(i18next.language); })
+          .map(function(e) { return _this.labelToString([e],null,true); })
+          .join(i18next.t("_dash"));
         if(title === "p. ") title = "p. "+(Number(index)+1);        
 
         return {

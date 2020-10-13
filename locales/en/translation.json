@@ -1,4 +1,5 @@
 {
+  "_dash":" - ",
   "addItem": "Add Item",
   "addNewObject": "Add new object from URL",
   "addSlotAbove": "Add Slot Above",
@@ -32,6 +33,7 @@
   "details": "Details",
   "disabledLayersTabMessage": "Image layers are only available in single-page view",
   "disabledOpacityMessage": "disabled",
+  "downloadI":"Download Images",
   "dotDashed": "Dots &amp; Dashes",
   "dropToLoad": "Drop to Load Manifest",
   "edit": "Edit",
@@ -91,6 +93,7 @@
   "searchText": "Search text",
   "seeAlso": "See Also",
   "selectGrid": "Select a grid below",
+  "showE":"Show Etext",
   "sidePanelTooltip": "Toggle the side panel",
   "solid": "Solid",
   "submit": "Submit",
