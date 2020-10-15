@@ -732,7 +732,8 @@ var Z = 0 ;
               imagesListLtr: _this.imagesListLtr,
               imagesListRtl: _this.imagesListRtl,
               vDirectionStatus: _this.vDirectionStatus,
-              thumbInfo: {thumbsHeight: 80, listingCssCls: 'panel-listing-thumbs', thumbnailCls: 'panel-thumbnail-view'}
+              thumbInfo: {thumbsHeight: 80, listingCssCls: 'panel-listing-thumbs', thumbnailCls: 'panel-thumbnail-view'},
+              labelToString:_this.labelToString
             });
           }
 
@@ -790,7 +791,7 @@ var Z = 0 ;
           searchTabAvailable: searchTabAvailable,
           annotationsTabAvailable: annotationsTabAvailable,
           hasStructures: hasStructures,
-          labelToString:this.labelToString
+          labelToString:_this.labelToString
         });
       } else {
         this.sidePanel.update('annotations', annotationsTabAvailable);

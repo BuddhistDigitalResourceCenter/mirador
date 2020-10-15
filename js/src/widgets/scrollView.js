@@ -89,7 +89,7 @@
     $.ScrollView.prototype.originalInitThumbs = $.ScrollView.prototype.initThumbs ;
     $.ScrollView.prototype.initThumbs = function( tplData, useThumbnailProperty) {
       var _this = this;
-            
+      
       tplData.thumbs = jQuery.map(this.imagesList, function(canvas, index) {
 
         if (canvas.width === 0) {

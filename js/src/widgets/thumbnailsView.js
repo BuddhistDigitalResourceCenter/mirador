@@ -20,7 +20,7 @@
       windowId:             null,
       panel:                false,
       lazyLoadingFactor:    1.35,  //should be >= 1
-      eventEmitter:         null
+      eventEmitter:         null,
     }, options);
 
     this.init();
@@ -59,7 +59,7 @@
 
     initThumbs: function( tplData, useThumbnailProperty) {
       var _this = this;
-
+      
       tplData.thumbs = jQuery.map(this.imagesList, function(canvas, index) {
 
         if (canvas.width === 0) {
@@ -75,8 +75,14 @@
         
         //console.log("canvas",canvas,index,thumbnailUrl,width,height);
 
-        var title = $.JsonLd.getTextValue(canvas.label);
-        if(title === "p. ") title = "p. "+(Number(index)+1);
+        var clabel = canvas.label;
+        if(!Array.isArray(clabel)) clabel = [ clabel ];
+        var title = 
+          clabel
+          .filter(function(e){ return e && (!e["@language"] || e["@language"].startsWith(i18next.language)); })
+          .map(function(e) { return _this.labelToString([e],null,true); })
+          .join(i18next.t("_dash"));
+        if(title === "p. ") title = "p. "+(Number(index)+1);       
 
         return {
           thumbUrl: thumbnailUrl,
