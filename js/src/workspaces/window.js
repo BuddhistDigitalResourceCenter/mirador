@@ -305,10 +305,21 @@ var Z = 0 ;
               if(url) {
                 elem.removeAttr("data-value").text(elem.text().replace(/.*(PDF|ZIP)$/,"Generating $1..."));
 
+                var headers = {};
+                var id_token = localStorage.getItem('id_token');
+                if(id_token && url && url.match(/[^?&]+[.]bdrc[.]io[/]/)) {
+                  var jwt = parseJwt(id_token);
+                  if(jwt.exp && jwt.exp > Date.now() / 1000)
+                    headers = { "Authorization": "Bearer " + id_token } ; // TODO no need if manifest not from BDRC x is token valid ?
+                }
+
+                console.log("header:",headers);
+
                 var request = jQuery.ajax({
                   url: url,
                   dataType:'json',
                   async: true,
+                  headers: headers
                 });
 
                 request.done(function(jsonLd) {
