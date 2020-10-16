@@ -135,7 +135,7 @@
 
       if(manifest.sequences[0].canvases) for( var i=0; i < manifest.sequences[0].canvases.length; i++) {
         var canvas = manifest.sequences[0].canvases[i];
-        if (canvas.width === 0) {
+        if (canvas.width === 0 || canvas["@id"].includes("/missing")) {
           continue;
         }
 
@@ -147,14 +147,18 @@
         var view ;
         if(canvas['@id'] && canvas['@id'].match(/bdr:[A-Z]/)) view = canvas['@id'].replace(/.*(bdr:[^:/]+).*/,"$1") ;
 
-        _this.allImages.push({
+        var img = {
           url: url,
           width: width,
           height: _this.thumbHeight,
           id: canvas['@id'],
           view: view,
           index: i
-        });
+        } ;
+        
+        //console.log("push:",img);
+
+        _this.allImages.push(img);
       }
 
       jQuery.each(jQuery(_this.allImages).first(), function(index, value) {
