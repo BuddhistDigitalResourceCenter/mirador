@@ -36339,20 +36339,46 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
         return '';
       })();
 
-      if(manifest.sequences[0].canvases) for( var i=0; i < manifest.sequences[0].canvases.length; i++) {
-        var canvas = manifest.sequences[0].canvases[i];
+      if(manifest.sequences[0].canvases) for( var i=-1; i < manifest.sequences[0].canvases.length; i++) {
+        var url ;
+        var canvas ;
+        if(i == -1) {
+          if(manifest.thumbnail) { 
+            canvas = manifest.thumbnail ;
+            url = manifest.thumbnail["@id"] ;
+            //console.log("usin manif.thumb",url);
+          }
+          else continue ;
+        }
+        else {          
+          var startC = manifest.sequences[0].startCanvas ;
+          if(startC) {
+            if(!Array.isArray(startC)) startC = [ startC ] ;
+            canvas = manifest.sequences[0].canvases[i];
+            for(var c in startC) {
+              if(startC[c] === canvas["@id"]) { 
+                url = _this.manifest.getThumbnailForCanvas(canvas, width);
+                console.log("startC:",url);
+                break ;
+              }
+            }
+            continue ;
+          }
+          else url = _this.manifest.getThumbnailForCanvas(canvas, width);
+        }
+
         if (canvas.width === 0 || canvas["@id"].includes("/missing")) {
           continue;
         }
 
+        if(url) url = url.replace(/\/max\//,"/,246/");
+
         var aspectRatio = canvas.height/canvas.width,
         width = (_this.thumbHeight/aspectRatio);
         if(width > canvas.width) width = canvas.width ;
-        var url = _this.manifest.getThumbnailForCanvas(canvas, width);
 
         var view ;
         if(canvas['@id'] && canvas['@id'].match(/bdr:[A-Z]/)) view = canvas['@id'].replace(/.*(bdr:[^:/]+).*/,"$1") ;
-
 
         var img = {
           url: url,
@@ -36363,7 +36389,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
           index: i
         } ;
         
-        console.log("push:",img);
+        //console.log("push:",img);
 
         _this.allImages.push(img);
       }
