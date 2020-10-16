@@ -353,7 +353,7 @@
         '<div class="preview-images {{#if error}}error{{/if}}" data-manifest={{manifId}}>',
         '{{#each images}}',
           '{{#if view}}',
-            '<a href="/view/{{view}}"><img data-src="{{url}}" width="{{width}}" height="{{height}}" class="preview-image flash" data-image-id="{{id}}"></a>',
+            '<a href="/view/{{view}}"><img data-youpi="{{url}}" data-src="{{url}}" width="{{width}}" height="{{height}}" class="preview-image flash" data-image-id="{{id}}"></a>',
           '{{else}}',  
             '<a href="#"><img data-src="{{url}}" width="{{width}}" height="{{height}}" class="preview-image flash" data-image-id="{{id}}"></a>',
           '{{/if}}',          

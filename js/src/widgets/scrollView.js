@@ -131,9 +131,13 @@
         if(!Array.isArray(clabel)) clabel = [ clabel ];
         var title = 
           clabel
-          .filter(function(e){ return e && (!e["@language"] || e["@language"].startsWith(i18next.language)); })
-          .map(function(e) { return _this.labelToString([e],null,true); })
-          .join(i18next.t("_dash"));
+          .filter(function(e){ return e && (!e["@language"] || e["@language"].startsWith(i18next.language) || i18next.language.startsWith(e["@language"])); });
+        if(!title.length) // fallback to english for page numbers when uilang not found
+          title = clabel 
+                  .filter(function(e){ return e && (!e["@language"] || e["@language"] === "en"); });
+        title = title
+                .map(function(e) { return _this.labelToString([e],null,true); })
+                .join(i18next.t("_dash"));
         if(title === "p. ") title = "p. "+(Number(index)+1);        
 
         return {
