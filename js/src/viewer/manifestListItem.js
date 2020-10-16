@@ -165,7 +165,7 @@
           continue;
         }
 
-        if(url) url = url.replace(/\/max\//,"/,246/");
+        if(url && canvas.height >= 246) url = url.replace(/\/max\//,"/,246/");
 
         var aspectRatio = canvas.height/canvas.width,
         width = (_this.thumbHeight/aspectRatio);
