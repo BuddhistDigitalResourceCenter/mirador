@@ -47259,7 +47259,6 @@ var Z = 0 ;
     $.ScrollView.prototype.originalInitThumbs = $.ScrollView.prototype.initThumbs ;
     $.ScrollView.prototype.initThumbs = function( tplData, useThumbnailProperty) {
       var _this = this;
-      var dash = i18next.t("_dash");
 
       tplData.thumbs = jQuery.map(this.imagesList, function(canvas, index) {
 
@@ -47298,28 +47297,8 @@ var Z = 0 ;
 
         var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
 
-        var clabel = canvas.label;
-        if(!Array.isArray(clabel)) clabel = [ clabel ];
-        var localeP = [], fallbackP = [], e;
-        for(var i in clabel) {
-          e = clabel[i];
-          if(e && !e["@language"]) { 
-            localeP.push(e);
-            fallbackP.push(e);
-          } else {
-            if(e["@language"] === "en") {
-              fallbackP.push(e);
-            }
-            if(e["@language"].startsWith(i18next.language) || i18next.language.startsWith(e["@language"])) {
-              localeP.push(e);
-            }
-          }
-        }
-        if(!localeP.length) localeP = fallbackP;
-        var title = localeP
-                    .map(function(e) { return _this.labelToString([e],null,true); })
-                    .join(dash);
-        if(title === "p. ") title = "p. "+(Number(index)+1);        
+        // initialisation
+        var title = (Number(index)+1);            
 
         /*
         var title = 
@@ -47333,7 +47312,6 @@ var Z = 0 ;
                 .join(i18next.t("_dash"));
         if(title === "p. ") title = "p. "+(Number(index)+1);        
         */
-        console.log("init thumb...");
 
         return {
           thumbUrl: thumbnailUrl,
@@ -48479,6 +48457,7 @@ $.SearchWithinResults.prototype = {
 
     initThumbs: function( tplData, useThumbnailProperty) {
       var _this = this;
+      var dash = i18next.t("_dash");
       
       tplData.thumbs = jQuery.map(this.imagesList, function(canvas, index) {
 
@@ -48495,7 +48474,10 @@ $.SearchWithinResults.prototype = {
         
         //console.log("canvas",canvas,index,thumbnailUrl,width,height);
 
-        
+        // initialisation
+        var title = ""+(Number(index)+1);        
+
+        /*
         var clabel = canvas.label;
         if(!Array.isArray(clabel)) clabel = [ clabel ];
         var title = 
@@ -48508,7 +48490,7 @@ $.SearchWithinResults.prototype = {
                 .map(function(e) { return _this.labelToString([e],null,true); })
                 .join(i18next.t("_dash"));
         if(title === "p. ") title = "p. "+(Number(index)+1);         
-  
+        */
 
         return {
           thumbUrl: thumbnailUrl,
@@ -48689,6 +48671,28 @@ $.SearchWithinResults.prototype = {
       imagePromise.done(function(image) {
 
         imageElement.src = image ;
+        var id = jQuery(imageElement).attr("data-image-id");
+        var canvas = _this.imagesList.filter(function(e) { return e["@id"] === id; });
+
+        //console.log("canvas",canvas);
+
+        if(canvas.length) {
+
+          var clabel = canvas[0].label;
+          if(!Array.isArray(clabel)) clabel = [ clabel ];
+          var title = 
+            clabel
+            .filter(function(e){ return e && (!e["@language"] || e["@language"].startsWith(i18next.language) || i18next.language.startsWith(e["@language"])); });
+          if(!title.length) // fallback to english for page numbers when uilang not found
+            title = clabel 
+                    .filter(function(e){ return e && (!e["@language"] || e["@language"] === "en"); });
+          title = title
+                  .map(function(e) { return _this.labelToString([e],null,true); })
+                  .join(i18next.t("_dash"));
+          if(title === "p. ") title = "p. "+(Number(index)+1);         
+
+          jQuery("[data-image-id='"+id+"'] ~ .thumb-label").html(title);
+        }
 
         setTimeout(function() { if(_this.ps) _this.ps.update(); }, 10);
 
@@ -48696,8 +48700,6 @@ $.SearchWithinResults.prototype = {
 
         if(showET) {
          
-          var id = jQuery(imageElement).attr("data-image-id"),
-              canvas = _this.imagesList.filter(function(e) { return e["@id"] === id; });
 
           if(canvas.length) { //} && jQuery(imageElement).isInViewport()) {
 
