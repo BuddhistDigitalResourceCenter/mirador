@@ -169,6 +169,21 @@
     if(window.providerUrl) { jQuery(".scroll-view .provider div").append("<img src='"+(window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl)+"'/>") ; }
     else if(window.providerAttr) { jQuery(".scroll-view .provider div").prepend("<span>"+this.labelToString(window.providerAttr)+"</span>"); }
 
+
+    var iniT = setInterval(function(){ 
+      console.log("scrollView postinit check...");
+      if(jQuery(".scroll-listing-thumbs li img[data-src^='http']:not([src^='http'])").length) {
+        jQuery(window).resize(); 
+        console.warn("RESIZED images should be visible");
+        clearInterval(init);
+      }
+    },350);  
+
+    setTimeout(function() {
+      console.log("scrollView postinit end");
+      clearInterval(iniT);
+    }, 5000);
+
     
   };
 
