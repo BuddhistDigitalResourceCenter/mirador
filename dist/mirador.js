@@ -47341,11 +47341,11 @@ var Z = 0 ;
 
 
     var iniT = setInterval(function(){ 
-      console.log("scrollView postinit check...");
-      if(jQuery(".scroll-listing-thumbs li img[data-src^='http']:not([src^='http'])").length) {
+      console.log("scrollView postinit check...",jQuery(".scroll-listing-thumbs li img[data-image-id^='http']:not([src^='http'])").length);
+      if(jQuery(".scroll-listing-thumbs li img[data-image-id^='http']:not([src^='http'])").length) {
         jQuery(window).resize(); 
-        console.warn("RESIZED images should be visible");
-        clearInterval(init);
+        console.log("RESIZED images should be visible");
+        clearInterval(iniT);
       }
     },350);  
 
