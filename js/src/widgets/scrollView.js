@@ -89,7 +89,8 @@
     $.ScrollView.prototype.originalInitThumbs = $.ScrollView.prototype.initThumbs ;
     $.ScrollView.prototype.initThumbs = function( tplData, useThumbnailProperty) {
       var _this = this;
-      
+      var dash = i18next.t("_dash");
+
       tplData.thumbs = jQuery.map(this.imagesList, function(canvas, index) {
 
         if (canvas.width === 0) {
@@ -129,6 +130,28 @@
 
         var clabel = canvas.label;
         if(!Array.isArray(clabel)) clabel = [ clabel ];
+        var localeP = [], fallbackP = [], e;
+        for(var i in clabel) {
+          e = clabel[i];
+          if(e && !e["@language"]) { 
+            localeP.push(e);
+            fallbackP.push(e);
+          } else {
+            if(e["@language"] === "en") {
+              fallbackP.push(e);
+            }
+            if(e["@language"].startsWith(i18next.language) || i18next.language.startsWith(e["@language"])) {
+              localeP.push(e);
+            }
+          }
+        }
+        if(!localeP.length) localeP = fallbackP;
+        var title = localeP
+                    .map(function(e) { return _this.labelToString([e],null,true); })
+                    .join(dash);
+        if(title === "p. ") title = "p. "+(Number(index)+1);        
+
+        /*
         var title = 
           clabel
           .filter(function(e){ return e && (!e["@language"] || e["@language"].startsWith(i18next.language) || i18next.language.startsWith(e["@language"])); });
@@ -139,6 +162,8 @@
                 .map(function(e) { return _this.labelToString([e],null,true); })
                 .join(i18next.t("_dash"));
         if(title === "p. ") title = "p. "+(Number(index)+1);        
+        */
+        console.log("init thumb...");
 
         return {
           thumbUrl: thumbnailUrl,
