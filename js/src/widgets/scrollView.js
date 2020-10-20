@@ -132,8 +132,7 @@
         var title = "(loading #"+(Number(index)+1)+")";  
 
         // missing pages
-        //if(canvas["@id"].includes("/missing")) 
-        title = _this.setThumbLabel([canvas],null,dash);
+        if(canvas["@id"].includes("/missing")) title = _this.setThumbLabel([canvas],null,dash);
         
 
         return {

@@ -47295,8 +47295,7 @@ var Z = 0 ;
         var title = "(loading #"+(Number(index)+1)+")";  
 
         // missing pages
-        //if(canvas["@id"].includes("/missing")) 
-        title = _this.setThumbLabel([canvas],null,dash);
+        if(canvas["@id"].includes("/missing")) title = _this.setThumbLabel([canvas],null,dash);
         
 
         return {
@@ -48514,9 +48513,8 @@ $.SearchWithinResults.prototype = {
         // initialisation
         var title = "(loading #"+(Number(index)+1)+")";        
 
-        // missing pages
-        //if(canvas["@id"].includes("/missing")) 
-        title = _this.setThumbLabel([canvas],null,dash);
+        // missing pages: 
+        if(canvas["@id"].includes("/missing")) title = _this.setThumbLabel([canvas],null,dash);
 
 
         return {
@@ -48690,6 +48688,9 @@ $.SearchWithinResults.prototype = {
         id = jQuery(imageElement).attr("data-image-id"),
         canvas = _this.imagesList.filter(function(e) { return e["@id"] === id; }),
         imagePromise = $.createImagePromise(url);
+
+
+      var dash = i18next.t("_dash");
   
       /* // surprisingly not changing anything ... 
       imagePromise.fail(function() {
@@ -48703,8 +48704,7 @@ $.SearchWithinResults.prototype = {
 
         //console.log("canvas",canvas);
 
-        //_this.setThumbLabel(canvas, imageElement);
-        
+        _this.setThumbLabel(canvas, imageElement, dash);        
 
         setTimeout(function() { if(_this.ps) _this.ps.update(); }, 10);
 
