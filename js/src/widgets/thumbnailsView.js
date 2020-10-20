@@ -24,6 +24,7 @@
     }, options);
 
     this.init();
+
   };
 
 
@@ -57,6 +58,56 @@
       this.listenForActions();
     },
 
+    setThumbLabel: function(canvas,doHtml,dash) {
+      var _this = this;
+      if(canvas.length) {
+
+        var id = canvas[0]["@id"];
+        var clabel = canvas[0].label;
+        if(!Array.isArray(clabel)) clabel = [ clabel ];
+        var localeP = [], fallbackP = [], e;
+        for(var i in clabel) {
+          e = clabel[i];
+          if(e && !e["@language"]) { 
+            localeP.push(e);
+            fallbackP.push(e);
+          } else {
+            if(e["@language"] === "en") {
+              fallbackP.push(e);
+            }
+            if(e["@language"].startsWith(i18next.language) || i18next.language.startsWith(e["@language"])) {
+              localeP.push(e);
+            }
+          }
+        }
+        if(!localeP.length) localeP = fallbackP;
+        var title = localeP
+                    .map(function(e) { return _this.labelToString([e],null,true); })
+                    .join(dash);
+        if(title === "p. ") title = "p. "+(Number(index)+1);       
+
+/*        
+        var clabel = canvas[0].label;
+        if(!Array.isArray(clabel)) clabel = [ clabel ];
+        var title = 
+          clabel
+          .filter(function(e){ return e && (!e["@language"] || e["@language"].startsWith(i18next.language) || i18next.language.startsWith(e["@language"])); });
+        if(!title.length) // fallback to english for page numbers when uilang not found
+          title = clabel 
+                  .filter(function(e){ return e && (!e["@language"] || e["@language"] === "en"); });
+        title = title
+                .map(function(e) { return _this.labelToString([e],null,true); })
+                .join(i18next.t("_dash"));
+        if(title === "p. ") title = "p. "+(Number(index)+1);         
+*/
+
+        if(doHtml) jQuery(doHtml).parent().find(".thumb-label").html(title).parent().find("img").attr("title",title);
+
+        return title;
+      }
+    },
+
+
     initThumbs: function( tplData, useThumbnailProperty) {
       var _this = this;
       var dash = i18next.t("_dash");
@@ -77,22 +128,11 @@
         //console.log("canvas",canvas,index,thumbnailUrl,width,height);
 
         // initialisation
-        var title = ""+(Number(index)+1);        
+        var title = "(loading #"+(Number(index)+1)+")";        
 
-        /*
-        var clabel = canvas.label;
-        if(!Array.isArray(clabel)) clabel = [ clabel ];
-        var title = 
-          clabel
-          .filter(function(e){ return e && (!e["@language"] || e["@language"].startsWith(i18next.language) || i18next.language.startsWith(e["@language"])); });
-        if(!title.length) // fallback to english for page numbers when uilang not found
-          title = clabel 
-                  .filter(function(e){ return e && (!e["@language"] || e["@language"] === "en"); });
-        title = title
-                .map(function(e) { return _this.labelToString([e],null,true); })
-                .join(i18next.t("_dash"));
-        if(title === "p. ") title = "p. "+(Number(index)+1);         
-        */
+        // missing pages: //if(canvas["@id"].includes("/missing")) 
+        title = _this.setThumbLabel([canvas],null,dash);
+
 
         return {
           thumbUrl: thumbnailUrl,
@@ -261,8 +301,10 @@
     },
 
     loadImage: function(imageElement, url) {
-      var _this = this,  
-      imagePromise = $.createImagePromise(url);
+      var _this = this,
+        id = jQuery(imageElement).attr("data-image-id"),
+        canvas = _this.imagesList.filter(function(e) { return e["@id"] === id; }),
+        imagePromise = $.createImagePromise(url);
   
       /* // surprisingly not changing anything ... 
       imagePromise.fail(function() {
@@ -273,28 +315,10 @@
       imagePromise.done(function(image) {
 
         imageElement.src = image ;
-        var id = jQuery(imageElement).attr("data-image-id");
-        var canvas = _this.imagesList.filter(function(e) { return e["@id"] === id; });
 
         //console.log("canvas",canvas);
 
-        if(canvas.length) {
-
-          var clabel = canvas[0].label;
-          if(!Array.isArray(clabel)) clabel = [ clabel ];
-          var title = 
-            clabel
-            .filter(function(e){ return e && (!e["@language"] || e["@language"].startsWith(i18next.language) || i18next.language.startsWith(e["@language"])); });
-          if(!title.length) // fallback to english for page numbers when uilang not found
-            title = clabel 
-                    .filter(function(e){ return e && (!e["@language"] || e["@language"] === "en"); });
-          title = title
-                  .map(function(e) { return _this.labelToString([e],null,true); })
-                  .join(i18next.t("_dash"));
-          if(title === "p. ") title = "p. "+(Number(index)+1);         
-
-          jQuery("[data-image-id='"+id+"'] ~ .thumb-label").html(title);
-        }
+        //_this.setThumbLabel(canvas, imageElement);        
 
         setTimeout(function() { if(_this.ps) _this.ps.update(); }, 10);
 
@@ -400,7 +424,7 @@
         '<ul class="{{listingCssCls}}" role="list" aria-label="Thumbnails">',
         '{{#thumbs}}',
         '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
-        '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" width="{{width}}" style="min-height:{{height}}px;">',
+        '<img class="thumbnail-image {{highlight}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" width="{{width}}" style="min-height:{{height}}px;">',
         '<div class="thumb-label">{{title}}</div>',
         '</li>',
         '{{/thumbs}}',

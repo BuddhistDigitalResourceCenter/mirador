@@ -39,7 +39,7 @@
       '<ul class="{{listingCssCls}}" role="list" aria-label="Thumbnails">',
       '{{#thumbs}}',
       '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
-      '<img class="thumbnail-image {{highlight}}" title="{{title}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" data-max-height={{height}} data-ratio={{ratio}} height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px;min-height:{{height}}px">',
+      '<img class="thumbnail-image {{highlight}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" data-max-height={{height}} data-ratio={{ratio}} height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px;min-height:{{height}}px">',
       '<div class="etext-content" width="{{width}}" style="max-width:{{width}}px;height:auto;"></div>',
       '<div class="thumb-label" lang={{locale}}>{{title}}</div>',
       '</li>',
@@ -89,6 +89,7 @@
     $.ScrollView.prototype.originalInitThumbs = $.ScrollView.prototype.initThumbs ;
     $.ScrollView.prototype.initThumbs = function( tplData, useThumbnailProperty) {
       var _this = this;
+      var dash = i18next.t("_dash");
 
       tplData.thumbs = jQuery.map(this.imagesList, function(canvas, index) {
 
@@ -128,20 +129,12 @@
         var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
 
         // initialisation
-        var title = (Number(index)+1);            
+        var title = "(loading #"+(Number(index)+1)+")";  
 
-        /*
-        var title = 
-          clabel
-          .filter(function(e){ return e && (!e["@language"] || e["@language"].startsWith(i18next.language) || i18next.language.startsWith(e["@language"])); });
-        if(!title.length) // fallback to english for page numbers when uilang not found
-          title = clabel 
-                  .filter(function(e){ return e && (!e["@language"] || e["@language"] === "en"); });
-        title = title
-                .map(function(e) { return _this.labelToString([e],null,true); })
-                .join(i18next.t("_dash"));
-        if(title === "p. ") title = "p. "+(Number(index)+1);        
-        */
+        // missing pages
+        //if(canvas["@id"].includes("/missing")) 
+        title = _this.setThumbLabel([canvas],null,dash);
+        
 
         return {
           thumbUrl: thumbnailUrl,
