@@ -152,7 +152,7 @@
             for(var c in startC) {
               if(startC[c] === canvas["@id"]) { 
                 url = _this.manifest.getThumbnailForCanvas(canvas, width);
-                console.log("startC:",url);
+                //console.log("startC:",url);
                 break ;
               }
             }
@@ -165,7 +165,8 @@
           continue;
         }
 
-        if(url && canvas.height >= 246) url = url.replace(/\/max\//,"/,246/");
+        //if(url && canvas.height >= 246) 
+        url = url.replace(/\/max\//,"/!2000,"+(_this.thumbHeight+1)+"/");
 
         var aspectRatio = canvas.height/canvas.width,
         width = (_this.thumbHeight/aspectRatio);
