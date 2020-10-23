@@ -48449,13 +48449,21 @@ $.SearchWithinResults.prototype = {
         var id = canvas[0]["@id"];
         var clabel = canvas[0].label;
         if(!Array.isArray(clabel)) clabel = [ clabel ];
+
+        //v3
+        /*
+        var title = _this.labelToString(clabel,null,true).join(dash);
+        if(title === "p. ") title = "p. "+(Number(index)+1);     
+        */
+
+        // v2
         var localeP = [], fallbackP = [], e;
         for(var i in clabel) {
           e = clabel[i];
           if(e && !e["@language"]) { 
             localeP.push(e);
             fallbackP.push(e);
-          } else {
+          } else if(e) {
             if(e["@language"] === "en") {
               fallbackP.push(e);
             }
@@ -48469,8 +48477,9 @@ $.SearchWithinResults.prototype = {
                     .map(function(e) { return _this.labelToString([e],null,true); })
                     .join(dash);
         if(title === "p. ") title = "p. "+(Number(index)+1);       
+        
 
-/*        
+/*   // v1  
         var clabel = canvas[0].label;
         if(!Array.isArray(clabel)) clabel = [ clabel ];
         var title = 
