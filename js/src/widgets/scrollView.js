@@ -129,7 +129,7 @@
         var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
 
         // initialisation
-        var title = _this.setThumbLabel([ canvas ], null, dash);  //= "(loading #"+(Number(index)+1)+")";  
+        var obj = _this.setThumbLabel([ canvas ], null, dash);  //= "(loading #"+(Number(index)+1)+")";  
 
         // missing pages
         if(canvas["@id"].includes("/missing")) title = _this.setThumbLabel([canvas],null,dash);
@@ -137,7 +137,8 @@
 
         return {
           thumbUrl: thumbnailUrl,
-          title:    title,
+          title:    obj.title,
+          lang:     obj.lang,
           id:       canvas['@id'],
           width:    width,
           height:   height,

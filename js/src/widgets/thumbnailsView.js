@@ -67,12 +67,13 @@
         if(!Array.isArray(clabel)) clabel = [ clabel ];
 
         //v3
-        /*
-        var title = _this.labelToString(clabel,null,true).join(dash);
+        var title = _this.labelToString(clabel,null,true,true), lang = "en";        
+        if(title.lang) lang = title.lang ;
+        if(title.values) title = title.values.join(dash);
         if(title === "p. ") title = "p. "+(Number(index)+1);     
-        */
 
         // v2
+        /*
         var localeP = [], fallbackP = [], e;
         for(var i in clabel) {
           e = clabel[i];
@@ -93,7 +94,7 @@
                     .map(function(e) { return _this.labelToString([e],null,true); })
                     .join(dash);
         if(title === "p. ") title = "p. "+(Number(index)+1);       
-        
+        */
 
 /*   // v1  
         var clabel = canvas[0].label;
@@ -112,7 +113,7 @@
 
         if(doHtml) jQuery(doHtml).parent().find(".thumb-label").html(title).parent().find("img").attr("title",title);
 
-        if(title) return title;
+        return { title: title, lang: lang };
       }
       return "";
     },
@@ -138,7 +139,7 @@
         //console.log("canvas",canvas,index,thumbnailUrl,width,height);
 
         // initialisation
-        var title = _this.setThumbLabel([ canvas ], null, dash);  //"(loading #"+(Number(index)+1)+")";        
+        var obj = _this.setThumbLabel([ canvas ], null, dash);  //"(loading #"+(Number(index)+1)+")";        
 
         // missing pages: 
         if(canvas["@id"].includes("/missing")) title = _this.setThumbLabel([canvas],null,dash);
@@ -146,7 +147,8 @@
 
         return {
           thumbUrl: thumbnailUrl,
-          title:    title.replace(/[.] +([0-9])/,".$1"),
+          title:    obj.title.replace(/[.] +([0-9])/,".$1"),
+          lang:     obj.lang,
           id:       canvas['@id'],
           width:    width,
           height:   height,
@@ -438,7 +440,7 @@
         '{{#thumbs}}',
         '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
         '<img class="thumbnail-image {{highlight}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" width="{{width}}" style="min-height:{{height}}px;">',
-        '<div class="thumb-label" lang={{locale}}>{{title}}</div>',
+        '<div class="thumb-label" lang={{lang}}>{{title}}</div>',
         '</li>',
         '{{/thumbs}}',
         '</ul>',
