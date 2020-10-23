@@ -103,8 +103,9 @@
 
         if(doHtml) jQuery(doHtml).parent().find(".thumb-label").html(title).parent().find("img").attr("title",title);
 
-        return title;
+        if(title) return title;
       }
+      return "";
     },
 
 
@@ -128,7 +129,7 @@
         //console.log("canvas",canvas,index,thumbnailUrl,width,height);
 
         // initialisation
-        var title = "(loading #"+(Number(index)+1)+")";        
+        var title = _this.setThumbLabel([ canvas ], null, dash);  //"(loading #"+(Number(index)+1)+")";        
 
         // missing pages: 
         if(canvas["@id"].includes("/missing")) title = _this.setThumbLabel([canvas],null,dash);
@@ -321,7 +322,7 @@
 
         //console.log("canvas",canvas);
 
-        _this.setThumbLabel(canvas, imageElement, dash);        
+        //_this.setThumbLabel(canvas, imageElement, dash);        
 
         setTimeout(function() { if(_this.ps) _this.ps.update(); }, 10);
 
@@ -428,7 +429,7 @@
         '{{#thumbs}}',
         '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
         '<img class="thumbnail-image {{highlight}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" width="{{width}}" style="min-height:{{height}}px;">',
-        '<div class="thumb-label">{{title}}</div>',
+        '<div class="thumb-label" lang={{locale}}>{{title}}</div>',
         '</li>',
         '{{/thumbs}}',
         '</ul>',
