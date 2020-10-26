@@ -68,8 +68,15 @@
 
         //v3
         var title = _this.labelToString(clabel,null,true,true), lang = "en";        
+        //console.log("title:",title);
         if(title.lang) lang = title.lang ;
-        if(title.values) title = title.values.join(dash);
+        if(title.values) { 
+          if(title.values.join) title = title.values.join(dash);
+          else { 
+            console.warn("cant join",title.values);
+            title = title.values ;
+          }
+        }
         if(title === "p. ") title = "p. "+(Number(index)+1);     
 
         // v2

@@ -135,7 +135,7 @@ function parseJwt(token){
       width = parseInt(width, 10);
 
       // Respecting the Model...
-      if (canvas.hasOwnProperty('thumbnail')) {
+      if (canvas && canvas.hasOwnProperty('thumbnail')) {
         // use the thumbnail image, prefer via a service
         if (typeof(canvas.thumbnail) == 'string') {
           thumbnailUrl = canvas.thumbnail;
@@ -160,7 +160,7 @@ function parseJwt(token){
       } else {
         // No thumbnail, use main image
         var resource ;
-        if(canvas.images) { 
+        if(canvas && canvas.images) { 
           resource = canvas.images[0].resource;
           service = resource['default'] ? resource['default'].service : resource.service;
           if (service.hasOwnProperty('@context')) {

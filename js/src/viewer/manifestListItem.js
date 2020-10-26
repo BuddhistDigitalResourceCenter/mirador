@@ -161,7 +161,7 @@
           else url = _this.manifest.getThumbnailForCanvas(canvas, width);
         }
 
-        if (canvas.width === 0 || canvas["@id"].includes("/missing")) {
+        if (!canvas || canvas.width === 0 || canvas["@id"].includes("/missing")) {
           continue;
         }
 
