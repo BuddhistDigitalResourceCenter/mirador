@@ -64,7 +64,9 @@
 
         var id = canvas[0]["@id"];
         var clabel = canvas[0].label;
-        if(!Array.isArray(clabel)) clabel = [ clabel ];
+
+        if(!clabel) return {title:"",lang:""};
+        else if(!Array.isArray(clabel)) clabel = [ clabel ];
 
         //v3
         var title = _this.labelToString(clabel,null,true,true), lang = "en";        
