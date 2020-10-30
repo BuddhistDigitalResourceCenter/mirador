@@ -353,12 +353,12 @@
 
           if(canvas.length) { //} && jQuery(imageElement).isInViewport()) {
 
-              jQuery(imageElement).next('.etext-content').addClass(showET!="open"?"hide":"").text("--");
+              jQuery(imageElement).next('.etext-content').addClass(showET!="open"?"hide":"").text("...");
               var prom = _this.updateGetEtextPage(canvas[0]);              
               if(!prom) jQuery(imageElement).next('.etext-content').text("");
               else prom.then(function(val) {                
                 
-                console.log("val",canvas[0].label[0],JSON.stringify(val,null,3));
+                console.log("val:",canvas[0].label[0],JSON.stringify(val,null,3));
 
                 try { 
 

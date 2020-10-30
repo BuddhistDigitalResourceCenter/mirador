@@ -385,6 +385,9 @@ var Z = 0 ;
                   window.MiradorUseEtext = "open" ;
                   jQuery(".etext-content").removeClass("hide"); 
                   jQuery(window).resize();
+                  setTimeout(function() {
+                    jQuery(window).resize();
+                  }, 350);
                 }
                 else {
                   window.MiradorUseEtext = true ;
