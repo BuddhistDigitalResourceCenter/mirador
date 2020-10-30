@@ -239,7 +239,7 @@
     }
 
     &.loaded-bo {
-      font-size: 16px; //~"calc( 4500 * (100% / 2500)  )";
+      font-size: ~"calc( 4500 * (100% / 2500)  )";
       //text-align:left;      
 
       div {
@@ -249,7 +249,7 @@
 
     &.unformated {
       white-space: normal; 
-      font-size:16px; //~"calc( 2500 * (100% / 2500)  )";
+      &:not(.loaded-bo) { font-size:16px; } //~"calc( 2500 * (100% / 2500)  )";
     }
     &:empty { height:0 !important; transition: all 1s ease-in-out; padding-top:0;padding-bottom:0;}
     
