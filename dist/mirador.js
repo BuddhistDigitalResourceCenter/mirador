@@ -48466,7 +48466,7 @@ $.SearchWithinResults.prototype = {
         //v3
         var title = _this.labelToString(clabel,null,true,true), lang = "en";        
         
-        console.log("title:",JSON.stringify(title));
+        //console.log("title:",JSON.stringify(title));
 
         if(title.lang) lang = title.lang ;
         if(title.values) { 
@@ -48711,11 +48711,16 @@ $.SearchWithinResults.prototype = {
     loadImages: function() {
       var _this = this;
       jQuery.each(_this.element.find("img"), function(key, value) {
-        //console.log("img?",key,$.isOnScreen(value, _this.lazyLoadingFactor));
+        //console.log("img?",key,$.isOnScreen(value, _this.lazyLoadingFactor));        
         if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src") ) {
-          //console.log("reload", key);
-          var url = jQuery(value).attr("data");
-          if(!_this.imagePromise[url]) _this.loadImage(value, url);
+          console.log("ONSCREEN",key);
+          setTimeout(function() {
+            if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src") ) {              
+              console.log("RELOAD", key);
+              var url = jQuery(value).attr("data");
+              if(!_this.imagePromise[url]) _this.loadImage(value, url);
+            }
+          }, 650);
         }
       });
     },
