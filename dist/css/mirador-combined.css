@@ -5295,7 +5295,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   display: inline-block;
 }
 .mirador-container ul.scroll-listing-thumbs li img {
-  background-color: #eee;
+  background-color: #333;
   min-height: 25px;
   min-width: 25px;
   margin: 0 auto;

@@ -19,7 +19,7 @@
       defaultThumbHeight:   150,
       windowId:             null,
       panel:                false,
-      lazyLoadingFactor:    1.35,  //should be >= 1
+      lazyLoadingFactor:    2,  //should be >= 1
       eventEmitter:         null,
     }, options);
 
@@ -70,7 +70,9 @@
 
         //v3
         var title = _this.labelToString(clabel,null,true,true), lang = "en";        
-        //console.log("title:",title);
+        
+        console.log("title:",JSON.stringify(title));
+
         if(title.lang) lang = title.lang ;
         if(title.values) { 
           if(title.values.join) title = title.values.join(dash);
@@ -273,6 +275,7 @@
 
     bindEvents: function() {
       var _this = this;
+        /* // remove blinking + image moving up/down bug in firefox!
       _this.element.find('img').on('load', function() {
         jQuery(this).hide().fadeIn(750,function(){
           // Under firefox $.show() used under display:none iframe does not change the display.
@@ -280,6 +283,7 @@
           jQuery(this).css('display', 'block');
         });
       });
+        */
 
       jQuery(_this.element).scroll(function() {
         _this.loadImages();
