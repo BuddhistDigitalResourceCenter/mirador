@@ -324,7 +324,8 @@ var Z = 0 ;
 
                 request.done(function(jsonLd) {
                   console.log("ajax:",jsonLd,elem);
-                  elem.html("<a download href='"+url.replace(/^(.*?bdrc.io).*/,"$1")+jsonLd.links+"'>"+elem.text().replace(/.*(PDF|ZIP).*/,"Download $1")+"</a>");
+                  elem.html("<a download href='"+//url.replace(/^(.*?bdrc.io).*/,"$1")
+                    jsonLd.links+"'>"+elem.text().replace(/.*(PDF|ZIP).*/,"Download $1")+"</a>");
                 });
 
               }
