@@ -6638,7 +6638,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 #collection-tree[lang='en'] li .jstree-anchor {
   font-size: 16px;
   line-height: 20px;
-  padding-bottom: 8px;
+  padding-bottom: 12px;
 }
 #collection-tree[lang='en'] .jstree-icon.jstree-ocl {
   vertical-align: 4px;
