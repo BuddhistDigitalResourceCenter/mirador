@@ -35379,8 +35379,8 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
 
               var elem = jQuery('#collection-tree-resizer');
               var w = jQuery(".mirador-container #manifest-select-menu").width();
-              var mw = 360 ;
-              if(w > 1600) mw = 475 ;
+              var mw = 240 ;
+              if(w > 1600) mw = 350 ;
 
               if(!elem.resizable("instance")) elem.resizable({
                 minWidth: Math.min(mw,w*0.25),
