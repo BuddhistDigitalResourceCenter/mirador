@@ -37,9 +37,10 @@
     $.CollectionTreeManifestsPanel.prototype = {
 
         init: function() {
-            var _this = this;
+            var _this = this;            
             this.element = jQuery(this.template({
-                showURLBox : this.state.getStateProperty('showAddFromURLBox')
+                showURLBox : this.state.getStateProperty('showAddFromURLBox'),
+                lang:i18next.language
             })).appendTo(this.appendTo);
             this.manifestListElement = this.element.find('ul');
 
@@ -216,19 +217,26 @@
 
               var elem = jQuery('#collection-tree-resizer');
               var w = jQuery(".mirador-container #manifest-select-menu").width();
+              var mw = 360 ;
+              if(w > 1600) mw = 475 ;
 
               if(!elem.resizable("instance")) elem.resizable({
-                minWidth: Math.min(240,w*0.25),
+                minWidth: Math.min(mw,w*0.25),
                 maxWidth: w*0.75,
                 handles: "e"
               });
               else {
-                elem.resizable("option","minWidth", Math.min(240,w*0.25));
+                elem.resizable("option","minWidth", Math.min(mw,w*0.25));
                 elem.resizable("option","maxWidth", w*0.75);
               }
+              
 
-              if(elem.width() > w*0.75) elem.width(w * 0.75);
-              else if(elem.width() < Math.min(240,w*0.25)) elem.width(Math.min(240,w*0.25));
+              var ew = elem.width() ; 
+              if(ew) {
+                console.log("W:"+w+":",ew,mw,w*0.25);
+                if(ew && ew > w*0.75) elem.width(w * 0.75);
+                else if(ew && ew < Math.min(mw,w*0.25)) elem.width(Math.min(mw,w*0.25));
+              }
 
             }, 100, true));
 
@@ -705,7 +713,7 @@
               '<div id="collection-tree-resizer">',            
                 '<div class="collec-tree-open-close">',
                 '</div>',
-                '<div id="collection-tree">',
+                '<div id="collection-tree" lang={{lang}}>',
                 '</div>',
               '</div>',
               '<div class="member-select-results">',
