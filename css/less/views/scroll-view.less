@@ -219,7 +219,7 @@
     background:rgba(255,255,255,0.9);
     //background:white;
     font-size:16px; //~"calc( 2000 * (100% / 2500)  )";
-    padding:~"calc(3% * 9 / 16)" 0;
+    //padding:~"calc(3% * 9 / 16)" 0;
     white-space: pre;
     word-break: break-all; 
     text-align: center;   
@@ -228,7 +228,7 @@
     
     &.hide { display:none; }
 
-    div {
+    div:not(.pad) {
       //border:1px solid black;
       text-align:left;
       background:white;
@@ -236,10 +236,11 @@
       margin:0 1%;
       padding: 35px;
       box-shadow: -3px 3px 15px rgba(0,0,0,0.35);
+      box-sizing:border-box;
     }
 
     &.loaded-bo {
-      font-size: ~"calc( 4500 * (100% / 2500)  )";
+      font-size: 24px; //~"calc( 4500 * (100% / 2500)  )";
       //text-align:left;      
 
       div {

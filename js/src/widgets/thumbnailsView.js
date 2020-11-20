@@ -362,14 +362,23 @@
 
           if(canvas.length) { //} && jQuery(imageElement).isInViewport()) {
 
-              jQuery(imageElement).next('.etext-content').addClass(showET!="open"?"hide":"").text("...");
+              var etc = jQuery(imageElement).next('.etext-content');
+              etc.addClass(showET!="open"?"hide":"").html("<div class='pad'></div><div>...</div><div class='pad'></div>");
+              if(window.currentZoom) {
+                var h0 = etc.height();
+                var p = etc.attr("data-h0",h0).find("div:not(.pad)");
+                var h = p.innerHeight();
+                p.attr("data-h",h).css({"transform":"scale("+1/window.currentZoom+")"});
+                etc.find(".pad").height(30 / window.currentZoom + 0.5 * (h / window.currentZoom - h0));
+              }
               var prom = _this.updateGetEtextPage(canvas[0]);              
               if(!prom) jQuery(imageElement).next('.etext-content').text("");
               else prom.then(function(val) {                
                 
-                console.log("val:",canvas[0].label[0],JSON.stringify(val,null,3));
+                //console.log("val:",canvas[0].label[0],JSON.stringify(val,null,3));
 
                 try { 
+
 
                   var labelArray = [],
                       txt = "",
@@ -392,11 +401,18 @@
                     if(!txt.match(/[\n\r]/)) 
                       css += "unformated " ;                  
 
-                    jQuery(imageElement).next('.etext-content').addClass(css).html("<div>"+txt+"</div>") ; 
+                    jQuery(imageElement).next('.etext-content').addClass(css).html("<div class='pad'></div><div>"+txt+"</div><div class='pad'></div>") ; 
 
                   } 
                   else { 
-                    jQuery(imageElement).next('.etext-content').addClass(css).text('--'); 
+                    jQuery(imageElement).next('.etext-content').addClass(css).html("<div class='pad'></div><div>--</div><div class='pad'></div>"); 
+                  }
+                  if(window.currentZoom) {
+                    var h0 = etc.height();
+                    var p = etc.attr("data-h0",h0).find("div:not(.pad)");
+                    var h = p.innerHeight();
+                    p.attr("data-h",h).css({"transform":"scale("+1/window.currentZoom+")"});
+                    etc.find(".pad").height(30 / window.currentZoom + 0.5 * (h / window.currentZoom - h0));
                   }
                 }
                 catch(e){ 
