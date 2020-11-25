@@ -165,6 +165,23 @@
     };
   };
 
+
+  var nativeranges = [
+    {"range": [0x0F00, 0x0FFF], "lt": "tibt"},
+  ];
+
+  $.guessTibtFromRange = function(str) {
+    var i, cp ;
+    var nl = nativeranges[0];
+    for(i = 0 ; i < str.length ; i++) {
+      cp = str.codePointAt(i);
+      if (cp > nl.range[0] && cp < nl.range[1]) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   // http://upshots.org/javascript/jquery-test-if-element-is-in-viewport-visible-on-screen
   $.isOnScreen = function(elem, outsideViewportFactor) {
     var factor = 1;

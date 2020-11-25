@@ -382,7 +382,7 @@
 
                   var labelArray = [],
                       txt = "",
-                      css = "" ;
+                      css = "loaded " ;
 
                   //var checkB = jQuery('#showEtext') ;
                   //if(!checkB || !checkB.get(0).checked) css += "hide " ;
@@ -395,7 +395,7 @@
                     }
 
                     //if(labelArray[0] && labelArray[0]["@language"] === "bo") 
-                    if(val[0] && val[0]["@language"] === "bo" && !txt.match(/[a-z]/)) 
+                    if(val[0] && val[0]["@language"] === "bo" && $.guessTibtFromRange(txt))  //!txt.match(/[a-z]/)) 
                       css += "loaded-bo " ;
 
                     if(!txt.match(/[\n\r]/)) 
