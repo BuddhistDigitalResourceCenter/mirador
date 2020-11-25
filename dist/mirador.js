@@ -43452,17 +43452,6 @@ var Z = 0 ;
         jQuery("#zoomer").val(Z/100);
         jQuery("#Zmenu span").text(Z+"%");
 
-
-        if(window.currentZoom) { 
-          jQuery(".scroll-listing-thumbs .etext-content:not(:empty)").each(function(i,e){
-            var etc = jQuery(e);
-            var h0 = etc.attr('data-h0');
-            var p = etc.find("div:not(.pad)");
-            var h = p.attr('data-h');
-            p.css({"transform":"scale("+1/window.currentZoom+")"});
-            etc.find(".pad").height(30 / window.currentZoom + 0.5 * (h / window.currentZoom - h0));
-          });
-        }
       });
 
       this.element.find('#Zo').on('click', function(e) {
