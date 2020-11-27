@@ -126,12 +126,15 @@
         var repo = _this.tplData.repository;
         if (manifest.logo) {
           if (typeof manifest.logo === "string")
-            return manifest.logo;
+            return manifest.logo.replace(/:\/\/ngcs-beta\.staatsbibliothek-berlin\.de\//, "://content.staatsbibliothek-berlin.de/");
           if (typeof manifest.logo['@id'] !== 'undefined')
             return manifest.logo['@id'];
         }
         return '';
       })();
+
+
+      var aspectRatio, width ;
 
       if(manifest.sequences[0].canvases) for( var i=-1; i < manifest.sequences[0].canvases.length; i++) {
         var url ;
@@ -151,6 +154,11 @@
             canvas = manifest.sequences[0].canvases[i];
             for(var c in startC) {
               if(startC[c] === canvas["@id"]) { 
+
+                aspectRatio = canvas.height/canvas.width;
+                width = (_this.thumbHeight/aspectRatio);
+                if(width > canvas.width) width = canvas.width ;
+                
                 url = _this.manifest.getThumbnailForCanvas(canvas, width);
                 //console.log("startC:",url);
                 break ;
@@ -158,7 +166,17 @@
             }
             continue ;
           }
-          else url = _this.manifest.getThumbnailForCanvas(canvas, width);
+          else {
+            canvas = manifest.sequences[0].canvases[i];
+
+            aspectRatio = canvas.height/canvas.width;
+            width = (_this.thumbHeight/aspectRatio);
+            if(width > canvas.width) width = canvas.width ;
+            
+            url = _this.manifest.getThumbnailForCanvas(canvas, width);
+
+            //console.log("startC:",canvas,url);
+          }
         }
 
         if (!canvas || canvas.width === 0 || canvas["@id"].includes("/missing")) {
@@ -166,9 +184,9 @@
         }
 
         //if(url && canvas.height >= 246) 
-        url = url.replace(/\/max\//,"/!2000,"+(_this.thumbHeight+1)+"/");
+        if(url && url.includes("/max/")) url = url.replace(/\/max\//,"/!2000,"+(_this.thumbHeight+1)+"/");
 
-        var aspectRatio = canvas.height/canvas.width,
+        aspectRatio = canvas.height/canvas.width;
         width = (_this.thumbHeight/aspectRatio);
         if(width > canvas.width) width = canvas.width ;
 
@@ -184,7 +202,7 @@
           index: i
         } ;
         
-        //console.log("push:",img);
+        //console.log("push:",url,img);
 
         _this.allImages.push(img);
       }
@@ -385,7 +403,7 @@
         '<div class="preview-images {{#if error}}error{{/if}}" data-manifest={{manifId}}>',
         '{{#each images}}',
           '{{#if view}}',
-            '<a href="/view/{{view}}"><img data-youpi="{{url}}" data-src="{{url}}" width="{{width}}" height="{{height}}" class="preview-image flash" data-image-id="{{id}}"></a>',
+            '<a href="/view/{{view}}"><img data-src="{{url}}" width="{{width}}" height="{{height}}" class="preview-image flash" data-image-id="{{id}}"></a>',
           '{{else}}',  
             '<a href="#"><img data-src="{{url}}" width="{{width}}" height="{{height}}" class="preview-image flash" data-image-id="{{id}}"></a>',
           '{{/if}}',          
