@@ -32,7 +32,13 @@
 
     console.log("provUrl",window.providerUrl);
 
-    if(window.providerUrl) { jQuery(".image-view .provider").append("<img src='"+(window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl)+"'/>"); }
+    if(window.providerUrl) { 
+      var logoUrl ; 
+      if(window.providerUrl["@id"]) logoUrl = window.providerUrl["@id"] ;
+      else logoUrl = window.providerUrl;
+      logoUrl = logoUrl.replace(/:\/\/ngcs-beta\.staatsbibliothek-berlin\.de\//, "://content.staatsbibliothek-berlin.de/");
+      jQuery(".image-view .provider").append("<img src='"+(logoUrl)+"'/>"); 
+    }
     else if(window.providerAttr) { jQuery(".image-view .provider").prepend("<span>"+this.labelToString(window.providerAttr)+"</span>"); }
   };
 

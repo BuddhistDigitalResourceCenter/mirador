@@ -267,9 +267,35 @@ var Z = 0 ;
         }
       }));
 
+      console.log("Z:",window.currentZoom);
+
       for(var i = 0 ; i <= 100 ; i += 25) {
         jQuery(".view-nav #Zmenu ul.select").append("<li data-value='"+(i)+"'>"+(i === 0?"auto":(i)+"%")+"</li>") ;            
-      }        
+      }  
+            
+      jQuery(".view-nav #Zmenu ul.select li").click(function(event){
+        var elem = jQuery(event.currentTarget).closest("li");
+        if(elem.attr("data-value")) {
+          jQuery("#Zmenu span").text( elem.attr("data-value") == 0 ? "auto":(elem.attr("data-value")) +"%");
+          Z = Number(elem.attr("data-value"))  ;
+          jQuery("#Zi,#Zo").addClass("on");
+          if(Z == 100) jQuery("#Zi").removeClass("on");
+          else if(Z == 0) jQuery("#Zo").removeClass("on");
+          window.setZoom(Z/100);
+          jQuery("#zoomer").val(Z/100);
+        }
+      });
+
+      jQuery(".view-nav #Zmenu").click(function(event) {                        
+        jQuery(".view-nav #Zmenu ul.select").toggleClass("on");
+        event.stopPropagation();
+        event.preventDefault();
+        return false;          
+      });
+
+      jQuery(document).click(function(event) {
+        jQuery(".view-nav #Zmenu ul.on").removeClass("on");
+      });
       
       if(manifest && manifest.rendering) {
         var render = manifest.rendering ;
@@ -280,19 +306,6 @@ var Z = 0 ;
             var txt = "Generate " + (render[i].format.includes("pdf")?"PDF":"ZIP");
             jQuery(".view-nav .DL ul.select").append("<li data-value='"+render[i]["@id"]+"'>"+txt+"</li>") ;            
           }        
-
-          jQuery(".view-nav #Zmenu ul.select li").click(function(event){
-            var elem = jQuery(event.currentTarget).closest("li");
-            if(elem.attr("data-value")) {
-              jQuery("#Zmenu span").text( elem.attr("data-value") == 0 ? "auto":(elem.attr("data-value")) +"%");
-              Z = Number(elem.attr("data-value"))  ;
-              jQuery("#Zi,#Zo").addClass("on");
-              if(Z == 100) jQuery("#Zi").removeClass("on");
-              else if(Z == 0) jQuery("#Zo").removeClass("on");
-              window.setZoom(Z/100);
-              jQuery("#zoomer").val(Z/100);
-            }
-          });
           
           jQuery(".view-nav .DL").addClass("on");
 
@@ -348,16 +361,9 @@ var Z = 0 ;
             return false;          
           });
 
-
-          jQuery(".view-nav #Zmenu").click(function(event) {                        
-            jQuery(".view-nav #Zmenu ul.select").toggleClass("on");
-            event.stopPropagation();
-            event.preventDefault();
-            return false;          
-          });
         
           jQuery(document).click(function(event) {
-            jQuery(".view-nav .DL ul.on, .view-nav #Zmenu ul.on").removeClass("on");
+            jQuery(".view-nav .DL ul.on").removeClass("on");
           });
 
 

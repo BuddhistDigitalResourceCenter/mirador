@@ -123,7 +123,7 @@
 
         var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
 
-        console.log("canvas:",canvas,index,thumbnailUrl,width,height);
+        //console.log("canvas:",canvas,index,thumbnailUrl,width,height);
 
         // initialisation
         var obj = _this.setThumbLabel([ canvas ], null, dash);  //= "(loading #"+(Number(index)+1)+")";  
