@@ -299,6 +299,8 @@
 
       
       jQuery(window).resize(function() {
+        if(window.currentZoom) delete window.currentZoom;
+        window.setZoom(0);
         var z = jQuery("#zoomer");        
         if(z.length && window.setZoom) window.setZoom(z.val());
       });

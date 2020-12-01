@@ -43102,18 +43102,18 @@ var Z = 0 ;
         if(_this.id === id){
           _this.destroy();
         }
-      }));
+      }));      
 
-      console.log("Z:",window.currentZoom);
-
-      for(var i = 0 ; i <= 100 ; i += 25) {
-        jQuery(".view-nav #Zmenu ul.select").append("<li data-value='"+(i)+"'>"+(i === 0?"auto":(i)+"%")+"</li>") ;            
+      for(var i = 100 ; i >= 0 ; i -= 25) {
+        jQuery(".view-nav #Zmenu ul.select").append("<li "+(i === 0?"data-selected='true'":"")+" data-value='"+(i)+"'>"+(i === 0?"auto":(i)+"%")+"</li>") ;            
       }  
             
       jQuery(".view-nav #Zmenu ul.select li").click(function(event){
         var elem = jQuery(event.currentTarget).closest("li");
         if(elem.attr("data-value")) {
-          jQuery("#Zmenu span").text( elem.attr("data-value") == 0 ? "auto":(elem.attr("data-value")) +"%");
+          jQuery("#Zmenu .select").find("[data-selected]").removeAttr("data-selected");
+          elem.attr("data-selected",true);
+          jQuery("#Zmenu span").text( elem.text() ); //attr("data-value") == 0 ? "auto":(elem.attr("data-value")) +"%");
           Z = Number(elem.attr("data-value"))  ;
           jQuery("#Zi,#Zo").addClass("on");
           if(Z == 100) jQuery("#Zi").removeClass("on");
@@ -43481,8 +43481,21 @@ var Z = 0 ;
         }
         window.setZoom(Z/100);
         jQuery("#zoomer").val(Z/100);
-        jQuery("#Zmenu span").text(Z+"%");
+        jQuery("#Zmenu .select").find("[data-selected]").removeAttr("data-selected");
 
+        var N = Number(jQuery("#Zmenu [data-auto]").attr("data-auto"));
+        jQuery("#Zmenu span").text(Z > 0 ? Math.floor(N*100 + (1-N)*Z)+"%":"auto");
+
+        if(window.currentZoom) { 
+          jQuery(".scroll-listing-thumbs .etext-content:not(:empty)").each(function(i,e){
+            var etc = jQuery(e);
+            var h0 = etc.attr('data-h0');
+            var p = etc.find("div:not(.pad)");
+            var h = p.attr('data-h');
+            p.css({"transform":"scale("+1/window.currentZoom+")"});
+            etc.find(".pad").height(30 / window.currentZoom + 0.5 * (h / window.currentZoom - h0));
+          });
+        }
       });
 
       this.element.find('#Zo').on('click', function(e) {
@@ -43496,8 +43509,10 @@ var Z = 0 ;
         }
         window.setZoom(Z/100);
         jQuery("#zoomer").val(Z/100);        
-        jQuery("#Zmenu span").text(Z > 0 ? Z+"%" : "auto");
+        jQuery("#Zmenu .select").find("[data-selected]").removeAttr("data-selected");
 
+        var N = Number(jQuery("#Zmenu [data-auto]").attr("data-auto"));
+        jQuery("#Zmenu span").text(Z > 0 ? Math.floor(N*100 + (1-N)*Z)+"%":"auto");
 
         if(window.currentZoom) { 
           jQuery(".scroll-listing-thumbs .etext-content:not(:empty)").each(function(i,e){
@@ -48751,6 +48766,8 @@ $.SearchWithinResults.prototype = {
 
       
       jQuery(window).resize(function() {
+        if(window.currentZoom) delete window.currentZoom;
+        window.setZoom(0);
         var z = jQuery("#zoomer");        
         if(z.length && window.setZoom) window.setZoom(z.val());
       });
