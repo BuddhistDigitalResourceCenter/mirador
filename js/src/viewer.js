@@ -163,7 +163,7 @@
       _this.eventEmitter.subscribe('manifestReceived', function(event, newManifest) {
 
         if(newManifest.jsonLd.logo)
-          window.providerUrl = newManifest.jsonLd.logo ;
+          window.providerUrl = newManifest.jsonLd.logo;
         else 
           window.providerAttr = newManifest.jsonLd.attribution ;
 

@@ -98,14 +98,8 @@
         }
         
         var aspectRatio = canvas.height/canvas.width,
-        width = (_this.thumbInfo.thumbsHeight/aspectRatio);
-        if(width > canvas.width) width = canvas.width ;
-        var height = width *  aspectRatio ;
-
-        //console.log("content",canvas,width,height,canvas.width,canvas.height,tplData.defaultHeight);
-
-        width = canvas.width ;
-        height = canvas.height ;
+          width = canvas.width,
+          height = canvas.height ;
 
         var img = canvas.images ;
         if(img && img.length && img[0]) {
@@ -119,7 +113,8 @@
             else { 
               img = canvas.images[0].resource;
               if(width === img.width && height === img.height) { // Taisho manifest
-                width = (_this.thumbInfo.thumbsHeight/aspectRatio);              
+                width =  Math.min(canvas.width,3440); // use best *reasonable* width 
+                // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
                 height = width *  aspectRatio ;
               }
             }
@@ -127,6 +122,8 @@
         }
 
         var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
+
+        console.log("canvas:",canvas,index,thumbnailUrl,width,height);
 
         // initialisation
         var obj = _this.setThumbLabel([ canvas ], null, dash);  //= "(loading #"+(Number(index)+1)+")";  
@@ -162,7 +159,15 @@
 
     console.log("provUrl",window.providerUrl,window.providerAttr,this.manifest);
 
-    if(window.providerUrl) { jQuery(".scroll-view .provider div").append("<img src='"+(window.providerUrl["@id"]?window.providerUrl["@id"]:window.providerUrl)+"'/>") ; }
+
+
+    if(window.providerUrl) { 
+      var logoUrl ; 
+      if(window.providerUrl["@id"]) logoUrl = window.providerUrl["@id"] ;
+      else logoUrl = window.providerUrl;
+      logoUrl = logoUrl.replace(/:\/\/ngcs-beta\.staatsbibliothek-berlin\.de\//, "://content.staatsbibliothek-berlin.de/");
+      jQuery(".scroll-view .provider div").append("<img src='"+(logoUrl)+"'/>") ; 
+    }
     else if(window.providerAttr) { jQuery(".scroll-view .provider div").prepend("<span>"+this.labelToString(window.providerAttr)+"</span>"); }
 
 

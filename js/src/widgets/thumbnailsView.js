@@ -318,10 +318,10 @@
       jQuery.each(_this.element.find("img"), function(key, value) {
         //console.log("img?",key,$.isOnScreen(value, _this.lazyLoadingFactor));        
         if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src") ) {
-          console.log("ONSCREEN",key);
+          //console.log("ONSCREEN",key);
           setTimeout(function() {
             if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src") ) {              
-              console.log("RELOAD", key);
+              //console.log("RELOAD", key);
               var url = jQuery(value).attr("data");
               if(!_this.imagePromise[url]) _this.loadImage(value, url);
             }
@@ -332,7 +332,8 @@
 
     loadImage: function(imageElement, url) {
       var _this = this,
-        id = jQuery(imageElement).attr("data-image-id"),
+        imelem = jQuery(imageElement),
+        id = imelem.attr("data-image-id"),
         canvas = _this.imagesList.filter(function(e) { return e["@id"] === id; }),
         imagePromise = $.createImagePromise(url);
 
@@ -345,6 +346,17 @@
       });
       */
 
+      imelem.on("load",function() {
+        var ratio = imageElement.naturalWidth / imageElement.naturalHeight;
+        //console.log("im:",ratio,imageElement.naturalWidth,imageElement.naturalHeight,imelem.attr("data-ratio"));
+        if(ratio != imelem.attr("data-ratio")) {
+          imelem
+          .attr({"data-ratio":ratio,"width":imageElement.naturalWidth,"height":imageElement.naturalHeight})
+          .css("min-height",(imelem.width() / ratio)+"px");
+        }
+        //if(imelem.attr("data-max-height") != )
+      });
+      
       imagePromise.done(function(image) {
 
         imageElement.src = image ;
@@ -451,9 +463,11 @@
               height = width * aspectRatio;
             }
             else { 
+
               img = image.images[0].resource;
               if(width === img.width && height === img.height) { // Taisho manifest
-                width = (_this.thumbInfo.thumbsHeight/aspectRatio);              
+                width =  Math.min(image.width,3440); // use best *reasonable* width 
+                // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
                 height = width *  aspectRatio ;
               }
             }
