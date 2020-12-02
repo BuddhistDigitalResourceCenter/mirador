@@ -267,8 +267,8 @@ var Z = 0 ;
         }
       }));      
 
-      for(var i = 100 ; i >= 0 ; i -= 25) {
-        jQuery(".view-nav #Zmenu ul.select").append("<li "+(i === 0?"data-selected='true'":"")+" data-value='"+(i)+"'>"+(i === 0?"auto":(i)+"%")+"</li>") ;            
+      for(var i = 150 ; i >= 0 ; i -= 5) {
+        jQuery(".view-nav #Zmenu ul.select").append("<li "+ /*(i === 0?"data-selected='true'":"")+*/ " data-value='"+(i)+"'>"+(/*i === 0?"auto":*/(i)+"%")+"</li>") ;            
       }  
             
       jQuery(".view-nav #Zmenu ul.select li").click(function(event){
@@ -634,20 +634,22 @@ var Z = 0 ;
       });
 
       this.element.find('#Zi').on('click', function(e) {
-        //console.log("i+",Z);
-        Z += 5 ;
-        if(Z > 100) {
-          Z = 100 ; 
-          jQuery("#Zi").removeClass("on");
-        } else if(Z > 0) {
-          jQuery("#Zo").addClass("on");
-        }
-        window.setZoom(Z/100);
-        jQuery("#zoomer").val(Z/100);
-        jQuery("#Zmenu .select").find("[data-selected]").removeAttr("data-selected");
 
-        var N = Number(jQuery("#Zmenu [data-auto]").attr("data-auto"));
-        jQuery("#Zmenu span").text(Z > 0 ? Math.floor(N*100 + (1-N)*Z)+"%":"auto");
+        var selec = jQuery("#Zmenu .select li[data-selected]");
+
+        if(selec.length) {
+          selec.removeAttr("data-selected");
+          selec = selec.prev();
+          selec.attr("data-selected","true");
+          Z = Number(selec.attr("data-value"));
+
+          window.setZoom(Z/100);
+          jQuery("#zoomer").val(Z/100);
+          jQuery("#Zmenu span").text(selec.text());
+
+          jQuery("#Zo").addClass("on");
+          if(selec.index() === 0) jQuery("#Zi").removeClass("on");
+        }
 
         if(window.currentZoom) { 
           jQuery(".scroll-listing-thumbs .etext-content:not(:empty)").each(function(i,e){
@@ -662,21 +664,22 @@ var Z = 0 ;
       });
 
       this.element.find('#Zo').on('click', function(e) {
-        //console.log("i-",Z);
-        Z -= 5 ;
-        if(Z < 0) { 
-          Z = 0 ;
-          jQuery("#Zo").removeClass("on");
-        } else if(Z < 100) {
+        
+        var selec = jQuery("#Zmenu .select li[data-selected]");
+
+        if(selec.length) {
+          selec.removeAttr("data-selected");
+          selec = selec.next();
+          selec.attr("data-selected","true");
+          Z = Number(selec.attr("data-value"));
+
+          window.setZoom(Z/100);
+          jQuery("#zoomer").val(Z/100);
+          jQuery("#Zmenu span").text(selec.text());
+
           jQuery("#Zi").addClass("on");
+          if(selec.hasClass("zoom0")) jQuery("#Zo").removeClass("on");
         }
-        window.setZoom(Z/100);
-        jQuery("#zoomer").val(Z/100);        
-        jQuery("#Zmenu .select").find("[data-selected]").removeAttr("data-selected");
-
-        var N = Number(jQuery("#Zmenu [data-auto]").attr("data-auto"));
-        jQuery("#Zmenu span").text(Z > 0 ? Math.floor(N*100 + (1-N)*Z)+"%":"auto");
-
         if(window.currentZoom) { 
           jQuery(".scroll-listing-thumbs .etext-content:not(:empty)").each(function(i,e){
             var etc = jQuery(e);
@@ -1351,7 +1354,7 @@ var Z = 0 ;
       '<div class="bottomPanel">',
       '<div class="thumbnails-open-close"></div>',
       '</div>',
-      '<div class="view-nav"><div><span class="DL"><ul class="select"></ul><a id="DL">{{t "downloadI"}}<img src="/icons/DLw.png"></a></span><div id="control" class="on"><span id="Zo" title="{{t "zoomOut"}}" class=""><img src="/icons/Zm.svg"></span><span id="Zmenu" class="on"><ul class="select"></ul><span>auto</span></span><span id="Zi" title="{{t "zoomIn"}}" class="on"><img src="/icons/Zp.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a class="eText"><span id="check"><img src="/icons/check.svg"/></span>{{t "showE"}}<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
+      '<div class="view-nav"><div><span class="DL"><ul class="select"></ul><a id="DL">{{t "downloadI"}}<img src="/icons/DLw.png"></a></span><div id="control" class="on"><span id="Zo" title="{{t "zoomOut"}}" class=""><img src="/icons/Zm.svg"></span><span id="Zmenu" class="on"><ul class="select"></ul><span> </span></span><span id="Zi" title="{{t "zoomIn"}}" class="on"><img src="/icons/Zp.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a class="eText"><span id="check"><img src="/icons/check.svg"/></span>{{t "showE"}}<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
       '</div>',
       '</div>',
       '</div>'

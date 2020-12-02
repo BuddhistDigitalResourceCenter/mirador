@@ -93,6 +93,9 @@
 
       &[data-value] { cursor:pointer; }
 
+      &:nth-child(even):not(.zoom0),
+      &[data-value^="-"] { display:none; }
+
       padding:5px 15px ;
       background-color:#fff;
       color:#222;

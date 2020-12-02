@@ -5178,6 +5178,10 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .view-nav ul.select li[data-value] {
   cursor: pointer;
 }
+.view-nav ul.select li:nth-child(even):not(.zoom0),
+.view-nav ul.select li[data-value^="-"] {
+  display: none;
+}
 .view-nav ul.select li a {
   display: block;
   color: #222;
