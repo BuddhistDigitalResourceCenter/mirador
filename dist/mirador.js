@@ -48771,8 +48771,7 @@ $.SearchWithinResults.prototype = {
       jQuery(window).resize(function() {
         if(window.currentZoom) delete window.currentZoom;
         window.setZoom(0);
-        //var z = jQuery("#zoomer");        
-        //if(z.length && window.setZoom) window.setZoom(z.val());
+        window.setZoom(Z/100);
       });
       
     },
@@ -48821,9 +48820,9 @@ $.SearchWithinResults.prototype = {
       imelem.on("load",function() {
         var ratio = imageElement.naturalWidth / imageElement.naturalHeight;
         //console.log("im:",ratio,imageElement.naturalWidth,imageElement.naturalHeight,imelem.attr("data-ratio"));
-        if(ratio != imelem.attr("data-ratio")) {
+        if(ratio != imelem.attr("data-ratio") ) {
           imelem
-          .attr({"data-ratio":ratio,"width":imageElement.naturalWidth,"height":imageElement.naturalHeight})
+          .attr({"data-ratio":ratio}) //,"width":imageElement.naturalWidth,"height":imageElement.naturalHeight})
           .css("min-height",(imelem.width() / ratio)+"px");
         }
         //if(imelem.attr("data-max-height") != )
