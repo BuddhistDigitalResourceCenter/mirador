@@ -5322,7 +5322,6 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 }
 .mirador-container .etext-content {
   box-sizing: border-box;
-  overflow: hidden;
   font-family: "Tibetan Machine Uni";
   color: black;
   background: rgba(255, 255, 255, 0.9);
@@ -5331,7 +5330,6 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   word-break: break-all;
   text-align: center;
   margin: 0 auto;
-  overflow-x: auto;
 }
 .mirador-container .etext-content.hide {
   display: none;
