@@ -27,8 +27,51 @@
 
     $.ScrollView.prototype.originalReloadImages = $.ThumbnailsView.prototype.reloadImages ;
     $.ScrollView.prototype.reloadImages = function(newThumbHeight, triggerShow, useThumbnailProperty) {
-        if(useThumbnailProperty == undefined) useThumbnailProperty = false ;
-        return this.originalReloadImages(newThumbHeight, triggerShow, useThumbnailProperty ) ;
+        
+      var _this = this;
+      this.thumbInfo.thumbsHeight = newThumbHeight;
+      if(useThumbnailProperty == undefined) useThumbnailProperty = false ;
+
+      jQuery.each(this.imagesList, function(index, image) {
+        var aspectRatio = image.height/image.width,
+        width = (_this.thumbInfo.thumbsHeight/aspectRatio),
+        height = _this.thumbInfo.thumbsHeight,
+        id = image['@id'];      
+
+        //console.log("reload",image,width,height,image.width,image.height,_this.thumbInfo.thumbsHeight);
+        width = image.width;
+        height = image.height;
+
+        var img = canvas.images ;
+        if(img && img.length && img[0]) {
+          img = img[0] ;
+          if(img.resource && img.resource.service ) {
+            img = img.resource.service ;
+            if(img.width && img.height) {
+              width = Math.min(img.width, 3500);
+              height = width *aspectRatio;
+            }            
+            else { 
+              img = canvas.images[0].resource;
+              if(width === img.width && height === img.height) { // Taisho manifest
+                width =  Math.min(canvas.width,3500); // use best *reasonable* width 
+                // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
+                height = width *  aspectRatio ;
+              }
+            }
+          }        
+        }
+
+        var newThumbURL = $.getThumbnailForCanvas(image, width, useThumbnailProperty);        
+        var imageElement = _this.element.find('img[data-image-id="'+id+'"]');
+        imageElement.attr('data', newThumbURL).attr('height', image.height).attr('width', image.width).attr('src', '');
+      });
+      if (triggerShow) {
+        this.show();
+      }
+        
+        /*return this.originalReloadImages(newThumbHeight, triggerShow, useThumbnailProperty ) ;*/
+
     } ;
 
 

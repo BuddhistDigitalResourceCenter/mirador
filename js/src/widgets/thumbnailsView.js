@@ -454,31 +454,6 @@
         width = image.width;
         height = width * aspectRatio;
 
-        /* // why load full width image as thumb ??
-        width = image.width;
-        height = image.height;
-
-        var img = image.images ;       
-        if(img && img.length && img[0]) {
-          img = img[0] ;
-          if(img.resource && img.resource.service ) {
-            img = img.resource.service ;
-            if(img.width && img.height) {
-              width = img.width;
-              height = width * aspectRatio;
-            }
-            else { 
-
-              img = image.images[0].resource;
-              if(width === img.width && height === img.height) { // Taisho manifest
-                width =  Math.min(image.width,3500); // use best *reasonable* width 
-                // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
-                height = width *  aspectRatio ;
-              }
-            }
-          }        
-        }
-        */
 
         var newThumbURL = $.getThumbnailForCanvas(image, width, useThumbnailProperty);        
         var imageElement = _this.element.find('img[data-image-id="'+id+'"]');
