@@ -168,7 +168,9 @@ function parseJwt(token){
           }
           var cl = $.Iiif.getComplianceLevelFromProfile(service.profile);
           if (cl == 0  && service.width) {
-            thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version);
+            // fix for very big images like bdr:I1CZ5005
+            if(Number(service.width) < 3500) thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version);
+            else thumbnailUrl = $.Iiif.makeUriWithWidth(service, 3500, version);
           } else {
             thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
           }

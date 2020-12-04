@@ -452,6 +452,10 @@
         //console.log("reload",image,width,height,image.width,image.height,_this.thumbInfo.thumbsHeight);
 
         width = image.width;
+        height = width * aspectRatio;
+
+        /* // why load full width image as thumb ??
+        width = image.width;
         height = image.height;
 
         var img = image.images ;       
@@ -467,13 +471,15 @@
 
               img = image.images[0].resource;
               if(width === img.width && height === img.height) { // Taisho manifest
-                width =  Math.min(image.width,3440); // use best *reasonable* width 
+                width =  Math.min(image.width,3500); // use best *reasonable* width 
                 // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
                 height = width *  aspectRatio ;
               }
             }
           }        
         }
+        */
+
         var newThumbURL = $.getThumbnailForCanvas(image, width, useThumbnailProperty);        
         var imageElement = _this.element.find('img[data-image-id="'+id+'"]');
         imageElement.attr('data', newThumbURL).attr('height', image.height).attr('width', image.width).attr('src', '');

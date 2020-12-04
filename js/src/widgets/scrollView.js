@@ -107,13 +107,13 @@
           if(img.resource && img.resource.service ) {
             img = img.resource.service ;
             if(img.width && img.height) {
-              width = img.width;
+              width = Math.min(img.width, 3500);
               height = width *aspectRatio;
             }            
             else { 
               img = canvas.images[0].resource;
               if(width === img.width && height === img.height) { // Taisho manifest
-                width =  Math.min(canvas.width,3440); // use best *reasonable* width 
+                width =  Math.min(canvas.width,3500); // use best *reasonable* width 
                 // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
                 height = width *  aspectRatio ;
               }
@@ -123,7 +123,7 @@
 
         var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
 
-        //console.log("canvas:",canvas,index,thumbnailUrl,width,height);
+        console.log("canvas:",canvas,index,thumbnailUrl,width,height);
 
         // initialisation
         var obj = _this.setThumbLabel([ canvas ], null, dash);  //= "(loading #"+(Number(index)+1)+")";  
