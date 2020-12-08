@@ -47288,22 +47288,32 @@ var Z = 0 ;
         width = image.width;
         height = image.height;
 
-        var img = image.images ;       
+        var img = image.images ;      
         if(img && img.length && img[0]) {
           img = img[0] ;
           if(img.resource && img.resource.service ) {
             img = img.resource.service ;
             if(img.width && img.height) {
-              width = Math.min(img.width,3500);
-              height = width * aspectRatio;
-            }
+              if(img.width > img.height) {
+                width = Math.min(img.width, 3500);
+                height = width *aspectRatio;
+              } else {
+                height = Math.min(img.height, 3500);
+                width = height / aspectRatio;
+              }
+            }            
             else { 
-
               img = image.images[0].resource;
               if(width === img.width && height === img.height) { // Taisho manifest
-                width =  Math.min(image.width,3500); // use best *reasonable* width 
-                // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
-                height = width *  aspectRatio ;
+
+                if(image.width > image.height) {
+                  width =  Math.min(image.width,3500); // use best *reasonable* width 
+                  height = width *  aspectRatio ;
+                  // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
+                } else {
+                  height = Math.min(image.height,3500); // use best *reasonable* width 
+                  width = height / aspectRatio ;
+                }
               }
             }
           }        
@@ -47311,7 +47321,7 @@ var Z = 0 ;
 
         var newThumbURL = $.getThumbnailForCanvas(image, width, useThumbnailProperty);        
         var imageElement = _this.element.find('img[data-image-id="'+id+'"]');
-        imageElement.attr('data', newThumbURL).attr('height', image.height).attr('width', image.width).attr('src', '');
+        imageElement.attr('data', newThumbURL).attr('height', height).attr('width', width).attr('src', '');
       });
       if (triggerShow) {
         this.show();
@@ -47391,21 +47401,33 @@ var Z = 0 ;
           width = canvas.width,
           height = canvas.height ;
 
+
         var img = canvas.images ;
         if(img && img.length && img[0]) {
           img = img[0] ;
           if(img.resource && img.resource.service ) {
             img = img.resource.service ;
             if(img.width && img.height) {
-              width = Math.min(img.width, 3500);
-              height = width *aspectRatio;
+              if(img.width > img.height) {
+                width = Math.min(img.width, 3500);
+                height = width *aspectRatio;
+              } else {
+                height = Math.min(img.height, 3500);
+                width = height / aspectRatio;
+              }
             }            
             else { 
               img = canvas.images[0].resource;
               if(width === img.width && height === img.height) { // Taisho manifest
-                width =  Math.min(canvas.width,3500); // use best *reasonable* width 
-                // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
-                height = width *  aspectRatio ;
+
+                if(canvas.width > canvas.height) {
+                  width =  Math.min(canvas.width,3500); // use best *reasonable* width 
+                  height = width *  aspectRatio ;
+                  // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
+                } else {
+                  height = Math.min(canvas.height,3500); // use best *reasonable* width 
+                  width = height / aspectRatio ;
+                }
               }
             }
           }        
@@ -50447,12 +50469,26 @@ $.SearchWithinResults.prototype = {
         if (service.hasOwnProperty('@context')) {
           version = $.Iiif.getVersionFromContext(service['@context']);
         }
-        var cl = $.Iiif.getComplianceLevelFromProfile(service.profile);
-        if (cl == 0  && service.width && width > 200) {
-          // fix for very big images like bdr:I1CZ5005
-          if(Number(service.width) < 3500) thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version);
-          else thumbnailUrl = $.Iiif.makeUriWithWidth(service, 3500, version);
+        var cl = $.Iiif.getComplianceLevelFromProfile(service.profile),w,h; 
+        if (cl == 0  && service.width && width > 200) {          
+          w = Number(service.width); 
+          h = Number(service.height);
+          if(w > h) {
+            // fix for very big images like bdr:I1CZ5005
+            if(w < 3500) thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version); 
+            else thumbnailUrl = $.Iiif.makeUriWithWidth(service, 3500, version);
+          } else {
+            // fix for loading big portrait images 
+            if(h < 3500) thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version); 
+            else thumbnailUrl = $.Iiif.makeUriWithWidth(service, Math.round(3500 * w/h), version);
+          }
         } else {
+          // same for Taisho case
+          w = Number(canvas.width); 
+          h = Number(canvas.height);
+          if(w > h) width = Math.min(w,3500);
+          else if(h < 3500) width = w;
+          else width = Math.round(3500 * w/h);
           thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
         }
       } 

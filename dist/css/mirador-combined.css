@@ -5279,9 +5279,6 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .scroll-view .provider > div {
   display: inline-flex;
 }
-.scroll-view.v-direction-rtl .provider > div {
-  right: 0;
-}
 .image-view .provider {
   right: 0;
 }

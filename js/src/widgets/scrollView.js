@@ -42,22 +42,32 @@
         width = image.width;
         height = image.height;
 
-        var img = image.images ;       
+        var img = image.images ;      
         if(img && img.length && img[0]) {
           img = img[0] ;
           if(img.resource && img.resource.service ) {
             img = img.resource.service ;
             if(img.width && img.height) {
-              width = Math.min(img.width,3500);
-              height = width * aspectRatio;
-            }
+              if(img.width > img.height) {
+                width = Math.min(img.width, 3500);
+                height = width *aspectRatio;
+              } else {
+                height = Math.min(img.height, 3500);
+                width = height / aspectRatio;
+              }
+            }            
             else { 
-
               img = image.images[0].resource;
               if(width === img.width && height === img.height) { // Taisho manifest
-                width =  Math.min(image.width,3500); // use best *reasonable* width 
-                // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
-                height = width *  aspectRatio ;
+
+                if(image.width > image.height) {
+                  width =  Math.min(image.width,3500); // use best *reasonable* width 
+                  height = width *  aspectRatio ;
+                  // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
+                } else {
+                  height = Math.min(image.height,3500); // use best *reasonable* width 
+                  width = height / aspectRatio ;
+                }
               }
             }
           }        
@@ -65,7 +75,7 @@
 
         var newThumbURL = $.getThumbnailForCanvas(image, width, useThumbnailProperty);        
         var imageElement = _this.element.find('img[data-image-id="'+id+'"]');
-        imageElement.attr('data', newThumbURL).attr('height', image.height).attr('width', image.width).attr('src', '');
+        imageElement.attr('data', newThumbURL).attr('height', height).attr('width', width).attr('src', '');
       });
       if (triggerShow) {
         this.show();
@@ -145,21 +155,33 @@
           width = canvas.width,
           height = canvas.height ;
 
+
         var img = canvas.images ;
         if(img && img.length && img[0]) {
           img = img[0] ;
           if(img.resource && img.resource.service ) {
             img = img.resource.service ;
             if(img.width && img.height) {
-              width = Math.min(img.width, 3500);
-              height = width *aspectRatio;
+              if(img.width > img.height) {
+                width = Math.min(img.width, 3500);
+                height = width *aspectRatio;
+              } else {
+                height = Math.min(img.height, 3500);
+                width = height / aspectRatio;
+              }
             }            
             else { 
               img = canvas.images[0].resource;
               if(width === img.width && height === img.height) { // Taisho manifest
-                width =  Math.min(canvas.width,3500); // use best *reasonable* width 
-                // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
-                height = width *  aspectRatio ;
+
+                if(canvas.width > canvas.height) {
+                  width =  Math.min(canvas.width,3500); // use best *reasonable* width 
+                  height = width *  aspectRatio ;
+                  // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
+                } else {
+                  height = Math.min(canvas.height,3500); // use best *reasonable* width 
+                  width = height / aspectRatio ;
+                }
               }
             }
           }        

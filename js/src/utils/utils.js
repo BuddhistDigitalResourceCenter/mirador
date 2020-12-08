@@ -62,12 +62,26 @@
         if (service.hasOwnProperty('@context')) {
           version = $.Iiif.getVersionFromContext(service['@context']);
         }
-        var cl = $.Iiif.getComplianceLevelFromProfile(service.profile);
-        if (cl == 0  && service.width && width > 200) {
-          // fix for very big images like bdr:I1CZ5005
-          if(Number(service.width) < 3500) thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version);
-          else thumbnailUrl = $.Iiif.makeUriWithWidth(service, 3500, version);
+        var cl = $.Iiif.getComplianceLevelFromProfile(service.profile),w,h; 
+        if (cl == 0  && service.width && width > 200) {          
+          w = Number(service.width); 
+          h = Number(service.height);
+          if(w > h) {
+            // fix for very big images like bdr:I1CZ5005
+            if(w < 3500) thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version); 
+            else thumbnailUrl = $.Iiif.makeUriWithWidth(service, 3500, version);
+          } else {
+            // fix for loading big portrait images 
+            if(h < 3500) thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version); 
+            else thumbnailUrl = $.Iiif.makeUriWithWidth(service, Math.round(3500 * w/h), version);
+          }
         } else {
+          // same for Taisho case
+          w = Number(canvas.width); 
+          h = Number(canvas.height);
+          if(w > h) width = Math.min(w,3500);
+          else if(h < 3500) width = w;
+          else width = Math.round(3500 * w/h);
           thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
         }
       } 
