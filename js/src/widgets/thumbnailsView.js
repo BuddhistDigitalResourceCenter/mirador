@@ -58,7 +58,7 @@
       this.listenForActions();
     },
 
-    setThumbLabel: function(canvas,doHtml,dash) {
+    setThumbLabel: function(canvas,doHtml,dash,index) {
       var _this = this;
       if(canvas.length) {
 
@@ -150,10 +150,10 @@
         //console.log("canvas",canvas,index,thumbnailUrl,width,height);
 
         // initialisation
-        var obj = _this.setThumbLabel([ canvas ], null, dash);  //"(loading #"+(Number(index)+1)+")";        
+        var obj = _this.setThumbLabel([ canvas ], null, dash, index);  //"(loading #"+(Number(index)+1)+")";        
 
         // missing pages: 
-        if(canvas["@id"].includes("/missing")) title = _this.setThumbLabel([canvas],null,dash);
+        if(canvas["@id"].includes("/missing")) title = _this.setThumbLabel([canvas],null,dash,index);
 
 
         return {
