@@ -72,16 +72,16 @@
             else thumbnailUrl = $.Iiif.makeUriWithWidth(service, 3500, version);
           } else {
             // fix for loading big portrait images 
-            if(h < 3500) thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version); 
-            else thumbnailUrl = $.Iiif.makeUriWithWidth(service, Math.round(3500 * w/h), version);
+            if(h < 2500) thumbnailUrl = $.Iiif.makeUriWithWidth(service, "max", version); 
+            else thumbnailUrl = $.Iiif.makeUriWithWidth(service, Math.round(2000 * w/h), version);
           }
         } else {
           // same for Taisho case
           w = Number(canvas.width); 
           h = Number(canvas.height);
           if(w > h) width = Math.min(w,3500);
-          else if(h < 3500) width = w;
-          else width = Math.round(3500 * w/h);
+          else if(h < 2500) width = w;
+          else width = Math.round(2000 * w/h);
           thumbnailUrl = $.Iiif.makeUriWithWidth(service, width, version);
         }
       } 

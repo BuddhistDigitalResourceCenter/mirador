@@ -52,7 +52,7 @@
                 width = Math.min(img.width, 3500);
                 height = width *aspectRatio;
               } else {
-                height = Math.min(img.height, 3500);
+                height = Math.min(img.height, 2000);
                 width = height / aspectRatio;
               }
             }            
@@ -65,7 +65,7 @@
                   height = width *  aspectRatio ;
                   // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
                 } else {
-                  height = Math.min(image.height,3500); // use best *reasonable* width 
+                  height = Math.min(image.height,2000); // use best *reasonable* width 
                   width = height / aspectRatio ;
                 }
               }
@@ -166,7 +166,7 @@
                 width = Math.min(img.width, 3500);
                 height = width *aspectRatio;
               } else {
-                height = Math.min(img.height, 3500);
+                height = Math.min(img.height, 2000);
                 width = height / aspectRatio;
               }
             }            
@@ -179,7 +179,7 @@
                   height = width *  aspectRatio ;
                   // width = (_this.thumbInfo.thumbsHeight/aspectRatio); // deprecated
                 } else {
-                  height = Math.min(canvas.height,3500); // use best *reasonable* width 
+                  height = Math.min(canvas.height,2000); // use best *reasonable* width 
                   width = height / aspectRatio ;
                 }
               }
