@@ -28,7 +28,7 @@
        
       var headers = {};
       var id_token = localStorage.getItem('id_token');
-      if(id_token && collectionUri && collectionUri.match(/[^?&]+[.]bdrc[.]io[/]/)) {
+      if(id_token && collectionUri && collectionUri.match(/[^?&]+[.]bdrc[.]io[/]/) && !collectionUri.match(/bdr:[WI]0?(SAT|EAP|CDL|IA|SBB|LOC|LULDC)/)) {
         var jwt = parseJwt(id_token);
         if(jwt.exp && jwt.exp > Date.now() / 1000)
           headers = { "Authorization": "Bearer " + id_token } ; // TODO no need if manifest not from BDRC x is token valid ?
