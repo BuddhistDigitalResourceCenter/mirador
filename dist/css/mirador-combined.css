@@ -5046,6 +5046,33 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   opacity: 0.35;
   pointer-events: none;
 }
+.mirador-container .mirador-viewer .view-nav > div > .DL:not(.on) {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mirador-container .mirador-viewer .view-nav > div > .DL:not(.on) > ul,
+.mirador-container .mirador-viewer .view-nav > div > .DL:not(.on) > a {
+  opacity: 0.35;
+  pointer-events: none;
+}
+.mirador-container .mirador-viewer .view-nav > div > .DL:not(.on)::after {
+  content: '?';
+  position: absolute;
+  right: calc(100% + 15px);
+  background: #d73449;
+  color: white;
+  font-size: 12px;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  font-weight: 800;
+  line-height: 22px;
+  text-align: center;
+}
 .view-nav > div {
   justify-content: flex-start;
   align-items: center;

@@ -29,6 +29,14 @@
   & > div { width:1222px; display:flex;justify-content: space-between;align-items:center; 
   
     & > *:not(.on) { opacity:0.35; pointer-events:none; }
+  
+    & > .DL:not(.on) { opacity:1;pointer-events:auto;
+      & >  ul, & > a { opacity:0.35;pointer-events:none; }
+      &::after { content:'?'; position: absolute;right:~"calc(100% + 15px)";background:#d73449;color:white;font-size:12px; display:inline-block;
+        width:22px;height:22px;border-radius: 11px;align-items: center;justify-content: center; margin-top:10px; font-weight:800;line-height:22px;
+        text-align:center;
+      }
+    }
   } 
 }
 

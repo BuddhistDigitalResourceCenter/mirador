@@ -307,7 +307,7 @@ var Z = 0 ;
             jQuery(".view-nav .DL ul.select").append("<li data-value='"+render[i]["@id"]+"'>"+txt+"</li>") ;            
           }        
           
-          jQuery(".view-nav .DL").addClass("on");
+          jQuery(".view-nav .DL").addClass("on").removeAttr("title");
 
           jQuery(".view-nav .DL ul li").click(function(event){
 
@@ -408,6 +408,9 @@ var Z = 0 ;
           // clear timer if nothing happened
           setTimeout(function() { clearInterval(timer); }, 3000);
         }
+      } else {
+        var val = i18next.t("cannotDL", { interpolation: { escapeValue: false } });
+        jQuery(".DL").attr("title",jQuery("<div/>").html(val).text());
       }
 
       /*
