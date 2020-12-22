@@ -16,7 +16,7 @@
     "browse":"浏览藏品",
     "cancel": "取消",
     "cancelAnnotation": "你想取消这个注释吗？",
-    "cannotDL":"The provider of these images does not provide PDF download functionality. BDRC does not have a copy of these images and thus cannot provide a PDF export either.",
+    "cannotDL":"The provider of these images does not provide PDF download functionality.\nBDRC does not have a copy of these images and thus cannot provide a PDF export either.",
     "changeLayout": "更改布局",
     "changeLayoutTooltip": "更改可见插槽的数量",
     "close": "关闭",

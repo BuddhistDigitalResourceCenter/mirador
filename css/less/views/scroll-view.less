@@ -75,7 +75,13 @@
 
 .view-nav {
 
-  .DL { position:relative; }
+  .DL { position:relative;   }
+
+
+  #control ul.select {   
+    li:nth-child(even):not(.zoom0),
+    li[data-value^="-"] { display:none; }
+  }
 
   ul.select { 
 
@@ -100,9 +106,6 @@
     li {
 
       &[data-value] { cursor:pointer; }
-
-      &:nth-child(even):not(.zoom0),
-      &[data-value^="-"] { display:none; }
 
       padding:5px 15px ;
       background-color:#fff;
