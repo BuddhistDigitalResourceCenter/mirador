@@ -43862,6 +43862,7 @@ var Z = 0 ;
         this.focusModules.ImageView.updateImage(canvasID);
       }
       this.toggleFocus('ImageView', 'ImageView');
+      jQuery(".view-nav").hide();
     },
 
     toggleBookView: function(canvasID) {
@@ -43917,6 +43918,7 @@ var Z = 0 ;
       //if(!this.getEtextPage && !window.getEtextPage) { jQuery("#showEtext").parent().hide(); }
       //else { jQuery("#showEtext").parent().show(); }
       this.toggleFocus('ScrollView', '');
+      jQuery(".view-nav").show();
     },
 
     updateFocusImages: function(imageList) {
