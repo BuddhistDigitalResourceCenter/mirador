@@ -4090,6 +4090,14 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 #viewer.embed .mirador-osd {
   height: calc(100% - 60px);
 }
+@media (max-width: 768px) {
+  #viewer.embed .nav-bar-top {
+    padding: 0 10px;
+  }
+  #viewer.embed .nav-bar-top a#collec {
+    padding-left: 0;
+  }
+}
 /*
 .nav-bar-top div { display:flex; align-items:center; }
 .nav-bar-top div > a { display:inline-block;  }
@@ -4814,6 +4822,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   z-index: 1;
 }
 .mirador-container .mirador-hud > .goto-page input + .ui-selectmenu-menu {
+  z-index: 110;
   max-height: 210px;
   overflow: auto;
   overflow-x: hidden;
@@ -5019,8 +5028,23 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   font-weight: normal;
   font-style: normal;
 }
+.mirador-container .view-container {
+  display: flex;
+}
+.mirador-container .view-container .bottomPanel {
+  order: 1;
+}
+.mirador-container .view-container .scroll-view {
+  order: 2;
+}
+.mirador-container .view-container .view-nav {
+  order: 3;
+}
+.mirador-container .view-container .image-view {
+  order: 4;
+}
 .mirador-container .mirador-viewer .scroll-view {
-  position: relative;
+  position: absolute;
   height: calc(100% - 80px);
 }
 .mirador-container .mirador-viewer .view-nav {
@@ -5073,6 +5097,32 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   line-height: 22px;
   text-align: center;
 }
+.mirador-container.embed .mirador-viewer .scroll-view {
+  height: calc(100% - 60px);
+}
+#viewer.embed .view-nav {
+  height: 60px;
+}
+.mirador-container .overlay {
+  z-index: 1000;
+}
+@media (max-width: 768px) {
+  .mirador-container .mirador-viewer .view-nav > div {
+    padding: 0 10px;
+  }
+  .mirador-container .mirador-viewer .view-nav #control {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .mirador-container .mirador-viewer .view-nav .eText #check {
+    margin-left: 0;
+  }
+}
+/*
+#viewer .bottomPanel { z-index:102; } 
+#viewer .overlay { z-index:105;}
+#viewer .ui-selectmenu-menu .overlay { z-index:105;}
+*/
 .view-nav > div {
   justify-content: flex-start;
   align-items: center;
