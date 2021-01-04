@@ -34,6 +34,14 @@
 
         init: function() {
 
+            // TODO use "responsive" flag to work in library as well
+            var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin");
+            if(origin && origin.startsWith("BDRCLibApp")) {
+              jQuery('<div class="mobile-button top"><img src="/icons/burger.svg"/></div>')
+              .appendTo(this.appendTo);
+            }
+
+
             //this.mainMenuHeight = this.parent.mainMenuSettings.height;
             //this.mainMenuWidth = this.parent.mainMenuSettings.width;
             this.element
@@ -174,6 +182,7 @@
       '<a href="/show/{{resID}}" id="return" class="active">{{t "return"}}</a>',
       '{{/if}}',
       '<a id="collec"><span>{{t "browse"}}</span></a><a id="vol"><span>Reading View</span></a><a id="image"><span>Page View</span></a></div>',
+      '<span class="X"></span>',
       '</div>',
 
         '{{#if userLogo}}',

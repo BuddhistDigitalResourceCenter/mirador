@@ -47,9 +47,17 @@
   } 
 }
 
+
 .mirador-container.embed .mirador-viewer .scroll-view { height:~"calc(100% - 60px)"; }
 #viewer.embed .view-nav { height:60px;  }
 
+
+.mirador-container.inApp {
+  .bottomPanel,
+  .mirador-osd,
+  .mirador-viewer .scroll-view { height:~"calc(100%) !important"; }
+}
+  
 .mirador-container .overlay { z-index:1000;}
 
 @media(max-width:768px){
@@ -199,7 +207,12 @@
     & + img { display:none; }
   }
 }
-  
+
+.inApp .scroll-view .provider div,
+.inApp .image-view .provider {
+  top:~"calc(35% - 40px)";
+}
+
 .scroll-view .provider { position:absolute; top:0; right:0; width:48px; display: flex; justify-content: flex-end;
   & > div { display:inline-flex; }
 }

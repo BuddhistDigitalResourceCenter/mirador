@@ -165,6 +165,10 @@ var Z = 0 ;
 
       templateData.resID = this.resID ;
 
+      // TODO use "responsive" flag to work in library as well
+      var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin");
+      templateData.inApp = origin && origin.startsWith("BDRCLibApp");
+
       //determine if any buttons should be hidden in template
       templateData.iconClasses = {};
       jQuery.each(this.focuses, function(index, value) {
@@ -296,7 +300,17 @@ var Z = 0 ;
       jQuery(document).click(function(event) {
         jQuery(".view-nav #Zmenu ul.on").removeClass("on");
       });
-      
+
+      jQuery(".mobile-button").click(function(e){
+        jQuery(e.currentTarget).toggleClass("on");
+      });
+
+      /* TODO toggle back menus
+      jQuery(".X").click(function(e){
+        jQuery(e.currentTarget).closest().toggleClass("on");
+      });
+      */
+
       if(manifest && manifest.rendering) {
         var render = manifest.rendering ;
         if(!Array.isArray(render)) render = [ render ] ;
@@ -1355,11 +1369,15 @@ var Z = 0 ;
       '</div>',
       '{{/if}}',
       '<div class="overlay"></div>',
-      '<div class="view-container {{#unless sidePanel}}focus-max-width{{/unless}}">',
+      '<div class="view-container {{#if inApp}}inApp thumbs-off{{/if}} {{#unless sidePanel}}focus-max-width{{/unless}}">',
+      // TODO move to mirador-main-menu
+      //'{{#if inApp}}<div class="mobile-button top"><img src="/icons/burger.svg"/></div>{{/if}}',
       '<div class="bottomPanel">',
       '<div class="thumbnails-open-close"></div>',
       '</div>',
-      '<div class="view-nav"><div><span class="DL"><ul class="select"></ul><a id="DL">{{t "downloadI"}}<img src="/icons/DLw.png"></a></span><div id="control" class="on"><span id="Zo" title="{{t "zoomOut"}}" class=""><img src="/icons/Zm.svg"></span><span id="Zmenu" class="on"><ul class="select"></ul><span> </span></span><span id="Zi" title="{{t "zoomIn"}}" class="on"><img src="/icons/Zp.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a class="eText"><span id="check"><img src="/icons/check.svg"/></span>{{t "showE"}}<img width="42" src="/icons/search/etext_b.svg"></a></div></div>',
+      '{{#if inApp}}<div class="mobile-button bot"><img src="/icons/settings.svg"/></div>{{/if}}',
+      '<div class="view-nav"><div><span class="DL"><ul class="select"></ul><a id="DL">{{t "downloadI"}}<img src="/icons/DLw.png"></a></span><div id="control" class="on"><span id="Zo" title="{{t "zoomOut"}}" class=""><img src="/icons/Zm.svg"></span><span id="Zmenu" class="on"><ul class="select"></ul><span> </span></span><span id="Zi" title="{{t "zoomIn"}}" class="on"><img src="/icons/Zp.svg"></span><span id="lang" title="Choose language"><img src="/icons/LANGUEb.svg"></span></div><a class="eText"><span id="check"><img src="/icons/check.svg"/></span>{{t "showE"}}<img width="42" src="/icons/search/etext_b.svg"></a><span class="X"></span></div></div>',
+
       '</div>',
       '</div>',
       '</div>'
