@@ -558,6 +558,15 @@
         resetImageManipulationControls();
       });
       //Image manipulation controls
+
+
+
+
+
+      jQuery(".mirador-hud .X").click(function(e){
+        jQuery(".mobile-button.bot").toggleClass("on");
+      });
+
     },
 
     currentCanvasIDUpdated: function(event, canvasId) {

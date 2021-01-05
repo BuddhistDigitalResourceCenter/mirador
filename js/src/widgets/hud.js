@@ -309,6 +309,8 @@
                                 '<span></span>',
                                 '</a>',
                                 
+                                '<span class="X"></span>',
+
                                  '</div>'
     ].join(''))
 

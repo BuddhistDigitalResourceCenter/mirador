@@ -149,41 +149,53 @@
 .inApp {   
   .mirador-main-menu-bar,
   .view-nav,
-  .mirador-hud  {
-    .X { position:relative; font-size:30px; color:black;font-family: sans-serif; display:inline-block; }
+  .mirador-hud  { transition:all 400ms ease-in-out;
+    .X { position:relative; font-size:40px; color:black;font-family: sans-serif; display:inline-block; }
 
-    &:not(.mirador-main-menu-bar) .X { 
-        width: 15px;
-        height: 60px;
-        background-color: #d73449;
-        position: absolute;
-        right: 0;
-        
-      &::before {
-        content: ' ';
-        position: absolute;
-        top: calc(50% - 4px);
-        left: 8px;
-        width: 0;
-        height: 0;
-        border-top: 6px solid transparent;
-        border-bottom: 6px solid transparent;
-        border-right: 6px solid white;
-        transition: all 400ms ease-in-out;    
+    &.view-nav { 
+      a img { margin-left:10px;}
+      a span#check { margin-right:10px; }
+    }
+
+    &:not(.mirador-main-menu-bar) { padding-right:30px; box-sizing: border-box;
+      .X { 
+          width: 15px;
+          height: 60px;
+          background-color: #d73449;
+          position: absolute;
+          right: 0;
+          padding:0 !important;
+          
+        &::before {
+          content: ' ';
+          position: absolute;
+          top: ~"calc(50% - 6px)";
+          left: 5px;
+          width: 0;
+          height: 0;
+          border-top: 6px solid transparent;
+          border-bottom: 6px solid transparent;
+          border-right: 6px solid white;
+          transition: all 400ms ease-in-out;    
+          transform:rotate(180deg);
+        }
       }
     }
   }
-  .mirador-main-menu-bar {
+  .mirador-main-menu-bar { top:0px;right:0;
     .X { transform:rotate(45deg); 
       &::before { content:'+'; }
     }
   }
 }
 
-.mobile-button { position:absolute;border-radius: 50%;font-size:0; padding:5px; z-index:10;width:40px;height:40px;display:flex;
+.mobile-button { position:absolute;border-radius: 50%;font-size:0; padding:5px; z-index:10;width:40px;height:40px;display:flex; transition:all 400ms ease-in-out;  
+
+  &.on { opacity:0; pointer-events:none;}
+
   align-items: center; justify-content: center;
   &.top { top:5px;left:5px; background-color:white;
-    &:not(.on) + .mirador-main-menu-bar { right:100%; }
+    &:not(.on) + .mirador-main-menu-bar { top:-60px; }
   }
   &.bot { right:5px;bottom:5px; background-color:#172832 ;
     img { filter:invert(100%);}

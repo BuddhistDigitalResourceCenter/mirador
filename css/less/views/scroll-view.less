@@ -200,13 +200,18 @@
 
 .scroll-view .provider div,
 .image-view .provider { position:fixed; top:~"calc(100vh - 120px - 70px)"; min-width:40px;min-height:80px;background:#2d3b46;
-  display:flex;align-items: center;justify-content: center; z-index:1;z-index:100; 
+  display:flex;align-items: center;justify-content: center; z-index:1; top:0; 
 
-  span {  max-width: 50px;  padding:8px 4px; color: white;  text-align: center;  font-size: 10px;  font-weight: 600; 
   
+  span {  max-width: 50px;  padding:8px 4px; color: white;  text-align: center;  font-size: 10px;  font-weight: 600; 
+    
     & + img { display:none; }
   }
 }
+
+.inApp .provider { transition: all 400ms ease-in-out; }
+
+//.inApp .provider.off { opacity:0; }
 
 .inApp .scroll-view .provider div,
 .inApp .image-view .provider {
