@@ -567,6 +567,29 @@
         jQuery(".mobile-button.bot").toggleClass("on");
       });
 
+
+      jQuery("canvas").on('taphold', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      });
+
+      jQuery("canvas").on('swipeleft', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        _this.next();
+        return false;        
+      });
+
+      jQuery("canvas").on('swiperight', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        _this.previous();
+        return false;
+      });
+
+      
+
     },
 
     currentCanvasIDUpdated: function(event, canvasId) {
@@ -912,7 +935,10 @@
 
     next: function() {
       var _this = this;
-      var next = this.currentImgIndex + 1;
+      var next = this.currentImgIndex + 1, id;
+      while(next < this.imagesList.length && (id = this.imagesList[next]['@id'])&& id.indexOf("/missing") != -1) {
+        next ++ ;
+      }
       if (next < this.imagesList.length) {
         _this.eventEmitter.publish('SET_CURRENT_CANVAS_ID.' + this.windowId, this.imagesList[next]['@id']);
         _this.eventEmitter.publish('SET_PAGINATION.' + this.windowId, (next+1) + " / " + this.imagesList.length);
@@ -922,7 +948,9 @@
     previous: function() {
       var _this = this;
       var prev = this.currentImgIndex - 1;
-
+      while(prev >= 0 && (id = this.imagesList[prev]['@id'])&& id.indexOf("/missing") != -1) {
+        prev -- ;
+      }
       if (prev >= 0) {
         _this.eventEmitter.publish('SET_CURRENT_CANVAS_ID.' + this.windowId, this.imagesList[prev]['@id']);
         _this.eventEmitter.publish('SET_PAGINATION.' + this.windowId, (prev+1) + " / " + this.imagesList.length);

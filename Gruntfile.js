@@ -51,7 +51,8 @@ module.exports = function(grunt) {
     'node_modules/iiif-evented-canvas/dist/iiif-evented-canvas.umd.min.js',
     'node_modules/iiif-layout-functions/dist/iiif-layout-functions.umd.min.js',
     'node_modules/select2/dist/js/select2.full.min.js',
-    "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"
+    "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
+    'js/lib/jquery.mobile.custom.min.js',
   ],
 
   // source files
