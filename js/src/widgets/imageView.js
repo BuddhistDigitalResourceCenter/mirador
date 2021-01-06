@@ -567,8 +567,13 @@
         jQuery(".mobile-button.bot").toggleClass("on");
       });
 
-
-      /*
+/* //
+      jQuery("canvas").on('pointerdown', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      });
+*/
       jQuery("canvas").on('taphold', function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -578,17 +583,33 @@
       jQuery("canvas").on('swipeleft', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        _this.next();
+        var elem = jQuery(e.currentTarget);
+        elem.addClass("sLeftIn");        
+        setTimeout(function(){
+          _this.next();
+          elem.addClass("sLeftOut");
+          setTimeout(function(){
+            elem.removeClass("sLeftIn sLeftOut");
+          }, 650);
+        }, 200);        
         return false;        
       });
 
       jQuery("canvas").on('swiperight', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        _this.previous();
+        var elem = jQuery(e.currentTarget);
+        elem.addClass("sRightIn");        
+        setTimeout(function(){
+          _this.previous();
+          elem.addClass("sRightOut");
+          setTimeout(function(){
+            elem.removeClass("sRightIn sRightOut");
+          }, 650);
+        }, 200);        
         return false;
       });
-      */
+      
       
 
     },

@@ -5002,6 +5002,30 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .mirador-container .mirador-hud > .goto-page select + span .ui-selectmenu-text {
   opacity: 0;
 }
+.openseadragon-canvas > canvas:first-child {
+  transition: all 400ms ease-in-out;
+  /* // no :before on canvas...
+  &::before { content:''; width:100%;height:100%;display:block;position: absolute; left:100%;top:0;opacity:0;transition:all 400ms ease-in-out;   
+    background:yellow;
+  }
+  */
+}
+.openseadragon-canvas > canvas:first-child.sLeftIn {
+  margin-left: -100% !important;
+  transition: all 400ms ease-in-out;
+}
+.openseadragon-canvas > canvas:first-child.sLeftOut {
+  margin-left: 100% !important;
+  transition: none;
+}
+.openseadragon-canvas > canvas:first-child.sRightIn {
+  margin-left: 100% !important;
+  transition: all 400ms ease-in-out;
+}
+.openseadragon-canvas > canvas:first-child.sRightOut {
+  margin-left: -100% !important;
+  transition: none;
+}
 .mirador-container {
   /* scale
   ----------------*/
