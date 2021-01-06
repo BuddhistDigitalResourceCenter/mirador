@@ -591,7 +591,7 @@
           setTimeout(function(){
             elem.removeClass("sLeftIn sLeftOut");
           }, 650);
-        }, 200);        
+        }, 350);        
         return false;        
       });
 
@@ -606,7 +606,7 @@
           setTimeout(function(){
             elem.removeClass("sRightIn sRightOut");
           }, 650);
-        }, 200);        
+        }, 350);        
         return false;
       });
       
