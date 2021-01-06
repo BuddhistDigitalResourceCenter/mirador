@@ -568,6 +568,7 @@
       });
 
 
+      /*
       jQuery("canvas").on('taphold', function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -587,7 +588,7 @@
         _this.previous();
         return false;
       });
-
+      */
       
 
     },
