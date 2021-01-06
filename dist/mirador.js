@@ -46418,7 +46418,7 @@ var Z = 0 ;
           setTimeout(function(){
             elem.removeClass("sLeftIn sLeftOut");
           }, 650);
-        }, 350);        
+        }, 200);        
         return false;        
       });
 
@@ -46433,7 +46433,7 @@ var Z = 0 ;
           setTimeout(function(){
             elem.removeClass("sRightIn sRightOut");
           }, 650);
-        }, 350);        
+        }, 200);        
         return false;
       });
       

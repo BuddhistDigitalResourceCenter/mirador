@@ -5012,7 +5012,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 }
 .openseadragon-canvas > canvas:first-child.sLeftIn {
   margin-left: -100% !important;
-  transition: all 400ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 .openseadragon-canvas > canvas:first-child.sLeftOut {
   margin-left: 100% !important;
@@ -5020,7 +5020,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 }
 .openseadragon-canvas > canvas:first-child.sRightIn {
   margin-left: 100% !important;
-  transition: all 400ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 .openseadragon-canvas > canvas:first-child.sRightOut {
   margin-left: -100% !important;
