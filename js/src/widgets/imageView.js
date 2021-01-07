@@ -1,5 +1,7 @@
 (function($) {
 
+  var timerSw = 0 ;
+
   $.ImageView = function(options) {
 
     jQuery.extend(this, {
@@ -580,33 +582,78 @@
         return false;
       });
 
-      jQuery("canvas").on('swipeleft', function(e) {
+
+      jQuery(".openseadragon-canvas").on('swipeleft', function(e) {
+
         e.preventDefault();
         e.stopPropagation();
-        var elem = jQuery(e.currentTarget);
-        elem.addClass("sLeftIn");        
-        setTimeout(function(){
-          _this.next();
-          elem.addClass("sLeftOut");
-          setTimeout(function(){
-            elem.removeClass("sLeftIn sLeftOut");
-          }, 650);
-        }, 200);        
+        if(_this.currentImgIndex >= _this.imagesList.length - 1) return false ;
+
+        console.log("sLeft");
+        var elem = jQuery(e.currentTarget).find("canvas:first-of-type");
+        if(timerSw != 0 && elem.hasClass("sRightIn")) {
+          console.log("cancelRightIn?");
+          if(elem.hasClass("sRightOut")) {
+            //_this.next();
+          } else {
+            console.log("cancelRightOut");          
+            clearTimeout(timerSw);    
+            elem.removeClass("sRightOut");
+            elem.removeClass("sRightIn");
+          }
+        } else {
+          elem.addClass("sLeftIn");        
+          timerSw = setTimeout(function(){
+            console.log("sLeftIn");
+            _this.next();
+            elem.addClass("sLeftOut");
+            timerSw = setTimeout(function(){
+              console.log("sLeftOut");
+              elem.removeClass("sLeftIn");
+              timerSw = setTimeout(function(){
+                console.log("sLeftOut2");
+                elem.removeClass("sLeftOut");
+              }, 10);
+            }, 10);
+          }, 500);        
+        }
         return false;        
       });
 
-      jQuery("canvas").on('swiperight', function(e) {
+      jQuery(".openseadragon-canvas").on('swiperight', function(e) {
+
         e.preventDefault();
         e.stopPropagation();
-        var elem = jQuery(e.currentTarget);
-        elem.addClass("sRightIn");        
-        setTimeout(function(){
-          _this.previous();
-          elem.addClass("sRightOut");
-          setTimeout(function(){
-            elem.removeClass("sRightIn sRightOut");
-          }, 650);
-        }, 200);        
+        if(_this.currentImgIndex <= 0) return false ;
+
+        console.log("sRight");
+        var elem = jQuery(e.currentTarget).find("canvas:first-of-type");
+        if(timerSw != 0 && elem.hasClass("sLeftIn")) {
+          console.log("cancelLeftIn?");
+          if(elem.hasClass("sLeftOut")) {
+            //_this.previous();
+          } else {
+            console.log("cancelLeftInOut");          
+            clearTimeout(timerSw);
+            elem.removeClass("sLeftOut");
+            elem.removeClass("sLeftIn");
+          }
+        } else {
+          elem.addClass("sRightIn");        
+          timerSw = setTimeout(function(){
+            console.log("sRightIn");
+            _this.previous();
+            elem.addClass("sRightOut");
+            timerSw = setTimeout(function(){
+              console.log("sRightOut");
+              elem.removeClass("sRightIn");
+              timerSw = setTimeout(function(){
+                console.log("sRightOut2");
+                elem.removeClass("sRightOut");
+              }, 10);
+            }, 10);
+          }, 500);        
+        }
         return false;
       });
       
