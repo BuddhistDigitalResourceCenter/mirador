@@ -613,7 +613,7 @@
               timerSw = setTimeout(function(){
                 console.log("sLeftOut2");
                 elem.removeClass("sLeftOut");
-              }, 10);
+              }, 500);
             }, 10);
           }, 500);        
         }
@@ -650,7 +650,7 @@
               timerSw = setTimeout(function(){
                 console.log("sRightOut2");
                 elem.removeClass("sRightOut");
-              }, 10);
+              }, 500);
             }, 10);
           }, 500);        
         }
