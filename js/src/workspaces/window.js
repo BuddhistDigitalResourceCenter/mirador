@@ -315,9 +315,6 @@ var Z = 0 ;
         //if(!elem.closest(".view-nav").length) jQuery(".provider").toggleClass("off");
       });
 
-      
-
-
       if(manifest && manifest.rendering) {
         var render = manifest.rendering ;
         if(!Array.isArray(render)) render = [ render ] ;

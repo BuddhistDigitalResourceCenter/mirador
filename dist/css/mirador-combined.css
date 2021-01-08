@@ -4136,6 +4136,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .inApp .mirador-main-menu-bar {
   top: 0px;
   right: 0;
+  position: fixed;
 }
 .inApp .mirador-main-menu-bar .X {
   transform: rotate(45deg);
@@ -4144,7 +4145,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   content: '+';
 }
 .mobile-button {
-  position: absolute;
+  position: fixed;
   border-radius: 50%;
   font-size: 0;
   padding: 5px;
@@ -5239,8 +5240,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   height: 60px;
 }
 .mirador-container.inApp .bottomPanel,
-.mirador-container.inApp .mirador-osd,
-.mirador-container.inApp .mirador-viewer .scroll-view {
+.mirador-container.inApp .mirador-osd {
   height: calc(100%) !important;
 }
 .mirador-container .overlay {
@@ -5459,6 +5459,18 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .provider img[src$="bl_logo_100.gif"] {
   padding: 0;
 }
+.auto_rela:not(#a):not(#b):not(.c):not(.d) {
+  position: relative !important;
+}
+.auto_rela:not(#a):not(#b):not(.c):not(.d):not(.customH) {
+  height: auto !important;
+}
+.auto_rela:not(#a):not(#b):not(.c):not(.d).slot {
+  min-height: 100vh;
+}
+.auto_rela:not(#a):not(#b):not(.c):not(.d) .mirador-container .slotIconContainer {
+  position: absolute;
+}
 .scroll-view .provider div,
 .image-view .provider {
   position: fixed;
@@ -5485,6 +5497,11 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .image-view .provider span + img {
   display: none;
 }
+/*
+.inApp {
+  &#viewer.mirador-container { height:100vh; }
+}
+*/
 .inApp .provider {
   transition: all 400ms ease-in-out;
 }

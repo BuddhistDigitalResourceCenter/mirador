@@ -1,6 +1,6 @@
 (function($) {
 
-  var timerSw = 0 ;
+  var timerSw = -1 ;
 
   $.ImageView = function(options) {
 
@@ -111,6 +111,8 @@
       } else {
         _this.eventEmitter.publish('SET_BOTTOM_PANEL_VISIBILITY.' + this.windowId, null);
       }
+
+      jQuery(".auto_rela").removeClass("auto_rela");
     },
 
     template: $.Handlebars.compile([
@@ -591,13 +593,13 @@
 
         console.log("sLeft");
         var elem = jQuery(e.currentTarget).find("canvas:first-of-type");
-        if(timerSw != 0 && elem.hasClass("sRightIn")) {
+        if(elem.hasClass("sRightIn")) {
           console.log("cancelRightIn?");
           if(elem.hasClass("sRightOut")) {
             //_this.next();
           } else {
             console.log("cancelRightOut");          
-            clearTimeout(timerSw);    
+            if(timerSw != -1) clearTimeout(timerSw);    
             elem.removeClass("sRightOut");
             elem.removeClass("sRightIn");
           }
@@ -628,13 +630,13 @@
 
         console.log("sRight");
         var elem = jQuery(e.currentTarget).find("canvas:first-of-type");
-        if(timerSw != 0 && elem.hasClass("sLeftIn")) {
+        if(elem.hasClass("sLeftIn")) {
           console.log("cancelLeftIn?");
           if(elem.hasClass("sLeftOut")) {
             //_this.previous();
           } else {
             console.log("cancelLeftInOut");          
-            clearTimeout(timerSw);
+            if(timerSw != -1) clearTimeout(timerSw);
             elem.removeClass("sLeftOut");
             elem.removeClass("sLeftIn");
           }

@@ -55,7 +55,7 @@
 .mirador-container.inApp {
   .bottomPanel,
   .mirador-osd,
-  .mirador-viewer .scroll-view { height:~"calc(100%) !important"; }
+  /*.mirador-viewer .scroll-view*/ { height:~"calc(100%) !important"; }
 }
   
 .mirador-container .overlay { z-index:1000;}
@@ -197,6 +197,15 @@
   padding:0
 }
 
+.auto_rela:not(#a):not(#b):not(.c):not(.d) { 
+  position:relative !important; 
+  &:not(.customH) { 
+    height:auto !important; 
+  }
+  &.slot { min-height:100vh;} //> :not(.window) { display:none; }
+  .mirador-container .slotIconContainer { position:absolute;}
+}
+
 
 .scroll-view .provider div,
 .image-view .provider { position:fixed; top:~"calc(100vh - 120px - 70px)"; min-width:40px;min-height:80px;background:#2d3b46;
@@ -208,6 +217,12 @@
     & + img { display:none; }
   }
 }
+
+/*
+.inApp {
+  &#viewer.mirador-container { height:100vh; }
+}
+*/
 
 .inApp .provider { transition: all 400ms ease-in-out; }
 

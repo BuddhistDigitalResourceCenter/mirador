@@ -106,6 +106,16 @@
     $.ScrollView.prototype.originalToggle = $.ScrollView.prototype.toggle ;
     $.ScrollView.prototype.toggle = function(stateValue) {
       if (stateValue) {
+
+
+
+        var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin");
+        var inApp = origin && origin.startsWith("BDRCLibApp");
+        if(inApp) {
+          jQuery(".scroll-view").addClass("auto_rela").parents().addClass("auto_rela");
+        }
+
+
         jQuery(".nav-bar-top #breadcrumbs .on").removeClass("on");
         jQuery(".nav-bar-top #breadcrumbs #vol span").text(this.labelToString(this.manifest.jsonLd.label)).parent().addClass("active on");
         /*
@@ -222,6 +232,7 @@
     if(this.vDirectionStatus == 'rtl') {
       jQuery(this.appendTo).find('.scroll-view').addClass('v-direction-rtl');
     }
+
 
     console.log("provUrl",window.providerUrl,window.providerAttr,this.manifest);
 
