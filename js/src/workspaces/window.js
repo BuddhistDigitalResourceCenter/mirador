@@ -303,13 +303,19 @@ var Z = 0 ;
 
 
 
-      jQuery(".mobile-button").click(function(e){
+      jQuery(".mobile-button").off("click").click(function(e){
         var elem = jQuery(e.currentTarget);
         elem.toggleClass("on");
         //if(!elem.hasClass("bot")) jQuery(".provider").toggleClass("off");
+        console.log("TOGGLE");
+        /*
+        e.stopPropagation();
+        e.preventDefault();
+        return false;
+        */
       });
 
-      jQuery("#breadcrumbs + .X,.view-nav .X").click(function(e){
+      jQuery("#breadcrumbs + .X,.view-nav .X").off("click").click(function(e){
         var elem = jQuery(e.currentTarget);
         elem.parent().parent().prev().toggleClass("on");
         //if(!elem.closest(".view-nav").length) jQuery(".provider").toggleClass("off");

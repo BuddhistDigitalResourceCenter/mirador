@@ -92,17 +92,58 @@
 }
 
 
+// @media(max-width:768px)
+#viewer.inApp {
 
-@media (max-width: 768px) {
-  .select-results {
+  .select-metadata { order:1; margin-left:0;}
+  .preview-thumb { order:2; }
+
+  &.mirador-container .pdfDL::before { margin-left:10px;}
+
+  #manifest-select-menu { background:black; }
+
+  .member-select-results {
     //height: 87%;
-    height: ~"calc(100% - 20px)";
-  }
+    padding-right:0;    
+    height: ~"calc(100% - 60px)";
+    box-sizing: border-box;
+    padding-bottom:40px;
+    margin-top:60px;
+    max-width:~"calc(50% - 13px)";
+    position:absolute;
+    right:0;
 
+    transition:all 400ms ease-in-out;
+
+    li { padding:15px;
+
+      .preview-image { width:100%; height:auto; }
+    }
+  }
+  
   #collection-tree {
     //height: 85%;
-    height: ~"calc(100% - 20px)";
+    top:60px;
+    height: ~"calc(100% - 60px)";
+    box-sizing: border-box;
+    padding:15px;
+    padding-right:50px;
+    
   }
+
+  #collection-tree-resizer,
+  .collection-tree-resizer {
+    position:fixed ;
+    max-width:~"calc(100% + 13px)";
+    width:~"calc(50% + 13px)";
+    box-sizing: border-box;
+
+    &.closed + .member-select-results {      
+      max-width:~"calc(100% - 25px)";
+      width:~"calc(100%)";
+    }
+  }
+  .collec-tree-open-close::after, .mirador-container .thumbnails-open-close::after { top:~"calc(50% + 30px - 4px)";}
 }
 
 /* Overrides on jstree dependency */

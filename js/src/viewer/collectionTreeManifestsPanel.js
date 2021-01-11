@@ -284,12 +284,14 @@
         hide: function() {
             var _this = this;
             jQuery(this.element).hide({effect: "fade", duration: 160, easing: "easeOutCubic"});
+            jQuery(".mobile-button.top").removeClass("on collec");
         },
 
         show: function() {
             var _this = this;
             jQuery(this.element).show({effect: "fade", duration: 160, easing: "easeInCubic"});            
             this.element.find('.member-select-results').scroll();
+            jQuery(".mobile-button.top").addClass("on collec");
         },
 
         // Send explicit request for adding a manifest from a URL
