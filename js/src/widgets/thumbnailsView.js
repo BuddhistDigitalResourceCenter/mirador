@@ -289,6 +289,10 @@
         _this.loadImages();
       });
 
+      if(jQuery("body > #viewer.inApp").length) jQuery(window).scroll(function() {
+        _this.loadImages();
+      });
+
       //add any other events that would trigger thumbnail display (resize, etc)
 
       _this.element.find('.thumbnail-image').on('click', function() {

@@ -625,6 +625,7 @@ var Z = 0 ;
 
     bindEvents: function() {
       var _this = this;
+      var inApp = jQuery("body > #viewer.inApp").length > 0 ;
 
       //this event should trigger from layout
       jQuery(window).resize($.debounce(function(){
@@ -634,7 +635,9 @@ var Z = 0 ;
           if (_this.viewType === "ScrollView") {
             triggerShow = true;
           }
-          _this.focusModules.ScrollView.reloadImages(Math.floor(containerHeight * _this.scrollImageRatio), triggerShow);
+          // TODO do we ever need to reload images when window resized?? I don't think so
+          // > actually we need to when etext available... 
+          if(!inApp) _this.focusModules.ScrollView.reloadImages(Math.floor(containerHeight * _this.scrollImageRatio), triggerShow);
         }
       }, 300));
 

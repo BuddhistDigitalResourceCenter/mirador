@@ -4078,6 +4078,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .mirador-hud .X {
   display: none;
 }
+.inApp .mirador-container .mirador-viewer .scroll-view {
+  height: 100%;
+}
 .inApp .mirador-main-menu-bar,
 .inApp .view-nav,
 .inApp .mirador-hud {
