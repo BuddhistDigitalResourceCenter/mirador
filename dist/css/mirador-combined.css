@@ -4147,6 +4147,29 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .inApp .mirador-main-menu-bar .X::before {
   content: '+';
 }
+.inApp .nav-bar-top {
+  width: calc(100% - 20px) !important;
+}
+.inApp .nav-bar-top #breadcrumbs {
+  width: calc(100% - 20px - 10px);
+  overflow-y: visible;
+  overflow-x: hidden;
+  height: 35px;
+  margin-top: 15px;
+}
+.inApp .nav-bar-top #breadcrumbs a {
+  max-width: calc((100%)/3);
+  box-sizing: border-box;
+}
+.inApp .nav-bar-top #breadcrumbs a#image {
+  display: inline-flex;
+  height: 35px;
+}
+.inApp .nav-bar-top #breadcrumbs a#image > span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .mobile-button {
   position: fixed;
   border-radius: 50%;
@@ -4172,6 +4195,10 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .mobile-button.top:not(.on) + .mirador-main-menu-bar {
   top: -60px;
 }
+.mobile-button.top.collec + .mirador-main-menu-bar {
+  z-index: -100;
+  transition: none;
+}
 .mobile-button.top.collec + .mirador-main-menu-bar .X {
   display: none;
 }
@@ -4186,6 +4213,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .mobile-button.bot:not(.on) ~ .image-view .mirador-hud,
 .mobile-button.bot:not(.on) + .view-nav {
   left: 100%;
+}
+.mobile-button:not(.image) + .mirador-main-menu-bar .nav-bar-top #breadcrumbs a {
+  max-width: calc(100% / 2);
 }
 #viewer.embed .nav-bar-top {
   width: 100%;
@@ -4208,13 +4238,11 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 #viewer.embed .mirador-osd {
   height: calc(100% - 60px);
 }
-@media (max-width: 768px) {
-  #viewer.embed .nav-bar-top {
-    padding: 0 10px;
-  }
-  #viewer.embed .nav-bar-top a#collec {
-    padding-left: 0;
-  }
+#viewer.embed .nav-bar-top {
+  padding: 0 10px;
+}
+#viewer.embed .nav-bar-top a#collec {
+  padding-left: 0;
 }
 /*
 .nav-bar-top div { display:flex; align-items:center; }
@@ -6889,26 +6917,43 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 #collection-tree[lang='en'] .jstree-icon.jstree-ocl {
   vertical-align: 4px;
 }
+#viewer.inApp .repo-image {
+  position: relative;
+  display: block;
+  transition: all 400ms ease-in-out;
+}
+#viewer.inApp .select-metadata {
+  transition: all 400ms ease-in-out;
+}
+@media (max-width: 768px) {
+  #viewer.inApp #collection-tree-resizer:not(.closed) + .member-select-results .select-metadata {
+    margin-left: 0;
+  }
+  #viewer.inApp #collection-tree-resizer:not(.closed) + .member-select-results .repo-image {
+    width: 0;
+    margin-right: 0;
+  }
+}
 #viewer.inApp .select-metadata {
   order: 1;
-  margin-left: 0;
 }
 #viewer.inApp .preview-thumb {
   order: 2;
 }
+#viewer.inApp.mirador-container .pdfDL {
+  margin-left: 0;
+}
 #viewer.inApp.mirador-container .pdfDL::before {
-  margin-left: 10px;
+  margin-left: 15px;
 }
 #viewer.inApp #manifest-select-menu {
   background: black;
 }
 #viewer.inApp .member-select-results {
   padding-right: 0;
-  height: calc(100% - 60px);
   box-sizing: border-box;
   padding-bottom: 40px;
-  margin-top: 60px;
-  max-width: calc(50% - 13px);
+  width: calc(50% - 13px);
   position: absolute;
   right: 0;
   transition: all 400ms ease-in-out;
@@ -6921,8 +6966,6 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   height: auto;
 }
 #viewer.inApp #collection-tree {
-  top: 60px;
-  height: calc(100% - 60px);
   box-sizing: border-box;
   padding: 15px;
   padding-right: 50px;
@@ -6938,10 +6981,6 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 #viewer.inApp .collection-tree-resizer.closed + .member-select-results {
   max-width: calc(100% - 25px);
   width: calc(100%);
-}
-#viewer.inApp .collec-tree-open-close::after,
-#viewer.inApp .mirador-container .thumbnails-open-close::after {
-  top: calc(50% + 30px - 4px);
 }
 /* Overrides on jstree dependency */
 /* 32px.png */

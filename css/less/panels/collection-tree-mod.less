@@ -95,21 +95,33 @@
 // @media(max-width:768px)
 #viewer.inApp {
 
-  .select-metadata { order:1; margin-left:0;}
+  .repo-image { position:relative; display:block; transition:all 400ms ease-in-out;}
+  .select-metadata { transition:all 400ms ease-in-out; }
+
+  @media (max-width: 768px) {
+    #collection-tree-resizer:not(.closed) + .member-select-results {
+      .select-metadata { margin-left:0; }
+      .repo-image { width:0; margin-right:0;}
+    }
+  }
+
+  .select-metadata { order:1; }
   .preview-thumb { order:2; }
 
-  &.mirador-container .pdfDL::before { margin-left:10px;}
+  &.mirador-container .pdfDL { margin-left:0;
+    &::before { margin-left:15px;}
+  }
 
   #manifest-select-menu { background:black; }
 
   .member-select-results {
     //height: 87%;
+    //height: ~"calc(100% - 60px)";
+    //margin-top:60px;
     padding-right:0;    
-    height: ~"calc(100% - 60px)";
     box-sizing: border-box;
     padding-bottom:40px;
-    margin-top:60px;
-    max-width:~"calc(50% - 13px)";
+    width:~"calc(50% - 13px)";
     position:absolute;
     right:0;
 
@@ -123,8 +135,8 @@
   
   #collection-tree {
     //height: 85%;
-    top:60px;
-    height: ~"calc(100% - 60px)";
+    //top:60px;
+    //height: ~"calc(100% - 60px)";
     box-sizing: border-box;
     padding:15px;
     padding-right:50px;
@@ -143,7 +155,8 @@
       width:~"calc(100%)";
     }
   }
-  .collec-tree-open-close::after, .mirador-container .thumbnails-open-close::after { top:~"calc(50% + 30px - 4px)";}
+
+  //.collec-tree-open-close::after, .mirador-container .thumbnails-open-close::after { top:~"calc(50% + 30px - 4px)";}
 }
 
 /* Overrides on jstree dependency */

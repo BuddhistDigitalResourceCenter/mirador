@@ -833,7 +833,7 @@
     },
 
     hide: function() {
-      jQuery(this.element).hide({effect: "fade", duration: 300, easing: "easeOutCubic"});
+      jQuery(this.element).hide({effect: "fade", duration: 300, easing: "easeOutCubic"});      
     },
 
     show: function() {
@@ -844,6 +844,7 @@
           jQuery(this).css('display', 'block');
         }
       });
+      jQuery(".mobile-button.top").addClass("image");
     },
 
     adjustWidth: function(className, hasClass) {

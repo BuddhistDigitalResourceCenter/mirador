@@ -126,6 +126,7 @@
             });
 
             this.element.find("#breadcrumbs #collec").on('click', function() { 
+              jQuery(".mobile-button.top").removeClass("image");
               if(!jQuery(this).hasClass("on")) {
                 jQuery(this).parent().find(".on").removeClass("on");
                 jQuery(this).addClass("on");
@@ -135,6 +136,7 @@
             });
 
             this.element.find("#breadcrumbs #vol").on('click', function() { 
+              jQuery(".mobile-button.top").removeClass("image");
               var the = jQuery(this);
               if(!the.hasClass("on")) {
                 the.parent().find(".on").removeClass("on");
@@ -145,6 +147,7 @@
             });
 
             this.element.find("#breadcrumbs #image").on('click', function() {
+              jQuery(".mobile-button.top").addClass("image");
               var the = jQuery(this);
               if(!the.hasClass("on")) {
                 the.parent().find(".on").removeClass("on");
