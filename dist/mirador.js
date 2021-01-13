@@ -35403,6 +35403,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
                 else if(ew && ew < Math.min(mw,w*0.25)) elem.width(Math.min(mw,w*0.25));
               }
 
+              /*
               var tree = jQuery("#collection-tree-resizer");
               if(tree.hasClass("disabled")) {
                 if(window.innerWidth < 768) {
@@ -35416,6 +35417,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
                   }
                 }
               }
+              */
 
             }, 100, true));
 

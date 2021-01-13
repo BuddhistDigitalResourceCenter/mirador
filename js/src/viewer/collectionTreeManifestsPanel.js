@@ -238,6 +238,7 @@
                 else if(ew && ew < Math.min(mw,w*0.25)) elem.width(Math.min(mw,w*0.25));
               }
 
+              /*
               var tree = jQuery("#collection-tree-resizer");
               if(tree.hasClass("disabled")) {
                 if(window.innerWidth < 768) {
@@ -251,6 +252,7 @@
                   }
                 }
               }
+              */
 
             }, 100, true));
 
