@@ -238,6 +238,20 @@
                 else if(ew && ew < Math.min(mw,w*0.25)) elem.width(Math.min(mw,w*0.25));
               }
 
+              var tree = jQuery("#collection-tree-resizer");
+              if(tree.hasClass("disabled")) {
+                if(window.innerWidth < 768) {
+                  tree.removeClass("closed");
+                  jQuery(".collec-tree-open-close").click();
+                } else {
+                  tree.removeClass("disabled");                  
+                  if(tree.hasClass("closed")) {
+                    tree.removeClass("closed");
+                    jQuery(".collec-tree-open-close").click();
+                  }
+                }
+              }
+
             }, 100, true));
 
             setTimeout(function(){ jQuery(window).resize(); },650);  
@@ -282,6 +296,7 @@
         },
 
         hide: function() {
+            jQuery(".workspace-container").show({effect: "fade", duration: 160, easing: "easeInCubic"});              
             var _this = this;
             jQuery(this.element).hide({effect: "fade", duration: 160, easing: "easeOutCubic"});
             jQuery(".mobile-button.top").removeClass("on collec");
@@ -289,9 +304,18 @@
 
         show: function() {
             var _this = this;
+            jQuery(".workspace-container").hide({effect: "fade", duration: 160, easing: "easeInCubic"});              
             jQuery(this.element).show({effect: "fade", duration: 160, easing: "easeInCubic"});            
             this.element.find('.member-select-results').scroll();
             jQuery(".mobile-button.top").addClass("on collec");
+            
+
+            var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin");
+            var inApp = origin && origin.startsWith("BDRCLibApp");
+            if(inApp) {
+              this.element.find('.member-select-results').addClass("auto_rela").parents().addClass("auto_rela");
+            }
+
         },
 
         // Send explicit request for adding a manifest from a URL
@@ -358,6 +382,13 @@
 
         // Handler for when collection data is loaded for the first time
         onCollectionReceived: function(event, newCollection, uri, parentNodeId) {
+
+          if(newCollection && newCollection.jsonLd && (!newCollection.jsonLd.collections || !newCollection.jsonLd.collections.length)) {
+            var tree = jQuery("#collection-tree-resizer");
+            tree.addClass("disabled");
+            if(!tree.hasClass("closed") && window.innerWidth < 768) jQuery(".collec-tree-open-close").click();
+          }
+          
           // If the tree isn't ready, hold it and move on
           if (typeof this.treeQueue !== 'undefined') {
             this.treeQueue.push([event, newCollection, uri, parentNodeId]);
@@ -371,8 +402,8 @@
             console.log("ok?",node,newCollection);
             this.treeElement.jstree('deselect_all');
             this.treeElement.jstree('select_node', node);
-            this.treeElement.jstree('open_node', node);
-          
+            this.treeElement.jstree('open_node', node);          
+
             var _this = this, timer ;
             if(newCollection && newCollection.jsonLd && !newCollection.jsonLd.collections && newCollection.jsonLd.manifests && newCollection.jsonLd.manifests.length === 1) { 
               timer = setInterval(function(){
@@ -617,6 +648,7 @@
         // Helper for loading a Collection object as a child of nodeId
         // Optionally, skip seeding subnodes under this collection if unexpanded is specified; this marks it as "still loading"
         addCollectionNode: function(nodeId, collection, unexpanded) {
+          console.log("nodeId",nodeId,collection);
           var _this = this,
               subcollectionBlocks = collection.getCollectionBlocks();
           // Add the new node
