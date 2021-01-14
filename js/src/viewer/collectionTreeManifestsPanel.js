@@ -119,8 +119,10 @@
             this.bindEvents();
             this.listenForActions();
 
-            this.ps = new PerfectScrollbar(".member-select-results",{ minScrollbarLength:16, maxScrollbarLength:16 });
-            this.psTree = new PerfectScrollbar("#collection-tree",{ minScrollbarLength:16, maxScrollbarLength:16 });
+            if(!jQuery("#viewer.inApp").length) {
+              this.ps = new PerfectScrollbar(".member-select-results",{ minScrollbarLength:16, maxScrollbarLength:16 });
+              this.psTree = new PerfectScrollbar("#collection-tree",{ minScrollbarLength:16, maxScrollbarLength:16 });
+            }
         },
 
         // TODO get pdf download link via popin not new tab
@@ -183,6 +185,7 @@
         bindEvents: function() {
             var _this = this;
             
+
             // toggle node on simple click
             jQuery('#collection-tree').on('click', '.jstree-anchor', function (e) {
                 jQuery(this).jstree(true).toggle_node(e.target);
@@ -192,6 +195,18 @@
               var elem = jQuery("#collection-tree-resizer");
               if(!elem.hasClass("closed")) elem.addClass("closed").animate({"margin-left":-(elem.width() - 25)},400);    
               else elem.removeClass("closed").animate({"margin-left":0},400);    
+            });
+
+            jQuery("#manifest-select-menu,#collection-tree").on('swiperight', function(e) {              
+              var tree = jQuery("#collection-tree-resizer:not(.disabled) .collec-tree-open-close");
+              console.log("L:",tree);
+              if(tree.parent().hasClass("closed")) tree.click();
+            });
+
+            jQuery("#manifest-select-menu,#collection-tree").on('swipeleft', function(e) {              
+              var tree = jQuery("#collection-tree-resizer:not(.disabled) .collec-tree-open-close");
+              console.log("R:",tree);
+              if(!tree.parent().hasClass("closed")) tree.click();
             });
 
             // handle interface events
@@ -384,12 +399,6 @@
 
         // Handler for when collection data is loaded for the first time
         onCollectionReceived: function(event, newCollection, uri, parentNodeId) {
-
-          if(newCollection && newCollection.jsonLd && (!newCollection.jsonLd.collections || !newCollection.jsonLd.collections.length)) {
-            var tree = jQuery("#collection-tree-resizer");
-            tree.addClass("disabled");
-            if(!tree.hasClass("closed") && window.innerWidth < 768) jQuery(".collec-tree-open-close").click();
-          }
           
           // If the tree isn't ready, hold it and move on
           if (typeof this.treeQueue !== 'undefined') {
@@ -400,6 +409,14 @@
           if (parentNodeId) {
             this.updateCollectionNode(parentNodeId, newCollection);
           } else {
+
+             if(newCollection && newCollection.jsonLd && (!newCollection.jsonLd.collections || !newCollection.jsonLd.collections.length)) {
+                var tree = jQuery("#collection-tree-resizer");
+                tree.addClass("disabled");
+                if(!tree.hasClass("closed") && window.innerWidth < 768) jQuery(".collec-tree-open-close").click();
+              }
+         
+
             var node = this.addCollectionNode(parentNodeId, newCollection);
             console.log("ok?",node,newCollection);
             this.treeElement.jstree('deselect_all');
@@ -649,8 +666,7 @@
 
         // Helper for loading a Collection object as a child of nodeId
         // Optionally, skip seeding subnodes under this collection if unexpanded is specified; this marks it as "still loading"
-        addCollectionNode: function(nodeId, collection, unexpanded) {
-          console.log("nodeId",nodeId,collection);
+        addCollectionNode: function(nodeId, collection, unexpanded) {          
           var _this = this,
               subcollectionBlocks = collection.getCollectionBlocks();
           // Add the new node

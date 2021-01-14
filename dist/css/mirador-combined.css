@@ -4198,6 +4198,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .mobile-button.top.collec + .mirador-main-menu-bar {
   z-index: -100;
   transition: none;
+  display: none;
 }
 .mobile-button.top.collec + .mirador-main-menu-bar .X {
   display: none;
@@ -6974,14 +6975,23 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   display: none;
 }
 #viewer.inApp .member-select-results {
+  padding-bottom: 40px;
   margin-left: 25px;
-  padding-right: 40px;
-  padding-bottom: 0px;
+  padding-right: 0px;
   box-sizing: border-box;
   width: calc(50% - 13px);
   position: absolute;
   right: 0;
+  left: 0;
   transition: all 400ms ease-in-out;
+  pointer-events: none;
+  padding-bottom: 0px;
+}
+#viewer.inApp .member-select-results .preview-images {
+  pointer-events: auto;
+}
+#viewer.inApp .member-select-results .items-listing {
+  padding-bottom: 0!important;
 }
 #viewer.inApp .member-select-results li {
   padding: 15px;

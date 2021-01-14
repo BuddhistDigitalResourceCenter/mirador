@@ -98,13 +98,15 @@
   .repo-image { position:relative; display:block; transition:all 400ms ease-in-out;}
   .select-metadata { transition:all 400ms ease-in-out; }
 
-  #collection-tree-resizer:not(.closed) + .member-select-results { 
+  
+  #collection-tree-resizer:not(.closed) + .member-select-results {     
+
+    //left:25%;
+
     margin-left:0;
     left:~"calc(50% + 13px)"; 
-
-    // weird... this breaks scrolling!?
-    // margin-left:~"calc(50% + 13px)"; 
   }
+  
     
   @media (max-width: 768px) {
     #collection-tree-resizer:not(.closed) + .member-select-results { 
@@ -135,18 +137,21 @@
     //height: 87%;
     //height: ~"calc(100% - 60px)";
     //margin-top:60px;
+    padding-bottom:40px;
     margin-left:25px;
-    padding-right:40px;    
-    padding-bottom:0px;
+    padding-right:0px;    
     box-sizing: border-box;
     width:~"calc(50% - 13px)";
     position:absolute;
     right:0;
-    
+    left:0;
     transition:all 400ms ease-in-out;
-    
-    // weird... this breaks scrolling!?
-    // .items-listing { padding-bottom:0!important; }
+
+    pointer-events: none;
+    .preview-images { pointer-events:auto; }
+        
+    padding-bottom:0px;
+    .items-listing { padding-bottom:0!important; }  
 
     li { padding:15px;
 
@@ -154,7 +159,7 @@
     }
   }
   
-  #collection-tree {
+  #collection-tree { 
     //height: 85%;
     //top:60px;
     //height: ~"calc(100% - 60px)";
@@ -170,6 +175,9 @@
     max-width:~"calc(100% + 13px)";
     width:~"calc(50% + 13px)";
     box-sizing: border-box;
+
+    //debug
+    //opacity:0.35;
 
     &.closed + .member-select-results {      
       max-width:~"calc(100% - 25px)";
