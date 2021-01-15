@@ -3685,7 +3685,8 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .mirador-container .mirador-btn.disabled {
   opacity: 0.5;
 }
-.mirador-container .disabled {
+.mirador-container:not(.inApp) .disabled:not(#collection-tree-resizer),
+.mirador-container.inApp .disabled {
   opacity: 0.5;
   pointer-events: none;
 }

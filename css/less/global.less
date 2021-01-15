@@ -32,7 +32,8 @@
     }
   }
 
-  .disabled {
+  &:not(.inApp) .disabled:not(#collection-tree-resizer),
+  &.inApp .disabled {
     opacity: 0.5;
     pointer-events: none;
   }

@@ -276,7 +276,9 @@
             _this.resizePanel();
 
             // Lazy loading
-            this.element.find('.member-select-results').on('scroll', $.throttle(function() {              
+            var elem = this.element.find('.member-select-results');
+            if(jQuery("body > #viewer.inApp").length) elem =  jQuery(document);
+            elem.on('scroll', $.throttle(function() {              
               jQuery(this).find('.preview-images').each(function(_, w) {
                 var img = jQuery(this).find('img[data-src]');
                 if(img.length) {
