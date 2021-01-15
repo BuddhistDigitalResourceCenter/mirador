@@ -35442,7 +35442,10 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
 
             // Lazy loading
             var elem = this.element.find('.member-select-results');
-            if(jQuery("body > #viewer.inApp").length) elem =  jQuery(document);
+            
+            // TODO something's wrong with isOnScreen and scrolling modification for mobile...
+            //if(jQuery("body > #viewer.inApp").length) elem =  jQuery(document);
+
             elem.on('scroll', $.throttle(function() {              
               jQuery(this).find('.preview-images').each(function(_, w) {
                 var img = jQuery(this).find('img[data-src]');
@@ -36417,9 +36420,9 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
       })();
 
 
-      var aspectRatio, width ;
+      var aspectRatio, width, i ;
 
-      if(manifest.sequences[0].canvases) for( var i=-1; i < manifest.sequences[0].canvases.length; i++) {
+      if(manifest.sequences[0].canvases) for(i=-1; i < manifest.sequences[0].canvases.length; i++) {
         var url ;
         var canvas ;
         if(i == -1) {
@@ -36513,6 +36516,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
         }
       })();
 
+      
     },
 
     render: function() {
@@ -36521,6 +36525,82 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
 
     listenForActions: function() {
       var _this = this;
+      var manifest = _this.manifest.jsonLd ;
+
+      if(manifest && manifest.rendering) {
+        var render = manifest.rendering ;
+        if(!Array.isArray(render)) render = [ render ] ;
+        if(render.length) {
+
+          var el = _this.element.find(".pdfDL");
+
+          for(i = 0 ; i < render.length ; i ++) {
+            var txt = "Generate " + (render[i].format.includes("pdf")?"PDF":"ZIP");
+            el.find("ul.select").append("<li data-value='"+render[i]["@id"]+"'>"+txt+"</li>") ;            
+          }        
+          
+          el.addClass("on").removeAttr("title");
+
+          el.find("ul li").click(function(event){
+
+            var elem = jQuery(event.currentTarget).closest("li");
+            
+            if(elem.attr("data-value")) {
+              var url = elem.attr("data-value");
+              if(url) {
+                elem.removeAttr("data-value").text(elem.text().replace(/.*(PDF|ZIP)$/,"Generating $1..."));
+
+                var headers = {};
+                var id_token = localStorage.getItem('id_token');
+                if(id_token && url && url.match(/[^?&]+[.]bdrc[.]io[/]/)) {
+                  var jwt = parseJwt(id_token);
+                  if(jwt.exp && jwt.exp > Date.now() / 1000)
+                    headers = { "Authorization": "Bearer " + id_token } ; // TODO no need if manifest not from BDRC x is token valid ?
+                }
+
+                console.log("header:",headers);
+
+                var request = jQuery.ajax({
+                  url: url,
+                  dataType:'json',
+                  async: true,
+                  headers: headers
+                });
+
+                request.done(function(jsonLd) {
+                  console.log("ajax:",jsonLd,elem);
+                  elem.html("<a download target='_blank' href='"+//url.replace(/^(.*?bdrc.io).*/,"$1")
+                    jsonLd.links+"'>"+elem.text().replace(/.*(PDF|ZIP).*/,"Download $1")+"</a>");
+                });
+
+              }
+              event.stopPropagation();
+              event.preventDefault();
+              return false;
+            }
+            else if(!elem.find("a").length) {
+              event.stopPropagation();
+              event.preventDefault();
+              return false;
+            }
+          });
+
+  
+          el.find(".before").click(function(event) {                                    
+            var on = el.parent().find("ul.select").hasClass("on");
+            if(!on) el.closest(".items-listing").find("ul.on").removeClass("on");
+            el.parent().find("ul.select").toggleClass("on");
+            event.stopPropagation();
+            event.preventDefault();
+            return false;          
+          });
+
+        
+          jQuery(document).click(function(event) {
+            el.find("ul.on").removeClass("on");
+          });
+        }
+      }
 
       _this.eventEmitter.subscribe('manifestPanelWidthChanged', function(event, newWidth){
         _this.updateDisplay(newWidth);
@@ -36570,6 +36650,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
         jQuery(this).hide().fadeIn(600);        
         _this.eventEmitter.publish('UPDATE_COLLECTION_SCROLL_BAR');
       });
+
 
       /*
       this.element.on('click', function() {
@@ -36696,7 +36777,11 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
           '<i class="fa fa fa-ellipsis-h remaining"></i>',
         '{{/if}}',
         '{{#if pdf}}',
-        '<a class="pdfDL" title="Download as PDF" target="_blank" href="{{pdf}}"></a>',
+        '<a class="pdfDL" title="Download as PDF" target="_blank" data-href="{{pdf}}">',
+        '<div class="before"></div>',
+        '<ul class="select">',
+        '</ul>',
+        '</a>',
         '{{/if}}',        
       '</div>',
       '<div class="select-metadata">',
