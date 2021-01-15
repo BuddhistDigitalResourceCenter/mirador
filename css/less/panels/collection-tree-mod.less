@@ -22,7 +22,7 @@
 .member-select-results {
   //height: 90%;
   height: 100% ; //~"calc(100% - 20px)";
-  overflow-y: scroll;
+  overflow-y: auto;
   //margin-left: 240px;
   //margin-top: 10px;
   //border-top: 1px solid gray;
@@ -146,9 +146,10 @@
     right:0;
     left:0;
     transition:all 400ms ease-in-out;
+    overflow-x:hidden;
 
     pointer-events: none;
-    
+
     .pdfDL,
     .preview-images { pointer-events:auto; }
         

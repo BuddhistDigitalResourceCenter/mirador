@@ -3686,7 +3686,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   opacity: 0.5;
 }
 .mirador-container:not(.inApp) .disabled:not(#collection-tree-resizer),
-.mirador-container.inApp .disabled {
+.mirador-container.inApp .disabled:not(#collection-tree-resizer) {
   opacity: 0.5;
   pointer-events: none;
 }
@@ -6030,7 +6030,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 }
 .mirador-container .member-select-results .pdfDL .before {
   position: absolute;
-  left: 0;
+  right: 0;
   top: 0;
   background: none;
 }
@@ -6888,7 +6888,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 */
 .member-select-results {
   height: 100% ;
-  overflow-y: scroll;
+  overflow-y: auto;
   background-color: #100f0f;
   padding-right: 40px;
 }
@@ -7024,6 +7024,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   right: 0;
   left: 0;
   transition: all 400ms ease-in-out;
+  overflow-x: hidden;
   pointer-events: none;
   padding-bottom: 0px;
 }
