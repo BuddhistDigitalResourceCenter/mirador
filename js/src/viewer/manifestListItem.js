@@ -240,24 +240,26 @@
     listenForActions: function() {
       var _this = this;
       var manifest = _this.manifest.jsonLd ;
-
+    
       if(manifest && manifest.rendering) {
         var render = manifest.rendering ;
         if(!Array.isArray(render)) render = [ render ] ;
         if(render.length) {
 
           var el = _this.element.find(".pdfDL");
-
+          
           for(i = 0 ; i < render.length ; i ++) {
             var txt = "Generate " + (render[i].format.includes("pdf")?"PDF":"ZIP");
-            el.find("ul.select").append("<li data-value='"+render[i]["@id"]+"'>"+txt+"</li>") ;            
-          }        
+
+            // DONE using "<li>" breaks both lazy loading & ordering...
+            el.find("ul.select").append("<span data-value='"+render[i]["@id"]+"'>"+txt+"</span>") ;            
+          }
           
           el.addClass("on").removeAttr("title");
 
-          el.find("ul li").click(function(event){
+          el.find("ul > span").click(function(event){
 
-            var elem = jQuery(event.currentTarget).closest("li");
+            var elem = jQuery(event.currentTarget).closest("span");
             
             if(elem.attr("data-value")) {
               var url = elem.attr("data-value");
@@ -310,9 +312,11 @@
           });
 
         
+          
           jQuery(document).click(function(event) {
             el.find("ul.on").removeClass("on");
           });
+          
         }
       }
 

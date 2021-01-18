@@ -279,7 +279,7 @@
             var elem = this.element.find('.member-select-results');
             
             // TODO something's wrong with isOnScreen and scrolling modification for mobile...
-            //if(jQuery("body > #viewer.inApp").length) elem =  jQuery(document);
+            if(jQuery("body > #viewer.inApp").length) elem =  jQuery(document);
 
             elem.on('scroll', $.throttle(function() {              
               jQuery(this).find('.preview-images').each(function(_, w) {

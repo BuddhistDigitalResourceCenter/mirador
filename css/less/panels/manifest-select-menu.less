@@ -306,7 +306,7 @@
 
   .member-select-results .pdfDL { cursor:pointer;
     margin-left:auto;
-    display:inline-block;
+    display:block;
     justify-self:flex-end;
     
     &::before,.before {
@@ -318,10 +318,10 @@
     &::before { pointer-events: none; margin-left:0;}
 
     ul {  right:0; top:30px; width:200px; left:auto;z-index:1;
-      li { padding:5px 15px !important;
+      & > span, & > li { padding:5px 15px !important; display:block;
       
         @media(max-height:480px){
-          li { padding:10px 15px !important;}
+          padding:10px 15px !important;
         }
       }
     }
