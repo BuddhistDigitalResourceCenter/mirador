@@ -40,6 +40,7 @@ var prevDiff = -1;
 
     init: function() {
       this.imagePromise = {} ;
+      this.scrollView = false ;
 
       if (this.canvasID !== null) {
         this.currentImgIndex = $.getImageIndexById(this.imagesList, this.canvasID);
@@ -319,11 +320,11 @@ var prevDiff = -1;
           if (prevDiff > 0) {
             if (curDiff > prevDiff) {
               console.log("Zin");
-              jQuery("#Zi").click();
+              jQuery("#Zi.on").click();
             }
             if (curDiff < prevDiff) {
               console.log("Zout");
-              jQuery("#Zo").click();
+              jQuery("#Zo.on").click();
             }
           }
 
@@ -338,14 +339,16 @@ var prevDiff = -1;
       };
 
 
-      var el = jQuery(_this.element)[0];
-      el.onpointerdown = pointerdown_handler;
-      el.onpointermove = pointermove_handler;
+      if(_this.scrollView) {
+        var el = jQuery(_this.element)[0];
+        el.onpointerdown = pointerdown_handler;
+        el.onpointermove = pointermove_handler;
 
-      el.onpointerup = pointerup_handler;
-      el.onpointercancel = pointerup_handler;
-      el.onpointerout = pointerup_handler;
-      el.onpointerleave = pointerup_handler;
+        el.onpointerup = pointerup_handler;
+        el.onpointercancel = pointerup_handler;
+        el.onpointerout = pointerup_handler;
+        el.onpointerleave = pointerup_handler;
+      }
 
       // -----------------------------------------------------------------------------
 

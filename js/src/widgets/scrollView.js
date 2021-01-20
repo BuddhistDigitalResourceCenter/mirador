@@ -21,6 +21,7 @@
 
     $.ScrollView.prototype.originalLoadContent = $.ThumbnailsView.prototype.loadContent ;
     $.ScrollView.prototype.loadContent = function(useThumbnailProperty) {
+        this.scrollView = true ;
         if(useThumbnailProperty == undefined) useThumbnailProperty = false ;
         return this.originalLoadContent(useThumbnailProperty,this) ;
     } ;
