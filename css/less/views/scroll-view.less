@@ -67,7 +67,11 @@
     #control { margin-left:auto; margin-right:auto; }
     .eText #check { margin-left:0;} 
   }
-  
+}
+
+.inApp .view-nav .eText { pointer-events:none !important; opacity:0.35 !important;
+
+  &.on { animation:none !important; }
 }
 
 
@@ -232,6 +236,11 @@
 .inApp .scroll-view .provider div,
 .inApp .image-view .provider {
   top:~"calc(35% - 40px)";
+}
+
+.inApp .view-nav #control #Zmenu ul.select {
+  overflow-y: auto;
+  max-height: 65vh;
 }
 
 .scroll-view .provider { position:absolute; top:0; right:0; width:48px; display: flex; justify-content: flex-end;

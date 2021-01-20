@@ -1,4 +1,6 @@
-
+// handle pinch event (see https://developer.mozilla.org/fr/docs/Web/API/Pointer_events/gestes_pincer_zoom)
+var evCache = []; 
+var prevDiff = -1;
 
 (function($) {
 
@@ -284,6 +286,69 @@
         });
       });
         */
+
+      // handle pinch event ------------------------------------------------------
+
+      var remove_event = function (ev) {
+        for (var i = 0; i < evCache.length; i++) {
+          if (evCache[i].pointerId == ev.pointerId) {
+            evCache.splice(i, 1);
+            break;
+          }
+        }
+      };
+
+      var pointerdown_handler = function (ev) {
+        evCache.push(ev);
+      } ;
+
+
+      var pointermove_handler = function (ev) {
+        ev.target.style.border = "dashed";
+
+        for (var i = 0; i < evCache.length; i++) {
+          if (ev.pointerId == evCache[i].pointerId) {
+              evCache[i] = ev;
+              break;
+          }
+        }
+
+        if (evCache.length == 2) {
+          var curDiff = Math.abs(evCache[0].clientX - evCache[1].clientX);
+
+          if (prevDiff > 0) {
+            if (curDiff > prevDiff) {
+              console.log("Zin");
+              jQuery("#Zi").click();
+            }
+            if (curDiff < prevDiff) {
+              console.log("Zout");
+              jQuery("#Zo").click();
+            }
+          }
+
+          prevDiff = curDiff;
+        }
+      };
+      
+
+      var pointerup_handler = function (ev) {
+        remove_event(ev);
+        if (evCache.length < 2) prevDiff = -1;
+      };
+
+
+      var el = jQuery(_this.element)[0];
+      el.onpointerdown = pointerdown_handler;
+      el.onpointermove = pointermove_handler;
+
+      el.onpointerup = pointerup_handler;
+      el.onpointercancel = pointerup_handler;
+      el.onpointerout = pointerup_handler;
+      el.onpointerleave = pointerup_handler;
+
+      // -----------------------------------------------------------------------------
+
 
       jQuery(_this.element).scroll(function() {
         _this.loadImages();
