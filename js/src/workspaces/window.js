@@ -167,7 +167,8 @@ var Z = 0 ;
 
       // TODO use "responsive" flag to work in library as well
       var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin");
-      templateData.inApp = origin && origin.startsWith("BDRCLibApp");
+      templateData.inApp = (window.innerWidth < 800) || (origin && origin.startsWith("BDRCLibApp"));
+      console.log("inApp:",templateData.inApp);
 
       //determine if any buttons should be hidden in template
       templateData.iconClasses = {};
@@ -631,7 +632,11 @@ var Z = 0 ;
 
     bindEvents: function() {
       var _this = this;
-      var inApp = jQuery("body > #viewer.inApp").length > 0 ;
+      var inApp = window.innerWidth < 800 ; //jQuery("body > #viewer.inApp").length > 0 ;
+
+      if(inApp) {
+        jQuery("#breadcrumbs #return").text("BUDA");
+      }
 
       //this event should trigger from layout
       jQuery(window).resize($.debounce(function(){
@@ -643,7 +648,7 @@ var Z = 0 ;
           }
           // TODO do we ever need to reload images when window resized?? I don't think so
           // > actually we need to when etext available... 
-          if(!inApp) _this.focusModules.ScrollView.reloadImages(Math.floor(containerHeight * _this.scrollImageRatio), triggerShow);
+          if(!inApp) _this.focusModules.ScrollView.reloadImages(Math.floor(containerHeight * _this.scrollImageRatio), triggerShow);          
         }
       }, 300));
 

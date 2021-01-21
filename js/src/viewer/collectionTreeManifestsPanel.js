@@ -333,7 +333,7 @@
             
 
             var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin");
-            var inApp = origin && origin.startsWith("BDRCLibApp");
+            var inApp = (window.innerWidth < 800) || (origin && origin.startsWith("BDRCLibApp"));
             if(inApp) {
               this.element.find('.member-select-results').addClass("auto_rela").parents().addClass("auto_rela");
             }

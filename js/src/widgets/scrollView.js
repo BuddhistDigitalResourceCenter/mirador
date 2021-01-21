@@ -111,7 +111,7 @@
 
 
         var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin");
-        var inApp = origin && origin.startsWith("BDRCLibApp");
+        var inApp = (window.innerWidth < 800) || (origin && origin.startsWith("BDRCLibApp"));
         if(inApp) {
           jQuery(".scroll-view").addClass("auto_rela").parents().addClass("auto_rela");
         }
@@ -131,6 +131,9 @@
           var ima = jQuery(".nav-bar-top #breadcrumbs #image");
           if(ima.attr("data-page-view-id")) setTimeout(function() { window.scrollToImage(ima.attr("data-page-view-id")); }, 1000);
         }
+
+
+        jQuery(window).scroll();
 
         /* TODO not working with setInterval (try with "Goto" from footer menu)
         var ima = jQuery(".nav-bar-top #breadcrumbs #image");

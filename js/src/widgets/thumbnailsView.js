@@ -357,7 +357,7 @@ var prevDiff = -1;
         _this.loadImages();
       });
 
-      if(jQuery("body > #viewer.inApp").length) jQuery(window).scroll(function() {
+      if(jQuery("#viewer.inApp").length) jQuery(window).scroll(function() {
         _this.loadImages();
       });
 
