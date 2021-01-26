@@ -370,10 +370,12 @@ var prevDiff = -1;
       });
 
       
-      jQuery(window).resize(function() {
-        if(window.currentZoom) delete window.currentZoom;
-        window.setZoom(0);
-        window.setZoom(Z/100);
+      jQuery(window).resize(function() {        
+        if(window.screen.width > 767 || window.currentZoom === undefined) {
+          if(window.currentZoom) delete window.currentZoom;
+          window.setZoom(0);
+          window.setZoom(Z/100);
+        }
       });
       
     },
