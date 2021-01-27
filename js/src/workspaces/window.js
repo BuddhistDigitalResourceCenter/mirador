@@ -668,6 +668,34 @@ var Z = 0 ;
         _this.toggleFullScreen();
       });
 
+
+      var orientInit = function(event) {
+        console.log("the orientation of the device is now " + (event?event.target.screen.orientation.angle:"--"));
+
+        if(window.screen.width < 768 && window.innerWidth < window.innerHeight) {
+          jQuery("body").height(window.innerHeight);
+        } else {
+          jQuery("body").height("100vh");
+        }
+        
+        setTimeout(function() {
+          var selec = jQuery("#Zmenu .select li[data-selected]");
+          if(!selec.length) selec = jQuery("#Zmenu .select li:last-child");
+          if(selec.length) {
+            selec.removeAttr("data-selected");
+            selec = selec.prev();
+            selec.attr("data-selected","true");
+            Z = Number(selec.attr("data-value"));
+
+            window.setZoom(Z/100);
+          }
+        }, 350);
+      } ;
+      window.addEventListener("orientationchange", orientInit);
+      orientInit();
+
+      
+
       this.element.find('#Zi').on('click', function(e) {
 
         var selec = jQuery("#Zmenu .select li[data-selected]");

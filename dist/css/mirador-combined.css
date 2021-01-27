@@ -4192,6 +4192,18 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .inApp:not(.embed) .mobile-button:not(.image) + .mirador-main-menu-bar .nav-bar-top #breadcrumbs a {
   max-width: calc((100% - 75px) / 2);
 }
+@media only screen and (orientation: portrait) and (max-device-width: 767px) and (max-width: 480px) {
+  .inApp .view-nav a#DL {
+    font-size: 0;
+  }
+  .inApp .inApp .view-nav .eText {
+    display: none;
+  }
+  .inApp .items-listing ul.select,
+  .inApp .view-nav ul.select {
+    min-width: 130px;
+  }
+}
 .mobile-button {
   position: fixed;
   border-radius: 50%;
@@ -5545,16 +5557,16 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .provider img[src$="bl_logo_100.gif"] {
   padding: 0;
 }
-.auto_rela:not(#a):not(#b):not(.c):not(.d) {
+.auto_rela:not(#a):not(#b):not(.c):not(.d):not(html):not(body) {
   position: relative !important;
 }
-.auto_rela:not(#a):not(#b):not(.c):not(.d):not(.customH) {
+.auto_rela:not(#a):not(#b):not(.c):not(.d):not(html):not(body):not(.customH) {
   height: auto !important;
 }
-.auto_rela:not(#a):not(#b):not(.c):not(.d).slot {
+.auto_rela:not(#a):not(#b):not(.c):not(.d):not(html):not(body).slot {
   min-height: 100vh;
 }
-.auto_rela:not(#a):not(#b):not(.c):not(.d) .mirador-container .slotIconContainer {
+.auto_rela:not(#a):not(#b):not(.c):not(.d):not(html):not(body) .mirador-container .slotIconContainer {
   position: absolute;
 }
 .scroll-view .provider div,
