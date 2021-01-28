@@ -274,6 +274,7 @@ var prevDiff = -1;
       _this.eventEmitter.subscribe('windowResize', $.debounce(function(){
         _this.loadImages();
       }, 100));
+
     },
 
     bindEvents: function() {
@@ -353,13 +354,24 @@ var prevDiff = -1;
       // -----------------------------------------------------------------------------
 
 
-      jQuery(_this.element).scroll(function() {
-        _this.loadImages();
-      });
 
-      if(jQuery("#viewer.inApp").length) jQuery(window).scroll(function() {
-        _this.loadImages();
-      });
+
+      if(jQuery("#viewer.inApp").length) {
+        jQuery(window).scroll(function() {          
+          _this.loadImages();
+        });
+
+        // DONE fix lazy loading in portrait mode
+        jQuery("html,body").scroll(function() {
+          _this.loadImages();
+        });
+      } else {
+        jQuery(_this.element).scroll(function() {
+          _this.loadImages();
+        });
+      }
+
+      _this.eventEmitter.publish('update_orientation');
 
       //add any other events that would trigger thumbnail display (resize, etc)
 
@@ -392,13 +404,15 @@ var prevDiff = -1;
       var _this = this;
       jQuery.each(_this.element.find("img"), function(key, value) {
         //console.log("img?",key,$.isOnScreen(value, _this.lazyLoadingFactor));        
-        if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src") ) {
-          //console.log("ONSCREEN",key);
+        if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src")) {
           setTimeout(function() {
-            if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src") ) {              
-              //console.log("RELOAD", key);
+            if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src")) {              
+              //console.log("ONSCREEN",key,_this.imagePromise[jQuery(value).attr("data")]);
               var url = jQuery(value).attr("data");
-              if(!_this.imagePromise[url]) _this.loadImage(value, url);
+              if(!_this.imagePromise[url]) {
+                //console.log("RELOAD", key);
+                _this.loadImage(value, url);            
+              }
             }
           }, 650);
         }
@@ -412,6 +426,7 @@ var prevDiff = -1;
         canvas = _this.imagesList.filter(function(e) { return e["@id"] === id; }),
         imagePromise = $.createImagePromise(url);
 
+      _this.imagePromise[url] = imagePromise ;
 
       var dash = i18next.t("_dash");
   
@@ -429,6 +444,7 @@ var prevDiff = -1;
           .attr({"data-ratio":ratio}) //,"width":imageElement.naturalWidth,"height":imageElement.naturalHeight})
           .css("min-height",(imelem.width() / ratio)+"px");
         }
+        //imelem.removeAttr("preload");
         //if(imelem.attr("data-max-height") != )
       });
       

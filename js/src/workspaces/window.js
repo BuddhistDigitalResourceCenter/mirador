@@ -677,7 +677,21 @@ var Z = 0 ;
         } else {
           jQuery("body").height("100vh");
         }
-        
+
+        /* 
+        // TODO keep current page when switching orientation
+
+        console.log("scrollTops:",jQuery(window).scrollTop(),jQuery("html,body").scrollTop());
+
+        if(window.innerWidth < window.innerHeight) {
+          jQuery(window).scrollTop(jQuery("html,body").scrollTop());
+          //jQuery("html,body").scrollTop(0);
+        } else {
+          jQuery("html,body").scrollTop(jQuery(window).scrollTop());
+          //jQuery(window).scrollTop(0);
+        }
+        */
+            
         setTimeout(function() {
           var selec = jQuery("#Zmenu .select li[data-selected]").removeAttr("data-selected");
           selec = jQuery("#Zmenu .select li.zoom0").attr("data-selected","true");
