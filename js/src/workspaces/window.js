@@ -679,15 +679,16 @@ var Z = 0 ;
         }
         
         setTimeout(function() {
-          var selec = jQuery("#Zmenu .select li[data-selected]");
-          if(!selec.length) selec = jQuery("#Zmenu .select li:last-child");
+          var selec = jQuery("#Zmenu .select li[data-selected]").removeAttr("data-selected");
+          selec = jQuery("#Zmenu .select li.zoom0").attr("data-selected","true");
           if(selec.length) {
-            selec.removeAttr("data-selected");
-            selec = selec.prev();
-            selec.attr("data-selected","true");
             Z = Number(selec.attr("data-value"));
+            window.setZoom(0/100);
 
-            window.setZoom(Z/100);
+            jQuery("#Zmenu span").text(selec.text());
+
+            jQuery("#Zo").removeClass("on");
+            jQuery("#Zi").addClass("on");
           }
         }, 350);
       } ;
