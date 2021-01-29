@@ -401,7 +401,7 @@ var prevDiff = -1;
     },
 
     loadImages: function() {
-      var _this = this;
+      var _this = this, ref;
       jQuery.each(_this.element.find("img"), function(key, value) {
         //console.log("img?",key,$.isOnScreen(value, _this.lazyLoadingFactor));        
         if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src")) {
@@ -411,15 +411,16 @@ var prevDiff = -1;
               var url = jQuery(value).attr("data");
               if(!_this.imagePromise[url]) {
                 //console.log("RELOAD", key);
-                _this.loadImage(value, url);            
+                _this.loadImage(value, url, ref);            
               }
             }
           }, 650);
         }
+        ref = value;
       });
     },
 
-    loadImage: function(imageElement, url) {
+    loadImage: function(imageElement, url, ref) {
       var _this = this,
         imelem = jQuery(imageElement),
         id = imelem.attr("data-image-id"),
@@ -436,17 +437,16 @@ var prevDiff = -1;
       });
       */
 
-      imelem.on("load",function() {
-        var ratio = imageElement.naturalWidth / imageElement.naturalHeight;
-        //console.log("im:",ratio,imageElement.naturalWidth,imageElement.naturalHeight,imelem.attr("data-ratio"));
-        if(ratio != imelem.attr("data-ratio") ) {
-          imelem
-          .attr({"data-ratio":ratio}) //,"width":imageElement.naturalWidth,"height":imageElement.naturalHeight})
-          .css("min-height",(imelem.width() / ratio)+"px");
-        }
-        //imelem.removeAttr("preload");
-        //if(imelem.attr("data-max-height") != )
-      });
+      if(url.indexOf("static::error-copyright") == -1) 
+        imelem.on("load",function() {
+          var ratio = imageElement.naturalWidth / imageElement.naturalHeight;
+          //console.log("im:",ratio,imageElement.naturalWidth,imageElement.naturalHeight,imelem.attr("data-ratio"));
+          if(ratio != imelem.attr("data-ratio") ) {
+            imelem
+            .attr({"data-ratio":ratio}) //,"width":imageElement.naturalWidth,"height":imageElement.naturalHeight})
+            .css("min-height",(imelem.width() / ratio)+"px");
+          }
+        });
       
       imagePromise.done(function(image) {
 

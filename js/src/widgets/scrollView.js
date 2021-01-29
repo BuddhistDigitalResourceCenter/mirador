@@ -158,6 +158,7 @@
     $.ScrollView.prototype.initThumbs = function( tplData, useThumbnailProperty) {
       var _this = this;
       var dash = i18next.t("_dash");
+      var prevW ;
 
       tplData.thumbs = jQuery.map(this.imagesList, function(canvas, index) {
 
@@ -167,11 +168,16 @@
         
         var aspectRatio = canvas.height/canvas.width,
           width = canvas.width,
-          height = canvas.height ;
+          height = canvas.height,
+          isErrorImg = canvas["@id"] && canvas["@id"].indexOf("static::error-copyright") != -1  && window.screen.width < 768 && window.innerWidth < window.innerHeight ;
 
+        if(prevW && isErrorImg) {
+          width = prevW ;
+          height =  width * aspectRatio;
+        }        
 
         var img = canvas.images ;
-        if(img && img.length && img[0]) {
+        if(img && img.length && img[0] && !isErrorImg) {
           img = img[0] ;
           if(img.resource && img.resource.service ) {
             img = img.resource.service ;
@@ -203,14 +209,15 @@
 
         var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
 
-        //console.log("canvas:",canvas,index,thumbnailUrl,width,height);
+        //console.log("canvas:",isErrorImg,canvas,index,thumbnailUrl,width,height,prevW);
+
+        prevW = width ;
 
         // initialisation
         var obj = _this.setThumbLabel([ canvas ], null, dash, index);  //= "(loading #"+(Number(index)+1)+")";  
 
         // missing pages
-        if(canvas["@id"].includes("/missing")) title = _this.setThumbLabel([canvas],null,dash,index);
-        
+        if(canvas["@id"].includes("/missing")) title = _this.setThumbLabel([canvas],null,dash,index);        
 
         return {
           thumbUrl: thumbnailUrl,
