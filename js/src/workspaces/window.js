@@ -693,17 +693,51 @@ var Z = 0 ;
         */
             
         setTimeout(function() {
+
+          window.miradorNoScroll = true ;
+          
+          
+          var body ;
+          if(window.miradorBookmark && window.miradorBookmark.length) {
+            body = jQuery(".scroll-view");
+            while(!body.scrollTop() && !body.is("html")) {
+              body = body.parent();
+            }
+            if(body && body.is("html") && !body.scrollTop()) body = jQuery(window);
+          }          
+          
+
           var selec = jQuery("#Zmenu .select li[data-selected]").removeAttr("data-selected");
           selec = jQuery("#Zmenu .select li.zoom0").attr("data-selected","true");
           if(selec.length) {
+
+
             Z = Number(selec.attr("data-value"));
             window.setZoom(0/100);
+
 
             jQuery("#Zmenu span").text(selec.text());
 
             jQuery("#Zo").removeClass("on");
             jQuery("#Zi").addClass("on");
           }
+
+          if(window.miradorBookmark && window.miradorBookmark.length) {
+            
+            // TODO really don't understand how these 2 get swaped... when switching from portrait to landscape and not reciprocally!
+
+            body.scrollTop(window.miradorBookmark.offset().top);
+            console.log("sT1?",body.scrollTop(),window.miradorBookmark.offset().top); //,body.height(),window.miradorBookmark.attr("data-image-id"));
+            body.scrollTop(window.miradorBookmark.offset().top);
+            console.log("sT2?",body.scrollTop(),window.miradorBookmark.offset().top); //,body.height(),window.miradorBookmark.attr("data-image-id"));
+
+
+            //body.scrollTop(window.miradorBookmark.offset().top);
+            //console.log("sT3?",body.scrollTop(),window.miradorBookmark.offset().top,body.height(),window.miradorBookmark.attr("data-image-id"));            
+          };
+
+          delete window.miradorNoScroll ;
+
         }, 350);
       } ;
       window.addEventListener("orientationchange", orientInit);

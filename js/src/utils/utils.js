@@ -213,9 +213,9 @@
     viewport.right = (viewport.left + win.outerWidth()) * factor;
 
     var el = jQuery(elem);
-    var bounds = el.offset();
-    bounds.bottom = bounds.top + el.height();
-    bounds.right = bounds.left + el.width();
+    var bounds = el.offset(), dim = el[0].getBoundingClientRect();
+    bounds.bottom = bounds.top + dim.height;
+    bounds.right = bounds.left + dim.width;
 
     var valid = (bounds.left != 0 && bounds.right != bounds.left) ;
 

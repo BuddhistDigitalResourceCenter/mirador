@@ -169,7 +169,7 @@
         var aspectRatio = canvas.height/canvas.width,
           width = canvas.width,
           height = canvas.height,
-          isErrorImg = canvas["@id"] && canvas["@id"].indexOf("static::error-copyright") != -1  && window.screen.width < 768 && window.innerWidth < window.innerHeight ;
+          isErrorImg = canvas["@id"] && canvas["@id"].indexOf("static::error-copyright") != -1  && window.screen.width < 768 /*&& window.innerWidth < window.innerHeight*/ ;
 
         if(prevW && isErrorImg) {
           width = prevW ;

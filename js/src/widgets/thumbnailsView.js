@@ -362,7 +362,7 @@ var prevDiff = -1;
         });
 
         // DONE fix lazy loading in portrait mode
-        jQuery("html,body").scroll(function() {
+        jQuery("html,body").scroll(function() {       
           _this.loadImages();
         });
       } else {
@@ -401,12 +401,22 @@ var prevDiff = -1;
     },
 
     loadImages: function() {
-      var _this = this, ref;
-      jQuery.each(_this.element.find("img"), function(key, value) {
+      var _this = this, ref ;
+      delete window.miradorBookmark ;
+      jQuery.each(_this.element.find("ul img"), function(key, value) {
+        var jmg = jQuery(value);
+        
+        if(!window.miradorBookmark || !window.miradorBookmark.length) { 
+          if($.isOnScreen(value)) { 
+            window.miradorBookmark = jmg ;
+            //console.log("onScr:",window.miradorBookmark.attr("data-image-id"),jQuery(window).scrollTop(),window.miradorBookmark.offset().top);
+          }
+        }
+        
         //console.log("img?",key,$.isOnScreen(value, _this.lazyLoadingFactor));        
-        if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src")) {
+        if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jmg.attr("src")) {          
           setTimeout(function() {
-            if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jQuery(value).attr("src")) {              
+            if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jmg.attr("src")) {              
               //console.log("ONSCREEN",key,_this.imagePromise[jQuery(value).attr("data")]);
               var url = jQuery(value).attr("data");
               if(!_this.imagePromise[url]) {
