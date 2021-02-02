@@ -358,16 +358,18 @@ var prevDiff = -1;
 
       if(jQuery("#viewer.inApp").length) {
 
+        /*
         jQuery(window).scroll(function() {          
           console.log("scroll1?",window.miradorNoScroll);
           if(window.innerWidth < window.innerHeight || window.miradorNoScroll) return ;     
           _this.loadImages();
         });
+        */
 
         // DONE fix lazy loading in portrait mode
         jQuery("html,body").scroll(function() {     
           console.log("scroll2?",window.miradorNoScroll);
-          if(window.innerWidth > window.innerHeight || window.miradorNoScroll) return ;
+          if( /*window.innerWidth > window.innerHeight ||*/ window.miradorNoScroll) return ;
           _this.loadImages();
         });
       } else {
