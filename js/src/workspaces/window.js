@@ -670,6 +670,9 @@ var Z = 0 ;
 
 
       var orientInit = function(event) {
+
+        if(event) window.miradorNoScroll = true ;
+
         console.log("the orientation of the device is now " + (event?event.target.screen.orientation.angle:"--"));
 
         if(window.screen.width < 768 && window.innerWidth < window.innerHeight) {
@@ -692,9 +695,7 @@ var Z = 0 ;
         }
         */
             
-        setTimeout(function() {
-
-          window.miradorNoScroll = true ;
+        if(event) setTimeout(function() {
 
           var selec = jQuery("#Zmenu .select li[data-selected]").removeAttr("data-selected");
           selec = jQuery("#Zmenu .select li.zoom0").attr("data-selected","true");
@@ -713,18 +714,18 @@ var Z = 0 ;
 
           if(window.miradorBookmark && window.miradorBookmark.length) {
                         
-            //window.miradorBookmark[0].scrollIntoView(); // why does this break scrolling up??
-
+          //  window.miradorBookmark[0].scrollIntoView(); // why does this break scrolling up??
+          
             var body = jQuery("html,body");
             if(!body.scrollTop()) body = jQuery("body");
             if(!body.scrollTop()) body = jQuery(window);
             
             body.scrollTop(0);   
-            body.scrollTop(window.miradorBookmark[0].getBoundingClientRect().top);
+            body.scrollTop(window.miradorBookmark.offset().top); //[0].getBoundingClientRect().top);             
 
           }
 
-          delete window.miradorNoScroll ;
+          setTimeout(function() { delete window.miradorNoScroll ;}, 150);
 
         }, 350);
       } ;

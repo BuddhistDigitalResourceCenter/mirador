@@ -357,13 +357,16 @@ var prevDiff = -1;
 
 
       if(jQuery("#viewer.inApp").length) {
+
         jQuery(window).scroll(function() {          
+          console.log("scroll1?",window.miradorNoScroll);
           if(window.innerWidth < window.innerHeight || window.miradorNoScroll) return ;     
           _this.loadImages();
         });
 
         // DONE fix lazy loading in portrait mode
         jQuery("html,body").scroll(function() {     
+          console.log("scroll2?",window.miradorNoScroll);
           if(window.innerWidth > window.innerHeight || window.miradorNoScroll) return ;
           _this.loadImages();
         });
@@ -404,7 +407,7 @@ var prevDiff = -1;
 
     loadImages: function() {
       var _this = this, ref ;
-      delete window.miradorBookmark ;
+      if(window.miradorBookmark) delete window.miradorBookmark ;
       jQuery.each(_this.element.find("ul img"), function(key, value) {
         var jmg = jQuery(value);
         

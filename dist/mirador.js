@@ -43667,6 +43667,9 @@ var Z = 0 ;
 
 
       var orientInit = function(event) {
+
+        if(event) window.miradorNoScroll = true ;
+
         console.log("the orientation of the device is now " + (event?event.target.screen.orientation.angle:"--"));
 
         if(window.screen.width < 768 && window.innerWidth < window.innerHeight) {
@@ -43689,9 +43692,7 @@ var Z = 0 ;
         }
         */
             
-        setTimeout(function() {
-
-          window.miradorNoScroll = true ;
+        if(event) setTimeout(function() {
 
           var selec = jQuery("#Zmenu .select li[data-selected]").removeAttr("data-selected");
           selec = jQuery("#Zmenu .select li.zoom0").attr("data-selected","true");
@@ -43710,18 +43711,18 @@ var Z = 0 ;
 
           if(window.miradorBookmark && window.miradorBookmark.length) {
                         
-            //window.miradorBookmark[0].scrollIntoView(); // why does this break scrolling up??
-
+          //  window.miradorBookmark[0].scrollIntoView(); // why does this break scrolling up??
+          
             var body = jQuery("html,body");
             if(!body.scrollTop()) body = jQuery("body");
             if(!body.scrollTop()) body = jQuery(window);
             
             body.scrollTop(0);   
-            body.scrollTop(window.miradorBookmark[0].getBoundingClientRect().top);
+            body.scrollTop(window.miradorBookmark.offset().top); //[0].getBoundingClientRect().top);             
 
           }
 
-          delete window.miradorNoScroll ;
+          setTimeout(function() { delete window.miradorNoScroll ;}, 150);
 
         }, 350);
       } ;
@@ -47753,8 +47754,13 @@ var Z = 0 ;
           if(ima.attr("data-page-view-id")) setTimeout(function() { window.scrollToImage(ima.attr("data-page-view-id")); }, 1000);
         }
 
-
-        jQuery(window).scroll();
+        /*
+        if(!inApp) jQuery(window).scroll();
+        else {
+          jQuery("html,body").scroll();
+          //jQuery("body").scroll();
+        }
+        */
 
         /* TODO not working with setInterval (try with "Goto" from footer menu)
         var ima = jQuery(".nav-bar-top #breadcrumbs #image");
@@ -47879,11 +47885,12 @@ var Z = 0 ;
     }
     else if(window.providerAttr) { jQuery(".scroll-view .provider div").prepend("<span>"+this.labelToString(window.providerAttr)+"</span>"); }
 
-
+    var _this = this ;
     var iniT = setInterval(function(){ 
       console.log("scrollView postinit check...",jQuery(".scroll-listing-thumbs li img[data-image-id^='http']:not([src^='http'])").length);
       if(jQuery(".scroll-listing-thumbs li img[data-image-id^='http']:not([src^='http'])").length) {
-        jQuery(window).resize(); 
+        //jQuery(window).resize(); 
+        _this.eventEmitter.publish('windowResize');
         console.log("RESIZED images should be visible");
         clearInterval(iniT);
       }
@@ -49292,13 +49299,16 @@ var prevDiff = -1;
 
 
       if(jQuery("#viewer.inApp").length) {
+
         jQuery(window).scroll(function() {          
+          console.log("scroll1?",window.miradorNoScroll);
           if(window.innerWidth < window.innerHeight || window.miradorNoScroll) return ;     
           _this.loadImages();
         });
 
         // DONE fix lazy loading in portrait mode
         jQuery("html,body").scroll(function() {     
+          console.log("scroll2?",window.miradorNoScroll);
           if(window.innerWidth > window.innerHeight || window.miradorNoScroll) return ;
           _this.loadImages();
         });
@@ -49339,7 +49349,7 @@ var prevDiff = -1;
 
     loadImages: function() {
       var _this = this, ref ;
-      delete window.miradorBookmark ;
+      if(window.miradorBookmark) delete window.miradorBookmark ;
       jQuery.each(_this.element.find("ul img"), function(key, value) {
         var jmg = jQuery(value);
         

@@ -132,8 +132,13 @@
           if(ima.attr("data-page-view-id")) setTimeout(function() { window.scrollToImage(ima.attr("data-page-view-id")); }, 1000);
         }
 
-
-        jQuery(window).scroll();
+        /*
+        if(!inApp) jQuery(window).scroll();
+        else {
+          jQuery("html,body").scroll();
+          //jQuery("body").scroll();
+        }
+        */
 
         /* TODO not working with setInterval (try with "Goto" from footer menu)
         var ima = jQuery(".nav-bar-top #breadcrumbs #image");
@@ -258,11 +263,12 @@
     }
     else if(window.providerAttr) { jQuery(".scroll-view .provider div").prepend("<span>"+this.labelToString(window.providerAttr)+"</span>"); }
 
-
+    var _this = this ;
     var iniT = setInterval(function(){ 
       console.log("scrollView postinit check...",jQuery(".scroll-listing-thumbs li img[data-image-id^='http']:not([src^='http'])").length);
       if(jQuery(".scroll-listing-thumbs li img[data-image-id^='http']:not([src^='http'])").length) {
-        jQuery(window).resize(); 
+        //jQuery(window).resize(); 
+        _this.eventEmitter.publish('windowResize');
         console.log("RESIZED images should be visible");
         clearInterval(iniT);
       }
