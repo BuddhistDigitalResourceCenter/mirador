@@ -112,7 +112,6 @@
         _this.eventEmitter.publish('SET_BOTTOM_PANEL_VISIBILITY.' + this.windowId, null);
       }
 
-      jQuery(".auto_rela").removeClass("auto_rela");
     },
 
     template: $.Handlebars.compile([
@@ -837,6 +836,7 @@
     },
 
     show: function() {
+      jQuery(".auto_rela").removeClass("auto_rela");
       jQuery(this.element).show({
         effect: "fade", duration: 300, easing: "easeInCubic", complete: function () {
           // Under firefox $.show() used under display:none iframe does not change the display.

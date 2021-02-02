@@ -425,6 +425,7 @@ var prevDiff = -1;
         }
         
         //console.log("img?",key,$.isOnScreen(value, _this.lazyLoadingFactor));        
+
         if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jmg.attr("src")) {          
           setTimeout(function() {
             if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jmg.attr("src")) {              

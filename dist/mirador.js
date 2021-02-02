@@ -46162,7 +46162,6 @@ var Z = 0 ;
         _this.eventEmitter.publish('SET_BOTTOM_PANEL_VISIBILITY.' + this.windowId, null);
       }
 
-      jQuery(".auto_rela").removeClass("auto_rela");
     },
 
     template: $.Handlebars.compile([
@@ -46887,6 +46886,7 @@ var Z = 0 ;
     },
 
     show: function() {
+      jQuery(".auto_rela").removeClass("auto_rela");
       jQuery(this.element).show({
         effect: "fade", duration: 300, easing: "easeInCubic", complete: function () {
           // Under firefox $.show() used under display:none iframe does not change the display.
@@ -47733,7 +47733,7 @@ var Z = 0 ;
 
 
         var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin");
-        var inApp = (window.innerWidth < 800) || (origin && origin.startsWith("BDRCLibApp"));
+        var inApp = (window.screen.width < 768) || (origin && origin.startsWith("BDRCLibApp"));
         if(inApp) {
           jQuery(".scroll-view").addClass("auto_rela").parents().addClass("auto_rela");
         }
@@ -49367,6 +49367,7 @@ var prevDiff = -1;
         }
         
         //console.log("img?",key,$.isOnScreen(value, _this.lazyLoadingFactor));        
+
         if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jmg.attr("src")) {          
           setTimeout(function() {
             if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jmg.attr("src")) {              
@@ -51127,6 +51128,8 @@ var prevDiff = -1;
       factor = outsideViewportFactor;
     }
     var win = jQuery(window);
+    if(!win.scrollTop()) win = jQuery("html,body");
+    if(!win.scrollTop()) win = jQuery("body");
     var viewport = {
       top : win.scrollTop(), //* factor),
       left : (win.scrollLeft() * factor)

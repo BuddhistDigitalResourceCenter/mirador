@@ -111,7 +111,7 @@
 
 
         var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin");
-        var inApp = (window.innerWidth < 800) || (origin && origin.startsWith("BDRCLibApp"));
+        var inApp = (window.screen.width < 768) || (origin && origin.startsWith("BDRCLibApp"));
         if(inApp) {
           jQuery(".scroll-view").addClass("auto_rela").parents().addClass("auto_rela");
         }
