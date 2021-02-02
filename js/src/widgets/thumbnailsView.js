@@ -358,11 +358,13 @@ var prevDiff = -1;
 
       if(jQuery("#viewer.inApp").length) {
         jQuery(window).scroll(function() {          
+          if(window.innerWidth < window.innerHeight || window.miradorNoScroll) return ;     
           _this.loadImages();
         });
 
         // DONE fix lazy loading in portrait mode
-        jQuery("html,body").scroll(function() {       
+        jQuery("html,body").scroll(function() {     
+          if(window.innerWidth > window.innerHeight || window.miradorNoScroll) return ;
           _this.loadImages();
         });
       } else {
@@ -407,8 +409,14 @@ var prevDiff = -1;
         var jmg = jQuery(value);
         
         if(!window.miradorBookmark || !window.miradorBookmark.length) { 
-          if($.isOnScreen(value)) { 
-            window.miradorBookmark = jmg ;
+          if($.isOnScreen(value)) {
+            var bbox = value.getBoundingClientRect();
+            if(bbox.top > 0 && bbox.bottom < window.innerHeight || 
+               bbox.top < 0 && bbox.bottom / window.innerHeight > 0.5 || 
+               bbox.bottom > window.innerHeight && bbox.top / window.innerHeight < 0.5
+              ) {
+              window.miradorBookmark = jmg ;
+            } 
             //console.log("onScr:",window.miradorBookmark.attr("data-image-id"),jQuery(window).scrollTop(),window.miradorBookmark.offset().top);
           }
         }
