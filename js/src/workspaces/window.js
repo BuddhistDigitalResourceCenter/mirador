@@ -674,8 +674,8 @@ var Z = 0 ;
 
         if(window.screen.width < 768 && window.innerWidth < window.innerHeight) {
           jQuery("body").height(window.innerHeight);
-        //} else {
-        //  jQuery("body").height("100vh");
+        } else {
+          jQuery("body").height("100vh");
         }
 
         /* 
@@ -712,8 +712,15 @@ var Z = 0 ;
           }
 
           if(window.miradorBookmark && window.miradorBookmark.length) {
+                        
+            //window.miradorBookmark[0].scrollIntoView(); // why does this break scrolling up??
+
+            var body = jQuery("html,body");
+            if(!body.scrollTop()) body = jQuery("body");
+            if(!body.scrollTop()) body = jQuery(window);
             
-            window.miradorBookmark[0].scrollIntoView();
+            body.scrollTop(0);   
+            body.scrollTop(window.miradorBookmark[0].getBoundingClientRect().top);
 
           }
 
