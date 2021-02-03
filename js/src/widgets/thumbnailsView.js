@@ -361,18 +361,19 @@ var prevDiff = -1;
         window.miradorIniScroll = true ; 
         
         jQuery(window).scroll(function() {          
-          //console.log("scroll1?",window.miradorNoScroll);
-          if(window.innerWidth < window.innerHeight || window.miradorNoScroll) return ;     
+          console.log("scroll1?",window.miradorNoScroll);
+          if( /* window.innerWidth < window.innerHeight ||*/ window.miradorNoScroll) return ;     
           _this.loadImages();
         });
         
-
+        /*
         // DONE fix lazy loading in portrait mode
         jQuery("html,body").scroll(function() {     
-          //console.log("scroll2?",window.miradorNoScroll);
+          console.log("scroll2?",window.miradorNoScroll);
           if( window.innerWidth > window.innerHeight || window.miradorNoScroll) return ;
           _this.loadImages();
         });
+        */
 
       } else {
         jQuery(_this.element).scroll(function() {
@@ -571,7 +572,7 @@ var prevDiff = -1;
         height = _this.thumbInfo.thumbsHeight,
         id = image['@id'];      
 
-        console.log("reload:",image,width,height,image.width,image.height,_this.thumbInfo.thumbsHeight);
+        //console.log("reload:",image,width,height,image.width,image.height,_this.thumbInfo.thumbsHeight);
 
         width = image.width;
         height = width * aspectRatio;

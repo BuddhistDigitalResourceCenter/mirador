@@ -35445,6 +35445,8 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
 
             var lazy = function() {
 
+              if(!elem.is(":visible")) return ; 
+
               console.log("scroll?");
 
               jQuery(".member-select-results").find('.preview-images').each(function(_, w) {
@@ -35483,7 +35485,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
             
             // DONE fix lazyloading for mobile
             if(jQuery("#viewer.inApp").length) {
-                            
+
               jQuery(window).scroll( $.throttle( lazy, 50, true) );
 
             } else {
@@ -47850,7 +47852,7 @@ var Z = 0 ;
 
         var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
 
-        console.log("canvas:",isErrorImg,canvas,index,thumbnailUrl,width,height,prevW);
+        //console.log("canvas:",isErrorImg,canvas,index,thumbnailUrl,width,height,prevW);
 
         prevW = width ;
 
@@ -49317,18 +49319,19 @@ var prevDiff = -1;
         window.miradorIniScroll = true ; 
         
         jQuery(window).scroll(function() {          
-          //console.log("scroll1?",window.miradorNoScroll);
-          if(window.innerWidth < window.innerHeight || window.miradorNoScroll) return ;     
+          console.log("scroll1?",window.miradorNoScroll);
+          if( /* window.innerWidth < window.innerHeight ||*/ window.miradorNoScroll) return ;     
           _this.loadImages();
         });
         
-
+        /*
         // DONE fix lazy loading in portrait mode
         jQuery("html,body").scroll(function() {     
-          //console.log("scroll2?",window.miradorNoScroll);
+          console.log("scroll2?",window.miradorNoScroll);
           if( window.innerWidth > window.innerHeight || window.miradorNoScroll) return ;
           _this.loadImages();
         });
+        */
 
       } else {
         jQuery(_this.element).scroll(function() {
@@ -49527,7 +49530,7 @@ var prevDiff = -1;
         height = _this.thumbInfo.thumbsHeight,
         id = image['@id'];      
 
-        console.log("reload:",image,width,height,image.width,image.height,_this.thumbInfo.thumbsHeight);
+        //console.log("reload:",image,width,height,image.width,image.height,_this.thumbInfo.thumbsHeight);
 
         width = image.width;
         height = width * aspectRatio;

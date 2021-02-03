@@ -280,6 +280,8 @@
 
             var lazy = function() {
 
+              if(!elem.is(":visible")) return ; 
+
               console.log("scroll?");
 
               jQuery(".member-select-results").find('.preview-images').each(function(_, w) {
@@ -318,7 +320,7 @@
             
             // DONE fix lazyloading for mobile
             if(jQuery("#viewer.inApp").length) {
-                            
+
               jQuery(window).scroll( $.throttle( lazy, 50, true) );
 
             } else {

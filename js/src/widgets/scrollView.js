@@ -214,7 +214,7 @@
 
         var thumbnailUrl = $.getThumbnailForCanvas(canvas, width, useThumbnailProperty);
 
-        console.log("canvas:",isErrorImg,canvas,index,thumbnailUrl,width,height,prevW);
+        //console.log("canvas:",isErrorImg,canvas,index,thumbnailUrl,width,height,prevW);
 
         prevW = width ;
 
