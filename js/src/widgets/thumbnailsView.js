@@ -571,7 +571,7 @@ var prevDiff = -1;
         height = _this.thumbInfo.thumbsHeight,
         id = image['@id'];      
 
-        //console.log("reload",image,width,height,image.width,image.height,_this.thumbInfo.thumbsHeight);
+        console.log("reload:",image,width,height,image.width,image.height,_this.thumbInfo.thumbsHeight);
 
         width = image.width;
         height = width * aspectRatio;

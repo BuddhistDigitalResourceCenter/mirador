@@ -199,12 +199,13 @@
   };
 
   // http://upshots.org/javascript/jquery-test-if-element-is-in-viewport-visible-on-screen
-  $.isOnScreen = function(elem, outsideViewportFactor) {
+  $.isOnScreen = function(elem, outsideViewportFactor, container) {
     var factor = 1;
     if (outsideViewportFactor) {
       factor = outsideViewportFactor;
     }
     var win = jQuery(window);
+    //if(container) win = container ;
     //if(!win.scrollTop()) win = jQuery("html,body");
     //if(!win.scrollTop()) win = jQuery("body");
     var viewport = {
@@ -224,7 +225,7 @@
     var ret = valid && (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
 
     //if(ret) 
-    //  console.log("vp",elem.style.cssText,JSON.stringify(bounds),JSON.stringify(viewport));
+    //  console.log("vp",ret,elem.style.cssText,JSON.stringify(bounds),JSON.stringify(viewport));
     
     return ret ;
 

@@ -276,25 +276,25 @@
             _this.resizePanel();
 
             // Lazy loading
-            var elem = this.element.find('.member-select-results');
-            
-            // TODO something's wrong with isOnScreen and scrolling modification for mobile...
-            if(jQuery("body > #viewer.inApp").length) elem =  jQuery(document);
+            var elem = this.element.find('.member-select-results');            
 
-            elem.on('scroll', $.throttle(function() {              
-              jQuery(this).find('.preview-images').each(function(_, w) {
+            var lazy = function() {
+
+              console.log("scroll?");
+
+              jQuery(".member-select-results").find('.preview-images').each(function(_, w) {
                 var img = jQuery(this).find('img[data-src]');
                 if(img.length) {
                   img.each(function(_, v) {
-                    if ($.isOnScreen(v, _this.lazyLoadingFactor)) {
+                    if ($.isOnScreen(v, _this.lazyLoadingFactor,elem)) {
                       v.setAttribute('src', v.getAttribute('data-src'));
                       v.removeAttribute('data-src');
                     }
                   });
                 }
-                else if ($.isOnScreen(w, _this.lazyLoadingFactor)) {
-                  var url = jQuery(w).parent().parent().attr('data-url');
-                  //console.log("should load manifest\n",url);
+                else if ($.isOnScreen(w, _this.lazyLoadingFactor, elem)) {
+                  var url = jQuery(w).parent().parent().attr('data-url');                  
+                  //console.log("should load manifest",url);
                   if(_this.lazyLoadingManifests.indexOf(url) === -1) {
                     _this.lazyLoadingManifests.push(url);
                     var manifest = new $.Manifest(url,'');                     
@@ -314,7 +314,19 @@
                   }
                 }
               });
-            }, 50, true));
+            }; 
+            
+            // DONE fix lazyloading for mobile
+            if(jQuery("#viewer.inApp").length) {
+                            
+              jQuery(window).scroll( $.throttle( lazy, 50, true) );
+
+            } else {
+
+              elem.scroll( $.throttle( lazy, 50, true) );
+
+            }
+            
         },
 
         hide: function() {
