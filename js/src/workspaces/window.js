@@ -713,12 +713,13 @@ var Z = 0 ;
           }
 
           if(window.miradorBookmark && window.miradorBookmark.length) {
-                        
-          //  window.miradorBookmark[0].scrollIntoView(); // why does this break scrolling up??
+
+            //window.miradorBookmark[0].scrollIntoView(); // why does this break scrolling up??
+            
+            console.log("sT>",window.miradorBookmark.attr("data-image-id"));            
           
             var body = jQuery("html,body");
-            if(!body.scrollTop()) body = jQuery("body");
-            if(!body.scrollTop()) body = jQuery(window);
+            if(window.innerWidth > window.innerHeight) body = jQuery(window);
             
             body.scrollTop(0);   
             body.scrollTop(window.miradorBookmark.offset().top); //[0].getBoundingClientRect().top);             
@@ -1335,6 +1336,7 @@ var Z = 0 ;
       });
 
       this.element.find('.scroll-option').on('click', function() {
+        console.log("tog");
         _this.toggleScrollView(_this.canvasID);
       });
 

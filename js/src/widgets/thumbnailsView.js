@@ -356,22 +356,24 @@ var prevDiff = -1;
 
 
 
-      if(jQuery("#viewer.inApp").length) {
+      if(!window.miradorIniScroll  && jQuery("#viewer.inApp").length) {
 
-        /*
+        window.miradorIniScroll = true ; 
+        
         jQuery(window).scroll(function() {          
-          console.log("scroll1?",window.miradorNoScroll);
+          //console.log("scroll1?",window.miradorNoScroll);
           if(window.innerWidth < window.innerHeight || window.miradorNoScroll) return ;     
           _this.loadImages();
         });
-        */
+        
 
         // DONE fix lazy loading in portrait mode
         jQuery("html,body").scroll(function() {     
-          console.log("scroll2?",window.miradorNoScroll);
-          if( /*window.innerWidth > window.innerHeight ||*/ window.miradorNoScroll) return ;
+          //console.log("scroll2?",window.miradorNoScroll);
+          if( window.innerWidth > window.innerHeight || window.miradorNoScroll) return ;
           _this.loadImages();
         });
+
       } else {
         jQuery(_this.element).scroll(function() {
           _this.loadImages();
@@ -408,7 +410,7 @@ var prevDiff = -1;
     },
 
     loadImages: function() {
-      var _this = this, ref ;
+      var _this = this, ref; //, sav = window.miradorBookmark ;
       if(window.miradorBookmark) delete window.miradorBookmark ;
       jQuery.each(_this.element.find("ul img"), function(key, value) {
         var jmg = jQuery(value);
@@ -421,8 +423,8 @@ var prevDiff = -1;
                bbox.bottom > window.innerHeight && bbox.top / window.innerHeight < 0.5
               ) {
               window.miradorBookmark = jmg ;
+              //console.log("onScr:",window.miradorBookmark.attr("data-image-id"),jQuery(window).scrollTop(),window.miradorBookmark.offset().top);
             } 
-            //console.log("onScr:",window.miradorBookmark.attr("data-image-id"),jQuery(window).scrollTop(),window.miradorBookmark.offset().top);
           }
         }
         
@@ -442,6 +444,12 @@ var prevDiff = -1;
         }
         ref = value;
       });
+      /*
+      if(sav && (!window.miradorBookmark || !window.miradorBookmark.length)) {
+        console.warn("no bookM...",sav);
+        window.miradorBookmark = sav ;
+      }
+      */
     },
 
     loadImage: function(imageElement, url, ref) {

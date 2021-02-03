@@ -205,7 +205,7 @@
       factor = outsideViewportFactor;
     }
     var win = jQuery(window);
-    if(!win.scrollTop()) win = jQuery("html,body");
+    //if(!win.scrollTop()) win = jQuery("html,body");
     //if(!win.scrollTop()) win = jQuery("body");
     var viewport = {
       top : win.scrollTop(), //* factor),
