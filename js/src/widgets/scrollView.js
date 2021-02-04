@@ -94,7 +94,7 @@
       '<ul class="{{listingCssCls}}" role="list" aria-label="Thumbnails">',
       '{{#thumbs}}',
       '<li class="{{highlight}}" role="listitem" aria-label="Thumbnail">',
-      '<img class="thumbnail-image {{highlight}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" data-max-height={{height}} data-ratio={{ratio}} height="{{../defaultHeight}}" width="{{width}}" style="max-width:{{width}}px;min-height:{{height}}px">',
+      '<img class="thumbnail-image {{highlight}}" data-image-id="{{id}}" src="" data="{{thumbUrl}}" data-max-height={{height}} data-ratio={{ratio}} width="{{width}}" style="max-width:{{width}}px;min-height:{{height}}px">',
       '<div class="etext-content" width="{{width}}" style="max-width:{{width}}px;height:auto;"></div>',
       '<div class="thumb-label" lang={{locale}}>{{title}}</div>',
       '</li>',
