@@ -269,11 +269,11 @@
       if(jQuery(".scroll-listing-thumbs li img[data-image-id^='http']:not([src^='http'])").length) {
         //jQuery(window).resize(); 
         _this.eventEmitter.publish('windowResize');
-        console.log("RESIZED images should be visible");
+        console.log("RESIZED images should be visible (Z="+Z+")");        
         if(Z != undefined) {
           if(window.currentZoom != undefined) delete window.currentZoom;
           window.setZoom(0);
-          window.setZoom(Z/100);
+          jQuery("#Zmenu ul.select li.zoom0").click();
         }
         clearInterval(iniT);
       }
