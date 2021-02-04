@@ -345,6 +345,8 @@
             this.element.find('.member-select-results').scroll();
             jQuery(".mobile-button.top").addClass("on collec");
             
+            Z = 0 ;
+            if(window.currentZoom != undefined) delete window.currentZoom ;
 
             var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin");
             var inApp = (window.innerWidth < 800) || (origin && origin.startsWith("BDRCLibApp"));
