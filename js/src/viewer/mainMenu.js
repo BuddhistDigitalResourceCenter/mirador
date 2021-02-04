@@ -141,8 +141,9 @@
               if(!the.hasClass("on")) {
                 the.parent().find(".on").removeClass("on");
                 the.addClass("on");
-                if(the.attr("data-reading-view-id"))  jQuery(".preview-image[data-image-id='"+the.attr("data-reading-view-id")+"']").click();
-                else jQuery(".mirador-viewer li.scroll-option").click();                
+                //if(the.attr("data-reading-view-id"))  jQuery(".preview-image[data-image-id='"+the.attr("data-reading-view-id")+"']").click();
+                //else 
+                jQuery(".mirador-viewer li.scroll-option").click();                
               }
             });
 

@@ -36106,8 +36106,9 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
               if(!the.hasClass("on")) {
                 the.parent().find(".on").removeClass("on");
                 the.addClass("on");
-                if(the.attr("data-reading-view-id"))  jQuery(".preview-image[data-image-id='"+the.attr("data-reading-view-id")+"']").click();
-                else jQuery(".mirador-viewer li.scroll-option").click();                
+                //if(the.attr("data-reading-view-id"))  jQuery(".preview-image[data-image-id='"+the.attr("data-reading-view-id")+"']").click();
+                //else 
+                jQuery(".mirador-viewer li.scroll-option").click();                
               }
             });
 
@@ -47908,6 +47909,11 @@ var Z = 0 ;
         //jQuery(window).resize(); 
         _this.eventEmitter.publish('windowResize');
         console.log("RESIZED images should be visible");
+        if(Z != undefined) {
+          if(window.currentZoom != undefined) delete window.currentZoom;
+          window.setZoom(0);
+          window.setZoom(Z/100);
+        }
         clearInterval(iniT);
       }
     },350);  
