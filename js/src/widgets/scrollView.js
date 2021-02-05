@@ -274,6 +274,7 @@
           if(window.currentZoom != undefined) delete window.currentZoom;
           window.setZoom(0);
           jQuery("#Zmenu ul.select li.zoom0").click();
+          jQuery("#Zmenu ul.select li.zoom0").click();
         }
         clearInterval(iniT);
       }

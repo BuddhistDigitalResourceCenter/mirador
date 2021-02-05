@@ -255,6 +255,7 @@
                                  '</a>',
                                  '{{/if}}',
                                  */
+                                 '<div class="break"></div>',
                                  '<a class="mirador-osd-zoom-out hud-control" role="button" title="{{t "ZoomOutTooltip"}}" aria-label="{{t "ZoomOutTooltip"}}">',
                                  '<span></span>',
                                  '</a>',
