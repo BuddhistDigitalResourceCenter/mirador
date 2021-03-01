@@ -275,19 +275,31 @@
                 }
 
                 console.log("header:",headers);
+                var pdfTimer = 0 ;
 
-                var request = jQuery.ajax({
-                  url: url,
-                  dataType:'json',
-                  async: true,
-                  headers: headers
-                });
+                var updatePdfPercent = function(){
 
-                request.done(function(jsonLd) {
-                  console.log("ajax:",jsonLd,elem);
-                  elem.html("<a download target='_blank' href='"+//url.replace(/^(.*?bdrc.io).*/,"$1")
-                    jsonLd.links+"'>"+elem.text().replace(/.*(PDF|ZIP).*/,"Download $1")+"</a>");
-                });
+                  var request = jQuery.ajax({
+                    url: url,
+                    dataType:'json',
+                    async: true,
+                    headers: headers
+                  });
+
+                  request.done(function(jsonLd) {
+                    console.log("ajax:",jsonLd,elem);
+                    if(jsonLd.link) {
+                      if(pdfTimer) clearInterval(pdfTimer);
+                      elem.html("<a download target='_blank' href='"+//url.replace(/^(.*?bdrc.io).*/,"$1")
+                        jsonLd.link+"'>"+elem.text().replace(/.*(PDF|ZIP).*/,"Download $1")+"</a>");
+                    } else if(jsonLd.percentdone != undefined)  {
+                      elem.text(elem.text().replace(/([0-9]+%)?$/, " "+jsonLd.percentdone+"%")) ;
+                    }
+                  });
+                };
+
+                updatePdfPercent();
+                pdfTimer = setInterval(updatePdfPercent, 3000);
 
               }
               event.stopPropagation();
