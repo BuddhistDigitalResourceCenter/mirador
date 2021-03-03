@@ -4611,6 +4611,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   display: none;
 }
 .mirador-container .mirador-hud .mirador-hud-nav {
+  bottom: 10px;
   position: fixed;
   left: 50%;
   width: 160px;
