@@ -577,12 +577,16 @@
         return false;
       });
 */
+
+/* 
+
       jQuery("canvas").on('taphold', function(e) {
         e.preventDefault();
         e.stopPropagation();
         return false;
       });
 
+// conflict with pan
 
       jQuery(".openseadragon-canvas").on('swipeleft', function(e) {
 
@@ -657,7 +661,7 @@
         }
         return false;
       });
-      
+     */ 
       
 
     },

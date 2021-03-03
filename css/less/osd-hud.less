@@ -29,6 +29,28 @@
     justify-content:center;
 
     & > .break { display:none;}
+   
+    .mirador-hud-nav {
+      position: fixed;
+      left: 50%;
+      width: 160px;
+      justify-content: space-between;
+      margin-left: -80px;
+      transition:all 200ms ease-in-out;
+
+      a { 
+        border-radius:0; 
+        background:none;
+
+        span { 
+          display: block;
+          font-size: 60px;
+          line-height: 30px;
+
+          &::before { content:'‹';}
+        }
+      }
+    }
   }
 
   .hud-control {

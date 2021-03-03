@@ -435,10 +435,13 @@ var prevDiff = -1;
           setTimeout(function() {
             if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jmg.attr("src")) {              
               //console.log("ONSCREEN",key,_this.imagePromise[jQuery(value).attr("data")]);
-              var url = jQuery(value).attr("data");
+              var url = jmg.attr("data");
               if(!_this.imagePromise[url]) {
                 //console.log("RELOAD", key);
                 _this.loadImage(value, url, ref);            
+              } else {
+                // DONE fix images disappearing on resize 
+                jmg.attr("src",url); 
               }
             }
           }, 650);

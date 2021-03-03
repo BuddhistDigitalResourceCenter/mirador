@@ -264,6 +264,7 @@
     img { filter:invert(100%);}
     &:not(.on) ~ .image-view .mirador-hud,
     &:not(.on) + .view-nav { left:100%; }
+    &.on ~ .image-view .mirador-hud .mirador-hud-nav { opacity: 0; pointer-events:none;}
   }
 
   &:not(.image) + .mirador-main-menu-bar .nav-bar-top {

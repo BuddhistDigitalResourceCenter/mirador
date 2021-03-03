@@ -235,9 +235,17 @@
       });
     },
 
-    template: $.Handlebars.compile([
+    template: $.Handlebars.compile([       
                                  '<div class="mirador-hud">',                                 
                                  '{{#if showNextPrev}}',
+                                 '<div class="mirador-hud-nav">',                                 
+                                 '<a class="mirador-osd-previous hud-control" role="button" title="{{t "PreviousImageTooltip"}}" aria-label="{{t "PreviousImageTooltip"}}">',
+                                 '<span></span>',
+                                 '</a>',
+                                 '<a class="mirador-osd-next hud-control" role="button" title="{{t "NextImageTooltip"}}" aria-label="{{t "NextImageTooltip"}}">',
+                                 '<span></span>',
+                                 '</a>',
+                                 '</div>',
                                  //"<span class='goto-page'>Go to p. <input type='text' id='gotoPage' onInput='javascript:jQuery(\"#gotoPage\").removeClass(\"error\");' onChange='javascript:window.scrollToImage(event.target.value);'/></span>",
                                  '<span class="goto-page"><select size="5" title="{{t "GotoImageSelectTooltip"}}" aria-label="{{t "GotoImageSelectTooltip"}}"></select><span>{{t "goto"}}</span><input type="text" id="gotoPage" title="{{t "GotoImageTooltip"}}" aria-label="{{t "GotoImageTooltip"}}"/></span>',
                                  '<a class="mirador-osd-previous hud-control" role="button" title="{{t "PreviousImageTooltip"}}" aria-label="{{t "PreviousImageTooltip"}}">',
