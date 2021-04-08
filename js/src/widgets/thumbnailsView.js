@@ -442,6 +442,8 @@ var prevDiff = -1;
               } else {
                 // DONE fix images disappearing on resize 
                 jmg.attr("src",url); 
+                // DONE fix rendering first pages of etext 
+                if(window.MiradorUseEtext == "open") _this.loadImage(value, url, ref);            
               }
             }
           }, 650);
