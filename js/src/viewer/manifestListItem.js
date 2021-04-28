@@ -160,11 +160,13 @@
                 if(width > canvas.width) width = canvas.width ;
                 
                 url = _this.manifest.getThumbnailForCanvas(canvas, width);
-                //console.log("startC:",url);
+                console.log("startC:",url,canvas);
                 break ;
               }
             }
-            continue ;
+            // DONE: don't continue here or we won't queue image for loading at end of for
+            
+            // continue
           }
           else {
             canvas = manifest.sequences[0].canvases[i];
@@ -175,11 +177,12 @@
             
             url = _this.manifest.getThumbnailForCanvas(canvas, width);
 
-            //console.log("startC:",canvas,url);
+            console.log("startC:",canvas,url);
           }
         }
 
         if (!canvas || canvas.width === 0 || canvas["@id"].includes("/missing")) {
+          console.warn("no canvas?",canvas,url);
           continue;
         }
 

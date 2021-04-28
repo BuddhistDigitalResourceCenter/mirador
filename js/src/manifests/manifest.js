@@ -88,7 +88,7 @@ function parseJwt(token){
       });
 
       this.request.error(function(jsonLd) {
-        console.error("manifest:",jsonLd);
+        console.error("manifest:",manifestUri,jsonLd);
         _this.jsonLd = {
           label:{"@language":"en","@value":jsonLd.status == 404 ? "images not available" : "problem fetching manifest"},
           sequences:[{canvases:[]}],
