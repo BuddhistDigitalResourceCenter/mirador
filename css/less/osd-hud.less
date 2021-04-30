@@ -50,7 +50,20 @@
 
           &::before { content:'‹';}
         }
+        
+        &.mirador-osd-reading-view span::before {    
+          background-image: url(../images/readingN.svg);
+          filter: invert(1);
+          content: '';
+          display: block;
+          width: 45px;
+          height: 50px;
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
       }
+
     }
   }
 

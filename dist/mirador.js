@@ -46015,6 +46015,9 @@ var Z = 0 ;
                                  '<a class="mirador-osd-previous hud-control" role="button" title="{{t "PreviousImageTooltip"}}" aria-label="{{t "PreviousImageTooltip"}}">',
                                  '<span></span>',
                                  '</a>',
+                                 '<a class="mirador-osd-reading-view hud-control" role="button" title="{{t "ReadingViewTooltip"}}" aria-label="{{t "ReadingViewTooltip"}}">',
+                                 '<span></span>',
+                                 '</a>',
                                  '<a class="mirador-osd-next hud-control" role="button" title="{{t "NextImageTooltip"}}" aria-label="{{t "NextImageTooltip"}}">',
                                  '<span></span>',
                                  '</a>',
@@ -46337,6 +46340,10 @@ var Z = 0 ;
 
     bindEvents: function() {
       var _this = this;
+
+      this.element.find('.mirador-osd-reading-view').on('click', function() {
+        jQuery(".mirador-viewer li.scroll-option").click();         
+      });
 
       this.element.find('.mirador-osd-next').on('click', function() {
         _this.next();

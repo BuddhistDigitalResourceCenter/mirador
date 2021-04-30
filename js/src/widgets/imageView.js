@@ -236,6 +236,10 @@
     bindEvents: function() {
       var _this = this;
 
+      this.element.find('.mirador-osd-reading-view').on('click', function() {
+        jQuery(".mirador-viewer li.scroll-option").click();         
+      });
+
       this.element.find('.mirador-osd-next').on('click', function() {
         _this.next();
       });

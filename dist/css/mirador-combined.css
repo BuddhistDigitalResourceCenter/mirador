@@ -4631,6 +4631,17 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .mirador-container .mirador-hud .mirador-hud-nav a span::before {
   content: '‹';
 }
+.mirador-container .mirador-hud .mirador-hud-nav a.mirador-osd-reading-view span::before {
+  background-image: url(../images/readingN.svg);
+  filter: invert(1);
+  content: '';
+  display: block;
+  width: 45px;
+  height: 50px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .mirador-container .hud-control {
   color: white;
   text-shadow: 0 0 5px #000;
