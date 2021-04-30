@@ -5627,7 +5627,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .scroll-view .provider div,
 .image-view .provider {
   position: fixed;
-  top: calc(100vh - 120px - 70px);
+  top: 5px /*~"calc(100vh - 120px - 70px)"*/;
   min-width: 40px;
   min-height: 80px;
   background: #2d3b46;
@@ -5660,7 +5660,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 }
 .inApp .scroll-view .provider div,
 .inApp .image-view .provider {
-  top: calc(35% - 40px);
+  top: 5px !important;
 }
 .inApp .view-nav #control #Zmenu ul.select {
   overflow-y: auto;

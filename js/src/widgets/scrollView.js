@@ -254,12 +254,18 @@
 
 
 
-    if(window.providerUrl) { 
-      var logoUrl ; 
-      if(window.providerUrl["@id"]) logoUrl = window.providerUrl["@id"] ;
-      else logoUrl = window.providerUrl;
-      logoUrl = logoUrl.replace(/:\/\/ngcs-beta\.staatsbibliothek-berlin\.de\//, "://content.staatsbibliothek-berlin.de/");
-      jQuery(".scroll-view .provider div").append("<img src='"+(logoUrl)+"'/>") ; 
+    if(window.providerUrl) {
+      var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin");
+      var inApp = (window.screen.width < 768) || (origin && origin.startsWith("BDRCLibApp"));      
+      if(!window.providerUrl["@id"] || !window.providerUrl["@id"].match(/\/\/iiif(-dev)?\.bdrc\.io\//) || !inApp) { 
+        var logoUrl ; 
+        if(window.providerUrl["@id"]) logoUrl = window.providerUrl["@id"] ;
+        else logoUrl = window.providerUrl;
+        logoUrl = logoUrl.replace(/:\/\/ngcs-beta\.staatsbibliothek-berlin\.de\//, "://content.staatsbibliothek-berlin.de/");
+        jQuery(".scroll-view .provider div").append("<img src='"+(logoUrl)+"'/>") ; 
+      } else if(inApp) {
+        jQuery(".scroll-view .provider").remove();
+      }
     }
     else if(window.providerAttr) { jQuery(".scroll-view .provider div").prepend("<span>"+this.labelToString(window.providerAttr)+"</span>"); }
 
