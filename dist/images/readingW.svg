@@ -1,0 +1,43 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 16" width="42" height="23">
+	<title>readingN (1)-svg</title>
+	<defs>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+			<path d="M-9 3L37 3L37 29L-9 29L-9 3ZM2 18L26 18L26 14L2 14L2 18Z" />
+		</clipPath>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp2">
+			<path d="M-9 -9L37 -9L37 15L-9 15L-9 -9ZM2 4L26 4L26 2L2 2L2 4Z" />
+		</clipPath>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp3">
+			<path d="M-9 -4L37 -4L37 22L-9 22L-9 -4ZM2 10.08L26 10.08L26 7.92L2 7.92L2 10.08Z" />
+		</clipPath>
+	</defs>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { fill: none;stroke: #343434;stroke-width: 2.4 } 
+	</style>
+	<g id="menumirador_noir">
+		<g id="Group-4">
+			<g id="Group-9">
+				<g id="Clip-8">
+				</g>
+				<g id="Clip-Path: Stroke-7" clip-path="url(#cp1)">
+					<path id="Stroke-7" class="shp0" d="M2 18L26 18L26 14L2 14L2 18Z" />
+				</g>
+			</g>
+			<g id="Group-3">
+				<g id="Clip-2">
+				</g>
+				<g id="Clip-Path: Stroke-1" clip-path="url(#cp2)">
+					<path id="Stroke-1" class="shp0" d="M2 4L26 4L26 2L2 2L2 4Z" />
+				</g>
+			</g>
+			<g id="Group-6">
+				<g id="Clip-5">
+				</g>
+				<g id="Clip-Path: Stroke-4" clip-path="url(#cp3)">
+					<path id="Stroke-4" class="shp0" d="M2 10L26 10L26 8L2 8L2 10Z" />
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>

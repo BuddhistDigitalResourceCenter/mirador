@@ -4614,7 +4614,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   bottom: 10px;
   position: fixed;
   left: 50%;
-  width: 160px;
+  width: 200px;
   justify-content: space-between;
   margin-left: -80px;
   transition: all 200ms ease-in-out;
@@ -4632,12 +4632,12 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   content: '‹';
 }
 .mirador-container .mirador-hud .mirador-hud-nav a.mirador-osd-reading-view span::before {
-  background-image: url(../images/readingN.svg);
+  background-image: url(../images/readingW.svg);
   filter: invert(1);
   content: '';
   display: block;
-  width: 45px;
-  height: 50px;
+  width: 42px;
+  height: 42px;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
