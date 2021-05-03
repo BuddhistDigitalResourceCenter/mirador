@@ -46343,8 +46343,8 @@ var Z = 0 ;
     bindEvents: function() {
       var _this = this;
 
-      jQuery(this.element).keydown(function(ev){
-        console.log("key:",ev,ev.which,_this.osd.viewport._contentAspectRatio);
+      jQuery(document).keydown(function(ev){
+        //console.log("key:",ev,ev.which,_this.osd.viewport._contentAspectRatio);
         if(ev.which == 36) { // home
           _this.osd.viewport.panBy(new OpenSeadragon.Point(-100000000, 0));
           _this.osd.viewport.applyConstraints();
@@ -46360,6 +46360,18 @@ var Z = 0 ;
           _this.next();
         } else if(ev.which == 80 || ev.which == 33) { // "p", pageup
           _this.previous();
+        } else if([37,38,39,40].indexOf(ev.which) != -1) { // arrows
+          var kdEv = jQuery.Event('keydown');
+          kdEv.keyCode = ev.keyCode;
+          _this.osd.innerTracker.keyDownHandler(kdEv);
+        } else if([54,109].indexOf(ev.which) != -1) { // -
+          _this.osd.viewport.zoomBy(0.9);
+          _this.osd.viewport.applyConstraints();
+        } else if([107,187].indexOf(ev.which) != -1) { // +
+          _this.osd.viewport.zoomBy(1.1);
+          _this.osd.viewport.applyConstraints();
+        } else if([82,86,8].indexOf(ev.which) != -1) { // v,r,backspace
+          jQuery("#breadcrumbs #vol").click();
         }
       });
 
