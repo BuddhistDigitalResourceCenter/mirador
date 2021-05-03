@@ -270,10 +270,7 @@
                                  '<a class="mirador-osd-zoom-out hud-control" role="button" title="{{t "ZoomOutTooltip"}}" aria-label="{{t "ZoomOutTooltip"}}">',
                                  '<span></span>',
                                  '</a>',
-                                 '<a class="mirador-osd-zoom-in hud-control" role="button" title="{{t "ZoomInTooltip" }}" aria-label="{{t "ZoomInTooltip"}}">',
-                                 '<span></span>',
-                                 '</a>',
-                                 /*
+                                 
                                  '<div class="mirador-pan-zoom-controls hud-control">',
                                  '<a class="mirador-osd-up hud-control" role="button" aria-label="Move image up">',
                                  '<i class="fa fa-chevron-circle-up"></i>',
@@ -287,7 +284,12 @@
                                  '<a class="mirador-osd-left hud-control" role="button" aria-label="Move image left">',
                                  '<i class="fa fa-chevron-circle-left"></i>',
                                  '</a>',
-                                 */
+                                 '</div>',
+
+                                 '<a class="mirador-osd-zoom-in hud-control" role="button" title="{{t "ZoomInTooltip" }}" aria-label="{{t "ZoomInTooltip"}}">',
+                                 '<span></span>',
+                                 '</a>',
+                                 
                                  /*
                                  '<a class="mirador-osd-go-home hud-control" role="button" aria-label="Reset image bounds">',
                                  '<i class="fa fa-home"></i>',

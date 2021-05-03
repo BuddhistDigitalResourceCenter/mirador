@@ -46043,10 +46043,7 @@ var Z = 0 ;
                                  '<a class="mirador-osd-zoom-out hud-control" role="button" title="{{t "ZoomOutTooltip"}}" aria-label="{{t "ZoomOutTooltip"}}">',
                                  '<span></span>',
                                  '</a>',
-                                 '<a class="mirador-osd-zoom-in hud-control" role="button" title="{{t "ZoomInTooltip" }}" aria-label="{{t "ZoomInTooltip"}}">',
-                                 '<span></span>',
-                                 '</a>',
-                                 /*
+                                 
                                  '<div class="mirador-pan-zoom-controls hud-control">',
                                  '<a class="mirador-osd-up hud-control" role="button" aria-label="Move image up">',
                                  '<i class="fa fa-chevron-circle-up"></i>',
@@ -46060,7 +46057,12 @@ var Z = 0 ;
                                  '<a class="mirador-osd-left hud-control" role="button" aria-label="Move image left">',
                                  '<i class="fa fa-chevron-circle-left"></i>',
                                  '</a>',
-                                 */
+                                 '</div>',
+
+                                 '<a class="mirador-osd-zoom-in hud-control" role="button" title="{{t "ZoomInTooltip" }}" aria-label="{{t "ZoomInTooltip"}}">',
+                                 '<span></span>',
+                                 '</a>',
+                                 
                                  /*
                                  '<a class="mirador-osd-go-home hud-control" role="button" aria-label="Reset image bounds">',
                                  '<i class="fa fa-home"></i>',
@@ -46407,6 +46409,9 @@ var Z = 0 ;
         var panBy = _this.getPanByValue();
         _this.osd.viewport.panBy(new OpenSeadragon.Point(0, -panBy.y));
         _this.osd.viewport.applyConstraints();
+      }).on("dblclick", function() {        
+          _this.osd.viewport.panBy(new OpenSeadragon.Point(0,-100000000));
+          _this.osd.viewport.applyConstraints();
       });
       this.element.find('.mirador-osd-right').on('click', function() {
         var panBy = _this.getPanByValue();
@@ -46416,11 +46421,17 @@ var Z = 0 ;
           _this.osd.viewport.panBy(new OpenSeadragon.Point(panBy.x, 0));
         }
         _this.osd.viewport.applyConstraints();
+      }).on("dblclick", function() {        
+          _this.osd.viewport.panBy(new OpenSeadragon.Point(100000000, 0));
+          _this.osd.viewport.applyConstraints();
       });
       this.element.find('.mirador-osd-down').on('click', function() {
         var panBy = _this.getPanByValue();
         _this.osd.viewport.panBy(new OpenSeadragon.Point(0, panBy.y));
         _this.osd.viewport.applyConstraints();
+      }).on("dblclick", function() {        
+          _this.osd.viewport.panBy(new OpenSeadragon.Point(0,100000000));
+          _this.osd.viewport.applyConstraints();
       });
       this.element.find('.mirador-osd-left').on('click', function() {
         var panBy = _this.getPanByValue();
@@ -46430,6 +46441,9 @@ var Z = 0 ;
           _this.osd.viewport.panBy(new OpenSeadragon.Point(-panBy.x, 0));
         }
         _this.osd.viewport.applyConstraints();
+      }).on("dblclick", function() {        
+          _this.osd.viewport.panBy(new OpenSeadragon.Point(-100000000, 0));
+          _this.osd.viewport.applyConstraints();
       });
 
       this.element.find('.mirador-osd-zoom-in').on('click', function() {
@@ -46924,8 +46938,8 @@ var Z = 0 ;
       var bounds = this.osd.viewport.getBounds(true);
       //for now, let's keep 50% of the image on the screen
       var panBy = {
-        "x" : bounds.width * 0.5,
-        "y" : bounds.height * 0.5
+        "x" : bounds.width * 0.45,
+        "y" : bounds.height * 0.45
       };
       return panBy;
     },
