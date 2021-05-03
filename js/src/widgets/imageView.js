@@ -236,6 +236,26 @@
     bindEvents: function() {
       var _this = this;
 
+      jQuery(this.element).keydown(function(ev){
+        console.log("key:",ev,ev.which,_this.osd.viewport._contentAspectRatio);
+        if(ev.which == 36) { // home
+          _this.osd.viewport.panBy(new OpenSeadragon.Point(-100000000, 0));
+          _this.osd.viewport.applyConstraints();
+        } else if(ev.which == 35) { // end
+          _this.osd.viewport.panBy(new OpenSeadragon.Point(100000000,0));
+          _this.osd.viewport.applyConstraints();
+        } else if(ev.which == 32) { // space
+          var bounds = _this.osd.viewport.getBounds(true);
+          if(_this.osd.viewport._contentAspectRatio > 1) _this.osd.viewport.panBy(new OpenSeadragon.Point(bounds.width*0.45, 0));
+          else _this.osd.viewport.panBy(new OpenSeadragon.Point(0, bounds.height*0.45, 0));
+          _this.osd.viewport.applyConstraints();
+        } else if(ev.which == 78 || ev.which == 34) { // "n", pagedown  
+          _this.next();
+        } else if(ev.which == 80 || ev.which == 33) { // "p", pageup
+          _this.previous();
+        }
+      });
+
       this.element.find('.mirador-osd-reading-view').on('click', function() {
         jQuery(".mirador-viewer li.scroll-option").click();         
       });
