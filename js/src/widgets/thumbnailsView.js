@@ -178,15 +178,27 @@ var prevDiff = -1;
         _this.ps = new PerfectScrollbar(".panel-thumbnail-view",{ minScrollbarLength:16, maxScrollbarLength:16 });
         
         for(var i = 0 ; i < tplData.thumbs.length ; i ++) {
-          var val = tplData.thumbs[i].title.replace(/(^[^0-9]+)|([^0-9a-z]$)/g,"") ;
-          jQuery(".goto-page select").append("<option value='"+val+"'>"+val+"</option>") ;
+          var val = tplData.thumbs[i].title ; //.replace(/(^[^0-9]+)|([^0-9a-z]$)/g,"") ;
+          if(!val) val = "#"+i;
+          jQuery(".goto-page select").append("<option value='#"+i+"' lang='"+tplData.thumbs[i].lang+"'>"+val+"</option>") ;
         }        
 
-        jQuery(".goto-page select").selectmenu( { 
+        var menu = jQuery(".goto-page select").selectmenu( { 
           appendTo:".goto-page",
           position: { my : "right-1 bottom-1", at: "right bottom-2" },
-          select: function( event, ui ) { _this.eventEmitter.publish('GOTO_IMAGE_NUM.'+_this.windowId, ui.item.value) ; }
-        });
+          select: function( event, ui ) { _this.eventEmitter.publish('GOTO_IMAGE_NUM.'+_this.windowId, ui.item.value) ; },
+          create: function( event, ui ) { 
+            console.log("create:",ui,jQuery("#goto-page select"));
+          }
+        }).data("ui-selectmenu") ;
+        menu.originalRenderItem = menu._renderItem ;
+        menu._renderItem = function(ul, item) {
+          var li = menu.originalRenderItem(ul, item) ;
+          var lang = jQuery(".goto-page select option")[item.index].lang;
+          console.log("render:li",li.index(),lang,item);
+          if(lang) li.attr("lang",lang);
+          return li ;
+        } ;
 
         if(!_this.gotoPs) { 
           var container = document.querySelector(".goto-page .ui-selectmenu-menu");

@@ -5072,6 +5072,8 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   z-index: 1;
 }
 .mirador-container .mirador-hud > .goto-page input + .ui-selectmenu-menu {
+  top: auto !important;
+  bottom: 36px !important;
   z-index: 110;
   max-height: 210px;
   overflow: auto;
@@ -5093,8 +5095,8 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .mirador-container .mirador-hud > .goto-page input + .ui-selectmenu-menu ul.ui-menu {
   border: none;
   border-radius: 0 ;
-  width: 50px !important;
   overflow: hidden;
+  width: auto;
 }
 .mirador-container .mirador-hud > .goto-page input + .ui-selectmenu-menu ul.ui-menu li:hover,
 .mirador-container .mirador-hud > .goto-page input + .ui-selectmenu-menu ul.ui-menu li:hover div {
@@ -5104,6 +5106,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   font-family: "Noto Sans";
   font-weight: 400 !important;
   font-size: 11px;
+  line-height: 22px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -5111,6 +5114,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .mirador-container .mirador-hud > .goto-page input + .ui-selectmenu-menu ul.ui-menu li div.ui-state-active {
   border-color: transparent !important;
   font-weight: 700 !important;
+}
+.mirador-container .mirador-hud > .goto-page input + .ui-selectmenu-menu ul.ui-menu li[lang=bo] div {
+  font-size: 14px;
 }
 .mirador-container .mirador-hud > .goto-page:after {
   position: absolute;

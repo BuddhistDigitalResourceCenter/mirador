@@ -95,6 +95,9 @@
       _this.element.find('.goto-page input').on('change', function(event) {
          _this.eventEmitter.publish('GOTO_IMAGE_NUM.'+_this.windowId, jQuery(this).val());
          jQuery(this).val("");
+      }).on("keydown",function(event){
+        if([82,86,8].indexOf(event.which) != -1) // don't go to reading view with backspace
+        event.stopPropagation();
       });
 
 

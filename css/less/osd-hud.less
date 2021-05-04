@@ -563,13 +563,15 @@
     border-width:1px;
     z-index:1;
 
-    & + .ui-selectmenu-menu { 
+    & + .ui-selectmenu-menu {
+      top:auto !important;
+      bottom:36px !important;
       z-index:110;
       max-height:210px;
       //border:1px solid #D73449 ;
       overflow:auto;
       overflow-x:hidden;
-
+      
       box-shadow:0 0 1px 1px #D73449;
       
       // fix for infinite scroll bug
@@ -585,12 +587,14 @@
         z-index:-1;
       }        
       */
+      
 
       ul.ui-menu {
         border:none;
         border-radius:0 ;
-        width:50px !important;
+        //min-width:50px !important;
         overflow:hidden;
+        width:auto;
   
         li:hover { 
           &, div { background-color:#eee; }
@@ -600,6 +604,7 @@
           font-family:"Noto Sans";
           font-weight:400 !important;
           font-size:11px;
+          line-height:22px;
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
@@ -609,6 +614,8 @@
           border-color:transparent !important;
           font-weight:700 !important;
         }
+
+        li[lang=bo] div { font-size:14px; }
       }
     }    
   }

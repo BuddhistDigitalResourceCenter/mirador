@@ -196,23 +196,38 @@
 
 
         var n = imageNum, m = Number(imageNum), found = false ;
+        if(!m && n.match(/^[༠-༩]+$/)) m = n ;
         // if(n == Number(n)) n-- ;        
-        
+          
         console.log("imaN",imageNum,n,m,n==m);
 
-        for(var i = 0 ; i <  _this.imagesList.length ; i ++) {
+        if(imageNum.startsWith("#")) {
+          n = Number(imageNum.replace(/^#/,""));
+          found = true;
+        }
+        else for(var i = 0 ; i <  _this.imagesList.length ; i ++) {
           var label = _this.imagesList[i].label ;
           if(!label) continue ;
           if(!Array.isArray(label)) {
             if(label["@value"]) label = [ label ] ;
             else label = [ { "@value": label } ] ;
           }
-          for(var l = 0 ; l < label.length ; l++) { 
+
+          var l, allLabels = [] ;
+          for(l = 0 ; l < label.length ; l++) {             
+            allLabels.push(label[l]);
+
+            var lab = _this.labelToString([ label[l] ],allLabels,true,true);
+            if(lab.lang != label[l]["@language"]) for(var v in lab.values) allLabels.push({"@value":lab.values[v], "@language":lab.lang }); 
+          }
+          //console.log("label:",allLabels); //label,langLabels,tmp);
+          label = allLabels;
+          for(l = 0 ; l < label.length ; l++) {             
             if(label[l]["@value"] && label[l]["@value"].match && 
-                ((n == m && label[l]["@value"].match(new RegExp("^[^0-9]*"+(m)+"[^0-9]*$"))) ||
+                ((n == m && label[l]["@value"].match(new RegExp("^[^0-9༠-༩]*"+(m)+"[^0-9༠-༩]*$"))) ||
                 (n != m &&  label[l]["@value"].startsWith(n)) ) ) {                
               
-              //console.log("found",l,label[l]["@value"]);
+              console.log("found",l,label[l]["@value"],label);
               
               n = i ;
               found = true ;
@@ -225,6 +240,7 @@
           found = true ;
           n = n - 1;
         }
+        console.log("GOTO",found,n,m);
         if(found && n >= 0 && n < _this.imagesList.length) {          
             _this.eventEmitter.publish('SET_CURRENT_CANVAS_ID.' + _this.windowId, _this.imagesList[n]['@id']);
             _this.eventEmitter.publish('SET_PAGINATION.' + _this.windowId, (n+1) + " / " + _this.imagesList.length);
