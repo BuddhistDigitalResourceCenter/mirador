@@ -195,7 +195,7 @@ var prevDiff = -1;
         menu._renderItem = function(ul, item) {
           var li = menu.originalRenderItem(ul, item) ;
           var lang = jQuery(".goto-page select option")[item.index].lang;
-          console.log("render:li",li.index(),lang,item);
+          //console.log("render:li",li.index(),lang,item);
           if(lang) li.attr("lang",lang);
           return li ;
         } ;
