@@ -35,7 +35,7 @@
     console.log("provUrl",window.providerUrl);
 
     if(window.providerUrl) {var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin");
-      var inApp = (window.screen.width < 768) || (origin && origin.startsWith("BDRCLibApp"));      
+      var inApp = (window.screen.width < 800) || (origin && origin.startsWith("BDRCLibApp"));      
       if(!window.providerUrl["@id"] || !window.providerUrl["@id"].match(/\/\/iiif(-dev)?\.bdrc\.io\//) || !inApp) { 
         var logoUrl ; 
         if(window.providerUrl["@id"]) logoUrl = window.providerUrl["@id"] ;

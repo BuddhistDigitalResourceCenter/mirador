@@ -256,7 +256,7 @@
               /*
               var tree = jQuery("#collection-tree-resizer");
               if(tree.hasClass("disabled")) {
-                if(window.innerWidth < 768) {
+                if(window.innerWidth < 800) {
                   tree.removeClass("closed");
                   jQuery(".collec-tree-open-close").click();
                 } else {
@@ -434,7 +434,7 @@
              if(newCollection && newCollection.jsonLd && (!newCollection.jsonLd.collections || !newCollection.jsonLd.collections.length)) {
                 var tree = jQuery("#collection-tree-resizer");
                 tree.addClass("disabled");
-                if(!tree.hasClass("closed") && window.innerWidth < 768) jQuery(".collec-tree-open-close").click();
+                if(!tree.hasClass("closed") && window.innerWidth < 800) jQuery(".collec-tree-open-close").click();
               }
          
 

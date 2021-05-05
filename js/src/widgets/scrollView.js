@@ -111,7 +111,7 @@
 
 
         var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin");
-        var inApp = (window.screen.width < 768) || (origin && origin.startsWith("BDRCLibApp"));
+        var inApp = (window.screen.width < 800) || (origin && origin.startsWith("BDRCLibApp"));
         if(inApp) {
           jQuery(".scroll-view").addClass("auto_rela").parents().addClass("auto_rela");
         }
@@ -174,7 +174,7 @@
         var aspectRatio = canvas.height/canvas.width,
           width = canvas.width,
           height = canvas.height,
-          isErrorImg = canvas["@id"] && canvas["@id"].indexOf("static::error-copyright") != -1  && window.screen.width < 768 /*&& window.innerWidth < window.innerHeight*/ ;
+          isErrorImg = canvas["@id"] && canvas["@id"].indexOf("static::error-copyright") != -1  && window.screen.width < 800 /*&& window.innerWidth < window.innerHeight*/ ;
 
         if(prevW && isErrorImg) {
           width = prevW ;
@@ -256,7 +256,7 @@
 
     if(window.providerUrl) {
       var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin");
-      var inApp = (window.screen.width < 768) || (origin && origin.startsWith("BDRCLibApp"));      
+      var inApp = (window.screen.width < 800) || (origin && origin.startsWith("BDRCLibApp"));      
       if(!window.providerUrl["@id"] || !window.providerUrl["@id"].match(/\/\/iiif(-dev)?\.bdrc\.io\//) || !inApp) { 
         var logoUrl ; 
         if(window.providerUrl["@id"]) logoUrl = window.providerUrl["@id"] ;

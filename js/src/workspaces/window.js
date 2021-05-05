@@ -688,7 +688,7 @@ var Z = 0 ;
 
         console.log("the orientation of the device is now " + (event?event.target.screen.orientation.angle:"--"));
 
-        if(window.screen.width < 768 && window.innerWidth < window.innerHeight) {
+        if(window.screen.width < 800 && window.innerWidth < window.innerHeight) {
           jQuery("body").height(window.innerHeight);
         } else {
           jQuery("body").height("100vh");
