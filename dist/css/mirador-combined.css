@@ -7139,7 +7139,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   margin-left: 0;
   left: calc(50% + 13px);
 }
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   #viewer.inApp #collection-tree-resizer:not(.closed) + .member-select-results .select-metadata {
     margin-left: 0;
   }

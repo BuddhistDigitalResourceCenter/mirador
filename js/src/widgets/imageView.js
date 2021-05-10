@@ -1028,6 +1028,11 @@
 
       _this.osd.addHandler('zoom', $.debounce(function() {
         _this.setBounds();
+        if(_this.manifest && _this.manifest.jsonLd && _this.manifest.jsonLd["@id"]){
+          if(!window.OSDzoom) window.OSDzoom = {} ; 
+          console.log("zoomed:",_this.osd.viewport.getZoom(),window.OSDzoom[_this.manifest.jsonLd["@id"]]);
+          window.OSDzoom[_this.manifest.jsonLd["@id"]] = _this.osd.viewport.getZoom() ; 
+        }
       }, 500));
 
       _this.osd.addHandler('pan', $.debounce(function(){
@@ -1073,7 +1078,19 @@
           osdBounds:        null,
           zoomLevel:        null
         };
+
         this.eventEmitter.publish('resetImageManipulationControls.'+this.windowId);
+
+        var z = null;
+        if(_this.manifest && _this.manifest.jsonLd && _this.manifest.jsonLd["@id"] && window.OSDzoom){
+          z = window.OSDzoom[_this.manifest.jsonLd["@id"]];
+          if(z != undefined) {
+            _this.osd.viewport.zoomTo(z,{},true);
+            _this.osd.viewport.panTo({x:0, y:0}, true);
+            _this.osd.viewport.applyConstraints();
+          }
+        }
+        
       }
       _this.eventEmitter.publish('UPDATE_FOCUS_IMAGES.' + this.windowId, {array: [canvasID]});
       },
