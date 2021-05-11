@@ -105,8 +105,7 @@
         availableAnnotationTools: this.availableAnnotationTools,
         state: this.state,
         eventEmitter: this.eventEmitter
-      });
-
+      });   
       this.initialiseImageCanvas();
       this.bindEvents();
       this.listenForActions();

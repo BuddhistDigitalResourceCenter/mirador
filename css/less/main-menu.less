@@ -272,6 +272,27 @@
       a { max-width:~"calc(100% / 2)"; }
     }
   }
+
+  .fa-arrow-left {
+    color: #172832;
+    margin-bottom: 3px;
+    font-size: 26px;
+    -webkit-text-stroke: 2px white;
+    display: none;
+  }
+}
+
+.inApp {
+  .mobile-button.image {
+    .fa-arrow-left { display: block;}
+    img { display:none; }
+
+    & ~ .mirador-viewer { 
+      .thumbnails-open-close,
+      .mobile-button.bot { display:none; }
+      .view-container.thumbs-off .mirador-osd { width:100%; }
+    }
+  }
 }
 
 #viewer.inApp { 

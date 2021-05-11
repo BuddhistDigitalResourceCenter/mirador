@@ -37,7 +37,7 @@
             // TODO use "responsive" flag to work in library as well
             var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin"), inApp;
             if(window.innerWidth < 800 || origin && origin.startsWith("BDRCLibApp")) {
-              jQuery('<div class="mobile-button top"><img src="/icons/burger.svg"/></div>')
+              jQuery('<div class="mobile-button top"><img src="/icons/burger.svg"/><i class="fa fa-arrow-left" aria-hidden="true"></i></div>')
               .appendTo(this.appendTo);
             }
 

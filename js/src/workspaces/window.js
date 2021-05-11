@@ -306,14 +306,19 @@ var Z = 0 ;
 
       jQuery(".mobile-button").off("click").click(function(e){
         var elem = jQuery(e.currentTarget);
-        elem.toggleClass("on");
-        //if(!elem.hasClass("bot")) jQuery(".provider").toggleClass("off");
-        console.log("TOGGLE");
+        if(elem.hasClass("image")) {
+          elem.removeClass("image");
+          jQuery(".mirador-viewer li.scroll-option").click();           
+        } else {
+          elem.toggleClass("on");
+          //if(!elem.hasClass("bot")) jQuery(".provider").toggleClass("off");
+          console.log("TOGGLE");
         /*
         e.stopPropagation();
         e.preventDefault();
         return false;
         */
+        }
       });
 
       jQuery("#breadcrumbs + .X,.view-nav .X").off("click").click(function(e){

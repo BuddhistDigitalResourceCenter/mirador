@@ -4256,6 +4256,26 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 .mobile-button:not(.image) + .mirador-main-menu-bar .nav-bar-top #breadcrumbs a {
   max-width: calc(100% / 2);
 }
+.mobile-button .fa-arrow-left {
+  color: #172832;
+  margin-bottom: 3px;
+  font-size: 26px;
+  -webkit-text-stroke: 2px white;
+  display: none;
+}
+.inApp .mobile-button.image .fa-arrow-left {
+  display: block;
+}
+.inApp .mobile-button.image img {
+  display: none;
+}
+.inApp .mobile-button.image ~ .mirador-viewer .thumbnails-open-close,
+.inApp .mobile-button.image ~ .mirador-viewer .mobile-button.bot {
+  display: none;
+}
+.inApp .mobile-button.image ~ .mirador-viewer .view-container.thumbs-off .mirador-osd {
+  width: 100%;
+}
 #viewer.inApp .nav-bar-top {
   width: 100%;
   padding-left: 24px;
@@ -4616,7 +4636,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   left: 50%;
   width: 200px;
   justify-content: space-between;
-  margin-left: -80px;
+  margin-left: -100px;
   transition: all 200ms ease-in-out;
 }
 .mirador-container .mirador-hud .mirador-hud-nav a {
