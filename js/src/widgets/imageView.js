@@ -284,6 +284,7 @@
       });
 
       this.element.find('.mirador-osd-reading-view').on('click', function() {
+        jQuery(".inApp .mobile-button.top").removeClass("image");
         jQuery(".mirador-viewer li.scroll-option").click();         
       });
 

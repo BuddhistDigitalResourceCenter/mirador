@@ -36000,6 +36000,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
             // TODO use "responsive" flag to work in library as well
             var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin"), inApp;
             if(window.innerWidth < 800 || origin && origin.startsWith("BDRCLibApp")) {
+              inApp = true ;
               jQuery('<div class="mobile-button top"><img src="/icons/burger.svg"/><i class="fa fa-arrow-left" aria-hidden="true"></i></div>')
               .appendTo(this.appendTo);
             }
@@ -36041,7 +36042,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
             });
 
             this.listenForActions();
-            this.bindEvents();
+            this.bindEvents(inApp);
         },
 
         listenForActions: function() {
@@ -36057,7 +36058,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
           });
         },
 
-        bindEvents: function() {
+        bindEvents: function(inApp) {
             var _this = this;
             //change 'change-layout' to mouseover events rather than click?
             this.element.find('.change-layout').on('click', function() { 
@@ -36095,6 +36096,7 @@ this.event.unbindAll(),e(this.scrollbarX),e(this.scrollbarY),e(this.scrollbarXRa
                 jQuery(this).addClass("on");
                 _this.eventEmitter.publish('manifestsPanelVisible.set',true);
                 jQuery(".nav-bar-top #breadcrumbs #vol,.nav-bar-top #breadcrumbs #image").removeClass("active on");
+                if(inApp) setTimeout(function() { jQuery(window).scrollTop(0); }, 150);
               }
             });
 
@@ -46399,6 +46401,7 @@ var Z = 0 ;
       });
 
       this.element.find('.mirador-osd-reading-view').on('click', function() {
+        jQuery(".inApp .mobile-button.top").removeClass("image");
         jQuery(".mirador-viewer li.scroll-option").click();         
       });
 
@@ -49533,7 +49536,8 @@ var prevDiff = -1;
     loadImages: function() {
       var _this = this, ref; //, sav = window.miradorBookmark ;
       if(window.miradorBookmark) delete window.miradorBookmark ;
-      jQuery.each(_this.element.find("ul img"), function(key, value) {
+      // DONE can't use _this.element after switching volume in collection view...
+      jQuery.each(jQuery(".mirador-viewer .scroll-view") /*_this.element*/.find("ul img"), function(key, value) {
         var jmg = jQuery(value);
         
         if(!window.miradorBookmark || !window.miradorBookmark.length) { 
@@ -49553,6 +49557,7 @@ var prevDiff = -1;
 
         if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jmg.attr("src")) {          
           setTimeout(function() {
+            //console.log("ONSCREEN...",key);
             if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jmg.attr("src")) {              
               //console.log("ONSCREEN",key,_this.imagePromise[jQuery(value).attr("data")]);
               var url = jmg.attr("data");
@@ -49567,7 +49572,12 @@ var prevDiff = -1;
               }
             }
           }, 650);
+        } 
+        /*
+        else {
+          if(key < 20) console.log("not on screen",key,value);
         }
+        */
         ref = value;
       });
       /*

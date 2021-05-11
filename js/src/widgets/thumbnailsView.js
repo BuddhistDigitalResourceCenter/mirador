@@ -425,7 +425,8 @@ var prevDiff = -1;
     loadImages: function() {
       var _this = this, ref; //, sav = window.miradorBookmark ;
       if(window.miradorBookmark) delete window.miradorBookmark ;
-      jQuery.each(_this.element.find("ul img"), function(key, value) {
+      // DONE can't use _this.element after switching volume in collection view...
+      jQuery.each(jQuery(".mirador-viewer .scroll-view") /*_this.element*/.find("ul img"), function(key, value) {
         var jmg = jQuery(value);
         
         if(!window.miradorBookmark || !window.miradorBookmark.length) { 
@@ -445,6 +446,7 @@ var prevDiff = -1;
 
         if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jmg.attr("src")) {          
           setTimeout(function() {
+            //console.log("ONSCREEN...",key);
             if ($.isOnScreen(value, _this.lazyLoadingFactor) && !jmg.attr("src")) {              
               //console.log("ONSCREEN",key,_this.imagePromise[jQuery(value).attr("data")]);
               var url = jmg.attr("data");
@@ -459,7 +461,12 @@ var prevDiff = -1;
               }
             }
           }, 650);
+        } 
+        /*
+        else {
+          if(key < 20) console.log("not on screen",key,value);
         }
+        */
         ref = value;
       });
       /*

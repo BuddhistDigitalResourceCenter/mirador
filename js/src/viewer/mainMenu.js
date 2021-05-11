@@ -37,6 +37,7 @@
             // TODO use "responsive" flag to work in library as well
             var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin"), inApp;
             if(window.innerWidth < 800 || origin && origin.startsWith("BDRCLibApp")) {
+              inApp = true ;
               jQuery('<div class="mobile-button top"><img src="/icons/burger.svg"/><i class="fa fa-arrow-left" aria-hidden="true"></i></div>')
               .appendTo(this.appendTo);
             }
@@ -78,7 +79,7 @@
             });
 
             this.listenForActions();
-            this.bindEvents();
+            this.bindEvents(inApp);
         },
 
         listenForActions: function() {
@@ -94,7 +95,7 @@
           });
         },
 
-        bindEvents: function() {
+        bindEvents: function(inApp) {
             var _this = this;
             //change 'change-layout' to mouseover events rather than click?
             this.element.find('.change-layout').on('click', function() { 
@@ -132,6 +133,7 @@
                 jQuery(this).addClass("on");
                 _this.eventEmitter.publish('manifestsPanelVisible.set',true);
                 jQuery(".nav-bar-top #breadcrumbs #vol,.nav-bar-top #breadcrumbs #image").removeClass("active on");
+                if(inApp) setTimeout(function() { jQuery(window).scrollTop(0); }, 150);
               }
             });
 
