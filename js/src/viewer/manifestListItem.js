@@ -414,7 +414,7 @@
         };
         _this.eventEmitter.publish('ADD_WINDOW', windowConfig);
         _this.eventEmitter.publish('UPDATE_MAIN_MENU_MANIFEST.'+_this.manifest.jsonLd["@id"]);
-        jQuery(".mobile-button.top.off").removeClass("off");
+        if(jQuery(_this.element).closest("ul").find("li").length > 1) jQuery(".mobile-button.top.off").removeClass("off");
         e.preventDefault();
       });
     },
