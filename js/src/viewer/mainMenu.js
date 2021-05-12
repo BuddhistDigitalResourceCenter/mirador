@@ -38,7 +38,7 @@
             var urlParams = new URLSearchParams(window.location.search), origin = urlParams.get("origin"), inApp;
             if(window.innerWidth < 800 || origin && origin.startsWith("BDRCLibApp")) {
               inApp = true ;
-              jQuery('<div class="mobile-button top"><img src="/icons/burger.svg"/><i class="fa fa-arrow-left" aria-hidden="true"></i></div>')
+              jQuery('<div class="mobile-button top '+(origin && origin.startsWith("BDRCLibApp")?"off":"")+'"><img src="/icons/burger.svg"/><i class="fa fa-arrow-left" aria-hidden="true"></i></div>')
               .appendTo(this.appendTo);
             }
 

@@ -259,6 +259,8 @@
 
 .mobile-button { position:fixed;border-radius: 50%;font-size:0; padding:5px; z-index:10;width:40px;height:40px;display:flex; transition:all 400ms ease-in-out;  
 
+  &.off { display:none; }
+
   &.on { opacity:0; pointer-events:none;}
 
   align-items: center; justify-content: center;
@@ -294,6 +296,8 @@
   .mobile-button.image {
     .fa-arrow-left { display: block;}
     img { display:none; }
+
+    &.off { display:flex; }
 
     & ~ .mirador-viewer { 
       .thumbnails-open-close,

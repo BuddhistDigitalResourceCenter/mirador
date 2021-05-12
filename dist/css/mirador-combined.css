@@ -4226,6 +4226,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   align-items: center;
   justify-content: center;
 }
+.mobile-button.off {
+  display: none;
+}
 .mobile-button.on {
   opacity: 0;
   pointer-events: none;
@@ -4277,6 +4280,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 }
 .inApp .mobile-button.image img {
   display: none;
+}
+.inApp .mobile-button.image.off {
+  display: flex;
 }
 .inApp .mobile-button.image ~ .mirador-viewer .thumbnails-open-close,
 .inApp .mobile-button.image ~ .mirador-viewer .mobile-button.bot {
