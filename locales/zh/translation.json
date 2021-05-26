@@ -57,7 +57,7 @@
     "objectMetadata": "物件元数据",
     "pinTooltip": "点注释",
     "polygonTooltip": "多边形注释",
-    "quality0":"We acknowledge the poor quality of these scans and apologize for it.\nWe think these might still be useful for scholarship and make them available,\nwhile searching for higher quality ones.",
+    "quality0":"We acknowledge the poor quality of these scans, which might be difficult to read\nor in the wrong order, and we apologize for it.\nWe think these might still be useful for scholarship and make them available,\nwhile searching for higher quality ones.",
     "rectangleTooltip": "长方形注释",
     "resetTooltip": "重置图像",
     "return":"回到BUDA",

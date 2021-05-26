@@ -78,7 +78,7 @@
   "pointerTooltip": "Pointer",
   "polygonTooltip": "Polygon annotation",
   "preloadedManifests": "Preloaded Manifests",
-  "quality0":"We acknowledge the poor quality of these scans and apologize for it.\nWe think these might still be useful for scholarship and make them available,\nwhile searching for higher quality ones.",
+  "quality0":"We acknowledge the poor quality of these scans, which might be difficult to read\nor in the wrong order, and we apologize for it.\nWe think these might still be useful for scholarship and make them available,\nwhile searching for higher quality ones.",
   "rectangleTooltip": "Rectangle annotation",
   "related": "Related",
   "resetTooltip": "Reset image",
