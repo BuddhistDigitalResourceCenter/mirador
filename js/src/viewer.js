@@ -86,6 +86,10 @@
         var result = i18next.t(i18n_key);
         return new $.Handlebars.SafeString(result);
       });
+      $.Handlebars.registerHelper('u', function(i18n_key) {
+        var result = i18next.t(i18n_key, { interpolation: { escapeValue: false } } );
+        return new $.Handlebars.SafeString(result);
+      });
 
       //check all buttons in mainMenu.  If they are all set to false, then don't show mainMenu
       var showMainMenu = false;

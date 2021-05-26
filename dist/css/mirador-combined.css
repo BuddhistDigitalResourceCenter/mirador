@@ -5445,6 +5445,22 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
   line-height: 22px;
   text-align: center;
 }
+.mirador-container .mirador-viewer .view-nav .lowQ {
+  background: #d73449;
+  margin-left: 20px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+.mirador-container .mirador-viewer .view-nav .lowQ img {
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
+  margin-left: 0;
+}
 .mirador-container.inApp .mirador-viewer .scroll-view {
   height: calc(100% - 60px);
 }
