@@ -372,6 +372,16 @@ var Z = 0 ;
                     headers: headers
                   });
 
+
+                  request.error(function(jsonLd) {
+                    if(pdfTimer) clearInterval(pdfTimer);
+                    console.log("error:",jsonLd,elem);
+                    elem.parent().addClass("login").html(i18next.t("mustLogin")).click(function() {
+                      window.location.href = 
+                        window.location.href.replace(/^(https?:\/\/[^/]+).*/,"$1/login?backToViewer="+encodeURIComponent(window.location.href));
+                    });
+                  });
+
                   request.done(function(jsonLd) {
                     console.log("ajax:",jsonLd,elem);
                     if(jsonLd.link) {

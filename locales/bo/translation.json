@@ -3,6 +3,7 @@
     "cannotDL":"The provider of these images does not provide PDF download functionality.\nBDRC does not have a copy of these images and thus cannot provide a PDF export either.",
     "downloadI":"download images",
     "goto":"ཤོག་ངོས་སྟོན།",
+    "mustLogin":"You must be logged in to download PDFs or ZIPs.",
     "quality0":"We acknowledge the poor quality of these scans, which might be difficult to read\nor in the wrong order, and we apologize for it.\nWe think these might still be useful for scholarship and make them available,\nwhile searching for higher quality ones.",
     "return":"བུདྡྷ་ལ་ཕྱིར་ལོག",
     "showE":"show Etext"
