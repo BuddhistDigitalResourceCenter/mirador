@@ -425,8 +425,10 @@ var prevDiff = -1;
     loadImages: function() {
       var _this = this, ref; //, sav = window.miradorBookmark ;
       if(window.miradorBookmark) delete window.miradorBookmark ;
-      // DONE can't use _this.element after switching volume in collection view...
-      jQuery.each(jQuery(".mirador-viewer .scroll-view") /*_this.element*/.find("ul img"), function(key, value) {
+      var selector = ".mirador-viewer .scroll-view" ;
+      if(!_this.element.hasClass("scroll-view")) selector = ".mirador-viewer .panel-thumbnail-view" ;
+      // DONE can't use _this.element after switching volume in collection view...      
+      jQuery.each(jQuery(selector) /*_this.element*/.find("ul img"), function(key, value) {
         var jmg = jQuery(value);
         
         if(!window.miradorBookmark || !window.miradorBookmark.length) { 
