@@ -13,6 +13,15 @@ function parseJwt(token){
   );
 }
 
+function getService(resource) {
+  var service ;
+  if(resource.full) service = resource.full.service ;
+  else if(resource.default) service = source.default.service ;
+  else service = resource.service;
+  if(!service) throw new Error("no IIIf service found in:\n"+JSON.stringify(resource,null,3));
+  return service;
+}
+
 (function($){
 
   $.Manifest = function(manifestUri, location, manifestContent) {
@@ -162,7 +171,7 @@ function parseJwt(token){
         var resource ;
         if(canvas && canvas.images) { 
           resource = canvas.images[0].resource;
-          service = resource['default'] ? resource['default'].service : resource.service;
+          service = getService(resource);
           if (service.hasOwnProperty('@context')) {
             version = $.Iiif.getVersionFromContext(service['@context']);
           }
