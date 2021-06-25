@@ -46154,6 +46154,15 @@ var Z = 0 ;
 (function($) {
 
   var timerSw = -1 ;
+  
+  function getCanvasRotation(canvas) {
+    var degrees = 0;
+    if( canvas && canvas.canvas && canvas.canvas.images && canvas.canvas.images.length && 
+        canvas.canvas.images[0] && canvas.canvas.images[0] && canvas.canvas.images[0].resource &&
+        canvas.canvas.images[0].resource.selector && canvas.canvas.images[0].resource.selector.rotation)          
+          degrees = Number(canvas.canvas.images[0].resource.selector.rotation) ;
+    return degrees ;
+  }
 
   $.ImageView = function(options) {
 
@@ -47093,7 +47102,9 @@ var Z = 0 ;
     initialiseImageCanvas: function() {
       var _this = this,
           osdID = 'mirador-osd-' + $.genUUID(),
-          canvasModel = _this.canvases[_this.canvasID];
+          canvasModel = _this.canvases[_this.canvasID],
+          // DONE: set initial rotation in OSD (#5)
+          degrees = getCanvasRotation(canvasModel); 
 
       _this.elemOsd =
         jQuery('<div/>')
@@ -47110,7 +47121,8 @@ var Z = 0 ;
         showNavigationControl: false,
         canvasControls: this.canvasControls,
         ajaxWithCredentials: this.ajaxWithCredentials,
-        maxZoomPixelRatio:4
+        maxZoomPixelRatio:4,
+        degrees:degrees
       });
 
       var canvasBounds = canvasModel.getBounds();
@@ -47215,15 +47227,14 @@ var Z = 0 ;
         this.canvasID = canvasID;
         this.currentImgIndex = $.getImageIndexById(this.imagesList, canvasID);
         this.currentImg = this.imagesList[this.currentImgIndex];
-
-        var newCanvas = this.canvases[_this.canvasID];
+        var newCanvas = this.canvases[_this.canvasID];        
         var canvasBounds = newCanvas.getBounds();
         var rect = new OpenSeadragon.Rect(
           canvasBounds.x,
           canvasBounds.y,
           canvasBounds.width,
           canvasBounds.height
-        );
+        );       
         _this.osd.viewport.fitBounds(rect, true); // center viewport before image is placed.
         newCanvas.show();
 
@@ -47233,6 +47244,11 @@ var Z = 0 ;
         };
 
         this.eventEmitter.publish('resetImageManipulationControls.'+this.windowId);
+
+        // DONE: set initial rotation in OSD (#5)
+        var degrees = getCanvasRotation(newCanvas); 
+        console.log("d:",degrees);
+        if(degrees > 0) _this.osd.viewport.setRotation(degrees);
 
         var z = null;
         if(_this.manifest && _this.manifest.jsonLd && _this.manifest.jsonLd["@id"] && window.OSDzoom){
