@@ -49167,6 +49167,18 @@ var prevDiff = -1;
 
 (function($) {
 
+  function getCanvasRotation(canvas) {
+    var degrees = 0;
+    if(Array.isArray(canvas) && canvas.length) {
+      canvas = canvas[0] ;
+      if( canvas && canvas.images && canvas.images.length && 
+          canvas.images[0] && canvas.images[0] && canvas.images[0].resource &&
+          canvas.images[0].resource.selector && canvas.images[0].resource.selector.rotation)          
+            degrees = Number(canvas.images[0].resource.selector.rotation) ;
+    }
+    return degrees ;
+  }
+
   $.ThumbnailsView = function(options) {
 
     jQuery.extend(this, {
@@ -49647,7 +49659,30 @@ var prevDiff = -1;
         imelem = jQuery(imageElement),
         id = imelem.attr("data-image-id"),
         canvas = _this.imagesList.filter(function(e) { return e["@id"] === id; }),
-        imagePromise = $.createImagePromise(url);
+        imagePromise = $.createImagePromise(url),
+        degrees = getCanvasRotation(canvas);
+
+      if(degrees) {
+
+        if(degrees == 180) {
+          imelem.css({ transform:"rotate("+degrees+"deg)" });
+        }
+        else if(_this.element.hasClass("scroll-view") && (degrees == 90 || degrees == 270)) {
+          var w = Number(imelem.attr("width")), h = Number(imelem.attr("height"));
+                  
+          if(w > h) {
+            imelem
+            .css({ position:"absolute", transform:"rotate("+degrees+"deg)", "margin-top":(h-w-30)+"px"})
+            .parent()
+            .css({ "padding-top":(w+40)+"px", width: w+"px" });
+          } else {
+            imelem
+            .css({ position:"absolute", transform:"rotate("+degrees+"deg)", "transform-origin": "100% 50%", "top":(h-w-60)/2+"px" })
+            .parent()
+            .css({ "padding-top":(w+20)+"px" });
+          }
+        }
+      }
 
       _this.imagePromise[url] = imagePromise ;
 
@@ -49669,12 +49704,13 @@ var prevDiff = -1;
             .css("min-height",(imelem.width() / ratio)+"px");
           }
         });
-      
+
+
       imagePromise.done(function(image) {
 
         imageElement.src = image ;
 
-        //console.log("canvas",canvas);
+        console.log("canvas:",canvas,degrees);
 
         //_this.setThumbLabel(canvas, imageElement, dash);        
 
