@@ -506,7 +506,24 @@ var prevDiff = -1;
         }
         else if(_this.element.hasClass("scroll-view") && (degrees == 90 || degrees == 270)) {
           var w = Number(imelem.attr("width")), h = Number(imelem.attr("height"));
-                  
+
+          if(w < h) {
+            imelem
+            .addClass("rotate90")
+            .css({ position:"absolute", transform:"rotate("+degrees+"deg)", "transform-origin": "100% 0", "max-width": h, "min-height": 0, width:h, height:w, "margin-left":-w  })
+            .parent()
+            .css({ "padding-top":(h)+"px" })
+            ;
+          } else {
+            imelem
+            .addClass("rotate90")
+            .css({ position:"absolute", transform:"rotate("+degrees+"deg)", "transform-origin": "100% 0", "max-width": h, "min-height": 0, width: h, height: w, "margin-left":(w-h)  })
+            .parent()
+            .css({ "padding-top":(h)+"px", width: w+"px"})
+            ;
+          }
+
+          /* // v1 with incorrect w/h in manifest
           if(w > h) {
             imelem
             .css({ position:"absolute", transform:"rotate("+degrees+"deg)", "margin-top":(h-w-30)+"px"})
@@ -518,6 +535,7 @@ var prevDiff = -1;
             .parent()
             .css({ "padding-top":(w+20)+"px" });
           }
+          */
         }
       }
 
@@ -535,7 +553,7 @@ var prevDiff = -1;
         imelem.on("load",function() {
           var ratio = imageElement.naturalWidth / imageElement.naturalHeight;
           //console.log("im:",ratio,imageElement.naturalWidth,imageElement.naturalHeight,imelem.attr("data-ratio"));
-          if(ratio != imelem.attr("data-ratio") ) {
+          if(ratio != imelem.attr("data-ratio") && !imelem.hasClass("rotate90")) {
             imelem
             .attr({"data-ratio":ratio}) //,"width":imageElement.naturalWidth,"height":imageElement.naturalHeight})
             .css("min-height",(imelem.width() / ratio)+"px");
