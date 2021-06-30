@@ -504,23 +504,33 @@ var prevDiff = -1;
         if(degrees == 180) {
           imelem.css({ transform:"rotate("+degrees+"deg)" });
         }
-        else if(_this.element.hasClass("scroll-view") && (degrees == 90 || degrees == 270)) {
+        else if(degrees == 90 || degrees == 270) {
           var w = Number(imelem.attr("width")), h = Number(imelem.attr("height"));
 
-          if(w < h) {
-            imelem
-            .addClass("rotate90")
-            .css({ position:"absolute", transform:"rotate("+degrees+"deg)", "transform-origin": "100% 0", "max-width": h, "min-height": 0, width:h, height:w, "margin-left":-w  })
-            .parent()
-            .css({ "padding-top":(h)+"px" })
-            ;
+          if(_this.element.hasClass("scroll-view")) {
+            var trOri = "100% 0", mL = -w ;
+            if(degrees == 270) { trOri = "0 0" ; mL = w ; } 
+            if(w < h) {
+              imelem
+              .addClass("rotate90")
+              .css({ position:"absolute", transform:"rotate("+degrees+"deg)", "transform-origin": trOri, "max-width": h, "min-height": 0, width:h, height:w, "margin-left": mL  })
+              .parent()
+              .css({ "padding-top":(h)+"px" })
+              ;
+            } else {
+              mL = (w-h) ;
+              if(degrees == 270) mL = 0;
+              imelem
+              .addClass("rotate90")
+              .css({ position:"absolute", transform:"rotate("+degrees+"deg)", "transform-origin": trOri, "max-width": h, "min-height": 0, width: h, height: w, "margin-left":mL  })
+              .parent()
+              .css({ "padding-top":(h)+"px", width: w+"px"})
+              ;
+            }
           } else {
-            imelem
-            .addClass("rotate90")
-            .css({ position:"absolute", transform:"rotate("+degrees+"deg)", "transform-origin": "100% 0", "max-width": h, "min-height": 0, width: h, height: w, "margin-left":(w-h)  })
-            .parent()
-            .css({ "padding-top":(h)+"px", width: w+"px"})
-            ;
+            var ratio = imelem.attr("data-ratio");
+            h = w * ratio ;
+            console.log(w,h,imelem);
           }
 
           /* // v1 with incorrect w/h in manifest
