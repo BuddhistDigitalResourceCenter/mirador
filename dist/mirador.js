@@ -49668,11 +49668,10 @@ var prevDiff = -1;
           imelem.css({ transform:"rotate("+degrees+"deg)" });
         }
         else if(degrees == 90 || degrees == 270) {
-          var w = Number(imelem.attr("width")), h = Number(imelem.attr("height"));
+          var w = Number(imelem.attr("width")), h = Number(imelem.attr("height")), trOri = "100% 0", mL = "calc(("+w+"px - "+h+"px) / 2)", mT ;
 
           if(_this.element.hasClass("scroll-view")) {
-            var trOri = "100% 0", mL = -w ;
-            if(degrees == 270) { trOri = "0 0" ; mL = w ; } 
+            if(degrees == 270) { trOri = "0 0" ; mL = "calc(("+w+"px - "+h+"px) / -2)"; } 
             if(w < h) {
               imelem
               .addClass("rotate90")
@@ -49691,9 +49690,19 @@ var prevDiff = -1;
               ;
             }
           } else {
-            console.log(imelem);
             var ratio = imelem.attr("data-ratio");
-            h = w * ratio ;
+            if(!ratio && canvas && canvas.length) ratio = canvas[0].width / canvas[0].height ;              
+            if(ratio < 1) { w = 180; h = w * ratio ; mL = "calc(("+w+"px - "+h+"px) /-2)"; }
+            else { h = 180 ; w = h / ratio ; trOri = "0 0" ; mL = h ; mT = -w ; }
+            if(degrees == 270) { trOri = "0 0" ; mL = h ; mT = 0 ;
+              if(w < h) mL = 0;
+            }
+            imelem
+              .addClass("rotate90")
+              .css({ position:"absolute", transform:"rotate("+degrees+"deg)", "min-height": 0, width: w, height: h, "transform-origin": trOri, "margin-left": mL, "margin-top":mT })
+              .parent()
+              .css({ "padding-top":(w)+"px" })
+              ;
           }
 
           /* // v1 with incorrect w/h in manifest
